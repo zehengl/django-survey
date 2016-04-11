@@ -1,8 +1,9 @@
 # Django survey
 
 install requirements using `pip install -r requirements.txt`
-
-then run using `./survey_test/manage.py runserver`
+create db: `./manage.py migrate`
+create superuser: `./manage.py createsuperuser`
+then run using `./manage.py runserver`
 
 ## About
 

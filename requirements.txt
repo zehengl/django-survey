@@ -1,4 +1,5 @@
-Django==1.4
+#Django==1.4
+Django
 django-tastypie # API
 django-registration # account logic, views and workflows
-
+pytz

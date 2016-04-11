@@ -101,11 +101,11 @@ class ResponseForm(models.ModelForm):
                     self.fields["question_%d" % q.pk].widget.attrs["category"] = q.category.name
 
                 if q.question_type == Question.SELECT:
-                    classes = self.fields["question_%d" % q.pk].widget.attrs.get("class")
+                    classes = self.fields["question_%d" % q.pk].widget.attrs.get("class") or ''
                     self.fields["question_%d" % q.pk].widget.attrs["class"] = classes + (" cs-select cs-skin-boxes")
 
                 if q.question_type == Question.RADIO:
-                    classes = self.fields["question_%d" % q.pk].widget.attrs.get("class")
+                    classes = self.fields["question_%d" % q.pk].widget.attrs.get("class") or ''
                     self.fields["question_%d" % q.pk].widget.attrs["class"] = classes + (" fs-radio-group fs-radio-custom clearfix")
 
                 #if q.question_type == Question.SELECT_MULTIPLE:
