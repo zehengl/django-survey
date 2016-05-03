@@ -9,10 +9,10 @@
 	<meta name="author" content="Jessy Kate Schingler">
 
 	<!-- Le styles -->
-	<link href="/media/css/bootstrap.css" rel="stylesheet">
-	<link href="/media/css/custom.css" rel="stylesheet">
-	<link href="/media/css/bootstrap-responsive.css" rel="stylesheet">
+	{% load staticfiles %}
 
+	<link rel="stylesheet" type="text/css" href="{% static 'survey/style.css' %}" />
+	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,6 +27,30 @@
   </head>
 
   <body>
+	<div class="logo">BRITE 2016<font color='black' size=7> Bioinformatics Research and Interdisciplinary Training Experience  </font> </div>
+
+<div id="wrap">
+
+<div id="navbar">
+	<ul id="primary-nav">
+		<li id="home"><a href="/" >HOME</a>
+			<ul>
+				<li><a href="survey" id="survey">Main Page</a></li>
+				<li><a href="about" id="about">About</a></li>
+			</ul>
+		</li>
+		
+		<li id="help"><a href="help" id="helper">HELP</a>
+			<ul>
+				<li><a href="help" id="manual">Manual</a></li>
+				<li><a href="faq" id="FAQ">FAQ</a></li>
+			</ul>
+		</li>
+		
+	</ul>
+
+</div>
+</div>
 
 	<!-- Part 1: Wrap all page content here -->
 	{% block wrapper %}

@@ -30,11 +30,11 @@ urlpatterns = patterns('',
 	# Examples:
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^', include('survey.urls'), name='survey-list'),
-
+	#url(r'^', include('contact_form.urls'), name='contact_form'),
 )
 
 # media url hackery. le sigh. 
-urlpatterns += patterns('',
+"""urlpatterns += patterns('',
     (r'^%s/(?P<path>.*)$' % media_url, 'django.views.static.serve',
      { 'document_root': settings.MEDIA_ROOT, 'show_indexes':True }),
-)
+)"""
