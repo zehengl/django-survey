@@ -4,9 +4,12 @@ media/data
 *.swo
 *.swn
 *.pyc
-local_settings.py
 survey.db
-
 survey.egg-info
 env
 survey_test_bak
+.env/
+.project
+.pydevproject
+.settings/
+
