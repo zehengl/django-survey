@@ -6,9 +6,9 @@ from django.core.urlresolvers import reverse
 from django.forms import models
 from django.utils.safestring import mark_safe
 
-from survey.models import (AnswerInteger, AnswerRadio, AnswerSelect,
-                           AnswerSelectMultiple, AnswerText, Question,
-                           Response)
+from survey.models import (AnswerBase, AnswerInteger, AnswerRadio,
+                           AnswerSelect, AnswerSelectMultiple, AnswerText,
+                           Question, Response)
 from survey.signals import survey_completed
 from survey.widgets import ImageSelectWidget
 

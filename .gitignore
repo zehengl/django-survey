@@ -12,4 +12,6 @@ survey_test_bak
 .project
 .pydevproject
 .settings/
+htmlcov/
+.coverage
 

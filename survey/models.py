@@ -1,8 +1,22 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from .utils import validate_list
+
+def validate_choices(choices):
+    """  Verifies that there is at least two choices in choices
+    :param String choices: The string representing the user choices.
+    """
+    values = choices.split(',')
+    empty = 0
+    for value in values:
+        if value.replace(" ", '') == '':
+            empty += 1
+    if len(values) < 2 + empty:
+        msg = "The selected field requires an associated list of choices."
+        msg += " Choices must contain more than one item."
+        raise ValidationError(msg)
 
 
 class Survey(models.Model):
@@ -84,7 +98,7 @@ comma-separated list of options for this question .""")
     def save(self, *args, **kwargs):
         if (self.question_type == Question.RADIO or self.question_type == Question.SELECT 
             or self.question_type == Question.SELECT_MULTIPLE):
-            validate_list(self.choices)
+            validate_choices(self.choices)
         super(Question, self).save(*args, **kwargs)
 
     def get_choices(self):
@@ -94,9 +108,10 @@ comma-separated list of options for this question .""")
         """
         choices = self.choices.split(',')
         choices_list = []
-        for c in choices:
-            c = c.strip()
-            choices_list.append((c,c))
+        for choice in choices:
+            choice = choice.strip().capitalize()
+            if choice != "":
+                choices_list.append((choice, choice))
         choices_tuple = tuple(choices_list)
         return choices_tuple
 
@@ -124,25 +139,50 @@ class Response(models.Model):
 
 
 class AnswerBase(models.Model):
-    question = models.ForeignKey(Question)
-    response = models.ForeignKey(Response)
+
+    question = models.ForeignKey(Question, related_name="answers")
+    response = models.ForeignKey(Response, related_name="answers")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-# these type-specific answer models use a text field to allow for flexible
-# field sizes depending on the actual question this answer corresponds to. any
-# "required" attribute will be enforced by the form.
+    def __unicode__(self):
+        try:
+            return u"{} to question '{}' : '{}'".format(
+                self.__class__.__name__, self.question, self.body
+            )
+        except AttributeError:
+            return u"AnswerBase to question '{}'".format(self.question)
+
+
 class AnswerText(AnswerBase):
     body = models.TextField(blank=True, null=True)
+
 
 class AnswerRadio(AnswerBase):
     body = models.TextField(blank=True, null=True)
 
+
 class AnswerSelect(AnswerBase):
     body = models.TextField(blank=True, null=True)
+
 
 class AnswerSelectMultiple(AnswerBase):
     body = models.TextField(blank=True, null=True)
 
+
 class AnswerInteger(AnswerBase):
     body = models.IntegerField(blank=True, null=True)
+
+
+def get_real_type_answer(answer):
+    """ Permit to recover a child answer class from the AnswerBase object.
+    :param AnswerBase answer: The AnswerBase to convert to its real type. """
+    for class_ in [AnswerText, AnswerRadio, AnswerSelect, AnswerSelectMultiple,
+                   AnswerInteger]:
+        try:
+            return class_.objects.get(response=answer.response,
+                                      question=answer.question)
+        except class_.DoesNotExist:
+            continue
+    # Probably a real AnswerBase
+    return answer

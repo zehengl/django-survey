@@ -7,7 +7,7 @@ from django.utils.safestring import mark_safe
 
 class ImageSelectWidget(forms.widgets.Widget):
 
-    class Media:
+    class Media(object):
         js = (
             'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js',
             'http://maps.googleapis.com/maps/api/js?sensor=false',

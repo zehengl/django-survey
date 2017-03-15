@@ -1,5 +1,6 @@
-# Django settings for survey project.
+# -*- coding: utf-8 -*-
 
+import logging
 import os
 
 DEBUG = True
@@ -13,6 +14,9 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
+logging.basicConfig(level=logging.DEBUG, format='%(name)s.%(funcName)s() l.%(lineno)s -\
+\033[32m %(message)s \033[39m')
 
 DATABASES = {
     'default': {
@@ -72,12 +76,6 @@ STATIC_ROOT = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -85,6 +83,13 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+DEBUG_ADMIN_NAME = "test_admin"
+DEBUG_ADMIN_PASSWORD = "test_password"
+
+STATICFILES_DIRS = [
+    os.path.normpath(os.path.join(ROOT, '..', "survey", "static")),
+]
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'js*79rk(+s+x9)8co+10$zghe2f)+33jd1l2m#f)vl+pvtj24e'
@@ -138,7 +143,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'survey',
-    "rosetta",
+    'bootstrapform',
+    'rosetta',
 )
 
 LOCALE_PATHS = (

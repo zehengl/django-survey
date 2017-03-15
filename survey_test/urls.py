@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # pylint: disable=invalid-name
 
 from django.conf.urls import include, url
