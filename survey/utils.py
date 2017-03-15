@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 
+
 def validate_list(value):
 	"""
 	takes a text value and verifies that there is at least one comma

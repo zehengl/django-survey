@@ -1,9 +1,9 @@
 #! -*- encoding: utf-8 -*-
 from django import forms
+from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 
-from django.conf import settings
 
 class ImageSelectWidget(forms.widgets.Widget):
 

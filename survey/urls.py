@@ -1,12 +1,15 @@
-from django.conf.urls import patterns, include, url
 
-from .views import IndexView, SurveyDetail, ConfirmView, SurveyCompleted
+from django.conf.urls import url
 
+from .views import ConfirmView, IndexView, SurveyCompleted, SurveyDetail
 
-urlpatterns = patterns('',
-       url(r'^survey/$', IndexView.as_view(), name='survey-list'),
-       url(r'^survey/(?P<id>\d+)/', SurveyDetail.as_view(), name='survey-detail'),
-       url(r'^survey/(?P<id>\d+)/completed/', SurveyCompleted.as_view(), name='survey-completed'),
-       url(r'^survey/(?P<id>\d+)-(?P<step>\d+)/', SurveyDetail.as_view(), name='survey-detail-step'),
-       url(r'^confirm/(?P<uuid>\w+)/', ConfirmView.as_view(), name='survey-confirmation'),
-)
+urlpatterns = [
+       url(r'^$', IndexView.as_view(), name='survey-list'),
+       url(r'^(?P<id>\d+)/', SurveyDetail.as_view(), name='survey-detail'),
+       url(r'^(?P<id>\d+)/completed/', SurveyCompleted.as_view(),
+           name='survey-completed'),
+       url(r'^(?P<id>\d+)-(?P<step>\d+)/', SurveyDetail.as_view(),
+           name='survey-detail-step'),
+       url(r'^confirm/(?P<uuid>\w+)/', ConfirmView.as_view(),
+           name='survey-confirmation'),
+]

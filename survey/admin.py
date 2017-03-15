@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import Question, Category, Survey, Response, AnswerText
-from .models import AnswerRadio, AnswerSelect
-from .models import AnswerInteger, AnswerSelectMultiple
 from .actions import make_published
+from .models import (AnswerInteger, AnswerRadio, AnswerSelect,
+                     AnswerSelectMultiple, AnswerText, Category, Question,
+                     Response, Survey)
 
 
 class QuestionInline(admin.TabularInline):

@@ -1,4 +1,5 @@
-from django.utils.translation import ungettext, ugettext_lazy
+from django.utils.translation import ugettext_lazy, ungettext
+
 
 # Actions
 def make_published(modeladmin, request, queryset):

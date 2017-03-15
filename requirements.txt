@@ -1,5 +1,4 @@
-#Django==1.4
-Django
-django-tastypie # API
-django-registration # account logic, views and workflows
-pytz
+Django==1.10.6
+django-tastypie==0.13.3 # API
+django-registration==2.2 # account logic, views and workflows
+pytz==2016.10

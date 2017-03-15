@@ -1,17 +1,17 @@
-import uuid
 import logging
+import uuid
 
 from django import forms
-from django.forms import models
 from django.core.urlresolvers import reverse
-
-from survey.models import Question, Response
-from survey.models import AnswerText, AnswerRadio, AnswerSelect
-from survey.models import AnswerInteger, AnswerSelectMultiple
-from survey.widgets import ImageSelectWidget
-from survey.signals import survey_completed
-
+from django.forms import models
 from django.utils.safestring import mark_safe
+
+from survey.models import (AnswerInteger, AnswerRadio, AnswerSelect,
+                           AnswerSelectMultiple, AnswerText, Question,
+                           Response)
+from survey.signals import survey_completed
+from survey.widgets import ImageSelectWidget
+
 
 # blatantly stolen from 
 # http://stackoverflow.com/questions/5935546/align-radio-buttons-horizontally-in-django-forms?rq=1
@@ -185,4 +185,3 @@ class ResponseForm(models.ModelForm):
                 a.save()
         survey_completed.send(sender=Response, instance=response, data=data)
         return response
-
