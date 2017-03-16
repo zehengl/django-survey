@@ -2,3 +2,6 @@ Django==1.10.6
 django-tastypie==0.13.3 # API
 django-registration==2.2 # account logic, views and workflows
 pytz==2016.10
+
+# I18n during development
+# django-rosetta==0.7.12

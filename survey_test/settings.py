@@ -138,6 +138,16 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'survey',
+    "rosetta",
+)
+
+LOCALE_PATHS = (
+    os.path.join(ROOT, "..", 'survey', "locale"),
+)
+LANGUAGE_CODE = 'en'
+LANGUAGES = (
+    ('en', 'english'),
+    ('fr', 'french'),
 )
 
 # A sample logging configuration. The only tangible logging

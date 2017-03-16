@@ -70,8 +70,11 @@ class Question(models.Model):
     survey = models.ForeignKey(Survey)
     question_type = models.CharField(max_length=200, choices=QUESTION_TYPES, default=TEXT)
     # the choices field is only used if the question type 
-    choices = models.TextField(blank=True, null=True,
-        help_text=_(u"if the question type is 'radio', 'select', or 'select multiple' provide a comma-separated list of options for this question ."))
+    choices = models.TextField(
+        blank=True, null=True, help_text=_(u"""If the question type is 'radio',
+'select', or 'select multiple' provide a
+comma-separated list of options for this question .""")
+    )
 
     class Meta:
         verbose_name = _('question')
