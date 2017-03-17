@@ -88,7 +88,6 @@ class ResponseForm(models.ModelForm):
             self.step = int(kwargs.pop('step'))
         except KeyError:
             self.step = None
-
         super(ResponseForm, self).__init__(*args, **kwargs)
         self.uuid = uuid.uuid4().hex
         self.steps_count = len(self.survey.questions())

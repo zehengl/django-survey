@@ -2,10 +2,11 @@
 
 from django.contrib import admin
 
+from survey.models import (AnswerInteger, AnswerRadio, AnswerSelect,
+                           AnswerSelectMultiple, AnswerText, Category,
+                           Question, Response, Survey)
+
 from .actions import make_published
-from .models import (AnswerInteger, AnswerRadio, AnswerSelect,
-                     AnswerSelectMultiple, AnswerText, Category, Question,
-                     Response, Survey)
 
 
 class QuestionInline(admin.TabularInline):
