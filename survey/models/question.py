@@ -84,4 +84,4 @@ options for this question .""")
         return choices_tuple
 
     def __unicode__(self):
-        return self.text
+        return u"{}".format(self.text)

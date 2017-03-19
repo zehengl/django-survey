@@ -53,32 +53,32 @@ class ResponseForm(models.ModelForm):
             kwargs["widget"] = forms.CheckboxSelectMultiple
 
         if question.type in [Question.TEXT, Question.SHORT_TEXT]:
-            form = forms.CharField(**kwargs)
+            field = forms.CharField(**kwargs)
         elif question.type in [Question.SELECT_MULTIPLE]:
-            form = forms.MultipleChoiceField(**kwargs)
+            field = forms.MultipleChoiceField(**kwargs)
         elif question.type in [Question.INTEGER]:
-            form = forms.IntegerField(**kwargs)
+            field = forms.IntegerField(**kwargs)
         else:
-            form = forms.ChoiceField(**kwargs)
+            field = forms.ChoiceField(**kwargs)
 
         # add the category as a css class, and add it as a data attribute
         # as well (this is used in the template to allow sorting the
         # questions by category)
-        classes = form.widget.attrs.get("class") or ''
+        classes = field.widget.attrs.get("class") or ''
         if question.category:
-            form.widget.attrs["class"] = classes + (" cat_%s" % question.category.name)
-            form.widget.attrs["category"] = question.category.name
+            field.widget.attrs["class"] = classes + (" cat_%s" % question.category.name)
+            field.widget.attrs["category"] = question.category.name
         if question.type == Question.SELECT:
-            form.widget.attrs["class"] = classes + (" cs-select cs-skin-boxes")
+            field.widget.attrs["class"] = classes + (" cs-select cs-skin-boxes")
         if question.type == Question.RADIO:
-            form.widget.attrs["class"] = classes + (" fs-radio-group fs-radio-custom clearfix")
+            field.widget.attrs["class"] = classes + (" fs-radio-group fs-radio-custom clearfix")
         if question.type == Question.SELECT_MULTIPLE:
-            form.widget.attrs["class"] = classes
+            field.widget.attrs["class"] = classes
 
-        # initialize the form field with values from a POST request, if any.
+        # initialize the field field with values from a POST request, if any.
         if data:
-            form.initial = data.get('question_%d' % question.pk)
-        self.fields["question_%d" % question.pk] = form
+            field.initial = data.get('question_%d' % question.pk)
+        self.fields["question_%d" % question.pk] = field
 
     def __init__(self, *args, **kwargs):
         """ Expects a survey object to be passed in initially """
