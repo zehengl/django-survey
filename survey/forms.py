@@ -11,8 +11,12 @@ from django.utils.safestring import mark_safe
 from survey.models import (AnswerBase, AnswerInteger, AnswerRadio,
                            AnswerSelect, AnswerSelectMultiple, AnswerText,
                            Question, Response)
+from survey.models.answer import get_real_type_answer
 from survey.signals import survey_completed
 from survey.widgets import ImageSelectWidget
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class HorizontalRadioRenderer(forms.RadioSelect.renderer):
@@ -27,9 +31,52 @@ class ResponseForm(models.ModelForm):
         model = Response
         fields = ()
 
+    def _get_preexisting_response(self):
+        """ Recover a pre-existing response in database.
+
+        The user must be logged.
+        :rtype: Response or None"""
+        if not self.user.is_authenticated():
+            return None
+        try:
+            return Response.objects.get(user=self.user, survey=self.survey)
+        except Response.DoesNotExist:
+            LOGGER.debug("No saved response for '%s' for user %s",
+                          self.survey, self.user)
+            return None
+
+    def _get_preexisting_answer(self, question):
+        """ Recover a pre-existing answer in database.
+
+        The user must be logged. A Response containing the Answer must exists.
+
+        :param Question question: The question we want to recover in the
+        response.
+        :rtype: Answer or None"""
+        response = self._get_preexisting_response()
+        if response is None:
+            return None
+        try:
+            base_answer = AnswerBase.objects.get(question=question,
+                                                 response=response)
+            return get_real_type_answer(base_answer)
+        except AnswerBase.DoesNotExist:
+            return None
+
     def add_question(self, question, data):
+        """ Add a question to the form.
+
+        :param Question question: The question to add.
+        :param dict data: The pre-existing values from a post request. """
         kwargs = {"label": question.text,
                   "required": question.required, }
+        answer = self._get_preexisting_answer(question)
+        if answer:
+            # Initialize the field with values from the database if any
+            if answer is AnswerSelectMultiple:
+                kwargs["initial"] = list(answer.body)
+            else:
+                kwargs["initial"] = answer.body
         if question.choices:
             qchoices = question.get_choices()
             # add an empty option at the top so that the user has to explicitly
@@ -121,13 +168,16 @@ class ResponseForm(models.ModelForm):
 
     def save(self, commit=True):
         """ Save the response object """
-        response = super(ResponseForm, self).save(commit=False)
+        # Recover an existing response from the database if any
+        # There is only one response by logged user.
+        response = self._get_preexisting_response()
+        if response is None:
+            response = super(ResponseForm, self).save(commit=False)
         response.survey = self.survey
         response.interview_uuid = self.uuid
         if self.user.is_authenticated():
             response.user = self.user
         response.save()
-
         # response "raw" data as dict (for signal)
         data = {
             'survey_id': response.survey.id,
@@ -143,30 +193,31 @@ class ResponseForm(models.ModelForm):
                 # field name in the __init__ method of this form class.
                 q_id = int(field_name.split("_")[1])
                 question = Question.objects.get(pk=q_id)
-                if question.type in [Question.TEXT, Question.SHORT_TEXT]:
-                    a = AnswerText(question=question)
-                    a.body = field_value
-                elif question.type == Question.RADIO:
-                    a = AnswerRadio(question=question)
-                    a.body = field_value
-                elif question.type == Question.SELECT:
-                    a = AnswerSelect(question=question)
-                    a.body = field_value
-                elif question.type == Question.SELECT_IMAGE:
-                    a = AnswerSelect(question=question)
+                answer = self._get_preexisting_answer(question)
+                if answer is None:
+                    if question.type in [Question.TEXT, Question.SHORT_TEXT]:
+                        answer = AnswerText(question=question)
+                    elif question.type == Question.RADIO:
+                        answer = AnswerRadio(question=question)
+                    elif question.type == Question.SELECT:
+                        answer = AnswerSelect(question=question)
+                    elif question.type == Question.SELECT_IMAGE:
+                        answer = AnswerSelect(question=question)
+                    elif question.type == Question.SELECT_MULTIPLE:
+                        answer = AnswerSelectMultiple(question=question)
+                    elif question.type == Question.INTEGER:
+                        answer = AnswerInteger(question=question)
+                if question.type == Question.SELECT_IMAGE:
                     value, img_src = field_value.split(":", 1)
-                    a.body = value
-                elif question.type == Question.SELECT_MULTIPLE:
-                    a = AnswerSelectMultiple(question=question)
-                    a.body = field_value
-                elif question.type == Question.INTEGER:
-                    a = AnswerInteger(question=question)
-                    a.body = field_value
-                data['responses'].append((a.question.id, a.body))
-                logging.debug("Creating %s for question %d of type %s",
-                              a.question.text, q_id, a.question.type)
-                logging.debug('Answer value: %s', field_value)
-                a.response = response
-                a.save()
+                    # TODO
+                answer.body = field_value
+                data['responses'].append((answer.question.id, answer.body))
+                LOGGER.debug(
+                    "Creating %s for question %d of type %s : %s",
+                     answer.question.text, q_id, answer.question.type,
+                     field_value
+                 )
+                answer.response = response
+                answer.save()
         survey_completed.send(sender=Response, instance=response, data=data)
         return response
