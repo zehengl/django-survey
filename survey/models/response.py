@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .survey import Survey
 
+
 class Response(models.Model):
 
     """

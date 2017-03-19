@@ -69,17 +69,23 @@ options for this question .""")
             validate_choices(self.choices)
         super(Question, self).save(*args, **kwargs)
 
-    def get_choices(self):
-        """
-        Parse the choices field and return a tuple formatted appropriately
-        for the 'choices' argument of a form widget.
-        """
+    def get_clean_choices(self):
         choices = str(self.choices).split(',')
         choices_list = []
         for choice in choices:
             choice = choice.strip().capitalize()
             if choice != "":
-                choices_list.append((choice, choice))
+                choices_list.append(choice)
+        return choices_list
+
+    def get_choices(self):
+        """
+        Parse the choices field and return a tuple formatted appropriately
+        for the 'choices' argument of a form widget.
+        """
+        choices_list = []
+        for choice in self.get_clean_choices():
+            choices_list.append((choice, choice))
         choices_tuple = tuple(choices_list)
         return choices_tuple
 

@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
-
-from .question import Question
-from .response import Response
-
-
 """
     These type-specific answer models use a text field to allow for flexible
     field sizes depending on the actual question this answer corresponds to any
     "required" attribute will be enforced by the form.
 """
+
+import logging
+
+from django.db import models
+
+from .question import Question
+from .response import Response
+from django.core.exceptions import ValidationError
 
 
 class AnswerBase(models.Model):
@@ -19,6 +21,30 @@ class AnswerBase(models.Model):
     response = models.ForeignKey(Response, related_name="answers")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    def __init__(self, *args, **kwargs):
+        try:
+            question = Question.objects.get(pk=kwargs["question_id"])
+        except KeyError:
+            try:
+                question = kwargs["question"]
+            except KeyError:
+                question = None
+        try:
+            body = kwargs["body"]
+        except KeyError:
+            body = None
+        if question and body:
+            self.check_answer_body(question, body)
+        super(AnswerBase, self).__init__(*args, **kwargs)
+
+    def check_answer_body(self, question, body):
+        if question.type in [Question.RADIO, Question.SELECT,
+                             Question.SELECT_MULTIPLE]:
+            if body not in question.get_clean_choices():
+                msg = "Impossible answer '{}'".format(body)
+                msg += " should be in {} ".format(question.get_clean_choices())
+                raise ValidationError(msg)
 
     def __unicode__(self):
         try:

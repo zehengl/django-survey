@@ -10,15 +10,15 @@ class TestQuestion(BaseModelTest):
 
     def test_unicode(self):
         """ Unicode generation. """
-        self.assertIsNotNone(str(self.question))
+        self.assertIsNotNone(str(self.questions[0]))
 
     def test_get_choices(self):
         """ We can get a list of choices for a widget from choices text. """
-        self.question.choices = "aa,bb"
-        self.assertEqual(self.question.get_choices(),
+        self.questions[0].choices = "aa,bb"
+        self.assertEqual(self.questions[0].get_choices(),
                          (('Aa', 'Aa'), ('Bb', 'Bb')))
-        self.question.choices = "aa,  ,cc"
-        self.assertEqual(self.question.get_choices(),
+        self.questions[0].choices = "aa,  ,cc"
+        self.assertEqual(self.questions[0].get_choices(),
                          (('Aa', 'Aa'), ('Cc', 'Cc')))
 
     def test_validate_choices(self):
