@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from django import template
 
 register = template.Library()
+
 
 class CounterNode(template.Node):
 
@@ -10,6 +13,7 @@ class CounterNode(template.Node):
     def render(self, context):
         self.count += 1
         return self.count
+
 
 @register.tag
 def counter(parser, token):

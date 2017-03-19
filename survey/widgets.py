@@ -1,8 +1,8 @@
-#! -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.utils.safestring import mark_safe
 
 
 class ImageSelectWidget(forms.widgets.Widget):
@@ -13,7 +13,7 @@ class ImageSelectWidget(forms.widgets.Widget):
             'http://maps.googleapis.com/maps/api/js?sensor=false',
             'js/survey.js',
         )
-    
+
     def render(self, name, value, *args, **kwargs):
         template_name = "survey/forms/image_select.html"
         choices = []

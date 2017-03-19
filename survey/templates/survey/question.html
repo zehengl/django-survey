@@ -1,0 +1,7 @@
+{% load bootstrap %}
+
+{% for field in response_form %}
+	{% if field.field.widget.attrs.category == category.name %}
+	   {{field|bootstrap}}
+	{% endif %}
+{% endfor %}

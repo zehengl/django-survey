@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 06:07-0500\n"
-"PO-Revision-Date: 2017-03-16 06:09-0551\n"
+"POT-Creation-Date: 2017-03-16 11:43-0500\n"
+"PO-Revision-Date: 2017-03-16 11:43-0551\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,91 +19,91 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.7.12\n"
 
-#: survey/actions.py:10
+#: survey/actions.py:13
 #, python-format
+#| msgid "%(count)d survey was successfully marked as published."
 msgid "%(count)d survey was successfully marked as published."
 msgid_plural "%(count)d surveys were successfully marked as published"
-msgstr[0] "%(count)d questionnaire a été publié."
-msgstr[1] "%(count)d questionnaires ont été publiés."
+msgstr[0] "%(count)d questionnaire a été publié avec succès."
+msgstr[1] "%(count)d questionnaires ont été publiés avec succès."
 
-#: survey/actions.py:14
+#: survey/actions.py:18
 msgid "Mark selected surveys as published"
 msgstr "Marquer le questionnaire comme publié"
 
-#: survey/models.py:16
+#: survey/models.py:20
 msgid "survey"
 msgstr "questionnaire"
 
-#: survey/models.py:17
+#: survey/models.py:21
 msgid "surveys"
 msgstr "questionnaires"
 
-#: survey/models.py:39
+#: survey/models.py:45
 msgid "category"
 msgstr "catégorie"
 
-#: survey/models.py:40
+#: survey/models.py:46
 msgid "categories"
 msgstr "catégories"
 
-#: survey/models.py:56
+#: survey/models.py:62
 msgid "text (multiple line)"
 msgstr "Texte (plusieurs lignes)"
 
-#: survey/models.py:57
+#: survey/models.py:63
 msgid "short text (one line)"
 msgstr "Texte court (une ligne)"
 
-#: survey/models.py:58
+#: survey/models.py:64
 msgid "radio"
 msgstr "Bouton radio"
 
-#: survey/models.py:59
+#: survey/models.py:65
 msgid "select"
 msgstr "Liste déroulante"
 
-#: survey/models.py:60
+#: survey/models.py:66
 msgid "Select Multiple"
 msgstr "Liste à choix multiple"
 
-#: survey/models.py:61
+#: survey/models.py:67
 msgid "Select Image"
 msgstr "Séléctionnez l'image"
 
-#: survey/models.py:62
+#: survey/models.py:68
 msgid "integer"
 msgstr "Chiffre"
 
-#: survey/models.py:73
-#| msgid ""
-#| "if the question type is 'radio', 'select', or 'select multiple' provide a "
-#| "comma-separated list of options for this question ."
+#: survey/models.py:80
 msgid ""
-"If the question type is 'radio',\n"
-"'select', or 'select multiple' provide a\n"
-"comma-separated list of options for this question ."
+"The choices field is only used if the question type\n"
+"if the question type is 'radio', 'select', or\n"
+"'select multiple' provide a comma-separated list of\n"
+"options for this question ."
 msgstr ""
-"Si la question est de type 'bouton radio', 'liste déroulante', ou 'liste à "
-"choix multiple', il faut fournir la liste des options pour cette question "
-"sous la forme d'une liste séparée par des virgules."
+"Le champ choix est utilisé seulement si la question est de type 'bouton "
+"radio', 'liste déroulante', ou 'liste à choix multiple', il faut fournir la "
+"liste des options pour cette question sous la forme d'une liste séparée par "
+"des virgules."
 
-#: survey/models.py:79
+#: survey/models.py:87
 msgid "question"
 msgstr "question"
 
-#: survey/models.py:80
+#: survey/models.py:88
 msgid "questions"
 msgstr "questions"
 
-#: survey/models.py:115
+#: survey/models.py:122
 msgid "Interview unique identifier"
 msgstr "Identifiant unique de la réponse"
 
-#: survey/models.py:118
+#: survey/models.py:126
 msgid "response"
 msgstr "réponse"
 
-#: survey/models.py:119
+#: survey/models.py:127
 msgid "responses"
 msgstr "réponses"
 
@@ -117,7 +117,7 @@ msgid "Sorry! Your already replied to our survey"
 msgstr "Désolé! Vous avez déjà répondu à ce sondage"
 
 #: survey/templates/survey/completed.html:9
-#: survey/templates/survey/confirm.html:12
+#: survey/templates/survey/confirm.html:13
 msgid "Back to survey list"
 msgstr "Retour à la liste de sondage"
 
@@ -127,12 +127,12 @@ msgid "Survey submitted"
 msgstr "Sondage soumis"
 
 #: survey/templates/survey/confirm.html:9
-msgid ""
-"Thanks! Your confirmation code is {{uuid}}. Use this to refer to your "
-"response."
-msgstr ""
-"Merci ! Votre code de confirmation est {{uuid}}. Utiliser ce code dans votre"
-" réponse."
+msgid "Thanks! Your confirmation code is"
+msgstr "Merci ! Votre code de confirmation est"
+
+#: survey/templates/survey/confirm.html:10
+msgid "Use this to refer to your response."
+msgstr "Utiliser ce code pour parler de votre questionnaire complété."
 
 #: survey/templates/survey/list.html:6
 msgid "Welcome to the Django Survey app"
@@ -142,6 +142,14 @@ msgstr "Bienvenue dans l'application Django-Survey"
 msgid "Take the Survey"
 msgstr "Réaliser le sondage"
 
-#: survey/templates/survey/survey.html:13
-msgid "Welcome to"
-msgstr "Bienvenue dans "
+#: survey/templates/survey/survey.html:24
+msgid "Answer"
+msgstr "Répondre"
+
+#: survey/templates/survey/survey.html:37
+msgid "Questions"
+msgstr "Questions"
+
+#: survey/templates/survey/survey.html:41
+msgid "I'm done!"
+msgstr "J'ai fini"

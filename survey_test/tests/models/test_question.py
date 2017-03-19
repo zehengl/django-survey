@@ -25,7 +25,7 @@ class TestQuestion(BaseModelTest):
         """  List are validated for comma. """
         question = Question.objects.create(
             text="Q?", choices="a,b,c", order=1, required=True,
-            survey=self.survey, question_type=Question.SELECT_MULTIPLE
+            survey=self.survey, type=Question.SELECT_MULTIPLE
         )
         question.choices = "a"
         self.assertRaises(ValidationError, question.save)

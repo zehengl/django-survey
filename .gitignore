@@ -6,6 +6,7 @@ media/data
 *.pyc
 survey.db
 survey.egg-info
+survey_test/static/
 env
 survey_test_bak
 .env/

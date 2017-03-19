@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView, View
 
-from .forms import ResponseForm
-from .models import Category, Response, Survey
+from survey.forms import ResponseForm
+from survey.models import Category, Survey
 
 
 class IndexView(TemplateView):
@@ -11,10 +13,10 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        qs = Survey.objects.filter(is_published=True)
+        surveys = Survey.objects.filter(is_published=True)
         if not self.request.user.is_authenticated():
-            qs = qs.filter(need_logged_user=False)
-        context['surveys'] = qs
+            surveys = surveys.filter(need_logged_user=False)
+        context['surveys'] = surveys
         return context
 
 
@@ -31,13 +33,9 @@ class SurveyDetail(View):
                 template_name = 'survey/one_page_survey.html'
         if survey.need_logged_user and not request.user.is_authenticated():
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-        if survey.need_logged_user and request.user.is_authenticated():
-            if Response.objects.filter(survey=survey, user=request.user).exists():
-                return redirect('survey-completed', id=survey.id)
-
-        category_items = Category.objects.filter(survey=survey).order_by('order')
-        categories = [c.name for c in category_items]
-        form = ResponseForm(survey=survey, user=request.user, step=kwargs.get('step', 0))
+        categories = Category.objects.filter(survey=survey).order_by('order')
+        form = ResponseForm(survey=survey, user=request.user,
+                            step=kwargs.get('step', 0))
         context = {
             'response_form': form,
             'survey': survey,
@@ -50,16 +48,14 @@ class SurveyDetail(View):
         survey = get_object_or_404(Survey, is_published=True, id=kwargs['id'])
         if survey.need_logged_user and not request.user.is_authenticated():
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-        if survey.need_logged_user and request.user.is_authenticated():
-            if Response.objects.filter(survey=survey, user=request.user).exists():
-                return redirect('survey-completed', id=survey.id)
-        category_items = Category.objects.filter(survey=survey).order_by('order')
-        categories = [c.name for c in category_items]
-        form = ResponseForm(request.POST, survey=survey, user=request.user, step=kwargs.get('step', 0))
-        context = {'response_form': form, 'survey': survey, 'categories': categories}
+        categories = Category.objects.filter(survey=survey).order_by('order')
+        form = ResponseForm(request.POST, survey=survey, user=request.user,
+                            step=kwargs.get('step', 0))
+        context = {'response_form': form, 'survey': survey,
+                   'categories': categories}
         if form.is_valid():
             session_key = 'survey_%s' % (kwargs['id'],)
-            if not session_key in request.session:
+            if session_key not in request.session:
                 request.session[session_key] = {}
             for key, value in form.cleaned_data.items():
                 request.session[session_key][key] = value
@@ -69,7 +65,8 @@ class SurveyDetail(View):
             response = None
             if survey.display_by_question:
                 if not form.has_next_step():
-                    save_form = ResponseForm(request.session[session_key], survey=survey, user=request.user)
+                    save_form = ResponseForm(request.session[session_key],
+                                             survey=survey, user=request.user)
                     response = save_form.save()
             else:
                 response = form.save()
@@ -81,13 +78,14 @@ class SurveyDetail(View):
                 if response is None:
                     return redirect('/')
                 else:
-                    next = request.session.get('next', None)
-                    if next is not None:
+                    next_ = request.session.get('next', None)
+                    if next_ is not None:
                         if 'next' in request.session:
                             del request.session['next']
-                        return redirect(next)
+                        return redirect(next_)
                     else:
-                        return redirect('survey-confirmation', uuid=response.interview_uuid)
+                        return redirect('survey-confirmation',
+                                        uuid=response.interview_uuid)
         if survey.template is not None and len(survey.template) > 4:
             template_name = survey.template
         else:
@@ -99,6 +97,7 @@ class SurveyDetail(View):
 
 
 class ConfirmView(TemplateView):
+
     template_name = 'survey/confirm.html'
 
     def get_context_data(self, **kwargs):
@@ -108,10 +107,11 @@ class ConfirmView(TemplateView):
 
 
 class SurveyCompleted(TemplateView):
+
     template_name = 'survey/completed.html'
 
     def get_context_data(self, **kwargs):
-        context = super(SurveyCompleted, self).get_context_data(**kwargs)
+        context = {}
         survey = get_object_or_404(Survey, is_published=True, id=kwargs['id'])
         context['survey'] = survey
         return context

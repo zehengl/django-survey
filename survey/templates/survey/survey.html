@@ -1,68 +1,43 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load survey_extras %}
 
-{% block title %}{{survey.name|title}}{% endblock title %}
+{% block title %} {{survey.name}} {% endblock title %}
 
 {% block extrajs %}
     {{response_form.media}}
 {% endblock %}
 
 {% block body %}
+	<h1> {{survey.name}} </h1>
+	<div class="survey-description"> {{survey.description|safe}} </div>
 
-	<h1> {% trans "Welcome to" %} {{survey.name|title}}</h1>
-	<div class="survey-description">
-	    {{survey.description|safe}}
-	</div>
+	<div><form action="{% url 'survey-detail' id=survey.id %}" method="post">
+	    {% csrf_token %}
+        {% for category in categories %}
+            <h3> {{category}} </h3>
+            <p> {{category.description}} </p>
+			 <div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h3 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{category.name}}">
+				          {% trans "Answer" %} {{category.name}}  
+				        </a>
+				      </h3>
+				    </div>
+		        <div class="category-container">
+				    <div id="collapse{{category}}" class="panel-collapse collapse">
+				        <div class="panel-body">
+	                        {% include "survey/question.html" %}
+		               </div>
+		           </div>
+	           </div>
+           </div>
+          {% empty %}
+            <h3> {% trans "Questions" %} </h3>
+                {% include "survey/question.html" %}
+          {% endfor %}
 
-<div><form action="{{ response_form.current_step_url }}" method="post">
-    {% csrf_token %}
-    <ol class="survey-questions">
-    {% for category in categories %}
-        <h3 class="collapsible">{{category|title}} Questions<span></span></h3>
-        <div class="category-container">
-        {% for field in response_form %}
-            {% if field.field.widget.attrs.category == category %}
-                <li>
-                {% if field.field.required %}
-                <div class="field-wrapper question-required">
-                    {{ field.errors }}
-                    <span class="asterix">*</span>
-                    <label class="label-inline">{{ field.label }}</label>
-                {% else %}
-                <div class="field-wrapper">
-                    {{ field.errors }}
-                    <label class="label-inline">{{ field.label }}</label>
-                {% endif %}
-                    <span class="form-help-text">{{ field.help_text}}</span>
-                    <div class="form-field-body">{{ field }} </div>
-                </div>
-                </li>
-            {% endif %}
-        {% endfor %}
-        </div>
-    {% endfor %}
-
-    <div class="category-container">
-    {% for field in response_form %}
-        {% if not field.field.widget.attrs.category %}
-            <li> {% if field.field.required %}
-                <div class="field-wrapper question-required">
-                {{ field.errors }}
-                <span class="asterix"> * </span>
-                <label class="label-inline">{{ field.label }}</label>
-            {% else %}
-                <div class="field-wrapper">{{ field.errors }}
-                <label class="label-inline">{{ field.label }}</label>
-            {% endif %}
-                <span class="form-help-text">{{ field.help_text}}</span>
-                <div class="form-field-body">{{ field }}</div>
-            </div>
-            </li>
-        {% endif %}
-    {% endfor %}
-    </div>
-    </ol>
-    <div class="submit-button"><input type="submit" value="I'm done!"></div>
-</form></div>
+	    <div class="submit-button text-center"><input type="submit" value="{% trans "I'm done!" %}"></div>
+	</form></div>
 {% endblock %}

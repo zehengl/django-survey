@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -20,6 +22,7 @@ def validate_choices(choices):
 
 
 class Survey(models.Model):
+
     name = models.CharField(max_length=400)
     description = models.TextField()
     is_published = models.BooleanField()
@@ -27,7 +30,7 @@ class Survey(models.Model):
     display_by_question = models.BooleanField()
     template = models.CharField(max_length=255, null=True, blank=True)
 
-    class Meta:
+    class Meta(object):
         verbose_name = _('survey')
         verbose_name_plural = _('surveys')
 
@@ -36,26 +39,28 @@ class Survey(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('survey-detail', [self.id])
+        return ('survey-detail', [self.pk])
 
     def questions(self):
         if self.pk:
-            return Question.objects.filter(survey=self.pk).order_by('category__order', 'order')
+            questions = Question.objects.filter(survey=self.pk)
+            return questions.order_by('category__order', 'order')
         else:
-            return Question.objects.none()
+            return []
 
 
 class Category(models.Model):
     name = models.CharField(max_length=400)
     survey = models.ForeignKey(Survey)
     order = models.IntegerField(blank=True, null=True)
+    description = models.CharField(max_length=2000, blank=True, null=True)
 
-    class Meta:
+    class Meta(object):
         verbose_name = _('category')
         verbose_name_plural = _('categories')
 
     def __unicode__(self):
-        return (self.name)
+        return self.name
 
 
 class Question(models.Model):
@@ -80,24 +85,26 @@ class Question(models.Model):
     text = models.TextField()
     order = models.IntegerField()
     required = models.BooleanField()
-    category = models.ForeignKey(Category, blank=True, null=True,) 
+    category = models.ForeignKey(Category, blank=True, null=True,)
     survey = models.ForeignKey(Survey)
-    question_type = models.CharField(max_length=200, choices=QUESTION_TYPES, default=TEXT)
-    # the choices field is only used if the question type 
+    type = models.CharField(max_length=200, choices=QUESTION_TYPES,
+                            default=TEXT)
     choices = models.TextField(
-        blank=True, null=True, help_text=_(u"""If the question type is 'radio',
-'select', or 'select multiple' provide a
-comma-separated list of options for this question .""")
+        blank=True, null=True,
+        help_text=_(u"""The choices field is only used if the question type
+if the question type is 'radio', 'select', or
+'select multiple' provide a comma-separated list of
+options for this question .""")
     )
 
-    class Meta:
+    class Meta(object):
         verbose_name = _('question')
         verbose_name_plural = _('questions')
         ordering = ('survey', 'order')
 
     def save(self, *args, **kwargs):
-        if (self.question_type == Question.RADIO or self.question_type == Question.SELECT 
-            or self.question_type == Question.SELECT_MULTIPLE):
+        if self.type in [Question.RADIO, Question.SELECT,
+                         Question.SELECT_MULTIPLE]:
             validate_choices(self.choices)
         super(Question, self).save(*args, **kwargs)
 
@@ -116,7 +123,7 @@ comma-separated list of options for this question .""")
         return choices_tuple
 
     def __unicode__(self):
-        return (self.text)
+        return self.text
 
 
 class Response(models.Model):
@@ -128,14 +135,15 @@ class Response(models.Model):
     updated = models.DateTimeField(auto_now=True)
     survey = models.ForeignKey(Survey)
     user = models.ForeignKey(User, null=True, blank=True)
-    interview_uuid = models.CharField(_(u"Interview unique identifier"), max_length=36)
+    interview_uuid = models.CharField(_(u"Interview unique identifier"),
+                                      max_length=36)
 
-    class Meta:
+    class Meta(object):
         verbose_name = _('response')
         verbose_name_plural = _('responses')
 
     def __unicode__(self):
-        return ("response %s" % self.interview_uuid)
+        return "response %s" % self.interview_uuid
 
 
 class AnswerBase(models.Model):
