@@ -8,11 +8,13 @@
 
 import logging
 
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from .question import Question
 from .response import Response
-from django.core.exceptions import ValidationError
+
+LOGGER = logging.getLogger(__name__)
 
 
 class AnswerBase(models.Model):
@@ -26,14 +28,8 @@ class AnswerBase(models.Model):
         try:
             question = Question.objects.get(pk=kwargs["question_id"])
         except KeyError:
-            try:
-                question = kwargs["question"]
-            except KeyError:
-                question = None
-        try:
-            body = kwargs["body"]
-        except KeyError:
-            body = None
+            question = kwargs.get("question")
+        body = kwargs.get("body")
         if question and body:
             self.check_answer_body(question, body)
         super(AnswerBase, self).__init__(*args, **kwargs)

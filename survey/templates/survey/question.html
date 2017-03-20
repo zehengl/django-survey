@@ -1,19 +1,31 @@
 {% load bootstrap %}
 
+<table class="table table-hover table-condensed">
+    <!--<thead>
+      <tr>
+        <th> Question  </th>
+        <th> Answers </th>
+      </tr>
+    </thead> -->
+    <tbody>
 {% for form in response_form %}
 	{% if form.field.widget.attrs.category == category.name %}
-        <div>
-	        <strong> {{ form.label }} </strong>
-	        {% if form.field.required %}
-	            <span class="glyphicon glyphicon-asterisk" style="color:red"></span>
-	        {% endif %}
-	        <span class="help-inline" style="color:red">
-	            <strong> {% for error in  form.errors %}{{ error }}{% endfor %} </strong>
-	        </span>
-	        <div class="controls">
-	             {{ form }}
-	        </div>
-               Initial : {{ form.initial}}
-        </div>
+        <tr class="{% if form.errors%} danger{% endif %}">
+            <td>
+	            <strong> {{ form.label }} </strong>
+	            {% if form.field.required %}
+	                <span class="glyphicon glyphicon-asterisk" style="color:red"> </span>
+	            {% endif %}
+	            <span class="help-inline" style="color:red">
+	                <strong> {% for error in  form.errors %}{{ error }}{% endfor %} </strong>
+	            </span>
+            </td>
+            <td>
+                {{ form }}
+            </td>
+        </tr>
+        <!-- Initial : {{ form.initial }} -->
 	{% endif %}
 {% endfor %}
+    </tbody>
+</table>

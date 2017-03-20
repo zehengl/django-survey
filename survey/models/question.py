@@ -8,6 +8,12 @@ from .category import Category
 from .survey import Survey
 
 
+CHOICES_HELP_TEXT = _(u"""The choices field is only used if the question type
+if the question type is 'radio', 'select', or
+'select multiple' provide a comma-separated list of
+options for this question .""")
+
+
 def validate_choices(choices):
     """  Verifies that there is at least two choices in choices
     :param String choices: The string representing the user choices.
@@ -50,13 +56,8 @@ class Question(models.Model):
     survey = models.ForeignKey(Survey, related_name="related_questions")
     type = models.CharField(max_length=200, choices=QUESTION_TYPES,
                             default=TEXT)
-    choices = models.TextField(
-        blank=True, null=True,
-        help_text=_(u"""The choices field is only used if the question type
-if the question type is 'radio', 'select', or
-'select multiple' provide a comma-separated list of
-options for this question .""")
-    )
+    choices = models.TextField(blank=True, null=True,
+                               help_text=CHOICES_HELP_TEXT)
 
     class Meta(object):
         verbose_name = _('question')
@@ -90,4 +91,8 @@ options for this question .""")
         return choices_tuple
 
     def __unicode__(self):
-        return u"{}".format(self.text)
+        msg = u"Question '{}' ".format(self.text)
+        if self.required:
+            msg += u"(*) "
+        msg += u"{}".format(self.get_clean_choices())
+        return msg

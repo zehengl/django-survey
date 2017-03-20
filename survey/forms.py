@@ -44,6 +44,26 @@ class ResponseForm(models.ModelForm):
         model = Response
         fields = ()
 
+    def __init__(self, *args, **kwargs):
+        """ Expects a survey object to be passed in initially """
+        self.survey = kwargs.pop('survey')
+        self.user = kwargs.pop('user')
+        try:
+            self.step = int(kwargs.pop('step'))
+        except KeyError:
+            self.step = None
+        super(ResponseForm, self).__init__(*args, **kwargs)
+        self.uuid = uuid.uuid4().hex
+        self.steps_count = len(self.survey.questions())
+        # add a field for each survey question, corresponding to the question
+        # type as appropriate.
+        data = kwargs.get('data')
+        for i, question in enumerate(self.survey.questions()):
+            if self.survey.display_by_question and i != self.step and self.step is not None:
+                continue
+            else:
+                self.add_question(question, data)
+
     def _get_preexisting_response(self):
         """ Recover a pre-existing response in database.
 
@@ -55,7 +75,7 @@ class ResponseForm(models.ModelForm):
             return Response.objects.get(user=self.user, survey=self.survey)
         except Response.DoesNotExist:
             LOGGER.debug("No saved response for '%s' for user %s",
-                          self.survey, self.user)
+                         self.survey, self.user)
             return None
 
     def _get_preexisting_answer(self, question):
@@ -76,42 +96,67 @@ class ResponseForm(models.ModelForm):
         except AnswerBase.DoesNotExist:
             return None
 
-    def add_question(self, question, data):
-        """ Add a question to the form.
+    def get_question_initial(self, question, data):
+        """ Get the initial value that we should use in the Form
 
-        :param Question question: The question to add.
-        :param dict data: The pre-existing values from a post request. """
-        kwargs = {"label": question.text,
-                  "required": question.required, }
+        :param Question question: The question
+        :param dict data: Value from a POST request.
+        :rtype: String or None  """
+        initial = None
         answer = self._get_preexisting_answer(question)
         if answer:
             # Initialize the field with values from the database if any
             if answer is AnswerSelectMultiple:
-                kwargs["initial"] = list(answer.body)
+                initial = list(answer.body)
             else:
-                kwargs["initial"] = answer.body
+                initial = answer.body
+        if data:
+            # Initialize the field field from a POST request, if any.
+            # Replace values from the database
+            initial = data.get('question_%d' % question.pk)
+        return initial
+
+    def get_question_widget(self, question):
+        """ Return the widget we should use for a question.
+
+        :param Question question: The question
+        :rtype: django.forms.widget or None """
+        widget = None
+        if question.type == Question.TEXT:
+            widget = forms.Textarea
+        elif question.type == Question.SHORT_TEXT:
+            widget = forms.TextInput
+        elif question.type == Question.RADIO:
+            widget = forms.RadioSelect(renderer=HorizontalRadioRenderer)
+        elif question.type == Question.SELECT:
+            widget = forms.Select
+        elif question.type == Question.SELECT_IMAGE:
+            widget = ImageSelectWidget
+        elif question.type == Question.SELECT_MULTIPLE:
+            widget = SelectMultipleHorizontal
+        return widget
+
+    def get_question_choices(self, question):
+        """ Return the choices we should use for a question.
+
+        :param Question question: The question
+        :rtype: List of String or None """
+        qchoices = None
         if question.choices:
             qchoices = question.get_choices()
             # add an empty option at the top so that the user has to explicitly
             # select one of the options
             if question.type in [Question.SELECT, Question.SELECT_IMAGE]:
                 qchoices = tuple([('', '-------------')]) + qchoices
-            kwargs["choices"] = qchoices
-        if question.type == Question.TEXT:
-            kwargs["widget"] = forms.Textarea
-        elif question.type == Question.SHORT_TEXT:
-            kwargs["widget"] = forms.TextInput
-        elif question.type == Question.RADIO:
-            kwargs["widget"] = forms.RadioSelect(
-                                    renderer=HorizontalRadioRenderer
-                                )
-        elif question.type == Question.SELECT:
-            kwargs["widget"] = forms.Select
-        elif question.type == Question.SELECT_IMAGE:
-            kwargs["widget"] = ImageSelectWidget
-        elif question.type == Question.SELECT_MULTIPLE:
-            kwargs["widget"] = forms.CheckboxSelectMultiple
+        return qchoices
 
+    def get_question_field(self, question, **kwargs):
+        """ Return the field we should use in our form.
+
+        :param Question question: The question
+        :param **kwargs: A dict of parameter properly initialized in
+            add_question.
+        :rtype: django.forms.fields """
         if question.type in [Question.TEXT, Question.SHORT_TEXT]:
             field = forms.CharField(**kwargs)
         elif question.type in [Question.SELECT_MULTIPLE]:
@@ -120,47 +165,28 @@ class ResponseForm(models.ModelForm):
             field = forms.IntegerField(**kwargs)
         else:
             field = forms.ChoiceField(**kwargs)
+        return field
 
-        # add the category as a css class, and add it as a data attribute
-        # as well (this is used in the template to allow sorting the
-        # questions by category)
-        classes = field.widget.attrs.get("class") or ''
+    def add_question(self, question, data):
+        """ Add a question to the form.
+
+        :param Question question: The question to add.
+        :param dict data: The pre-existing values from a post request. """
+        kwargs = {"label": question.text,
+                  "required": question.required, }
+        initial = self.get_question_initial(question, data)
+        if initial:
+            kwargs["initial"] = initial
+        choices = self.get_question_choices(question)
+        if choices:
+            kwargs["choices"] = choices
+        widget = self.get_question_widget(question)
+        if widget:
+            kwargs["widget"] = widget
+        field = self.get_question_field(question, **kwargs)
         if question.category:
-            field.widget.attrs["class"] = classes + (" cat_%s" % question.category.name)
             field.widget.attrs["category"] = question.category.name
-        if question.type == Question.SELECT:
-            field.widget.attrs["class"] = classes + (" cs-select cs-skin-boxes")
-        if question.type == Question.RADIO:
-            field.widget.attrs["class"] = classes + (" fs-radio-group fs-radio-custom clearfix")
-        if question.type == Question.SELECT_MULTIPLE:
-            field.widget.attrs["class"] = classes
-
-        # initialize the field field with values from a POST request, if any.
-        if data:
-            field.initial = data.get('question_%d' % question.pk)
-        self.fields["question_%d" % question.pk] = field
-
-    def __init__(self, *args, **kwargs):
-        """ Expects a survey object to be passed in initially """
-        self.survey = kwargs.pop('survey')
-        self.user = kwargs.pop('user')
-        try:
-            self.step = int(kwargs.pop('step'))
-        except KeyError:
-            self.step = None
-        super(ResponseForm, self).__init__(*args, **kwargs)
-        self.uuid = uuid.uuid4().hex
-        self.steps_count = len(self.survey.questions())
-        # add a field for each survey question, corresponding to the question
-        # type as appropriate.
-        data = kwargs.get('data')
-        for i, question in enumerate(self.survey.questions()):
-            if (self.survey.display_by_question and
-               i != self.step and
-               self.step is not None):
-                continue
-            else:
-                self.add_question(question, data)
+        self.fields['question_%d' % question.pk] = field
 
     def has_next_step(self):
         if self.survey.display_by_question:
@@ -182,7 +208,7 @@ class ResponseForm(models.ModelForm):
     def save(self, commit=True):
         """ Save the response object """
         # Recover an existing response from the database if any
-        # There is only one response by logged user.
+        #  There is only one response by logged user.
         response = self._get_preexisting_response()
         if response is None:
             response = super(ResponseForm, self).save(commit=False)
@@ -226,10 +252,9 @@ class ResponseForm(models.ModelForm):
                 answer.body = field_value
                 data['responses'].append((answer.question.id, answer.body))
                 LOGGER.debug(
-                    "Creating %s for question %d of type %s : %s",
-                     answer.question.text, q_id, answer.question.type,
-                     field_value
-                 )
+                    "Creating answer for question %d of type %s : %s", q_id,
+                    answer.question.type, field_value
+                )
                 answer.response = response
                 answer.save()
         survey_completed.send(sender=Response, instance=response, data=data)
