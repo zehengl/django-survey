@@ -15,7 +15,6 @@ from survey.models.answer import get_real_type_answer
 from survey.signals import survey_completed
 from survey.widgets import ImageSelectWidget
 
-
 LOGGER = logging.getLogger(__name__)
 
 
@@ -23,6 +22,20 @@ class HorizontalRadioRenderer(forms.RadioSelect.renderer):
     # Blatantly stolen from http://stackoverflow.com/questions/5935546/
     def render(self):
         return mark_safe(u'\n'.join([u'%s\n' % w for w in self]))
+
+
+class HorizontalCheckboxRenderer(forms.RadioSelect.renderer):
+    # Obviously an horrible hack based on HorizontalRadioRenderer.
+    def render(self):
+        return mark_safe(
+            u'\n'.join(
+                [u'{}\n'.format(w).replace("radio", "checkbox") for w in self]
+            )
+        )
+
+
+class SelectMultipleHorizontal(forms.CheckboxSelectMultiple):
+    renderer = HorizontalCheckboxRenderer
 
 
 class ResponseForm(models.ModelForm):
