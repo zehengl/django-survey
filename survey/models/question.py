@@ -71,7 +71,7 @@ class Question(models.Model):
         super(Question, self).save(*args, **kwargs)
 
     def get_clean_choices(self):
-        choices = str(self.choices).split(',')
+        choices = unicode(self.choices).split(',')
         choices_list = []
         for choice in choices:
             choice = choice.strip().capitalize()
