@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from .survey import Survey
+from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -18,3 +19,6 @@ class Category(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def slug(self):
+        return slugify(unicode(self))
