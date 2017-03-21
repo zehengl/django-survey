@@ -11,7 +11,7 @@ from .actions import make_published
 
 class QuestionInline(admin.TabularInline):
     model = Question
-    ordering = ('category', 'order',)
+    ordering = ('order', 'category', )
     extra = 1
 
 
