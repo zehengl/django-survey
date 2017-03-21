@@ -10,7 +10,7 @@
     <tbody>
 {% for form in response_form %}
 	{% if form.field.widget.attrs.category == category.name %}
-        <tr class="{% if form.errors%} danger{% endif %}">
+        <tr class="{% if form.errors%} danger {% endif %}">
             <td>
 	            <strong> {{ form.label }} </strong>
 	            {% if form.field.required %}
@@ -18,9 +18,7 @@
 	            {% endif %}
 	            <span class="help-inline" style="color:red">
 	                <strong> {% for error in  form.errors %}{{ error }}{% endfor %} </strong>
-	            </span>
-            </td>
-            <td>
+	            </span> <br>
                 {{ form }}
             </td>
         </tr>
