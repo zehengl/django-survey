@@ -1,469 +1,10 @@
 [
 {
- "model": "auth.permission",
- "pk": 1,
- "fields": {
-  "name": "Can add log entry",
-  "content_type": 1,
-  "codename": "add_logentry"
- }
-},
-{
- "model": "auth.permission",
- "pk": 2,
- "fields": {
-  "name": "Can change log entry",
-  "content_type": 1,
-  "codename": "change_logentry"
- }
-},
-{
- "model": "auth.permission",
- "pk": 3,
- "fields": {
-  "name": "Can delete log entry",
-  "content_type": 1,
-  "codename": "delete_logentry"
- }
-},
-{
- "model": "auth.permission",
- "pk": 4,
- "fields": {
-  "name": "Can add permission",
-  "content_type": 2,
-  "codename": "add_permission"
- }
-},
-{
- "model": "auth.permission",
- "pk": 5,
- "fields": {
-  "name": "Can change permission",
-  "content_type": 2,
-  "codename": "change_permission"
- }
-},
-{
- "model": "auth.permission",
- "pk": 6,
- "fields": {
-  "name": "Can delete permission",
-  "content_type": 2,
-  "codename": "delete_permission"
- }
-},
-{
- "model": "auth.permission",
- "pk": 7,
- "fields": {
-  "name": "Can add group",
-  "content_type": 3,
-  "codename": "add_group"
- }
-},
-{
- "model": "auth.permission",
- "pk": 8,
- "fields": {
-  "name": "Can change group",
-  "content_type": 3,
-  "codename": "change_group"
- }
-},
-{
- "model": "auth.permission",
- "pk": 9,
- "fields": {
-  "name": "Can delete group",
-  "content_type": 3,
-  "codename": "delete_group"
- }
-},
-{
- "model": "auth.permission",
- "pk": 10,
- "fields": {
-  "name": "Can add user",
-  "content_type": 4,
-  "codename": "add_user"
- }
-},
-{
- "model": "auth.permission",
- "pk": 11,
- "fields": {
-  "name": "Can change user",
-  "content_type": 4,
-  "codename": "change_user"
- }
-},
-{
- "model": "auth.permission",
- "pk": 12,
- "fields": {
-  "name": "Can delete user",
-  "content_type": 4,
-  "codename": "delete_user"
- }
-},
-{
- "model": "auth.permission",
- "pk": 13,
- "fields": {
-  "name": "Can add content type",
-  "content_type": 5,
-  "codename": "add_contenttype"
- }
-},
-{
- "model": "auth.permission",
- "pk": 14,
- "fields": {
-  "name": "Can change content type",
-  "content_type": 5,
-  "codename": "change_contenttype"
- }
-},
-{
- "model": "auth.permission",
- "pk": 15,
- "fields": {
-  "name": "Can delete content type",
-  "content_type": 5,
-  "codename": "delete_contenttype"
- }
-},
-{
- "model": "auth.permission",
- "pk": 16,
- "fields": {
-  "name": "Can add session",
-  "content_type": 6,
-  "codename": "add_session"
- }
-},
-{
- "model": "auth.permission",
- "pk": 17,
- "fields": {
-  "name": "Can change session",
-  "content_type": 6,
-  "codename": "change_session"
- }
-},
-{
- "model": "auth.permission",
- "pk": 18,
- "fields": {
-  "name": "Can delete session",
-  "content_type": 6,
-  "codename": "delete_session"
- }
-},
-{
- "model": "auth.permission",
- "pk": 19,
- "fields": {
-  "name": "Can add site",
-  "content_type": 7,
-  "codename": "add_site"
- }
-},
-{
- "model": "auth.permission",
- "pk": 20,
- "fields": {
-  "name": "Can change site",
-  "content_type": 7,
-  "codename": "change_site"
- }
-},
-{
- "model": "auth.permission",
- "pk": 21,
- "fields": {
-  "name": "Can delete site",
-  "content_type": 7,
-  "codename": "delete_site"
- }
-},
-{
- "model": "auth.permission",
- "pk": 22,
- "fields": {
-  "name": "Can add survey",
-  "content_type": 8,
-  "codename": "add_survey"
- }
-},
-{
- "model": "auth.permission",
- "pk": 23,
- "fields": {
-  "name": "Can change survey",
-  "content_type": 8,
-  "codename": "change_survey"
- }
-},
-{
- "model": "auth.permission",
- "pk": 24,
- "fields": {
-  "name": "Can delete survey",
-  "content_type": 8,
-  "codename": "delete_survey"
- }
-},
-{
- "model": "auth.permission",
- "pk": 25,
- "fields": {
-  "name": "Can add response",
-  "content_type": 9,
-  "codename": "add_response"
- }
-},
-{
- "model": "auth.permission",
- "pk": 26,
- "fields": {
-  "name": "Can change response",
-  "content_type": 9,
-  "codename": "change_response"
- }
-},
-{
- "model": "auth.permission",
- "pk": 27,
- "fields": {
-  "name": "Can delete response",
-  "content_type": 9,
-  "codename": "delete_response"
- }
-},
-{
- "model": "auth.permission",
- "pk": 28,
- "fields": {
-  "name": "Can add answer base",
-  "content_type": 10,
-  "codename": "add_answerbase"
- }
-},
-{
- "model": "auth.permission",
- "pk": 29,
- "fields": {
-  "name": "Can change answer base",
-  "content_type": 10,
-  "codename": "change_answerbase"
- }
-},
-{
- "model": "auth.permission",
- "pk": 30,
- "fields": {
-  "name": "Can delete answer base",
-  "content_type": 10,
-  "codename": "delete_answerbase"
- }
-},
-{
- "model": "auth.permission",
- "pk": 31,
- "fields": {
-  "name": "Can add question",
-  "content_type": 11,
-  "codename": "add_question"
- }
-},
-{
- "model": "auth.permission",
- "pk": 32,
- "fields": {
-  "name": "Can change question",
-  "content_type": 11,
-  "codename": "change_question"
- }
-},
-{
- "model": "auth.permission",
- "pk": 33,
- "fields": {
-  "name": "Can delete question",
-  "content_type": 11,
-  "codename": "delete_question"
- }
-},
-{
- "model": "auth.permission",
- "pk": 34,
- "fields": {
-  "name": "Can add answer integer",
-  "content_type": 12,
-  "codename": "add_answerinteger"
- }
-},
-{
- "model": "auth.permission",
- "pk": 35,
- "fields": {
-  "name": "Can change answer integer",
-  "content_type": 12,
-  "codename": "change_answerinteger"
- }
-},
-{
- "model": "auth.permission",
- "pk": 36,
- "fields": {
-  "name": "Can delete answer integer",
-  "content_type": 12,
-  "codename": "delete_answerinteger"
- }
-},
-{
- "model": "auth.permission",
- "pk": 37,
- "fields": {
-  "name": "Can add category",
-  "content_type": 13,
-  "codename": "add_category"
- }
-},
-{
- "model": "auth.permission",
- "pk": 38,
- "fields": {
-  "name": "Can change category",
-  "content_type": 13,
-  "codename": "change_category"
- }
-},
-{
- "model": "auth.permission",
- "pk": 39,
- "fields": {
-  "name": "Can delete category",
-  "content_type": 13,
-  "codename": "delete_category"
- }
-},
-{
- "model": "auth.permission",
- "pk": 40,
- "fields": {
-  "name": "Can add answer select multiple",
-  "content_type": 14,
-  "codename": "add_answerselectmultiple"
- }
-},
-{
- "model": "auth.permission",
- "pk": 41,
- "fields": {
-  "name": "Can change answer select multiple",
-  "content_type": 14,
-  "codename": "change_answerselectmultiple"
- }
-},
-{
- "model": "auth.permission",
- "pk": 42,
- "fields": {
-  "name": "Can delete answer select multiple",
-  "content_type": 14,
-  "codename": "delete_answerselectmultiple"
- }
-},
-{
- "model": "auth.permission",
- "pk": 43,
- "fields": {
-  "name": "Can add answer radio",
-  "content_type": 15,
-  "codename": "add_answerradio"
- }
-},
-{
- "model": "auth.permission",
- "pk": 44,
- "fields": {
-  "name": "Can change answer radio",
-  "content_type": 15,
-  "codename": "change_answerradio"
- }
-},
-{
- "model": "auth.permission",
- "pk": 45,
- "fields": {
-  "name": "Can delete answer radio",
-  "content_type": 15,
-  "codename": "delete_answerradio"
- }
-},
-{
- "model": "auth.permission",
- "pk": 46,
- "fields": {
-  "name": "Can add answer select",
-  "content_type": 16,
-  "codename": "add_answerselect"
- }
-},
-{
- "model": "auth.permission",
- "pk": 47,
- "fields": {
-  "name": "Can change answer select",
-  "content_type": 16,
-  "codename": "change_answerselect"
- }
-},
-{
- "model": "auth.permission",
- "pk": 48,
- "fields": {
-  "name": "Can delete answer select",
-  "content_type": 16,
-  "codename": "delete_answerselect"
- }
-},
-{
- "model": "auth.permission",
- "pk": 49,
- "fields": {
-  "name": "Can add answer text",
-  "content_type": 17,
-  "codename": "add_answertext"
- }
-},
-{
- "model": "auth.permission",
- "pk": 50,
- "fields": {
-  "name": "Can change answer text",
-  "content_type": 17,
-  "codename": "change_answertext"
- }
-},
-{
- "model": "auth.permission",
- "pk": 51,
- "fields": {
-  "name": "Can delete answer text",
-  "content_type": 17,
-  "codename": "delete_answertext"
- }
-},
-{
  "model": "auth.user",
  "pk": 1,
  "fields": {
   "password": "pbkdf2_sha256$30000$4qybUPscjFTq$CvNaiVIFYlwXLVPUQlOk8hlE7duE93Bdv1LyIMj2RRo=",
-  "last_login": "2017-03-16T11:25:11.270",
+  "last_login": "2017-03-22T05:38:02.728",
   "is_superuser": true,
   "username": "ps250112",
   "first_name": "",
@@ -492,6 +33,14 @@
   "date_joined": "2017-03-19T11:14:45.991",
   "groups": [],
   "user_permissions": []
+ }
+},
+{
+ "model": "sessions.session",
+ "pk": "94uzvee76vhqf147b15a4lf8x25mm3pl",
+ "fields": {
+  "session_data": "NTI3YWUwYzY1YzRiMDBlZTQxZTQzNzY5MDgzYTY3NDQyZmIwYmNjNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjI2ZTI0NjYzOTM5Mjk1YTAwOGFmOGNlYTgzMzJiYjRjYmQwYzNiOTIiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+  "expire_date": "2017-04-03T05:23:00.417"
  }
 },
 {
@@ -560,7 +109,7 @@
  "model": "survey.question",
  "pk": 1,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "text": "Lorem ipsum dolor sit amet, <strong> consectetur </strong> adipiscing elit.",
   "order": 1,
   "required": true,
   "category": 1,
@@ -573,7 +122,7 @@
  "model": "survey.question",
  "pk": 2,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "text": "Ipsum dolor sit amet, <strong> consectetur </strong>  adipiscing elit.",
   "order": 2,
   "required": false,
   "category": 2,
@@ -586,7 +135,7 @@
  "model": "survey.question",
  "pk": 3,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "text": "Dolor sit amet, <strong> consectetur</strong>  adipiscing elit.",
   "order": 3,
   "required": false,
   "category": 3,
@@ -599,7 +148,7 @@
  "model": "survey.question",
  "pk": 4,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "text": "Lorem ipsum dolor sit amet, consectetur<strong>  adipiscing </strong> elit.",
   "order": 4,
   "required": false,
   "category": 1,
@@ -612,7 +161,7 @@
  "model": "survey.question",
  "pk": 5,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "text": "Ipsum dolor sit amet, consectetur <strong> adipiscing </strong> elit.",
   "order": 5,
   "required": true,
   "category": 2,
@@ -625,7 +174,7 @@
  "model": "survey.question",
  "pk": 6,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "text": "Dolor sit amet, consectetur<strong>  adipiscing</strong>  elit.",
   "order": 6,
   "required": true,
   "category": 3,
@@ -638,12 +187,25 @@
  "model": "survey.question",
  "pk": 7,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "text": "Lorem?",
   "order": 1,
   "required": true,
   "category": null,
   "survey": 2,
   "type": "select-multiple",
+  "choices": "1, 2, 3, 4, 5"
+ }
+},
+{
+ "model": "survey.question",
+ "pk": 8,
+ "fields": {
+  "text": "Ipsum?",
+  "order": 2,
+  "required": false,
+  "category": null,
+  "survey": 2,
+  "type": "radio",
   "choices": "1, 2, 3, 4, 5"
  }
 },
@@ -654,7 +216,9 @@
   "created": "2017-03-19T11:33:22.379",
   "updated": "2017-03-19T12:04:11.997",
   "survey": 2,
-  "user": 2,
+  "user": [
+   "pierre"
+  ],
   "interview_uuid": "5bc13b731b7a41599c6cbacd7f7b54f3"
  }
 },
@@ -665,8 +229,36 @@
   "created": "2017-03-19T11:59:00.802",
   "updated": "2017-03-19T12:20:11.501",
   "survey": 1,
-  "user": 2,
+  "user": [
+   "pierre"
+  ],
   "interview_uuid": "37fe2707287743dcbe6d5de6cbec7407"
+ }
+},
+{
+ "model": "survey.response",
+ "pk": 11,
+ "fields": {
+  "created": "2017-03-20T05:12:03.007",
+  "updated": "2017-03-23T03:34:32.340",
+  "survey": 2,
+  "user": [
+   "ps250112"
+  ],
+  "interview_uuid": "663b61b63fdc485080450add65a8a324"
+ }
+},
+{
+ "model": "survey.response",
+ "pk": 12,
+ "fields": {
+  "created": "2017-03-22T08:24:43.468",
+  "updated": "2017-03-22T10:27:59.183",
+  "survey": 1,
+  "user": [
+   "ps250112"
+  ],
+  "interview_uuid": "e9b616a8adc24902aa4bc2fa2d57d4bb"
  }
 },
 {
@@ -740,10 +332,97 @@
  }
 },
 {
+ "model": "survey.answerbase",
+ "pk": 38,
+ "fields": {
+  "question": 8,
+  "response": 11,
+  "created": "2017-03-20T05:12:03.076",
+  "updated": "2017-03-23T03:34:32.374"
+ }
+},
+{
+ "model": "survey.answerbase",
+ "pk": 39,
+ "fields": {
+  "question": 7,
+  "response": 11,
+  "created": "2017-03-20T05:12:03.093",
+  "updated": "2017-03-23T03:34:32.400"
+ }
+},
+{
+ "model": "survey.answerbase",
+ "pk": 40,
+ "fields": {
+  "question": 3,
+  "response": 12,
+  "created": "2017-03-22T08:24:43.531",
+  "updated": "2017-03-22T10:27:59.259"
+ }
+},
+{
+ "model": "survey.answerbase",
+ "pk": 41,
+ "fields": {
+  "question": 2,
+  "response": 12,
+  "created": "2017-03-22T08:24:43.546",
+  "updated": "2017-03-22T10:27:59.300"
+ }
+},
+{
+ "model": "survey.answerbase",
+ "pk": 42,
+ "fields": {
+  "question": 1,
+  "response": 12,
+  "created": "2017-03-22T08:24:43.560",
+  "updated": "2017-03-22T10:27:59.334"
+ }
+},
+{
+ "model": "survey.answerbase",
+ "pk": 43,
+ "fields": {
+  "question": 6,
+  "response": 12,
+  "created": "2017-03-22T08:24:43.582",
+  "updated": "2017-03-22T10:27:59.356"
+ }
+},
+{
+ "model": "survey.answerbase",
+ "pk": 44,
+ "fields": {
+  "question": 5,
+  "response": 12,
+  "created": "2017-03-22T08:24:43.595",
+  "updated": "2017-03-22T10:27:59.411"
+ }
+},
+{
+ "model": "survey.answerbase",
+ "pk": 45,
+ "fields": {
+  "question": 4,
+  "response": 12,
+  "created": "2017-03-22T08:24:43.617",
+  "updated": "2017-03-22T10:27:59.434"
+ }
+},
+{
  "model": "survey.answertext",
  "pk": 32,
  "fields": {
   "body": "Text for a response"
+ }
+},
+{
+ "model": "survey.answertext",
+ "pk": 40,
+ "fields": {
+  "body": ""
  }
 },
 {
@@ -754,8 +433,29 @@
  }
 },
 {
+ "model": "survey.answerradio",
+ "pk": 38,
+ "fields": {
+  "body": "5"
+ }
+},
+{
+ "model": "survey.answerradio",
+ "pk": 41,
+ "fields": {
+  "body": ""
+ }
+},
+{
  "model": "survey.answerselect",
  "pk": 37,
+ "fields": {
+  "body": ""
+ }
+},
+{
+ "model": "survey.answerselect",
+ "pk": 45,
  "fields": {
   "body": ""
  }
@@ -782,8 +482,36 @@
  }
 },
 {
+ "model": "survey.answerselectmultiple",
+ "pk": 39,
+ "fields": {
+  "body": "[u'2']"
+ }
+},
+{
+ "model": "survey.answerselectmultiple",
+ "pk": 42,
+ "fields": {
+  "body": "[u'Yes']"
+ }
+},
+{
+ "model": "survey.answerselectmultiple",
+ "pk": 43,
+ "fields": {
+  "body": "[u'Yes']"
+ }
+},
+{
  "model": "survey.answerinteger",
  "pk": 36,
+ "fields": {
+  "body": 1
+ }
+},
+{
+ "model": "survey.answerinteger",
+ "pk": 44,
  "fields": {
   "body": 1
  }
