@@ -229,8 +229,8 @@ class ResponseForm(models.ModelForm):
         for field_name, field_value in self.cleaned_data.iteritems():
             if field_name.startswith("question_"):
                 # warning: this way of extracting the id is very fragile and
-                # entirely dependent on the way the question_id is encoded in the
-                # field name in the __init__ method of this form class.
+                # entirely dependent on the way the question_id is encoded in
+                # the field name in the __init__ method of this form class.
                 q_id = int(field_name.split("_")[1])
                 question = Question.objects.get(pk=q_id)
                 answer = self._get_preexisting_answer(question)

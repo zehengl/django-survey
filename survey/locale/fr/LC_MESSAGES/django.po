@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 11:43-0500\n"
-"PO-Revision-Date: 2017-03-16 11:43-0551\n"
+"POT-Creation-Date: 2017-03-22 08:06-0500\n"
+"PO-Revision-Date: 2017-03-22 05:39-0551\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -21,7 +21,6 @@ msgstr ""
 
 #: survey/actions.py:13
 #, python-format
-#| msgid "%(count)d survey was successfully marked as published."
 msgid "%(count)d survey was successfully marked as published."
 msgid_plural "%(count)d surveys were successfully marked as published"
 msgstr[0] "%(count)d questionnaire a été publié avec succès."
@@ -31,51 +30,15 @@ msgstr[1] "%(count)d questionnaires ont été publiés avec succès."
 msgid "Mark selected surveys as published"
 msgstr "Marquer le questionnaire comme publié"
 
-#: survey/models.py:20
-msgid "survey"
-msgstr "questionnaire"
-
-#: survey/models.py:21
-msgid "surveys"
-msgstr "questionnaires"
-
-#: survey/models.py:45
+#: survey/models/category.py:17
 msgid "category"
 msgstr "catégorie"
 
-#: survey/models.py:46
+#: survey/models/category.py:18
 msgid "categories"
 msgstr "catégories"
 
-#: survey/models.py:62
-msgid "text (multiple line)"
-msgstr "Texte (plusieurs lignes)"
-
-#: survey/models.py:63
-msgid "short text (one line)"
-msgstr "Texte court (une ligne)"
-
-#: survey/models.py:64
-msgid "radio"
-msgstr "Bouton radio"
-
-#: survey/models.py:65
-msgid "select"
-msgstr "Liste déroulante"
-
-#: survey/models.py:66
-msgid "Select Multiple"
-msgstr "Liste à choix multiple"
-
-#: survey/models.py:67
-msgid "Select Image"
-msgstr "Séléctionnez l'image"
-
-#: survey/models.py:68
-msgid "integer"
-msgstr "Chiffre"
-
-#: survey/models.py:80
+#: survey/models/question.py:11
 msgid ""
 "The choices field is only used if the question type\n"
 "if the question type is 'radio', 'select', or\n"
@@ -87,25 +50,61 @@ msgstr ""
 "liste des options pour cette question sous la forme d'une liste séparée par "
 "des virgules."
 
-#: survey/models.py:87
+#: survey/models/question.py:42
+msgid "text (multiple line)"
+msgstr "Texte (plusieurs lignes)"
+
+#: survey/models/question.py:43
+msgid "short text (one line)"
+msgstr "Texte court (une ligne)"
+
+#: survey/models/question.py:44
+msgid "radio"
+msgstr "Bouton radio"
+
+#: survey/models/question.py:45
+msgid "select"
+msgstr "Liste déroulante"
+
+#: survey/models/question.py:46
+msgid "Select Multiple"
+msgstr "Liste à choix multiple"
+
+#: survey/models/question.py:47
+msgid "Select Image"
+msgstr "Séléctionnez l'image"
+
+#: survey/models/question.py:48
+msgid "integer"
+msgstr "Chiffre"
+
+#: survey/models/question.py:63
 msgid "question"
 msgstr "question"
 
-#: survey/models.py:88
+#: survey/models/question.py:64
 msgid "questions"
 msgstr "questions"
 
-#: survey/models.py:122
+#: survey/models/response.py:21
 msgid "Interview unique identifier"
 msgstr "Identifiant unique de la réponse"
 
-#: survey/models.py:126
+#: survey/models/response.py:25
 msgid "response"
 msgstr "réponse"
 
-#: survey/models.py:127
+#: survey/models/response.py:26
 msgid "responses"
 msgstr "réponses"
+
+#: survey/models/survey.py:17
+msgid "survey"
+msgstr "questionnaire"
+
+#: survey/models/survey.py:18
+msgid "surveys"
+msgstr "questionnaires"
 
 #: survey/templates/survey/completed.html:4
 #: survey/templates/survey/completed.html:7
@@ -142,14 +141,14 @@ msgstr "Bienvenue dans l'application Django-Survey"
 msgid "Take the Survey"
 msgstr "Réaliser le sondage"
 
-#: survey/templates/survey/survey.html:24
-msgid "Answer"
-msgstr "Répondre"
+#: survey/templates/survey/survey.html:26
+msgid "Answer this part"
+msgstr "Répondre à cette partie"
 
-#: survey/templates/survey/survey.html:37
+#: survey/templates/survey/survey.html:39
 msgid "Questions"
 msgstr "Questions"
 
-#: survey/templates/survey/survey.html:41
+#: survey/templates/survey/survey.html:48
 msgid "I'm done!"
 msgstr "J'ai fini"
