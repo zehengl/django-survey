@@ -16,7 +16,7 @@ class Response(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    survey = models.ForeignKey(Survey)
+    survey = models.ForeignKey(Survey, related_name="responses")
     user = models.ForeignKey(User, null=True, blank=True)
     interview_uuid = models.CharField(_(u"Interview unique identifier"),
                                       max_length=36)
