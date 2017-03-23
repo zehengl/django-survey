@@ -40,6 +40,15 @@ class SelectMultipleHorizontal(forms.CheckboxSelectMultiple):
 
 class ResponseForm(models.ModelForm):
 
+    WIDGETS = {
+        Question.TEXT: forms.Textarea,
+        Question.SHORT_TEXT: forms.TextInput,
+        Question.RADIO: forms.RadioSelect(renderer=HorizontalRadioRenderer),
+        Question.SELECT: forms.Select,
+        Question.SELECT_IMAGE: ImageSelectWidget,
+        Question.SELECT_MULTIPLE: SelectMultipleHorizontal,
+    }
+
     class Meta(object):
         model = Response
         fields = ()
@@ -121,20 +130,10 @@ class ResponseForm(models.ModelForm):
 
         :param Question question: The question
         :rtype: django.forms.widget or None """
-        widget = None
-        if question.type == Question.TEXT:
-            widget = forms.Textarea
-        elif question.type == Question.SHORT_TEXT:
-            widget = forms.TextInput
-        elif question.type == Question.RADIO:
-            widget = forms.RadioSelect(renderer=HorizontalRadioRenderer)
-        elif question.type == Question.SELECT:
-            widget = forms.Select
-        elif question.type == Question.SELECT_IMAGE:
-            widget = ImageSelectWidget
-        elif question.type == Question.SELECT_MULTIPLE:
-            widget = SelectMultipleHorizontal
-        return widget
+        try:
+            return self.WIDGETS[question.type]
+        except KeyError:
+            return None
 
     def get_question_choices(self, question):
         """ Return the choices we should use for a question.
@@ -158,15 +157,16 @@ class ResponseForm(models.ModelForm):
         :param **kwargs: A dict of parameter properly initialized in
             add_question.
         :rtype: django.forms.fields """
-        if question.type in [Question.TEXT, Question.SHORT_TEXT]:
-            field = forms.CharField(**kwargs)
-        elif question.type in [Question.SELECT_MULTIPLE]:
-            field = forms.MultipleChoiceField(**kwargs)
-        elif question.type in [Question.INTEGER]:
-            field = forms.IntegerField(**kwargs)
-        else:
-            field = forms.ChoiceField(**kwargs)
-        return field
+        FIELDS = {
+            Question.TEXT: forms.CharField,
+            Question.SHORT_TEXT: forms.CharField,
+            Question.SELECT_MULTIPLE: forms.MultipleChoiceField,
+            Question.INTEGER: forms.IntegerField
+        }
+        try:
+            return FIELDS[question.type](**kwargs)
+        except KeyError:
+            return forms.ChoiceField(**kwargs)
 
     def add_question(self, question, data):
         """ Add a question to the form.
