@@ -6,10 +6,11 @@
 {% block body %}
 <h1>{% trans "Survey submitted"%}</h1>
 <p>
-	{% trans "Thanks! Your confirmation code is" %} {{uuid}}.
-	{% trans "Use this to refer to your response." %}
-</p>
-<p>
-	<a href="{% url "survey-list" %}">{% trans "Back to survey list"%}</a>
+    <div class="alert alert-success">
+       {% trans "Thanks! Your answers have been saved" %}
+    </div>
+    <div class="alert alert-info">
+       {% trans "You can always come back and change them." %}
+    </div>
 </p>
 {% endblock %}

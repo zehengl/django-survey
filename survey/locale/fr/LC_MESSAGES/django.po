@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-22 08:06-0500\n"
-"PO-Revision-Date: 2017-03-22 05:39-0551\n"
+"POT-Creation-Date: 2017-03-28 08:17-0500\n"
+"PO-Revision-Date: 2017-03-24 07:48-0551\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -116,7 +116,6 @@ msgid "Sorry! Your already replied to our survey"
 msgstr "Désolé! Vous avez déjà répondu à ce sondage"
 
 #: survey/templates/survey/completed.html:9
-#: survey/templates/survey/confirm.html:13
 msgid "Back to survey list"
 msgstr "Retour à la liste de sondage"
 
@@ -125,13 +124,13 @@ msgstr "Retour à la liste de sondage"
 msgid "Survey submitted"
 msgstr "Sondage soumis"
 
-#: survey/templates/survey/confirm.html:9
-msgid "Thanks! Your confirmation code is"
-msgstr "Merci ! Votre code de confirmation est"
-
 #: survey/templates/survey/confirm.html:10
-msgid "Use this to refer to your response."
-msgstr "Utiliser ce code pour parler de votre questionnaire complété."
+msgid "Thanks! Your answers have been saved"
+msgstr "Merci! Vos réponses ont été sauvegardées."
+
+#: survey/templates/survey/confirm.html:13
+msgid "You can always come back and change them."
+msgstr "Vous pouvez revenir les modifier plus tard."
 
 #: survey/templates/survey/list.html:6
 msgid "Welcome to the Django Survey app"
