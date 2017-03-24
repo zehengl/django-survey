@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from survey_test.tests.base_test import BaseTest
+from survey.tests import BaseTest
 
 
 class TestCategory(BaseTest):

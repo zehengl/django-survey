@@ -3,7 +3,7 @@
 from survey.models import (AnswerInteger, AnswerRadio, AnswerSelect,
                            AnswerSelectMultiple, AnswerText, Question,
                            Response, Survey)
-from survey_test.tests.base_test import BaseTest
+from survey.tests import BaseTest
 
 
 class BaseModelTest(BaseTest):
@@ -19,7 +19,7 @@ class BaseModelTest(BaseTest):
         self.answers = []
         self.data = {
             Question.TEXT: [AnswerText, "Mytext", None],
-            Question.SHORT_TEXT: [AnswerText, "Mytext" , None],
+            Question.SHORT_TEXT: [AnswerText, "Mytext", None],
             Question.RADIO: [AnswerRadio, "Yes", "Yes, No, Maybe"],
             Question.SELECT: [AnswerSelect, "No", "Yes, No, Maybe"],
             #  Question.SELECT_IMAGE: [AnswerSelectImage, "TODO" ,None],

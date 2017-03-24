@@ -10,7 +10,7 @@ from django.test.client import Client
 
 class BaseTest(TestCase):
 
-    fixtures = [os.path.join(settings.ROOT, "tests", "testdump.json")]
+    fixtures = [os.path.join(settings.ROOT, "survey", "tests", "testdump.json")]
 
     def setUp(self):
         user = User(username=settings.DEBUG_ADMIN_NAME, is_superuser=True,

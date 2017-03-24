@@ -2,17 +2,17 @@
 
 Using the admin interface you can create surveys, add questions, give questions
 categories, and mark them as required or not. The front-end survey view then
-automatically populates based on the questions that have been defined and published
-in the admin interface.
+automatically populates based on the questions that have been defined and
+published in the admin interface.
 
 Submitted responses can also be viewed via the admin backend. 
 
 
-## Using as a standalone app
+## Getting started
 
 
-In order to get started, install the requirements, create the database, create a superuser, launch the server,
-then create your survey in the django admin :
+In order to get started, install the requirements, create the database, create
+a superuser, launch the server, then create your survey in the django admin :
 
 	pip install -r requirements.txt
 	python manage.py migrate
@@ -20,31 +20,26 @@ then create your survey in the django admin :
 	python manage.py runserver
 	# Create survey in interface
 
-You will have to change the settings in the survey_test directory in order to suit your need.
+You will have to change the settings in order to suit your need.
 
-## Using as a portable app
+## Getting started as a contributor
 
-Copy paste the survey directory in your project. Make sure you include survey's the static files,
-and that you have a base.html template with a block named "body". Add "survey" in your installed app.
-
-## Using as a contributor
-
-In order to get started, install the dev requirements, create the database, create a superuser,
-load the test dump, then launch the server :
+In order to get started, install the dev requirements, create the database,
+create a superuser, load the test dump, then launch the server :
 
 	pip install -r requirements_dev.txt
 	python manage.py migrate
 	python manage.py createsuperuser
-	python manage.py loaddata survey_test/tests/testdump.json
+	python manage.py loaddata survey/tests/testdump.json
 	python manage.py runserver
 
 ### Test :
 
-	python manage.py test
+	python manage.py test survey
 
 ### Coverage :
 
-	coverage run --source=survey,survey_test ./manage.py test;coverage html
+	coverage run --source=survey ./manage.py test;coverage html
 	xdg-open htmlcov/index.html
 
 ### Internationalisation :

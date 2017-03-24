@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.urls.base import reverse
 
-from survey_test.tests.base_test import BaseTest
+from survey.tests import BaseTest
 
 
 class TestSurveyAuthRequired(BaseTest):
@@ -31,13 +31,13 @@ class TestSurveyAuthRequired(BaseTest):
             #reverse("survey-detail-step", kwargs={"id": 1, "step": 1}),
         ]
         for url in urls:
-                response = self.client.get(url)
-                self.assertEqual(response.status_code, 302)
-                self.assertTrue(settings.LOGIN_URL in response["location"])
-                self.login()
-                response = self.client.get(url, follow=True)
-                self.assertEqual(response.status_code, 200)
-                self.logout()
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 302)
+            self.assertTrue(settings.LOGIN_URL in response["location"])
+            self.login()
+            response = self.client.get(url, follow=True)
+            self.assertEqual(response.status_code, 200)
+            self.logout()
 
     def test_accesible(self):
         """ If need_logged_user=False user do not need to authenticate. """

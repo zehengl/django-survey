@@ -4,7 +4,6 @@ import logging
 import os
 
 DEBUG = True
-
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 logging.basicConfig(level=logging.DEBUG, format='%(name)s.%(funcName)s() l.%(lineno)s -\
@@ -28,7 +27,7 @@ SITE_ID = 1
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(ROOT, "survey_test", "media")
+MEDIA_ROOT = os.path.join(ROOT, "media")
 STATIC_ROOT = os.path.join(ROOT, 'static')
 
 STATICFILES_FINDERS = (
@@ -43,17 +42,16 @@ STATICFILES_DIRS = [
     os.path.normpath(os.path.join(ROOT, '..', "survey", "static")),
 ]
 
+VERSION="0.2.1"
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'js*79rk(+s+x9)8co+10$zghe2f)+33jd1l2m#f)vl+pvtj24e'
-
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(ROOT, "templates"),
-            os.path.join(ROOT, "templates", "survey"),
-            os.path.join(ROOT, "..", "survey", "templates", "survey"),
+            os.path.join(ROOT, "survey", "templates"),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -83,8 +81,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'survey_test.urls'
-WSGI_APPLICATION = 'survey_test.wsgi.application'
+ROOT_URLCONF = 'urls'
+WSGI_APPLICATION = 'wsgi.application'
 
 INSTALLED_APPS = (
     'django.contrib.admin',

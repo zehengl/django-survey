@@ -163,6 +163,7 @@ class ResponseForm(models.ModelForm):
             Question.SELECT_MULTIPLE: forms.MultipleChoiceField,
             Question.INTEGER: forms.IntegerField
         }
+        logging.debug("Args passed to field %s", kwargs)
         try:
             return FIELDS[question.type](**kwargs)
         except KeyError:
@@ -187,6 +188,7 @@ class ResponseForm(models.ModelForm):
         field = self.get_question_field(question, **kwargs)
         if question.category:
             field.widget.attrs["category"] = question.category.name
+        # logging.debug("Field for %s : %s", question, field.__dict__)
         self.fields['question_%d' % question.pk] = field
 
     def has_next_step(self):

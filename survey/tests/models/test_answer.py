@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from survey.models import AnswerBase, get_real_type_answer, Question, Survey, Response
-from survey_test.tests.models.base_model_test import BaseModelTest
-from survey.models.answer import AnswerText, AnswerSelectMultiple
 from django.core.exceptions import ValidationError
+
+from survey.models import (AnswerBase, AnswerSelectMultiple,
+                           get_real_type_answer)
+from survey.tests.models import BaseModelTest
 
 
 class TestAnswer(BaseModelTest):

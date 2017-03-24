@@ -3,7 +3,7 @@
 from django.core.exceptions import ValidationError
 
 from survey.models import Question
-from survey_test.tests.models.base_model_test import BaseModelTest
+from survey.tests.models import BaseModelTest
 
 
 class TestQuestion(BaseModelTest):

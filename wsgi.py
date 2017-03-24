@@ -1,5 +1,5 @@
 """
-WSGI config for survey_test project.
+WSGI config for standalone project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -18,6 +18,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "survey_test.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
 application = get_wsgi_application()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from survey_test.tests.models.base_model_test import BaseModelTest
+from survey.tests.models import BaseModelTest
 
 
 class TestResponse(BaseModelTest):
