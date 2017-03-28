@@ -24,20 +24,6 @@ class HorizontalRadioRenderer(forms.RadioSelect.renderer):
         return mark_safe(u'\n'.join([u'%s\n' % w for w in self]))
 
 
-class HorizontalCheckboxRenderer(forms.RadioSelect.renderer):
-    # Obviously an horrible hack based on HorizontalRadioRenderer.
-    def render(self):
-        return mark_safe(
-            u'\n'.join(
-                [u'{}\n'.format(w).replace("radio", "checkbox") for w in self]
-            )
-        )
-
-
-class SelectMultipleHorizontal(forms.CheckboxSelectMultiple):
-    renderer = HorizontalCheckboxRenderer
-
-
 class ResponseForm(models.ModelForm):
 
     WIDGETS = {
@@ -46,7 +32,7 @@ class ResponseForm(models.ModelForm):
         Question.RADIO: forms.RadioSelect(renderer=HorizontalRadioRenderer),
         Question.SELECT: forms.Select,
         Question.SELECT_IMAGE: ImageSelectWidget,
-        Question.SELECT_MULTIPLE: SelectMultipleHorizontal,
+        Question.SELECT_MULTIPLE: forms.CheckboxSelectMultiple,
     }
 
     class Meta(object):
@@ -68,7 +54,8 @@ class ResponseForm(models.ModelForm):
         # type as appropriate.
         data = kwargs.get('data')
         for i, question in enumerate(self.survey.questions()):
-            if self.survey.display_by_question and i != self.step and self.step is not None:
+            is_current_step = i != self.step and self.step is not None
+            if self.survey.display_by_question and is_current_step:
                 continue
             else:
                 self.add_question(question, data)
@@ -115,8 +102,12 @@ class ResponseForm(models.ModelForm):
         answer = self._get_preexisting_answer(question)
         if answer:
             # Initialize the field with values from the database if any
-            if answer is AnswerSelectMultiple:
-                initial = list(answer.body)
+            if question.type == Question.SELECT_MULTIPLE:
+                initial = []
+                unformated_choices = answer.body[1:-1].strip()
+                for unformated_choice in unformated_choices.split(","):
+                    choice = unformated_choice.split("'")[1]
+                    initial.append(unicode(choice))
             else:
                 initial = answer.body
         if data:
