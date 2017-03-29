@@ -20,7 +20,7 @@ DATABASES = {
     }
 }
 
-TIME_ZONE = 'America/Chicago'
+
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 

@@ -6,7 +6,6 @@ import uuid
 from django import forms
 from django.core.urlresolvers import reverse
 from django.forms import models
-from django.utils.safestring import mark_safe
 
 from survey.models import (AnswerBase, AnswerInteger, AnswerRadio,
                            AnswerSelect, AnswerSelectMultiple, AnswerText,
@@ -18,18 +17,12 @@ from survey.widgets import ImageSelectWidget
 LOGGER = logging.getLogger(__name__)
 
 
-class HorizontalRadioRenderer(forms.RadioSelect.renderer):
-    # Blatantly stolen from http://stackoverflow.com/questions/5935546/
-    def render(self):
-        return mark_safe(u'\n'.join([u'%s\n' % w for w in self]))
-
-
 class ResponseForm(models.ModelForm):
 
     WIDGETS = {
         Question.TEXT: forms.Textarea,
         Question.SHORT_TEXT: forms.TextInput,
-        Question.RADIO: forms.RadioSelect(renderer=HorizontalRadioRenderer),
+        Question.RADIO: forms.RadioSelect,
         Question.SELECT: forms.Select,
         Question.SELECT_IMAGE: ImageSelectWidget,
         Question.SELECT_MULTIPLE: forms.CheckboxSelectMultiple,
@@ -154,7 +147,7 @@ class ResponseForm(models.ModelForm):
             Question.SELECT_MULTIPLE: forms.MultipleChoiceField,
             Question.INTEGER: forms.IntegerField
         }
-        logging.debug("Args passed to field %s", kwargs)
+        # logging.debug("Args passed to field %s", kwargs)
         try:
             return FIELDS[question.type](**kwargs)
         except KeyError:
@@ -179,6 +172,8 @@ class ResponseForm(models.ModelForm):
         field = self.get_question_field(question, **kwargs)
         if question.category:
             field.widget.attrs["category"] = question.category.name
+        else:
+            field.widget.attrs["category"] = ""
         # logging.debug("Field for %s : %s", question, field.__dict__)
         self.fields['question_%d' % question.pk] = field
 
