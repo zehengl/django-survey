@@ -77,7 +77,7 @@ class Question(models.Model):
         choices = self.choices.decode("utf8").split(',')
         choices_list = []
         for choice in choices:
-            choice = choice.strip().capitalize()
+            choice = choice.strip()
             if choice != "":
                 choices_list.append(choice)
         return choices_list
