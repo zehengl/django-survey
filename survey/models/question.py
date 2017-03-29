@@ -2,6 +2,7 @@
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from .category import Category
@@ -71,7 +72,9 @@ class Question(models.Model):
         super(Question, self).save(*args, **kwargs)
 
     def get_clean_choices(self):
-        choices = unicode(self.choices).split(',')
+        if self.choices is None:
+            return []
+        choices = self.choices.decode("utf8").split(',')
         choices_list = []
         for choice in choices:
             choice = choice.strip().capitalize()
@@ -86,7 +89,7 @@ class Question(models.Model):
         """
         choices_list = []
         for choice in self.get_clean_choices():
-            choices_list.append((choice, choice))
+            choices_list.append((slugify(choice), choice))
         choices_tuple = tuple(choices_list)
         return choices_tuple
 

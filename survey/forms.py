@@ -6,6 +6,7 @@ import uuid
 from django import forms
 from django.core.urlresolvers import reverse
 from django.forms import models
+from django.utils.text import slugify
 
 from survey.models import (AnswerBase, AnswerInteger, AnswerRadio,
                            AnswerSelect, AnswerSelectMultiple, AnswerText,
@@ -97,12 +98,19 @@ class ResponseForm(models.ModelForm):
             # Initialize the field with values from the database if any
             if question.type == Question.SELECT_MULTIPLE:
                 initial = []
-                unformated_choices = answer.body[1:-1].strip()
-                for unformated_choice in unformated_choices.split(","):
-                    choice = unformated_choice.split("'")[1]
-                    initial.append(unicode(choice))
+                if answer.body == "[]":
+                    pass
+                elif "[" in answer.body and "]" in answer.body:
+                    initial = []
+                    unformated_choices = answer.body[1:-1].strip()
+                    for unformated_choice in unformated_choices.split(","):
+                        choice = unformated_choice.split("'")[1]
+                        initial.append(slugify(choice))
+                else:
+                    # Only one element
+                    initial.append(slugify(answer.body))
             else:
-                initial = answer.body
+                initial = slugify(answer.body)
         if data:
             # Initialize the field field from a POST request, if any.
             # Replace values from the database

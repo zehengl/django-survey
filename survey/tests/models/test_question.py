@@ -14,12 +14,12 @@ class TestQuestion(BaseModelTest):
 
     def test_get_choices(self):
         """ We can get a list of choices for a widget from choices text. """
-        self.questions[0].choices = "aa,bb"
+        self.questions[0].choices = "A éa,B éb"
         self.assertEqual(self.questions[0].get_choices(),
-                         (('Aa', 'Aa'), ('Bb', 'Bb')))
-        self.questions[0].choices = "aa,  ,cc"
+                         ((u'a-ea', u'A éa'), (u'b-eb', u'B éb')))
+        self.questions[0].choices = "A()a,  ,C()c"
         self.assertEqual(self.questions[0].get_choices(),
-                         (('Aa', 'Aa'), ('Cc', 'Cc')))
+                         ((u'aa', u'A()a'), (u'cc', u'C()c')))
 
     def test_validate_choices(self):
         """  List are validated for comma. """
