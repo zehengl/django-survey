@@ -2,8 +2,9 @@
 
 from django.core.exceptions import ValidationError
 
-from survey.models import (AnswerBase, AnswerSelectMultiple,
-                           get_real_type_answer)
+from survey.models import (
+    AnswerBase, AnswerSelectMultiple, get_real_type_answer
+)
 from survey.tests.models import BaseModelTest
 
 

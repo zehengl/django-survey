@@ -8,9 +8,10 @@ from django.core.urlresolvers import reverse
 from django.forms import models
 from django.utils.text import slugify
 
-from survey.models import (AnswerBase, AnswerInteger, AnswerRadio,
-                           AnswerSelect, AnswerSelectMultiple, AnswerText,
-                           Question, Response)
+from survey.models import (
+    AnswerBase, AnswerInteger, AnswerRadio, AnswerSelect, AnswerSelectMultiple,
+    AnswerText, Question, Response
+)
 from survey.models.answer import get_real_type_answer
 from survey.signals import survey_completed
 from survey.widgets import ImageSelectWidget

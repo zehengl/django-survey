@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from survey.models import (AnswerInteger, AnswerRadio, AnswerSelect,
-                           AnswerSelectMultiple, AnswerText, Question,
-                           Response, Survey)
+from survey.models import (
+    AnswerInteger, AnswerRadio, AnswerSelect, AnswerSelectMultiple, AnswerText,
+    Question, Response, Survey
+)
 from survey.tests import BaseTest
 
 

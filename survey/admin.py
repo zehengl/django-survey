@@ -2,9 +2,10 @@
 
 from django.contrib import admin
 
-from survey.models import (AnswerInteger, AnswerRadio, AnswerSelect,
-                           AnswerSelectMultiple, AnswerText, Category,
-                           Question, Response, Survey)
+from survey.models import (
+    AnswerInteger, AnswerRadio, AnswerSelect, AnswerSelectMultiple, AnswerText,
+    Category, Question, Response, Survey
+)
 
 from .actions import make_published
 
