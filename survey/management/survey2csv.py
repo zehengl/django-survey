@@ -15,25 +15,29 @@ class Survey2CSV(object):
         """ Write a line in the CSV """
         new_line = u""
         for i, cell in enumerate(line):
-            cell = " ".join(cell.split())
-            cell = cell.encode("utf8").replace(",", ";")
-            new_line += cell
+            cell = u" ".join(cell.split())
+            try:
+                cell = unicode(cell)
+            except UnicodeDecodeError:
+                cell = unicode(cell.decode("utf8"))
+            new_line += cell.replace(u",", u";")
             if i != len(line) - 1:
-                new_line += ","
+                new_line += u","
         return new_line
 
     @staticmethod
     def get_user_line(question_order, response):
         """ Creating a line for a user """
-        not_an_answer = "NAA"
+        not_an_answer = u"NAA"
         logging.debug(u"\tTreating answer from {}".format(response.user))
         user_answers = {}
-        user_answers[-2] = str(response.user)
+        user_answers[-2] = unicode(response.user)
         # user_answers[-1] = response.user.entity
         for answer_base in response.answers.all():
             answer = get_real_type_answer(answer_base)
             cell = not_an_answer
-            answer_body = " ".join(str(answer.body).split())
+            # remove double space, tab, \n...
+            answer_body = " ".join(unicode(answer.body).split())
             if "[" in answer_body:
                 # Its a select multiple ( [u"Yes", u"Maybe"] )
                 answers = eval(answer_body)
@@ -69,7 +73,7 @@ class Survey2CSV(object):
         # question_order[-1] = "entity"
         other_field = len(question_order)
         for i, question in enumerate(survey.questions()):
-            header.append(question.text)
+            header.append(unicode(question.text))
             question_order[question.pk] = i + other_field
         return header, question_order
 

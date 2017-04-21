@@ -29,5 +29,7 @@ class Command(BaseCommand):
             logging.debug(u"Treating survey '{}'".format(survey))
             file_ = open(os.path.join(dir_, u"{}.csv".format(survey.name)), "w")
             csv = Survey2CSV.survey_to_csv(survey)
-            file_.write("\n".join(csv))
+            for line in csv:
+                file_.write(line.encode('utf-8'))
+                file_.write(u"\n")
             file_.close()

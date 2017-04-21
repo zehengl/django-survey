@@ -77,11 +77,11 @@ class Question(models.Model):
         try:
             choices = unicode(self.choices).split(',')
         except UnicodeDecodeError:
-            choices = self.choices.decode("utf8").split(',')
+            choices = unicode(self.choices.decode("utf8")).split(',')
         choices_list = []
         for choice in choices:
             choice = choice.strip()
-            if choice != "":
+            if choice:
                 choices_list.append(choice)
         return choices_list
 
