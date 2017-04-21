@@ -31,8 +31,8 @@ class Survey2CSV(object):
         not_an_answer = u"NAA"
         logging.debug(u"\tTreating answer from {}".format(response.user))
         user_answers = {}
-        user_answers[-2] = unicode(response.user)
-        # user_answers[-1] = response.user.entity
+        user_answers[u"user"] = unicode(response.user)
+        # user_answers[u"entity"] = response.user.entity
         for answer_base in response.answers.all():
             answer = get_real_type_answer(answer_base)
             cell = not_an_answer
@@ -53,11 +53,9 @@ class Survey2CSV(object):
             logging.debug(u"\t\t{} : {}".format(answer.question.pk, cell))
             user_answers[answer.question.pk] = cell
         user_line = []
-        question_keys = question_order.keys()
-        question_keys.sort()
-        for i in question_keys:
+        for key_ in question_order:
             try:
-                user_line.append(user_answers[i])
+                user_line.append(user_answers[key_])
             except KeyError:
                 user_line.append(not_an_answer)
         return user_line
@@ -65,16 +63,11 @@ class Survey2CSV(object):
     @staticmethod
     def get_header_and_order(survey):
         """ Creating header """
-        header = []
-        question_order = {}
-        header.append(u"user")
-        question_order[-2] = 0
-        # header.append(u"entity")
-        # question_order[-1] = "entity"
-        other_field = len(question_order)
-        for i, question in enumerate(survey.questions()):
+        header = [u"user"]  # , u"entity"]
+        question_order = [u"user"]  # , u"entity" ]
+        for question in survey.questions():
             header.append(unicode(question.text))
-            question_order[question.pk] = i + other_field
+            question_order.append(question.pk)
         return header, question_order
 
     @staticmethod

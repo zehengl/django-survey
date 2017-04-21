@@ -16,8 +16,8 @@ class TestManagement(BaseTest):
     def setUp(self):
         BaseTest.setUp(self)
         self.survey = Survey.objects.create(
-            name="TestManagementSurvey", is_published=True, need_logged_user=True,
-            display_by_question=True,
+            name="TestManagementSurvey", is_published=True,
+            need_logged_user=True, display_by_question=True,
         )
         self.q1 = Question.objects.create(text="Aè?", order=1, required=True,
                                           survey=self.survey)
@@ -27,20 +27,21 @@ class TestManagement(BaseTest):
                                           survey=self.survey)
         self.response = Response.objects.create(survey=self.survey,
                                                 user=User.objects.all()[0])
+        self.response_null = Response.objects.create(survey=self.survey,
+                                                     user=User.objects.all()[1])
         self.a2 = AnswerText.objects.create(response=self.response,
                                             question=self.q2,
                                             body=u"2é")
+        self.empty3 = AnswerText.objects.create(response=self.response_null,
+                                                question=self.q3,
+                                                body="")
         self.a1 = AnswerText.objects.create(response=self.response,
                                             question=self.q1,
                                             body=u"1é")
         self.a3 = AnswerText.objects.create(response=self.response,
                                             question=self.q3,
                                             body=u"3é")
-        self.response_null = Response.objects.create(survey=self.survey,
-                                                     user=User.objects.all()[1])
-        self.empty3 = AnswerText.objects.create(response=self.response_null,
-                                                question=self.q3,
-                                                body="")
+
         self.expected_content = [
             u'user,Aè?,Bè?,Cè?',
             u'ps250112,1é,2é,3é',
