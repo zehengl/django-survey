@@ -74,7 +74,10 @@ class Question(models.Model):
     def get_clean_choices(self):
         if self.choices is None:
             return []
-        choices = self.choices.decode("utf8").split(',')
+        try:
+            choices = unicode(self.choices).split(',')
+        except UnicodeDecodeError:
+            choices = self.choices.decode("utf8").split(',')
         choices_list = []
         for choice in choices:
             choice = choice.strip()

@@ -56,7 +56,7 @@
  "pk": 1,
  "fields": {
   "name": "Test survey",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "description": "Lorem ipsum dolor sit amët, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "is_published": true,
   "need_logged_user": true,
   "display_by_question": false,
@@ -68,7 +68,7 @@
  "pk": 2,
  "fields": {
   "name": "Short Survey",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "description": "Lorem ipsum dolor sit amët, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "is_published": true,
   "need_logged_user": false,
   "display_by_question": false,
@@ -109,33 +109,33 @@
  "model": "survey.question",
  "pk": 1,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, <strong> consectetur </strong> adipiscing elit.",
+  "text": "Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.",
   "order": 1,
   "required": true,
   "category": 1,
   "survey": 1,
   "type": "select-multiple",
-  "choices": "Yes, no, Maybe"
+  "choices": "Yës, no, Maybe"
  }
 },
 {
  "model": "survey.question",
  "pk": 2,
  "fields": {
-  "text": "Ipsum dolor sit amet, <strong> consectetur </strong>  adipiscing elit.",
+  "text": "Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.",
   "order": 2,
   "required": false,
   "category": 2,
   "survey": 1,
   "type": "radio",
-  "choices": "Yes, No"
+  "choices": "Yës, No"
  }
 },
 {
  "model": "survey.question",
  "pk": 3,
  "fields": {
-  "text": "Dolor sit amet, <strong> consectetur</strong>  adipiscing elit.",
+  "text": "Dolor sit amët, <strong> consectetur</strong>  adipiscing elit.",
   "order": 3,
   "required": false,
   "category": 3,
@@ -148,20 +148,20 @@
  "model": "survey.question",
  "pk": 4,
  "fields": {
-  "text": "Lorem ipsum dolor sit amet, consectetur<strong>  adipiscing </strong> elit.",
+  "text": "Lorem ipsum dolor sit amët, consectetur<strong>  adipiscing </strong> elit.",
   "order": 4,
   "required": false,
   "category": 1,
   "survey": 1,
   "type": "select",
-  "choices": "Yes, No, Maybe"
+  "choices": "Yës, No, Maybe"
  }
 },
 {
  "model": "survey.question",
  "pk": 5,
  "fields": {
-  "text": "Ipsum dolor sit amet, consectetur <strong> adipiscing </strong> elit.",
+  "text": "Ipsum dolor sit amët, consectetur <strong> adipiscing </strong> elit.",
   "order": 5,
   "required": true,
   "category": 2,
@@ -174,13 +174,13 @@
  "model": "survey.question",
  "pk": 6,
  "fields": {
-  "text": "Dolor sit amet, consectetur<strong>  adipiscing</strong>  elit.",
+  "text": "Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.",
   "order": 6,
   "required": true,
   "category": 3,
   "survey": 1,
   "type": "select-multiple",
-  "choices": "Yes, No , Maybe, Whatever"
+  "choices": "Yës, No , Maybe, Whatever"
  }
 },
 {
@@ -471,7 +471,7 @@
  "model": "survey.answerselectmultiple",
  "pk": 34,
  "fields": {
-  "body": "[u'Yes', u'Maybe']"
+  "body": "[u'Yës', u'Maybe']"
  }
 },
 {
@@ -492,14 +492,14 @@
  "model": "survey.answerselectmultiple",
  "pk": 42,
  "fields": {
-  "body": "[u'Yes']"
+  "body": "[u'Yës']"
  }
 },
 {
  "model": "survey.answerselectmultiple",
  "pk": 43,
  "fields": {
-  "body": "[u'Yes']"
+  "body": "[u'Yës']"
  }
 },
 {
