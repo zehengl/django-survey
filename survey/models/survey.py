@@ -20,6 +20,14 @@ class Survey(models.Model):
     def __unicode__(self):
         return u"{}".format(self.name)
 
+    def latest_answer_date(self):
+        """ Return the latest answer date. """
+        min_ = None
+        for response in self.responses.all():
+            if min_ is None or min_ < response.updated:
+                min_ = response.updated
+        return min_
+
     @models.permalink
     def get_absolute_url(self):
         return ('survey-detail', [self.pk])
