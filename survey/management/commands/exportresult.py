@@ -7,7 +7,6 @@ from django.core.management.base import BaseCommand
 from survey.management.survey2csv import Survey2CSV
 from survey.models import Survey
 
-
 LOGGER = logging.getLogger(__name__)
 
 

@@ -27,8 +27,8 @@ class TestSurveyAuthRequired(BaseTest):
         """ If a survey has need_logged_user=True user need to authenticate."""
         urls = [
             reverse("survey-detail", kwargs={"id": 1}),
-            # reverse("survey-completed", kwargs={"id": 1}),
-            # reverse("survey-detail-step", kwargs={"id": 1, "step": 1}),
+            reverse("survey-completed", kwargs={"id": 1}),
+            reverse("survey-detail-step", kwargs={"id": 1, "step": 1}),
         ]
         for url in urls:
             response = self.client.get(url)
@@ -44,9 +44,9 @@ class TestSurveyAuthRequired(BaseTest):
         urls = [
             reverse("survey-list"),
             reverse("survey-detail", kwargs={"id": 2}),
-            # reverse("survey-completed", kwargs={"id": 2}),
-            # reverse("survey-detail-step", kwargs={"id": 2, "step": 1}),
-            #  reverse("survey-confirmation", kwargs={"uuid": "fake"}),
+            reverse("survey-completed", kwargs={"id": 2}),
+            reverse("survey-detail-step", kwargs={"id": 2, "step": 1}),
+            reverse("survey-confirmation", kwargs={"uuid": "fake"}),
         ]
         for url in urls:
             self.assert_accessible(url)
