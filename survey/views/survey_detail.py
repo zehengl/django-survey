@@ -2,22 +2,10 @@
 
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import TemplateView, View
+from django.views.generic import View
 
 from survey.forms import ResponseForm
 from survey.models import Category, Survey
-
-
-class IndexView(TemplateView):
-    template_name = "survey/list.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        surveys = Survey.objects.filter(is_published=True)
-        if not self.request.user.is_authenticated():
-            surveys = surveys.filter(need_logged_user=False)
-        context['surveys'] = surveys
-        return context
 
 
 class SurveyDetail(View):
@@ -94,24 +82,3 @@ class SurveyDetail(View):
             else:
                 template_name = 'survey/one_page_survey.html'
         return render(request, template_name, context)
-
-
-class ConfirmView(TemplateView):
-
-    template_name = 'survey/confirm.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ConfirmView, self).get_context_data(**kwargs)
-        context['uuid'] = kwargs['uuid']
-        return context
-
-
-class SurveyCompleted(TemplateView):
-
-    template_name = 'survey/completed.html'
-
-    def get_context_data(self, **kwargs):
-        context = {}
-        survey = get_object_or_404(Survey, is_published=True, id=kwargs['id'])
-        context['survey'] = survey
-        return context

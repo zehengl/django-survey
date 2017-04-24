@@ -11,7 +11,8 @@ logging.basicConfig(level=logging.DEBUG, format='%(name)s.%(funcName)s() l.%(lin
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2',
+        # 'mysql', 'sqlite3' or 'oracle'
         'NAME': 'survey.db',  # Or path to database file if using sqlite3
         'USER': '',  # Not used with sqlite3
         'PASSWORD': '',  # Not used with sqlite3.
@@ -42,7 +43,7 @@ STATICFILES_DIRS = [
     os.path.normpath(os.path.join(ROOT, '..', "survey", "static")),
 ]
 
-VERSION="0.2.1"
+VERSION = "0.2.1"
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'js*79rk(+s+x9)8co+10$zghe2f)+33jd1l2m#f)vl+pvtj24e'
