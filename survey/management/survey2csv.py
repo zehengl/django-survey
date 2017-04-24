@@ -90,3 +90,15 @@ class Survey2CSV(object):
             line = Survey2CSV.get_user_line(question_order, response)
             csv.append(Survey2CSV.line_list_to_string(line))
         return csv
+
+    @staticmethod
+    def generate_file(survey):
+        logging.debug(u"Treating survey '{}'".format(survey))
+        try:
+            with open(Survey2CSV.file_name(survey), "w") as f:
+                csv = Survey2CSV.survey_to_csv(survey)
+                for line in csv:
+                    f.write(line.encode('utf-8'))
+                    f.write(u"\n")
+        except IOError as exc:
+            raise IOError("Must create {}".format(settings.CSV_DIR), exc)
