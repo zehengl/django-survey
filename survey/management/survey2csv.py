@@ -44,7 +44,7 @@ class Survey2CSV(object):
                 cell = u""
                 for i, ans in enumerate(answers):
                     if i < len(answers) - 1:
-                        # Separate by a space if its not the last
+                        # Separate by a pipe if its not the last
                         cell += ans + u" | "
                     else:
                         cell += ans

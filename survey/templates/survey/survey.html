@@ -22,12 +22,12 @@
 				        <h3 class="panel-title"> <a
 				        data-toggle="collapse"
 				        data-parent="#accordion"
-				        href="#collapse{{category.slug}}">
+				        href="#collapse{{category.slugify}}">
 				            {% trans "Answer this part" %}
 			            </a></h3>
 				    </div>
                     <div class="category-container">
-				        <div id="collapse{{category.slug}}" class="panel-collapse collapse
+				        <div id="collapse{{category.slugify}}" class="panel-collapse collapse
 				        {{ response_form|collapse_form:category }}">
 				            <div class="panel-body">
 	                           {% include "survey/question.html" %}

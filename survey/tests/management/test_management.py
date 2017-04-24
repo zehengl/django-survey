@@ -27,8 +27,9 @@ class TestManagement(BaseTest):
                                           survey=self.survey)
         self.response = Response.objects.create(survey=self.survey,
                                                 user=User.objects.all()[0])
-        self.response_null = Response.objects.create(survey=self.survey,
-                                                     user=User.objects.all()[1])
+        self.response_null = Response.objects.create(
+            survey=self.survey, user=User.objects.all()[1]
+        )
         self.a2 = AnswerText.objects.create(response=self.response,
                                             question=self.q2,
                                             body=u"2é")

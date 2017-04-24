@@ -24,7 +24,7 @@ class TestSurveyAuthRequired(BaseTest):
             raise
 
     def test_need_login(self):
-        """ If a survey has need_logged_user=True user need to authenticate. """
+        """ If a survey has need_logged_user=True user need to authenticate."""
         urls = [
             reverse("survey-detail", kwargs={"id": 1}),
             # reverse("survey-completed", kwargs={"id": 1}),

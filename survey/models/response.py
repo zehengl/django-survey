@@ -26,11 +26,6 @@ class Response(models.Model):
         verbose_name_plural = _('responses')
 
     def __unicode__(self):
-        try:
-            # Survey can be None if we did not save it yet.
-            survey = self.survey
-        except:
-            survey = ""
-        msg = u"Response to {} by {}".format(survey, self.user)
+        msg = u"Response to {} by {}".format(self.survey, self.user)
         msg += u" on {}".format(self.created)
         return msg

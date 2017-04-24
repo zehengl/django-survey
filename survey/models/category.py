@@ -8,6 +8,7 @@ from .survey import Survey
 
 
 class Category(models.Model):
+
     name = models.CharField(max_length=400)
     survey = models.ForeignKey(Survey)
     order = models.IntegerField(blank=True, null=True)
@@ -21,5 +22,5 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
-    def slug(self):
+    def slugify(self):
         return slugify(unicode(self))

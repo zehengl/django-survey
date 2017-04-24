@@ -10,7 +10,8 @@ from django.test.client import Client
 
 class BaseTest(TestCase):
 
-    fixtures = [os.path.join(settings.ROOT, "survey", "tests", "testdump.json")]
+    fixtures = [os.path.join(settings.ROOT, "survey", "tests",
+                             "testdump.json")]
 
     def setUp(self):
         user = User(username=settings.DEBUG_ADMIN_NAME, is_superuser=True,
@@ -26,7 +27,7 @@ class BaseTest(TestCase):
         """ Log the user in. """
         is_logged = self.client.login(username=settings.DEBUG_ADMIN_NAME,
                                       password=settings.DEBUG_ADMIN_PASSWORD)
-        if not is_logged:  #  pragma: no cover
+        if not is_logged:  # pragma: no cover
             raise Exception("Login failed for test user! Tests won't work.")
 
     def logout(self):
