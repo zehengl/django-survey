@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import os
+
+from django.conf import settings
 
 from survey.models.answer import get_real_type_answer
 from survey.models.survey import Survey
@@ -9,6 +12,10 @@ LOGGER = logging.getLogger(__name__)
 
 
 class Survey2CSV(object):
+
+    @staticmethod
+    def file_name(survey):
+        return os.path.join(settings.CSV_DIR, u"{}.csv".format(survey.name))
 
     @staticmethod
     def line_list_to_string(line):

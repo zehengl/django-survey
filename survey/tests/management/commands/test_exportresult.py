@@ -15,7 +15,7 @@ class TestSurvey2CSV(TestManagement):
     def test_handle(self):
         """ The custom command export result create the rigth csv file. """
         call_command("exportresult")
-        file_ = open(os.path.join(settings.ROOT, "csv",
+        file_ = open(os.path.join(settings.CSV_DIR,
                                   'TestManagementSurvey.csv'))
         lines = file_.readlines()
         for i, line in enumerate(lines):

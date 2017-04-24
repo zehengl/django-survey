@@ -5,6 +5,7 @@ import os
 
 DEBUG = True
 ROOT = os.path.dirname(os.path.abspath(__file__))
+CSV_DIR = os.path.join(ROOT, "csv")
 
 logging.basicConfig(level=logging.DEBUG, format='%(name)s.%(funcName)s() l.%(lineno)s -\
 \033[32m %(message)s \033[39m')
@@ -20,7 +21,6 @@ DATABASES = {
         'PORT': '',  # Set to empty string for default. Not used with sqlite3
     }
 }
-
 
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
