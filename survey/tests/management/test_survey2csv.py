@@ -35,3 +35,8 @@ class TestSurvey2CSV(TestManagement):
         """ TypeError raised when the object is not a survey. """
         self.assertRaises(TypeError, Survey2CSV.survey_to_csv, "Not a survey")
         self.assertRaises(TypeError, Survey2CSV.generate_file, "Not a survey")
+
+    def test_filename(self):
+        """ Filename is not an unicode object or os.path and others fail. """
+        name = Survey2CSV.file_name(self.survey)
+        self.assertIsInstance(name, str)

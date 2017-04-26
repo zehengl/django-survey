@@ -15,13 +15,15 @@ class TestSurvey2CSV(TestManagement):
     def test_handle(self):
         """ The custom command export result create the rigth csv file. """
         call_command("exportresult")
-        file_ = open(os.path.join(settings.CSV_DIR,
-                                  'TestManagementSurvey.csv'))
+        file_ = open(
+            os.path.join(settings.CSV_DIR,
+                         u'{}.csv'.format(self.test_managament_survey_name))
+        )
         lines = file_.readlines()
         for i, line in enumerate(lines):
             expected_line = self.expected_content[i].encode("utf8") + "\n"
             self.assertEqual(expected_line, line)
-        file_ = open(os.path.join(settings.ROOT, "csv", 'Test survey.csv'))
+        file_ = open(os.path.join(settings.ROOT, "csv", 'Test survëy.csv'))
         expected = [
             u"""user,Lorem ipsum dolor sit amët; <strong> consectetur \
 </strong> adipiscing elit.,Ipsum dolor sit amët; <strong> consectetur \

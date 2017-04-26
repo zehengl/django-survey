@@ -18,7 +18,7 @@ class Survey(models.Model):
         verbose_name_plural = _('surveys')
 
     def __unicode__(self):
-        return u"{}".format(self.name)
+        return self.name
 
     def latest_answer_date(self):
         """ Return the latest answer date. """

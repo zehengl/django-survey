@@ -15,7 +15,8 @@ class Survey2CSV(object):
 
     @staticmethod
     def file_name(survey):
-        return os.path.join(settings.CSV_DIR, u"{}.csv".format(survey.name))
+        path = os.path.join(settings.CSV_DIR, u"{}.csv".format(survey.name))
+        return path.encode("utf8")
 
     @staticmethod
     def line_list_to_string(line):
@@ -96,7 +97,7 @@ class Survey2CSV(object):
         if not isinstance(survey, Survey):
             msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
             raise TypeError(msg)
-        logging.debug(u"Treating survey '{}'".format(survey))
+        logging.debug("Treating survey '{}'".format(survey))
         try:
             with open(Survey2CSV.file_name(survey), "w") as f:
                 csv = Survey2CSV.survey_to_csv(survey)
