@@ -104,7 +104,7 @@ class Survey2CSV(object):
                 for line in csv:
                     f.write(line.encode('utf-8'))
                     f.write(u"\n")
-        except IOError:
-            msg = "Must create {} ".format(settings.CSV_DIR)
-            msg += "in order to generate csv."
+        except IOError as exc:
+            msg = "Must fix {} ".format(settings.CSV_DIR)
+            msg += "in order to generate csv : {}".format(exc)
             raise IOError(msg)
