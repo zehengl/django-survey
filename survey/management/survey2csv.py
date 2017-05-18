@@ -23,11 +23,11 @@ class Survey2CSV(object):
         """ Write a line in the CSV """
         new_line = u""
         for i, cell in enumerate(line):
-            cell = u" ".join(cell.split())
             try:
                 cell = unicode(cell)
             except UnicodeDecodeError:
                 cell = unicode(cell.decode("utf8"))
+            cell = u" ".join(cell.split())
             new_line += cell.replace(u",", u";")
             if i != len(line) - 1:
                 new_line += u","
