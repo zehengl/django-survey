@@ -4,6 +4,7 @@ import logging
 import os
 
 from django.conf import settings
+from django.utils.text import slugify
 
 from survey.models.answer import get_real_type_answer
 from survey.models.survey import Survey
@@ -15,7 +16,8 @@ class Survey2CSV(object):
 
     @staticmethod
     def file_name(survey):
-        path = os.path.join(settings.CSV_DIR, u"{}.csv".format(survey.name))
+        file_name = u"{}.csv".format(slugify(survey.name))
+        path = os.path.join(settings.CSV_DIR, file_name)
         return path.encode("utf8")
 
     @staticmethod
