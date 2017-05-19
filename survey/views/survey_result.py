@@ -25,7 +25,6 @@ def serve_result_csv(request, pk):
         Survey2CSV.generate_file(survey)
     with open(Survey2CSV.file_name(survey), 'r') as f:
         response = HttpResponse(f.read(), content_type='text/csv')
-    response['mimetype='] = 'application/force-download'
     cd = u'attachment; filename="{}.csv"'.format(survey.name)
     response['Content-Disposition'] = cd
     return response
