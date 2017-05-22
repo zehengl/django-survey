@@ -111,7 +111,7 @@ class ResponseForm(models.ModelForm):
                     # Only one element
                     initial.append(slugify(answer.body))
             else:
-                initial = slugify(answer.body)
+                initial = answer.body
         if data:
             # Initialize the field field from a POST request, if any.
             # Replace values from the database
