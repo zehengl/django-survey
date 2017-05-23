@@ -37,7 +37,6 @@ def serve_protected_result(request, survey):
 
 def serve_result_csv(request, pk):
     survey = get_object_or_404(Survey, pk=pk)
-    print survey.need_logged_user
     if survey.need_logged_user:
         return serve_protected_result(request, survey)
     else:
