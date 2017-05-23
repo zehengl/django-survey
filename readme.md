@@ -52,7 +52,7 @@ create a superuser, load the test dump, then launch the server :
 
 	pylint survey
 
-### Build the package :
+### Build the package :
 
     python setup.py build
 
