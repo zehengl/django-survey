@@ -6,7 +6,7 @@ register = template.Library()
 
 
 def collapse_form(form, category):
-    """ Permit to return the class of the collapsible  according to errors in
+    """ Permit to return the class of the collapsible according to errors in
     the form. """
     categories_with_error = set()
     for field in form:
@@ -14,8 +14,7 @@ def collapse_form(form, category):
             categories_with_error.add(field.field.widget.attrs["category"])
     if category.name in categories_with_error:
         return "in"
-    else:
-        return ""
+    return ""
 
 register.filter('collapse_form', collapse_form)
 

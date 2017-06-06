@@ -8,7 +8,7 @@ from survey.tests.management.test_management import TestManagement
 
 @staticmethod
 def raise_io_exc(survey):
-    raise IOError("msg")
+    raise IOError(survey)
 
 
 class TestSurvey2CSV(TestManagement):

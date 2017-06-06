@@ -20,29 +20,29 @@ class TestManagement(BaseTest):
             name=self.test_managament_survey_name, is_published=True,
             need_logged_user=True, display_by_question=True,
         )
-        self.q1 = Question.objects.create(text="Aè?", order=1, required=True,
-                                          survey=self.survey)
-        self.q2 = Question.objects.create(text="Bè?", order=2, required=False,
-                                          survey=self.survey)
-        self.q3 = Question.objects.create(text="Cè?", order=3, required=True,
-                                          survey=self.survey)
+        self.qst1 = Question.objects.create(text="Aè?", order=1, required=True,
+                                            survey=self.survey)
+        self.qst2 = Question.objects.create(text="Bè?", order=2, required=False,
+                                            survey=self.survey)
+        self.qst3 = Question.objects.create(text="Cè?", order=3, required=True,
+                                            survey=self.survey)
         self.response = Response.objects.create(survey=self.survey,
                                                 user=User.objects.all()[0])
         self.response_null = Response.objects.create(
             survey=self.survey, user=User.objects.all()[1]
         )
-        self.a2 = AnswerText.objects.create(response=self.response,
-                                            question=self.q2,
-                                            body=u"2é")
+        self.ans2 = AnswerText.objects.create(response=self.response,
+                                              question=self.qst2,
+                                              body=u"2é")
         self.empty3 = AnswerText.objects.create(response=self.response_null,
-                                                question=self.q3,
+                                                question=self.qst3,
                                                 body="")
-        self.a1 = AnswerText.objects.create(response=self.response,
-                                            question=self.q1,
-                                            body=u"1é")
-        self.a3 = AnswerText.objects.create(response=self.response,
-                                            question=self.q3,
-                                            body=u"3é")
+        self.ans1 = AnswerText.objects.create(response=self.response,
+                                              question=self.qst1,
+                                              body=u"1é")
+        self.ans3 = AnswerText.objects.create(response=self.response,
+                                              question=self.qst3,
+                                              body=u"3é")
 
         self.expected_content = [
             u'user,Aè?,Bè?,Cè?',

@@ -73,6 +73,7 @@ class AnswerInteger(AnswerBase):
 
 def get_real_type_answer(answer):
     """ Permit to recover a child answer class from the AnswerBase object.
+
     :param AnswerBase answer: The AnswerBase to convert to its real type. """
     for class_ in [AnswerText, AnswerRadio, AnswerSelect, AnswerSelectMultiple,
                    AnswerInteger]:

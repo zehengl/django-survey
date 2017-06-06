@@ -16,13 +16,16 @@ class Survey2CSV(object):
 
     @staticmethod
     def file_name(survey):
+        """ Return the csv file name for a Survey.
+
+        :param Survey survey: The survey we're treating. """
         file_name = u"{}.csv".format(slugify(survey.name))
         path = os.path.join(settings.CSV_DIR, file_name)
         return path.encode("utf8")
 
     @staticmethod
     def line_list_to_string(line):
-        """ Write a line in the CSV """
+        """ Write a line in the CSV. """
         new_line = u""
         for i, cell in enumerate(line):
             try:
@@ -39,7 +42,7 @@ class Survey2CSV(object):
     def get_user_line(question_order, response):
         """ Creating a line for a user """
         not_an_answer = u"NAA"
-        logging.debug(u"\tTreating answer from {}".format(response.user))
+        LOGGER.debug(u"\tTreating answer from %s", response.user)
         user_answers = {}
         user_answers[u"user"] = unicode(response.user)
         # user_answers[u"entity"] = response.user.entity
@@ -60,7 +63,7 @@ class Survey2CSV(object):
                         cell += ans
             else:
                 cell = answer_body
-            logging.debug(u"\t\t{} : {}".format(answer.question.pk, cell))
+            LOGGER.debug(u"\t\t%s : %s", answer.question.pk, cell)
             user_answers[answer.question.pk] = cell
         user_line = []
         for key_ in question_order:
@@ -72,7 +75,9 @@ class Survey2CSV(object):
 
     @staticmethod
     def get_header_and_order(survey):
-        """ Creating header """
+        """ Creating header.
+
+        :param Survey survey: The survey we're treating. """
         header = [u"user"]  # , u"entity"]
         question_order = [u"user"]  # , u"entity" ]
         for question in survey.questions():
@@ -82,7 +87,9 @@ class Survey2CSV(object):
 
     @staticmethod
     def survey_to_csv(survey):
-        """ Export a csv for a survey. """
+        """ Export a csv for a survey.
+
+        :param Survey survey: The survey we're treating.  """
         if not isinstance(survey, Survey):
             msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
             raise TypeError(msg)
@@ -96,10 +103,13 @@ class Survey2CSV(object):
 
     @staticmethod
     def generate_file(survey):
+        """ Generate a csv file corresponding to a Survey.
+
+        :param Survey survey: The survey we're treating. """
         if not isinstance(survey, Survey):
             msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
             raise TypeError(msg)
-        logging.debug("Treating survey '{}'".format(survey))
+        LOGGER.debug("Treating survey '%s'", survey)
         try:
             with open(Survey2CSV.file_name(survey), "w") as f:
                 csv = Survey2CSV.survey_to_csv(survey)
