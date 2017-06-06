@@ -4,7 +4,7 @@
  "pk": 1,
  "fields": {
   "password": "pbkdf2_sha256$30000$4qybUPscjFTq$CvNaiVIFYlwXLVPUQlOk8hlE7duE93Bdv1LyIMj2RRo=",
-  "last_login": "2017-03-22T05:38:02.728",
+  "last_login": "2017-03-22T05:38:02.728Z",
   "is_superuser": true,
   "username": "ps250112",
   "first_name": "",
@@ -12,7 +12,7 @@
   "email": "",
   "is_staff": true,
   "is_active": true,
-  "date_joined": "2017-03-15T11:01:44.764",
+  "date_joined": "2017-03-15T11:01:44.764Z",
   "groups": [],
   "user_permissions": []
  }
@@ -22,7 +22,7 @@
  "pk": 2,
  "fields": {
   "password": "pbkdf2_sha256$30000$9I20UakFTpfx$y7eJAH51Uet6UY3A56g+JLEiG4qvks9XyGZnXy5B0E4=",
-  "last_login": "2017-03-19T11:21:55.386",
+  "last_login": "2017-03-19T11:21:55.386Z",
   "is_superuser": true,
   "username": "pierre",
   "first_name": "",
@@ -30,7 +30,7 @@
   "email": "",
   "is_staff": true,
   "is_active": true,
-  "date_joined": "2017-03-19T11:14:45.991",
+  "date_joined": "2017-03-19T11:14:45.991Z",
   "groups": [],
   "user_permissions": []
  }
@@ -40,7 +40,15 @@
  "pk": "94uzvee76vhqf147b15a4lf8x25mm3pl",
  "fields": {
   "session_data": "NTI3YWUwYzY1YzRiMDBlZTQxZTQzNzY5MDgzYTY3NDQyZmIwYmNjNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjI2ZTI0NjYzOTM5Mjk1YTAwOGFmOGNlYTgzMzJiYjRjYmQwYzNiOTIiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
-  "expire_date": "2017-04-03T05:23:00.417"
+  "expire_date": "2017-04-03T05:23:00.417Z"
+ }
+},
+{
+ "model": "sessions.session",
+ "pk": "wuf9qp15ba9upw0skklxlnudw8czlhn8",
+ "fields": {
+  "session_data": "MTE5YmJiYTBhYzAyMmEwY2U0OGIwZjg2YTVjMzcwY2NhMmM1ZTQyNjp7InJvc2V0dGFfY2FjaGVfc3RvcmFnZV9rZXlfcHJlZml4IjoiNGY1Yjk4MWJjYjg3NTA5OWI0MTVmMmVhMWFlMGM1MTYwNmQxNjY4OSIsIl9hdXRoX3VzZXJfaGFzaCI6IjRjZTIzM2ZjMDM5YzNlZmU2ZjIxMTM5ODgzYTQxZmIzYzhhOTFiNDciLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+  "expire_date": "2017-05-09T04:56:10.535Z"
  }
 },
 {
@@ -55,8 +63,8 @@
  "model": "survey.survey",
  "pk": 1,
  "fields": {
-  "name": "Test survëy",
-  "description": "Lorem ipsum dolor sit amët, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "name": "Test surv\u00eby",
+  "description": "Lorem ipsum dolor sit am\u00ebt, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "is_published": true,
   "need_logged_user": true,
   "display_by_question": false,
@@ -67,8 +75,8 @@
  "model": "survey.survey",
  "pk": 2,
  "fields": {
-  "name": "Short Survëy",
-  "description": "Lorem ipsum dolor sit amët, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "name": "Short Surv\u00eby",
+  "description": "Lorem ipsum dolor sit am\u00ebt, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "is_published": true,
   "need_logged_user": false,
   "display_by_question": false,
@@ -109,33 +117,33 @@
  "model": "survey.question",
  "pk": 1,
  "fields": {
-  "text": "Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.",
+  "text": "Lorem ipsum dolor sit am\u00ebt, <strong> consectetur </strong> adipiscing elit.",
   "order": 1,
   "required": true,
   "category": 1,
   "survey": 1,
   "type": "select-multiple",
-  "choices": "Yës, no, Maybe"
+  "choices": "Y\u00ebs, no, Maybe"
  }
 },
 {
  "model": "survey.question",
  "pk": 2,
  "fields": {
-  "text": "Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.",
+  "text": "Ipsum dolor sit am\u00ebt, <strong> consectetur </strong>  adipiscing elit.",
   "order": 2,
   "required": false,
   "category": 2,
   "survey": 1,
   "type": "radio",
-  "choices": "Yës, No"
+  "choices": "Y\u00ebs, No"
  }
 },
 {
  "model": "survey.question",
  "pk": 3,
  "fields": {
-  "text": "Dolor sit amët, <strong> consectetur</strong>  adipiscing elit.",
+  "text": "Dolor sit am\u00ebt, <strong> consectetur</strong>  adipiscing elit.",
   "order": 3,
   "required": false,
   "category": 3,
@@ -148,20 +156,20 @@
  "model": "survey.question",
  "pk": 4,
  "fields": {
-  "text": "Lorem ipsum dolor sit amët, consectetur<strong>  adipiscing </strong> elit.",
+  "text": "Lorem ipsum dolor sit am\u00ebt, consectetur<strong>  adipiscing </strong> elit.",
   "order": 4,
   "required": false,
   "category": 1,
   "survey": 1,
   "type": "select",
-  "choices": "Yës, No, Maybe"
+  "choices": "Y\u00ebs, No, Maybe"
  }
 },
 {
  "model": "survey.question",
  "pk": 5,
  "fields": {
-  "text": "Ipsum dolor sit amët, consectetur <strong> adipiscing </strong> elit.",
+  "text": "Ipsum dolor sit am\u00ebt, consectetur <strong> adipiscing </strong> elit.",
   "order": 5,
   "required": true,
   "category": 2,
@@ -174,13 +182,13 @@
  "model": "survey.question",
  "pk": 6,
  "fields": {
-  "text": "Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.",
+  "text": "Dolor sit am\u00ebt, consectetur<strong>  adipiscing</strong>  elit.",
   "order": 6,
   "required": true,
   "category": 3,
   "survey": 1,
   "type": "select-multiple",
-  "choices": "Yës, No , Maybe, Whatever"
+  "choices": "Y\u00ebs, No , Maybe, Whatever"
  }
 },
 {
@@ -213,8 +221,8 @@
  "model": "survey.response",
  "pk": 8,
  "fields": {
-  "created": "2017-03-19T11:33:22.379",
-  "updated": "2017-03-19T12:04:11.997",
+  "created": "2017-03-19T11:33:22.379Z",
+  "updated": "2017-03-19T12:04:11.997Z",
   "survey": 2,
   "user": [
    "pierre"
@@ -226,8 +234,8 @@
  "model": "survey.response",
  "pk": 10,
  "fields": {
-  "created": "2017-03-19T11:59:00.802",
-  "updated": "2017-03-19T12:20:11.501",
+  "created": "2017-03-19T11:59:00.802Z",
+  "updated": "2017-03-19T12:20:11.501Z",
   "survey": 1,
   "user": [
    "pierre"
@@ -239,8 +247,8 @@
  "model": "survey.response",
  "pk": 11,
  "fields": {
-  "created": "2017-03-20T05:12:03.007",
-  "updated": "2017-03-23T03:34:32.340",
+  "created": "2017-03-20T05:12:03.007Z",
+  "updated": "2017-03-23T03:34:32.340Z",
   "survey": 2,
   "user": [
    "ps250112"
@@ -252,8 +260,8 @@
  "model": "survey.response",
  "pk": 12,
  "fields": {
-  "created": "2017-03-22T08:24:43.468",
-  "updated": "2017-03-22T10:27:59.183",
+  "created": "2017-03-22T08:24:43.468Z",
+  "updated": "2017-03-22T10:27:59.183Z",
   "survey": 1,
   "user": [
    "ps250112"
@@ -267,8 +275,8 @@
  "fields": {
   "question": 7,
   "response": 8,
-  "created": "2017-03-19T11:57:56.650",
-  "updated": "2017-03-19T12:04:12.038"
+  "created": "2017-03-19T11:57:56.650Z",
+  "updated": "2017-03-19T12:04:12.038Z"
  }
 },
 {
@@ -277,8 +285,8 @@
  "fields": {
   "question": 3,
   "response": 10,
-  "created": "2017-03-19T11:59:00.819",
-  "updated": "2017-03-19T12:20:11.530"
+  "created": "2017-03-19T11:59:00.819Z",
+  "updated": "2017-03-19T12:20:11.530Z"
  }
 },
 {
@@ -287,8 +295,8 @@
  "fields": {
   "question": 2,
   "response": 10,
-  "created": "2017-03-19T11:59:00.848",
-  "updated": "2017-03-19T12:20:11.569"
+  "created": "2017-03-19T11:59:00.848Z",
+  "updated": "2017-03-19T12:20:11.569Z"
  }
 },
 {
@@ -297,8 +305,8 @@
  "fields": {
   "question": 1,
   "response": 10,
-  "created": "2017-03-19T11:59:00.884",
-  "updated": "2017-03-19T12:20:11.611"
+  "created": "2017-03-19T11:59:00.884Z",
+  "updated": "2017-03-19T12:20:11.611Z"
  }
 },
 {
@@ -307,8 +315,8 @@
  "fields": {
   "question": 6,
   "response": 10,
-  "created": "2017-03-19T11:59:00.902",
-  "updated": "2017-03-19T12:20:11.674"
+  "created": "2017-03-19T11:59:00.902Z",
+  "updated": "2017-03-19T12:20:11.674Z"
  }
 },
 {
@@ -317,8 +325,8 @@
  "fields": {
   "question": 5,
   "response": 10,
-  "created": "2017-03-19T11:59:00.933",
-  "updated": "2017-03-19T12:20:11.761"
+  "created": "2017-03-19T11:59:00.933Z",
+  "updated": "2017-03-19T12:20:11.761Z"
  }
 },
 {
@@ -327,8 +335,8 @@
  "fields": {
   "question": 4,
   "response": 10,
-  "created": "2017-03-19T11:59:00.950",
-  "updated": "2017-03-19T12:20:11.802"
+  "created": "2017-03-19T11:59:00.950Z",
+  "updated": "2017-03-19T12:20:11.802Z"
  }
 },
 {
@@ -337,8 +345,8 @@
  "fields": {
   "question": 8,
   "response": 11,
-  "created": "2017-03-20T05:12:03.076",
-  "updated": "2017-03-23T03:34:32.374"
+  "created": "2017-03-20T05:12:03.076Z",
+  "updated": "2017-03-23T03:34:32.374Z"
  }
 },
 {
@@ -347,8 +355,8 @@
  "fields": {
   "question": 7,
   "response": 11,
-  "created": "2017-03-20T05:12:03.093",
-  "updated": "2017-03-23T03:34:32.400"
+  "created": "2017-03-20T05:12:03.093Z",
+  "updated": "2017-03-23T03:34:32.400Z"
  }
 },
 {
@@ -357,8 +365,8 @@
  "fields": {
   "question": 3,
   "response": 12,
-  "created": "2017-03-22T08:24:43.531",
-  "updated": "2017-03-22T10:27:59.259"
+  "created": "2017-03-22T08:24:43.531Z",
+  "updated": "2017-03-22T10:27:59.259Z"
  }
 },
 {
@@ -367,8 +375,8 @@
  "fields": {
   "question": 2,
   "response": 12,
-  "created": "2017-03-22T08:24:43.546",
-  "updated": "2017-03-22T10:27:59.300"
+  "created": "2017-03-22T08:24:43.546Z",
+  "updated": "2017-03-22T10:27:59.300Z"
  }
 },
 {
@@ -377,8 +385,8 @@
  "fields": {
   "question": 1,
   "response": 12,
-  "created": "2017-03-22T08:24:43.560",
-  "updated": "2017-03-22T10:27:59.334"
+  "created": "2017-03-22T08:24:43.560Z",
+  "updated": "2017-03-22T10:27:59.334Z"
  }
 },
 {
@@ -387,8 +395,8 @@
  "fields": {
   "question": 6,
   "response": 12,
-  "created": "2017-03-22T08:24:43.582",
-  "updated": "2017-03-22T10:27:59.356"
+  "created": "2017-03-22T08:24:43.582Z",
+  "updated": "2017-03-22T10:27:59.356Z"
  }
 },
 {
@@ -397,8 +405,8 @@
  "fields": {
   "question": 5,
   "response": 12,
-  "created": "2017-03-22T08:24:43.595",
-  "updated": "2017-03-22T10:27:59.411"
+  "created": "2017-03-22T08:24:43.595Z",
+  "updated": "2017-03-22T10:27:59.411Z"
  }
 },
 {
@@ -407,8 +415,8 @@
  "fields": {
   "question": 4,
   "response": 12,
-  "created": "2017-03-22T08:24:43.617",
-  "updated": "2017-03-22T10:27:59.434"
+  "created": "2017-03-22T08:24:43.617Z",
+  "updated": "2017-03-22T10:27:59.434Z"
  }
 },
 {
@@ -471,7 +479,7 @@
  "model": "survey.answerselectmultiple",
  "pk": 34,
  "fields": {
-  "body": "[u'Yës', u'Maybe']"
+  "body": "[u'Y\u00ebs', u'Maybe']"
  }
 },
 {
@@ -492,14 +500,14 @@
  "model": "survey.answerselectmultiple",
  "pk": 42,
  "fields": {
-  "body": "[u'Yës']"
+  "body": "[u'Y\u00ebs']"
  }
 },
 {
  "model": "survey.answerselectmultiple",
  "pk": 43,
  "fields": {
-  "body": "[u'Yës']"
+  "body": "[u'Y\u00ebs']"
  }
 },
 {
