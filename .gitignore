@@ -15,5 +15,5 @@ survey_test_bak
 .settings/
 htmlcov/
 .coverage
-csv/
+csv/*.csv
 
