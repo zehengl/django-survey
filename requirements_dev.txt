@@ -3,6 +3,7 @@
 # I18n
 django-rosetta==0.7.13
 # Lint
-pylint==1.7.1
+pylint==1.7.2
 coverage==4.4.1
 mock==2.0.0
+
