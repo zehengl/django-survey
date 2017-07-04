@@ -44,7 +44,7 @@ create a superuser, load the test dump, then launch the server :
 
 ### Internationalisation :
 
-	python manage.py makemessages --no-obsolete
+	python manage.py makemessages --no-obsolete --no-wrap
 	python manage.py runserver
 	# Access http://localhost:8000/rosetta
 
