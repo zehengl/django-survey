@@ -8,11 +8,7 @@ from django.core.urlresolvers import reverse
 from django.forms import models
 from django.utils.text import slugify
 
-from survey.models import (
-    AnswerBase, AnswerInteger, AnswerRadio, AnswerSelect, AnswerSelectMultiple,
-    AnswerText, Question, Response
-)
-from survey.models.answer import get_real_type_answer
+from survey.models import Answer, Question, Response
 from survey.signals import survey_completed
 from survey.widgets import ImageSelectWidget
 
@@ -81,10 +77,8 @@ class ResponseForm(models.ModelForm):
         if response is None:
             return None
         try:
-            base_answer = AnswerBase.objects.get(question=question,
-                                                 response=response)
-            return get_real_type_answer(base_answer)
-        except AnswerBase.DoesNotExist:
+            return Answer.objects.get(question=question, response=response)
+        except Answer.DoesNotExist:
             return None
 
     def get_question_initial(self, question, data):
@@ -232,18 +226,7 @@ class ResponseForm(models.ModelForm):
                 question = Question.objects.get(pk=q_id)
                 answer = self._get_preexisting_answer(question)
                 if answer is None:
-                    if question.type in [Question.TEXT, Question.SHORT_TEXT]:
-                        answer = AnswerText(question=question)
-                    elif question.type == Question.RADIO:
-                        answer = AnswerRadio(question=question)
-                    elif question.type == Question.SELECT:
-                        answer = AnswerSelect(question=question)
-                    elif question.type == Question.SELECT_IMAGE:
-                        answer = AnswerSelect(question=question)
-                    elif question.type == Question.SELECT_MULTIPLE:
-                        answer = AnswerSelectMultiple(question=question)
-                    elif question.type == Question.INTEGER:
-                        answer = AnswerInteger(question=question)
+                    answer = Answer(question=question)
                 if question.type == Question.SELECT_IMAGE:
                     value, img_src = field_value.split(":", 1)
                     # TODO

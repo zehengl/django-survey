@@ -270,258 +270,168 @@
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 31,
  "fields": {
   "question": 7,
   "response": 8,
   "created": "2017-03-19T11:57:56.650Z",
-  "updated": "2017-03-19T12:04:12.038Z"
+  "updated": "2017-07-10T15:07:35.304Z",
+  "body": "[u'2', u'4']"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 32,
  "fields": {
   "question": 3,
   "response": 10,
   "created": "2017-03-19T11:59:00.819Z",
-  "updated": "2017-03-19T12:20:11.530Z"
+  "updated": "2017-07-10T15:07:35.287Z",
+  "body": "Text for a response"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 33,
  "fields": {
   "question": 2,
   "response": 10,
   "created": "2017-03-19T11:59:00.848Z",
-  "updated": "2017-03-19T12:20:11.569Z"
+  "updated": "2017-07-10T15:07:35.295Z",
+  "body": ""
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 34,
  "fields": {
   "question": 1,
   "response": 10,
   "created": "2017-03-19T11:59:00.884Z",
-  "updated": "2017-03-19T12:20:11.611Z"
+  "updated": "2017-07-10T15:07:35.306Z",
+  "body": "[u'Y\u00ebs', u'Maybe']"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 35,
  "fields": {
   "question": 6,
   "response": 10,
   "created": "2017-03-19T11:59:00.902Z",
-  "updated": "2017-03-19T12:20:11.674Z"
+  "updated": "2017-07-10T15:07:35.307Z",
+  "body": "[u'No', u'Whatever']"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 36,
  "fields": {
   "question": 5,
   "response": 10,
   "created": "2017-03-19T11:59:00.933Z",
-  "updated": "2017-03-19T12:20:11.761Z"
+  "updated": "2017-07-10T15:07:35.291Z",
+  "body": "1"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 37,
  "fields": {
   "question": 4,
   "response": 10,
   "created": "2017-03-19T11:59:00.950Z",
-  "updated": "2017-03-19T12:20:11.802Z"
+  "updated": "2017-07-10T15:07:35.300Z",
+  "body": ""
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 38,
  "fields": {
   "question": 8,
   "response": 11,
   "created": "2017-03-20T05:12:03.076Z",
-  "updated": "2017-03-23T03:34:32.374Z"
+  "updated": "2017-07-10T15:07:35.297Z",
+  "body": "5"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 39,
  "fields": {
   "question": 7,
   "response": 11,
   "created": "2017-03-20T05:12:03.093Z",
-  "updated": "2017-03-23T03:34:32.400Z"
+  "updated": "2017-07-10T15:07:35.308Z",
+  "body": "[u'2']"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 40,
  "fields": {
   "question": 3,
   "response": 12,
   "created": "2017-03-22T08:24:43.531Z",
-  "updated": "2017-03-22T10:27:59.259Z"
+  "updated": "2017-07-10T15:07:35.289Z",
+  "body": ""
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 41,
  "fields": {
   "question": 2,
   "response": 12,
   "created": "2017-03-22T08:24:43.546Z",
-  "updated": "2017-03-22T10:27:59.300Z"
+  "updated": "2017-07-10T15:07:35.298Z",
+  "body": ""
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 42,
  "fields": {
   "question": 1,
   "response": 12,
   "created": "2017-03-22T08:24:43.560Z",
-  "updated": "2017-03-22T10:27:59.334Z"
+  "updated": "2017-07-10T15:07:35.309Z",
+  "body": "[u'Y\u00ebs']"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 43,
  "fields": {
   "question": 6,
   "response": 12,
   "created": "2017-03-22T08:24:43.582Z",
-  "updated": "2017-03-22T10:27:59.356Z"
+  "updated": "2017-07-10T15:07:35.311Z",
+  "body": "[u'Y\u00ebs']"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 44,
  "fields": {
   "question": 5,
   "response": 12,
   "created": "2017-03-22T08:24:43.595Z",
-  "updated": "2017-03-22T10:27:59.411Z"
+  "updated": "2017-07-10T15:07:35.293Z",
+  "body": "1"
  }
 },
 {
- "model": "survey.answerbase",
+ "model": "survey.answer",
  "pk": 45,
  "fields": {
   "question": 4,
   "response": 12,
   "created": "2017-03-22T08:24:43.617Z",
-  "updated": "2017-03-22T10:27:59.434Z"
- }
-},
-{
- "model": "survey.answertext",
- "pk": 32,
- "fields": {
-  "body": "Text for a response"
- }
-},
-{
- "model": "survey.answertext",
- "pk": 40,
- "fields": {
+  "updated": "2017-07-10T15:07:35.301Z",
   "body": ""
- }
-},
-{
- "model": "survey.answerradio",
- "pk": 33,
- "fields": {
-  "body": ""
- }
-},
-{
- "model": "survey.answerradio",
- "pk": 38,
- "fields": {
-  "body": "5"
- }
-},
-{
- "model": "survey.answerradio",
- "pk": 41,
- "fields": {
-  "body": ""
- }
-},
-{
- "model": "survey.answerselect",
- "pk": 37,
- "fields": {
-  "body": ""
- }
-},
-{
- "model": "survey.answerselect",
- "pk": 45,
- "fields": {
-  "body": ""
- }
-},
-{
- "model": "survey.answerselectmultiple",
- "pk": 31,
- "fields": {
-  "body": "[u'2', u'4']"
- }
-},
-{
- "model": "survey.answerselectmultiple",
- "pk": 34,
- "fields": {
-  "body": "[u'Y\u00ebs', u'Maybe']"
- }
-},
-{
- "model": "survey.answerselectmultiple",
- "pk": 35,
- "fields": {
-  "body": "[u'No', u'Whatever']"
- }
-},
-{
- "model": "survey.answerselectmultiple",
- "pk": 39,
- "fields": {
-  "body": "[u'2']"
- }
-},
-{
- "model": "survey.answerselectmultiple",
- "pk": 42,
- "fields": {
-  "body": "[u'Y\u00ebs']"
- }
-},
-{
- "model": "survey.answerselectmultiple",
- "pk": 43,
- "fields": {
-  "body": "[u'Y\u00ebs']"
- }
-},
-{
- "model": "survey.answerinteger",
- "pk": 36,
- "fields": {
-  "body": 1
- }
-},
-{
- "model": "survey.answerinteger",
- "pk": 44,
- "fields": {
-  "body": 1
  }
 }
 ]

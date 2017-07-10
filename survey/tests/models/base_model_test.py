@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from survey.models import (
-    AnswerInteger, AnswerRadio, AnswerSelect, AnswerSelectMultiple, AnswerText,
-    Question, Response, Survey
-)
+from survey.models import Answer, Question, Response, Survey
 from survey.tests import BaseTest
 
 
@@ -19,14 +16,14 @@ class BaseModelTest(BaseTest):
         self.questions = []
         self.answers = []
         self.data = {
-            Question.TEXT: [AnswerText, "Mytext", None],
-            Question.SHORT_TEXT: [AnswerText, "Mytext", None],
-            Question.RADIO: [AnswerRadio, "Yes", "Yes, No, Maybe"],
-            Question.SELECT: [AnswerSelect, "No", "Yes, No, Maybe"],
+            Question.TEXT: [Answer, "Mytext", None],
+            Question.SHORT_TEXT: [Answer, "Mytext", None],
+            Question.RADIO: [Answer, "Yes", "Yes, No, Maybe"],
+            Question.SELECT: [Answer, "No", "Yes, No, Maybe"],
             #  Question.SELECT_IMAGE: [AnswerSelectImage, "TODO" ,None],
-            Question.SELECT_MULTIPLE: [AnswerSelectMultiple, "Yes",
+            Question.SELECT_MULTIPLE: [Answer, "Yes",
                                        "Yes, No, Maybe"],
-            Question.INTEGER: [AnswerInteger, 42, None],
+            Question.INTEGER: [Answer, 42, None],
         }
         for i, qtype in enumerate(self.data):
             answer_class = self.data[qtype][0]

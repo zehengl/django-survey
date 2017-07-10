@@ -2,10 +2,7 @@
 
 from django.contrib import admin
 
-from survey.models import (
-    AnswerInteger, AnswerRadio, AnswerSelect, AnswerSelectMultiple, AnswerText,
-    Category, Question, Response, Survey
-)
+from survey.models import Answer, Category, Question, Response, Survey
 
 from .actions import make_published
 
@@ -35,23 +32,23 @@ class AnswerBaseInline(admin.StackedInline):
 
 
 class AnswerTextInline(AnswerBaseInline):
-    model = AnswerText
+    model = Answer
 
 
 class AnswerRadioInline(AnswerBaseInline):
-    model = AnswerRadio
+    model = Answer
 
 
 class AnswerSelectInline(AnswerBaseInline):
-    model = AnswerSelect
+    model = Answer
 
 
 class AnswerSelectMultipleInline(AnswerBaseInline):
-    model = AnswerSelectMultiple
+    model = Answer
 
 
 class AnswerIntegerInline(AnswerBaseInline):
-    model = AnswerInteger
+    model = Answer
 
 
 class ResponseAdmin(admin.ModelAdmin):

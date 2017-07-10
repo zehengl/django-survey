@@ -6,8 +6,7 @@ import os
 from django.conf import settings
 from django.utils.text import slugify
 
-from survey.models.answer import get_real_type_answer
-from survey.models.survey import Survey
+from survey.models import Survey
 
 LOGGER = logging.getLogger(__name__)
 
@@ -46,8 +45,7 @@ class Survey2CSV(object):
         user_answers = {}
         user_answers[u"user"] = unicode(response.user)
         # user_answers[u"entity"] = response.user.entity
-        for answer_base in response.answers.all():
-            answer = get_real_type_answer(answer_base)
+        for answer in response.answers.all():
             cell = not_an_answer
             # remove double space, tab, \n...
             answer_body = " ".join(unicode(answer.body).split())

@@ -2,10 +2,7 @@
 
 from django.contrib.auth.models import User
 
-from survey.models.answer import AnswerText
-from survey.models.question import Question
-from survey.models.response import Response
-from survey.models.survey import Survey
+from survey.models import Answer, Question, Response, Survey
 from survey.tests import BaseTest
 
 
@@ -22,8 +19,8 @@ class TestManagement(BaseTest):
         )
         self.qst1 = Question.objects.create(text="Aè?", order=1, required=True,
                                             survey=self.survey)
-        self.qst2 = Question.objects.create(text="Bè?", order=2, required=False,
-                                            survey=self.survey)
+        self.qst2 = Question.objects.create(text="Bè?", order=2,
+                                            required=False, survey=self.survey)
         self.qst3 = Question.objects.create(text="Cè?", order=3, required=True,
                                             survey=self.survey)
         self.response = Response.objects.create(survey=self.survey,
@@ -31,18 +28,18 @@ class TestManagement(BaseTest):
         self.response_null = Response.objects.create(
             survey=self.survey, user=User.objects.all()[1]
         )
-        self.ans2 = AnswerText.objects.create(response=self.response,
-                                              question=self.qst2,
-                                              body=u"2é")
-        self.empty3 = AnswerText.objects.create(response=self.response_null,
-                                                question=self.qst3,
-                                                body="")
-        self.ans1 = AnswerText.objects.create(response=self.response,
-                                              question=self.qst1,
-                                              body=u"1é")
-        self.ans3 = AnswerText.objects.create(response=self.response,
-                                              question=self.qst3,
-                                              body=u"3é")
+        self.ans2 = Answer.objects.create(response=self.response,
+                                          question=self.qst2,
+                                          body=u"2é")
+        self.empty3 = Answer.objects.create(response=self.response_null,
+                                            question=self.qst3,
+                                            body="")
+        self.ans1 = Answer.objects.create(response=self.response,
+                                          question=self.qst1,
+                                          body=u"1é")
+        self.ans3 = Answer.objects.create(response=self.response,
+                                          question=self.qst3,
+                                          body=u"3é")
 
         self.expected_content = [
             u'user,Aè?,Bè?,Cè?',
