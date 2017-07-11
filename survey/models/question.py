@@ -85,6 +85,26 @@ class Question(models.Model):
                 choices_list.append(choice)
         return choices_list
 
+    @property
+    def answers_as_text(self):
+        """ Return answers as a list of text.
+
+        :rtype: List """
+        return self.answers_cardinality.keys()
+
+    @property
+    def answers_cardinality(self):
+        """ Return a dictionary with answers as key and cardinality as value
+
+        :rtype: Dict """
+        cardinality = {}
+        for answer in self.answers.all():
+            try:
+                cardinality[answer.body] += 1
+            except KeyError:
+                cardinality[answer.body] = 1
+        return cardinality
+
     def get_choices(self):
         """
         Parse the choices field and return a tuple formatted appropriately
