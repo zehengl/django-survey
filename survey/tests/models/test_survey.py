@@ -13,7 +13,7 @@ class TestSurvey(BaseModelTest):
 
     def test_questions(self):
         """ Recovering a list of questions from a survey. """
-        questions = self.survey.questions()
+        questions = self.survey.questions.all()
         self.assertEqual(len(questions), len(self.data))
 
     def test_absolute_url(self):

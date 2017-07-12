@@ -31,10 +31,3 @@ class Survey(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('survey-detail', [self.pk])
-
-    def questions(self):
-        """ Return the questions related to a Survey. """
-        questions = []
-        for question in self.related_questions.all():
-            questions.append(question)
-        return questions

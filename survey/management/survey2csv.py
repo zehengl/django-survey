@@ -78,7 +78,7 @@ class Survey2CSV(object):
         :param Survey survey: The survey we're treating. """
         header = [u"user"]  # , u"entity"]
         question_order = [u"user"]  # , u"entity" ]
-        for question in survey.questions():
+        for question in survey.questions.all():
             header.append(unicode(question.text))
             question_order.append(question.pk)
         return header, question_order

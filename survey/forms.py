@@ -40,11 +40,11 @@ class ResponseForm(models.ModelForm):
             self.step = None
         super(ResponseForm, self).__init__(*args, **kwargs)
         self.uuid = uuid.uuid4().hex
-        self.steps_count = len(self.survey.questions())
+        self.steps_count = len(self.survey.questions.all())
         # add a field for each survey question, corresponding to the question
         # type as appropriate.
         data = kwargs.get('data')
-        for i, question in enumerate(self.survey.questions()):
+        for i, question in enumerate(self.survey.questions.all()):
             is_current_step = i != self.step and self.step is not None
             if self.survey.display_by_question and is_current_step:
                 continue

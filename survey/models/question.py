@@ -53,8 +53,8 @@ class Question(models.Model):
     order = models.IntegerField()
     required = models.BooleanField()
     category = models.ForeignKey(Category, blank=True, null=True,
-                                 related_name="related_questions")
-    survey = models.ForeignKey(Survey, related_name="related_questions")
+                                 related_name="questions")
+    survey = models.ForeignKey(Survey, related_name="questions")
     type = models.CharField(max_length=200, choices=QUESTION_TYPES,
                             default=TEXT)
     choices = models.TextField(blank=True, null=True,
