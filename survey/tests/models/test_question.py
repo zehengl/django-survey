@@ -40,8 +40,8 @@ class TestQuestion(BaseModelTest):
         """ We can get a list of answers to this question. """
         question = Question.objects.get(pk=1)
         qat = question.answers_as_text
-        self.assertEqual(len(question.answers.all()), len(qat))
-        expected = [u"[u'Yës', u'Maybe']", u"[u'Yës']"]
+        self.assertEqual(3, len(qat))
+        expected = [u"Yës", u'Maybe', u"Yës"]
         expected.sort()
         qat.sort()
         self.assertEqual(qat, expected)
@@ -50,8 +50,7 @@ class TestQuestion(BaseModelTest):
         """ We can get the cardinality of each answers. """
         question = Question.objects.get(pk=1)
         self.assertEqual(question.answers_cardinality,
-                         {u"[u'Yës', u'Maybe']": 1,
-                          u"[u'Yës']": 1})
+                         {u"Maybe": 1, u"Yës": 2})
         question = Question.objects.get(pk=2)
         self.assertEqual({u'': 2},
                          question.answers_cardinality)

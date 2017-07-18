@@ -35,6 +35,24 @@ class Answer(models.Model):
             self.check_answer_body(question, body)
         super(Answer, self).__init__(*args, **kwargs)
 
+    @property
+    def values(self):
+        if len(self.body) < 3 or self.body[0:3] != "[u'":
+            return [self.body]
+        #  We do not use eval for security reason but it could work with :
+        #  eval(self.body)
+        #  It would permit to inject code into answer though.
+        values = []
+        raw_values = self.body.split("', u'")
+        nb_values = len(raw_values)
+        for i, value in enumerate(raw_values):
+            if i == 0:
+                value = value[3:]
+            if i + 1 == nb_values:
+                value = value[:-2]
+            values.append(value)
+        return values
+
     def check_answer_body(self, question, body):
         if question.type in [Question.RADIO, Question.SELECT,
                              Question.SELECT_MULTIPLE]:
@@ -54,6 +72,6 @@ class Answer(models.Model):
                     raise ValidationError(msg)
 
     def __unicode__(self):
-        return u"{} to question '{}' : '{}'".format(
+        return u"{} to '{}' : '{}'".format(
             self.__class__.__name__, self.question, self.body
         )

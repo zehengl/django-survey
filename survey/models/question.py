@@ -90,7 +90,11 @@ class Question(models.Model):
         """ Return answers as a list of text.
 
         :rtype: List """
-        return self.answers_cardinality.keys()
+        answers_as_text = []
+        for answer in self.answers.all():
+            for value in answer.values:
+                answers_as_text.append(value)
+        return answers_as_text
 
     @property
     def answers_cardinality(self):
@@ -99,10 +103,11 @@ class Question(models.Model):
         :rtype: Dict """
         cardinality = {}
         for answer in self.answers.all():
-            try:
-                cardinality[answer.body] += 1
-            except KeyError:
-                cardinality[answer.body] = 1
+            for value in answer.values:
+                try:
+                    cardinality[value] += 1
+                except KeyError:
+                    cardinality[value] = 1
         return cardinality
 
     def get_choices(self):
