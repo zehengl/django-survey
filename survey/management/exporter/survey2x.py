@@ -72,10 +72,7 @@ class Survey2X(object):
         LOGGER.debug("Exporting survey '%s' to %s", self.survey, self._get_X())
         try:
             with open(self.file_name(), "w") as f:
-                file_ = self.survey_to_x()
-                for line in file_:
-                    f.write(line.encode('utf-8'))
-                    f.write(u"\n")
+                f.write(self.survey_to_x().encode('utf-8'))
         except IOError as exc:
             msg = "Must fix {} ".format(self._get_X_dir())
             msg += "in order to generate {} : {}".format(self._get_X(), exc)

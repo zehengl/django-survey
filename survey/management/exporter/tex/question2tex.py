@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import unicodedata
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -44,7 +45,9 @@ class Question2Tex(object):
         pie = u""
         for answer, cardinality in question.answers_cardinality.iteritems():
             if cardinality >= min_cardinality:
-                pie += u"{}/{},".format(cardinality, answer)
+                cans = unicodedata.normalize('NFKD', answer).encode('ascii',
+                                                                    'ignore')
+                pie += u"{}/{},".format(cardinality, cans)
         final_answers = []
         for answer in pie.split(","):
             if answer:
@@ -86,7 +89,7 @@ class Question2Tex(object):
         if not results:
             return _("No answers for this question.")
         return """
-\\begin{figure}
+\\begin{figure}[h!]
     \\begin{tikzpicture}
         \\pie[radius=%d, sum=auto,%s%s text=inside]{
 %s

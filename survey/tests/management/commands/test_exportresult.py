@@ -18,24 +18,18 @@ class TestSurvey2CSV(TestManagement):
         call_command("exportresult")
         csv_name = u'{}.csv'.format(slugify(self.test_managament_survey_name))
         file_ = open(os.path.join(settings.CSV_DIR, csv_name))
-        lines = file_.readlines()
-        for i, line in enumerate(lines):
-            expected_line = self.expected_content[i].encode("utf8") + "\n"
-            self.assertEqual(expected_line, line)
+        self.assertEqual(self.expected_content.encode("utf8"), file_.read())
+        file_.close()
         csv_name = u'{}.csv'.format(slugify('Test survëy'))
         file_ = open(os.path.join(settings.CSV_DIR, csv_name))
-        expected = [
-            u"""user,Lorem ipsum dolor sit amët; <strong> consectetur \
-</strong> adipiscing elit.,Ipsum dolor sit amët; <strong> consectetur \
-</strong> adipiscing elit.,Dolor sit amët; <strong> consectetur</strong> \
-adipiscing elit.,Lorem ipsum dolor sit amët; consectetur<strong> adipiscing \
-</strong> elit.,Ipsum dolor sit amët; consectetur <strong> adipiscing \
-</strong> elit.,Dolor sit amët; consectetur<strong> adipiscing</strong>\
- elit.""",
-            u"pierre,Yës | Maybe,,Text for a response,,1,No | Whatever",
-            u"ps250112,Yës,,,,1,Yës"
-        ]
-        lines = file_.readlines()
-        for i, line in enumerate(lines):
-            expected_line = expected[i].encode("utf8") + "\n"
-            self.assertEqual(expected_line, line)
+        expected = u"""\
+user,Lorem ipsum dolor sit amët; <strong> consectetur </strong> adipiscing \
+elit.,Ipsum dolor sit amët; <strong> consectetur </strong> adipiscing elit.,\
+Dolor sit amët; <strong> consectetur</strong> adipiscing elit.,Lorem ipsum\
+ dolor sit amët; consectetur<strong> adipiscing </strong> elit.,Ipsum dolor \
+sit amët; consectetur <strong> adipiscing </strong> elit.,Dolor sit amët; \
+consectetur<strong> adipiscing</strong> elit.
+pierre,Yës | Maybe,,Text for a response,,1,No | Whatever
+ps250112,Yës,,,,1,Yës
+"""
+        self.assertMultiLineEqual(expected.encode("utf8"), file_.read())

@@ -11,7 +11,7 @@ def raise_io_exc():
     raise IOError()
 
 
-class TestSurvey2CSV(TestManagement):
+class TestSurvey2Csv(TestManagement):
 
     """ Permit to check if export result is working as intended. """
 
