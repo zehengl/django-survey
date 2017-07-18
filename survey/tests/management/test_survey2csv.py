@@ -2,7 +2,7 @@
 
 from mock.mock import patch
 
-from survey.management.exporter.csv.survey2csv import Survey2CSV
+from survey.management.exporter.csv.survey2csv import Survey2Csv
 from survey.tests.management.test_management import TestManagement
 
 
@@ -17,7 +17,7 @@ class TestSurvey2CSV(TestManagement):
 
     def setUp(self):
         TestManagement.setUp(self)
-        self.s2csv = Survey2CSV(self.survey)
+        self.s2csv = Survey2Csv(self.survey)
 
     def test_get_header_and_order(self):
         """ The header and order of the question is correct. """
@@ -29,14 +29,14 @@ class TestSurvey2CSV(TestManagement):
         """ The content of the CSV is correct. """
         self.assertEqual(self.s2csv.survey_to_x(), self.expected_content)
 
-    @patch.object(Survey2CSV, "file_name", raise_io_exc)
+    @patch.object(Survey2Csv, "file_name", raise_io_exc)
     def test_dir_not_exists(self):
         """ We raise an IoError if the directory does not exists. """
         self.assertRaises(IOError, self.s2csv.generate_file)
 
     def test_not_a_survey(self):
         """ TypeError raised when the object is not a survey. """
-        self.assertRaises(TypeError, Survey2CSV, "Not a survey")
+        self.assertRaises(TypeError, Survey2Csv, "Not a survey")
 
     def test_filename(self):
         """ Filename is not an unicode object or os.path and others fail. """

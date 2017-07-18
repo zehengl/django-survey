@@ -7,7 +7,7 @@ from survey.management.exporter.survey2x import Survey2X
 LOGGER = logging.getLogger(__name__)
 
 
-class Survey2CSV(Survey2X):
+class Survey2Csv(Survey2X):
 
     @staticmethod
     def line_list_to_string(line):
@@ -72,8 +72,8 @@ class Survey2CSV(Survey2X):
     def survey_to_x(self):
         csv = []
         header, question_order = self.get_header_and_order()
-        csv.append(Survey2CSV.line_list_to_string(header))
+        csv.append(Survey2Csv.line_list_to_string(header))
         for response in self.survey.responses.all():
-            line = Survey2CSV.get_user_line(question_order, response)
-            csv.append(Survey2CSV.line_list_to_string(line))
+            line = Survey2Csv.get_user_line(question_order, response)
+            csv.append(Survey2Csv.line_list_to_string(line))
         return csv

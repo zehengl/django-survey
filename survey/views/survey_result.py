@@ -4,13 +4,13 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404
 
-from survey.management.exporter.csv.survey2csv import Survey2CSV
+from survey.management.exporter.csv.survey2csv import Survey2Csv
 from survey.models import Survey
 
 
 def serve_unprotected_result_csv(survey):
     """ Return the csv corresponding to a survey. """
-    s2csv = Survey2CSV(survey)
+    s2csv = Survey2Csv(survey)
     if s2csv.need_update():
         s2csv.generate_file()
     with open(s2csv.file_name(), 'r') as csv_file:
