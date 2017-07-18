@@ -23,12 +23,12 @@ class Question2Tex(object):
         :param Dict colors_dict: Color to use (String answer: String color)
         """
         colors = u""
-        for answer, cardinality in question.answers_cardinality:
+        for answer, cardinality in question.answers_cardinality.iteritems():
             if cardinality >= min_cardinality:
                 try:
                     colors += u"{},".format(colors_dict[answer])
                 except KeyError:
-                    raise ValueError("Color for '%s' not provided" % answer)
+                    raise ValueError(u"Color for '%s' not provided" % answer)
         final_colors = []
         for color in colors.split(","):
             if color:
@@ -48,6 +48,8 @@ class Question2Tex(object):
                 cans = unicodedata.normalize('NFKD', answer).encode('ascii',
                                                                     'ignore')
                 pie += u"{}/{},".format(cardinality, cans)
+        if not pie:
+            return u""
         final_answers = []
         for answer in pie.split(","):
             if answer:
@@ -58,15 +60,14 @@ class Question2Tex(object):
     def cloud(cloud, pie):
         """ Return the value expected in pgf-pie option for cloud. """
         if cloud and pie:
-            raise ValueError("force_cloud and force_pie cannot both be true.")
+            raise ValueError("cloud and pie cannot both be true.")
         if cloud:
             return "cloud, "
-        elif pie:
-            return ""
+        return ""
 
     @staticmethod
-    def chart(question, min_cardinality=0, radius=4, colors="", cloud=False,
-              pie=True):
+    def chart(question, min_cardinality=0, radius=4, colors="", cloud=None,
+              pie=None):
         """ Return a pfg-pie pie chart of a question.
 
         You must use pgf-pie for this to works ::
@@ -82,7 +83,7 @@ class Question2Tex(object):
         :param boolean cloud: Is this chart a cloud chart ?
         :param boolean pie: Is this chart a pie chart ? """
         if colors:
-            colors = "color={}" % Question2Tex.get_colors(
+            colors = "color={%s}" % Question2Tex.get_colors(
                 question, min_cardinality, colors
             )
         results = Question2Tex.get_results(question, min_cardinality)
@@ -91,7 +92,7 @@ class Question2Tex(object):
         return """
 \\begin{figure}[h!]
     \\begin{tikzpicture}
-        \\pie[radius=%d, sum=auto,%s%s text=inside]{
+        \\pie[radius=%d, sum=auto,%s%s text=legend]{
 %s
         }
     \\end{tikzpicture}
