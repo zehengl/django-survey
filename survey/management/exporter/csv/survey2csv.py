@@ -1,26 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import os
 
-from django.conf import settings
-from django.utils.text import slugify
-
-from survey.models import Survey
+from survey.management.exporter.survey2x import Survey2X
 
 LOGGER = logging.getLogger(__name__)
 
 
-class Survey2CSV(object):
-
-    @staticmethod
-    def file_name(survey):
-        """ Return the csv file name for a Survey.
-
-        :param Survey survey: The survey we're treating. """
-        file_name = u"{}.csv".format(slugify(survey.name))
-        path = os.path.join(settings.CSV_DIR, file_name)
-        return path.encode("utf8")
+class Survey2CSV(Survey2X):
 
     @staticmethod
     def line_list_to_string(line):
@@ -71,50 +58,22 @@ class Survey2CSV(object):
                 user_line.append(not_an_answer)
         return user_line
 
-    @staticmethod
-    def get_header_and_order(survey):
+    def get_header_and_order(self):
         """ Creating header.
 
         :param Survey survey: The survey we're treating. """
         header = [u"user"]  # , u"entity"]
         question_order = [u"user"]  # , u"entity" ]
-        for question in survey.questions.all():
+        for question in self.survey.questions.all():
             header.append(unicode(question.text))
             question_order.append(question.pk)
         return header, question_order
 
-    @staticmethod
-    def survey_to_csv(survey):
-        """ Export a csv for a survey.
-
-        :param Survey survey: The survey we're treating.  """
-        if not isinstance(survey, Survey):
-            msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
-            raise TypeError(msg)
+    def survey_to_x(self):
         csv = []
-        header, question_order = Survey2CSV.get_header_and_order(survey)
+        header, question_order = self.get_header_and_order()
         csv.append(Survey2CSV.line_list_to_string(header))
-        for response in survey.responses.all():
+        for response in self.survey.responses.all():
             line = Survey2CSV.get_user_line(question_order, response)
             csv.append(Survey2CSV.line_list_to_string(line))
         return csv
-
-    @staticmethod
-    def generate_file(survey):
-        """ Generate a csv file corresponding to a Survey.
-
-        :param Survey survey: The survey we're treating. """
-        if not isinstance(survey, Survey):
-            msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
-            raise TypeError(msg)
-        LOGGER.debug("Treating survey '%s'", survey)
-        try:
-            with open(Survey2CSV.file_name(survey), "w") as f:
-                csv = Survey2CSV.survey_to_csv(survey)
-                for line in csv:
-                    f.write(line.encode('utf-8'))
-                    f.write(u"\n")
-        except IOError as exc:
-            msg = "Must fix {} ".format(settings.CSV_DIR)
-            msg += "in order to generate csv : {}".format(exc)
-            raise IOError(msg)

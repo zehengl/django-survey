@@ -3,6 +3,7 @@
 import logging
 import os
 
+
 DEBUG = True
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CSV_DIR = os.path.join(ROOT, "csv")

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from survey.management.question2tex import Question2Tex
+from survey.management.exporter.tex.question2tex import Question2Tex
 from survey.tests.management.test_management import TestManagement
 
 

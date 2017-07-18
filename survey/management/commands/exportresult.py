@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import logging
-
 from django.core.management.base import BaseCommand
 
-from survey.management.survey2csv import Survey2CSV
+from survey.management.exporter.csv.survey2csv import Survey2CSV
 from survey.models import Survey
-
-LOGGER = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -18,8 +14,12 @@ class Command(BaseCommand):
 
     requires_system_checks = False
 
-    help = u"This command permit to export all survey in the database as csv."
+    help = u"""This command permit to export all survey in the database as csv
+               and tex."""
 
     def handle(self, *args, **options):
         for survey in Survey.objects.all():
-            Survey2CSV.generate_file(survey)
+            exporters = [Survey2CSV(survey)]
+            for exporter in exporters:
+                if exporter.need_update():
+                    exporter.generate_file()

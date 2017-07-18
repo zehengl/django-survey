@@ -14,7 +14,7 @@ class TestSurvey2CSV(TestManagement):
     """ Permit to check if export result is working as intended. """
 
     def test_handle(self):
-        """ The custom command export result create the rigth csv file. """
+        """ The custom command export result create the right csv file. """
         call_command("exportresult")
         csv_name = u'{}.csv'.format(slugify(self.test_managament_survey_name))
         file_ = open(os.path.join(settings.CSV_DIR, csv_name))
