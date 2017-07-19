@@ -52,6 +52,6 @@ class TestManagement(BaseTest):
         self.expected_content = u"""\
 user,Aèbc?,Bècd?,Cède?
 ps250112,1é,2é,3é
-pierre,NAA,NAA,
+pierre,,,
 SlctMltipl,1|1a|1b,2|2a|2b,3|3a|3b"""
         self.expected_header = [u'user', u'Aèbc?', u'Bècd?', u'Cède?']

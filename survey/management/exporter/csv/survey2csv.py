@@ -27,24 +27,19 @@ class Survey2Csv(Survey2X):
     @staticmethod
     def get_user_line(question_order, response):
         """ Creating a line for a user """
-        not_an_answer = u"NAA"
         LOGGER.debug(u"\tTreating answer from %s", response.user)
         user_answers = {}
         user_answers[u"user"] = unicode(response.user)
         # user_answers[u"entity"] = response.user.entity
         for answer in response.answers.all():
-            cell = not_an_answer
-            if len(answer.values) == 1:
-                cell = answer.body
-            else:
-                cell = u""
-                answers = answer.values
-                for i, ans in enumerate(answers):
-                    if i < len(answers) - 1:
-                        # Separate by a pipe if its not the last
-                        cell += ans + u"|"
-                    else:
-                        cell += ans
+            answers = answer.values
+            cell = u""
+            for i, ans in enumerate(answers):
+                if i < len(answers) - 1:
+                    # Separate by a pipe if its not the last
+                    cell += ans + u"|"
+                else:
+                    cell += ans
             LOGGER.debug(u"\t\t%s : %s", answer.question.pk, cell)
             user_answers[answer.question.pk] = cell
         user_line = []
@@ -52,7 +47,7 @@ class Survey2Csv(Survey2X):
             try:
                 user_line.append(user_answers[key_])
             except KeyError:
-                user_line.append(not_an_answer)
+                user_line.append("")
         return user_line
 
     def get_header_and_order(self):

@@ -59,3 +59,6 @@ class TestQuestion(BaseModelTest):
                          question.answers_cardinality)
         question = Question.objects.get(pk=5)
         self.assertEqual({u'1': 2}, question.answers_cardinality)
+        question = Question.objects.get(pk=6)
+        self.assertEqual({u'No': 1, u'Whatever': 1, u'Yës': 1},
+                         question.answers_cardinality)
