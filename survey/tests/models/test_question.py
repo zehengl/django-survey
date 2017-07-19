@@ -8,6 +8,12 @@ from survey.tests.models import BaseModelTest
 
 class TestQuestion(BaseModelTest):
 
+    def setUp(self):
+        BaseModelTest.setUp(self)
+        text = "Lorem ipsum dolor sit amët, <strong> consectetur </strong> \
+adipiscing elit."
+        self.question = Question.objects.get(text=text)
+
     def test_unicode(self):
         """ Unicode generation. """
         self.assertIsNotNone(str(self.questions[0]))
@@ -38,8 +44,7 @@ class TestQuestion(BaseModelTest):
 
     def test_answers_as_text(self):
         """ We can get a list of answers to this question. """
-        question = Question.objects.get(pk=1)
-        qat = question.answers_as_text
+        qat = self.question.answers_as_text
         self.assertEqual(3, len(qat))
         expected = [u"Yës", u'Maybe', u"Yës"]
         expected.sort()
@@ -48,17 +53,20 @@ class TestQuestion(BaseModelTest):
 
     def test_answers_cardinality(self):
         """ We can get the cardinality of each answers. """
-        question = Question.objects.get(pk=1)
-        self.assertEqual(question.answers_cardinality,
+        self.assertEqual(self.question.answers_cardinality,
                          {u"Maybe": 1, u"Yës": 2})
-        question = Question.objects.get(pk=2)
+        question = Question.objects.get(text="Ipsum dolor sit amët, <strong> \
+consectetur </strong>  adipiscing elit.")
         self.assertEqual({u'': 2},
                          question.answers_cardinality)
-        question = Question.objects.get(pk=3)
+        question = Question.objects.get(text="Dolor sit amët, <strong> \
+consectetur</strong>  adipiscing elit.")
         self.assertEqual({u'': 1, u'Text for a response': 1},
                          question.answers_cardinality)
-        question = Question.objects.get(pk=5)
+        question = Question.objects.get(text="Ipsum dolor sit amët, consectetur\
+ <strong> adipiscing </strong> elit.")
         self.assertEqual({u'1': 2}, question.answers_cardinality)
-        question = Question.objects.get(pk=6)
+        question = Question.objects.get(text="Dolor sit amët, consectetur<stron\
+g>  adipiscing</strong>  elit.")
         self.assertEqual({u'No': 1, u'Whatever': 1, u'Yës': 1},
                          question.answers_cardinality)
