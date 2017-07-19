@@ -30,8 +30,10 @@ class TestExportresult(TestManagement):
         second_csv = self.get_csv_path('Test survëy')
         # Force to regenerate the csv, we want to test something not optimize
         # computing time.
-        os.remove(first_csv)
-        os.remove(second_csv)
+        if os.path.exists(first_csv):
+            os.remove(first_csv)
+        if os.path.exists(second_csv):
+            os.remove(second_csv)
         call_command("exportresult")
         self.assertMultiLineEqual(self.expected_content.encode("utf8"),
                                   self.get_file_content(first_csv))
