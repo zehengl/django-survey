@@ -1,13 +1,22 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
+
 import logging
 import os
+from builtins import object, open
 from datetime import datetime
 
 from django.conf import settings
 from django.utils.text import slugify
+from future import standard_library
 
 from survey.models import Survey
+
+standard_library.install_aliases()
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -34,7 +43,7 @@ class Survey2X(object):
         :param Survey survey: The survey we're treating. """
         file_name = u"{}.{}".format(slugify(self.survey.name), self._get_X())
         path = os.path.join(self._get_X_dir(), file_name)
-        return path.encode("utf8")
+        return path
 
     def need_update(self):
         """ Does a file need an update ?
@@ -72,7 +81,7 @@ class Survey2X(object):
         LOGGER.debug("Exporting survey '%s' to %s", self.survey, self._get_X())
         try:
             with open(self.file_name(), "w") as f:
-                f.write(self.survey_to_x().encode('utf-8'))
+                f.write(self.survey_to_x())
         except IOError as exc:
             msg = "Must fix {} ".format(self._get_X_dir())
             msg += "in order to generate {} : {}".format(self._get_X(), exc)

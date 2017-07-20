@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
+
 import logging
-import unicodedata
+from builtins import object
 
 from django.utils.translation import ugettext_lazy as _
+from future import standard_library
+
+standard_library.install_aliases()
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -23,7 +31,7 @@ class Question2Tex(object):
         :param Dict colors_dict: Color to use (String answer: String color)
         """
         colors = u""
-        for answer, cardinality in question.answers_cardinality.iteritems():
+        for answer, cardinality in question.answers_cardinality.items():
             if cardinality >= min_cardinality:
                 try:
                     colors += u"{},".format(colors_dict[answer])
@@ -43,11 +51,11 @@ class Question2Tex(object):
         :param Dict colors_dict: Color to use (String answer: String color)
         """
         pie = u""
-        for answer, cardinality in question.answers_cardinality.iteritems():
+        for answer, cardinality in question.answers_cardinality.items():
             if cardinality >= min_cardinality:
-                cans = unicodedata.normalize('NFKD', answer).encode('ascii',
-                                                                    'ignore')
-                pie += u"{}/{},".format(cardinality, cans)
+                if not answer:
+                    answer = _("Left blank")
+                pie += "{}/{},".format(cardinality, answer)
         if not pie:
             return u""
         final_answers = []
@@ -72,7 +80,7 @@ class Question2Tex(object):
 
         You must use pgf-pie for this to works ::
 
-            \usepackage{pgf-pie}
+            \\usepackage{pgf-pie}
 
         See : http://pgf-pie.googlecode.com/
 

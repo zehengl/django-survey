@@ -4,8 +4,8 @@ from django.conf import settings
 from setuptools import find_packages, setup
 
 import sys
-if sys.version_info > (2, 7):
-    sys.exit('Sorry, Python > 2.7 is not supported')
+if sys.version_info < (2, 6):
+    sys.exit('Sorry, Python < 2.6 is not supported')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
@@ -31,6 +31,7 @@ setup(
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 2.7",
+        "Programming Language  :: Python :: 3",
         "Framework :: Django",
     ],
     install_requires=install_requires,

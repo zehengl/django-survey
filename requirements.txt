@@ -3,4 +3,6 @@ django-bootstrap-form==3.2.1
 django-tastypie==0.14.0 # API
 django-registration==2.2 # account logic, views and workflows
 pytz==2017.2
+future==0.16.0
+ordereddict==1.1
 

@@ -1,12 +1,28 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
+
+from builtins import object, str, super
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from future import standard_library
 
 from .category import Category
 from .survey import Survey
+
+standard_library.install_aliases()
+
+
+
+try:
+    from _collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 
 
 CHOICES_HELP_TEXT = _(u"""The choices field is only used if the question type
@@ -72,14 +88,11 @@ class Question(models.Model):
         super(Question, self).save(*args, **kwargs)
 
     def get_clean_choices(self):
+        """ Return split and stripped list of choices with no null values. """
         if self.choices is None:
             return []
-        try:
-            choices = unicode(self.choices).split(',')
-        except UnicodeDecodeError:
-            choices = unicode(self.choices.decode("utf8")).split(',')
         choices_list = []
-        for choice in choices:
+        for choice in self.choices.split(','):
             choice = choice.strip()
             if choice:
                 choices_list.append(choice)
@@ -101,7 +114,7 @@ class Question(models.Model):
         """ Return a dictionary with answers as key and cardinality as value
 
         :rtype: Dict """
-        cardinality = {}
+        cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
                 try:

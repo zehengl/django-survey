@@ -1,12 +1,20 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
+
 import os
+from builtins import open
 
 from django.conf import settings
 from django.core.management import call_command
 from django.utils.text import slugify
+from future import standard_library
 
 from survey.tests.management.test_management import TestManagement
+
+standard_library.install_aliases()
 
 
 class TestExportresult(TestManagement):
@@ -35,7 +43,7 @@ class TestExportresult(TestManagement):
         if os.path.exists(second_csv):
             os.remove(second_csv)
         call_command("exportresult")
-        self.assertMultiLineEqual(self.expected_content.encode("utf8"),
+        self.assertMultiLineEqual(self.expected_content,
                                   self.get_file_content(first_csv))
         expected = u"""\
 user,Lorem ipsum dolor sit amët; <strong> consectetur </strong> adipiscing \
@@ -46,5 +54,4 @@ sit amët; consectetur <strong> adipiscing </strong> elit.,Dolor sit amët; \
 consectetur<strong> adipiscing</strong> elit.
 pierre,Yës|Maybe,,Text for a response,,1,No|Whatever
 ps250112,Yës,,,,1,Yës"""
-        self.assertMultiLineEqual(expected.encode("utf8"),
-                                  self.get_file_content(second_csv))
+        self.assertMultiLineEqual(expected, self.get_file_content(second_csv))

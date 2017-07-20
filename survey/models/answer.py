@@ -5,14 +5,22 @@
     field sizes depending on the actual question this answer corresponds to any
     "required" attribute will be enforced by the form.
 """
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
 
 import logging
+from builtins import super
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from future import standard_library
 
 from .question import Question
 from .response import Response
+
+standard_library.install_aliases()
+
 
 LOGGER = logging.getLogger(__name__)
 

@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
+
 import logging
 import os
+from builtins import super
 
 from django.conf import settings
-from django.template.defaultfilters import slugify
+from future import standard_library
 
 from survey.management.exporter.survey2x import Survey2X
 from survey.management.exporter.tex.question2tex import Question2Tex
 from survey.management.exporter.tex.survey_report_latex_file import (
     SurveyReportLatexFile
 )
+
+standard_library.install_aliases()
+
 
 LOGGER = logging.getLogger(__name__)
 

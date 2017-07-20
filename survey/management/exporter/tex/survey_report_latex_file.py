@@ -1,9 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
+
+from builtins import super
+
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from future import standard_library
 
 from survey.management.exporter.tex.latex_file import LatexFile
+
+standard_library.install_aliases()
 
 
 class SurveyReportLatexFile(LatexFile):
@@ -11,10 +20,11 @@ class SurveyReportLatexFile(LatexFile):
     """ Permit to handle the content of a LatexFile """
 
     USE = """
-\usepackage{pgf-pie}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\usetikzlibrary{patterns}
+\\usepackage{pgf-pie}
+\\usepackage{pgfplots}
+\\usepackage{pgfplotstable}
+\\usetikzlibrary{patterns}
+\\usepackage[section]{placeins}
 """
 
     def __init__(self):

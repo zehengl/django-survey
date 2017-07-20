@@ -9,6 +9,7 @@ survey_test/static/
 env
 survey_test_bak
 .env/
+.3env/
 .project
 .pydevproject
 .settings/

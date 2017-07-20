@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
+
 import logging
 
+from future import standard_library
+
 from survey.management.exporter.survey2x import Survey2X
+
+standard_library.install_aliases()
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -14,10 +23,6 @@ class Survey2Csv(Survey2X):
         """ Write a line in the CSV. """
         new_line = u""
         for i, cell in enumerate(line):
-            try:
-                cell = unicode(cell)
-            except UnicodeDecodeError:
-                cell = unicode(cell.decode("utf8"))
             cell = u" ".join(cell.split())
             new_line += cell.replace(u",", u";")
             if i != len(line) - 1:
@@ -29,7 +34,7 @@ class Survey2Csv(Survey2X):
         """ Creating a line for a user """
         LOGGER.debug(u"\tTreating answer from %s", response.user)
         user_answers = {}
-        user_answers[u"user"] = unicode(response.user)
+        user_answers[u"user"] = response.user.username
         # user_answers[u"entity"] = response.user.entity
         for answer in response.answers.all():
             answers = answer.values
@@ -57,7 +62,7 @@ class Survey2Csv(Survey2X):
         header = [u"user"]  # , u"entity"]
         question_order = [u"user"]  # , u"entity" ]
         for question in self.survey.questions.all():
-            header.append(unicode(question.text))
+            header.append(question.text)
             question_order.append(question.pk)
         return header, question_order
 
