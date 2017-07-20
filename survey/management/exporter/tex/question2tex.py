@@ -24,6 +24,25 @@ class Question2Tex(object):
     """
 
     @staticmethod
+    def html2latex(html_text):
+        """ Convert some html text to something latex can compile.
+
+        About the implementation : I added only what I used in my own questions
+        here, because html2latex (https://pypi.python.org/pypi/html2latex/) is
+        adding more than 12 Mo to the virtualenv size and 8 dependencies !
+            (Jinja (378kB), Pillow (7.5MB), lxml (3.5MB), pyenchant (60kB),
+             redis (62kB), selenium (2.6MB), ipython (2.8MB) nose (154kB)
+
+        :param String html_text: Some html text. """
+        html_text = html_text.replace("<strong>", "\\textbf{")
+        html_text = html_text.replace("</strong>", "}")
+        html_text = html_text.replace("<code>", "$")
+        html_text = html_text.replace("</code>", "$")
+        html_text = html_text.replace("&lt;", "<")
+        html_text = html_text.replace("&gt;", ">")
+        return html_text
+
+    @staticmethod
     def get_colors(question, min_cardinality, colors_dict):
         """ Return a formated string for a tikz pgf-pie chart.
 
@@ -107,4 +126,4 @@ class Question2Tex(object):
     \\caption{\label{figure:q%d} %s '%s'}
 \\end{figure}
 """ % (radius, Question2Tex.cloud(cloud, pie), colors, results, question.pk,
-       _("Answers to the question"), question.text)
+       _("Answers to the question"), Question2Tex.html2latex(question.text))

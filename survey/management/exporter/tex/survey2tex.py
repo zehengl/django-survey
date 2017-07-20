@@ -40,7 +40,7 @@ class Survey2Tex(Survey2X):
     def treat_question(self, question, survey):
         LOGGER.info("Treating, %s %s", question.pk, question.text)
         chart = Question2Tex().chart(question)
-        section_title = question.text.replace("&", "\&")
+        section_title = Question2Tex.html2latex(question.text)
         return u"""
 \\clearpage{}
 \\section{%s}

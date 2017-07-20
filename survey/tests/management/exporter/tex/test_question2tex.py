@@ -49,3 +49,12 @@ class TestQuestion2Tex(TestManagement):
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIn("No answers for this question.",
                       Question2Tex.chart(question, min_cardinality=2))
+
+    def test_html2latex(self):
+        """ We correctly translate a question to the latex equivalent. """
+        translation = Question2Tex.html2latex("&lt;filetype&gt; ?")
+        self.assertEqual("<filetype> ?", translation)
+        translation = Question2Tex.html2latex("Is <strong>42</strong> true ?")
+        self.assertEqual("Is \\textbf{42} true ?", translation)
+        translation = Question2Tex.html2latex("<code>is(this).sparta</code>?")
+        self.assertEqual("$is(this).sparta$?", translation)
