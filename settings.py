@@ -27,22 +27,19 @@ DATABASES = {
 
 TEX_DIR = u"tex"
 TEX_DOCUMENT_OPTION = None
-TEX_DOCUMENT_CLASS = u"report"
+TEX_DOCUMENT_CLASS = u"article"
 TEX_HEADER = u"""\
 \\title{My title}
 \\author{John Doe\\\\Associate Survey Branch Manager}
 """
-TEX_DATE = None  # Can be left empty, current date will be used
+# Can be left empty, current date will be used
+TEX_DATE = None
 TEX_INTRO = u"""\
     \\maketitle{}
-    \\tableofcontents{}
-    \\chapter*{Introduction}
+    \\section*{Introduction}
         This report has been automatically generated.
 """
-TEX_FOOTER = u"""
-\\clearpage{}
-This is the last page.
-"""
+TEX_FOOTER = u" "
 
 # Survey generation ###########################################################
 

@@ -10,9 +10,11 @@ class LatexFile(object):
 
     """ Permit to handle the content of a LatexFile """
 
-    def __init__(self, document_class, document_option=u"", use=u"",
-                 header=u"", intro=u"", footer=u"", date=datetime.now()):
-        self.text = u""
+    def __init__(self, document_class, document_option="", use="",
+                 header="", intro="", footer="", date=None):
+        self.text = ""
+        if date is None:
+            date = datetime.now().strftime("%B %d, %Y")
         self.document_class = document_class
         self.document_option = document_option
         self.use = use

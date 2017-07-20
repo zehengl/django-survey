@@ -35,7 +35,7 @@ class Survey2Tex(Survey2X):
         section_title = question.text.replace("&", "\&")
         return u"""
 \\clearpage{}
-\\subsection{%s}
+\\section{%s}
 
 \label{sec:%s}
 
@@ -47,10 +47,8 @@ class Survey2Tex(Survey2X):
         """ Generate the pdf. """
         dir_name, file_name = os.path.split(path)
         os.chdir(dir_name)
-        print dir_name
         os.system("pwd")
-        print "pdflatex {}".format(file_name)
-        #os.system("pdflatex {}".format(file_name))
+        os.system("pdflatex {}".format(file_name))
         os.system("pdflatex {}".format(file_name))
         if output is not None:
             os.system("mv {}.pdf {}".format(file_name[:-3], output))
