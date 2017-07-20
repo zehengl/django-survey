@@ -3,6 +3,10 @@ import os
 from django.conf import settings
 from setuptools import find_packages, setup
 
+import sys
+if sys.version_info > (2, 7):
+    sys.exit('Sorry, Python > 2.7 is not supported')
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
 install_requires = []
@@ -12,19 +16,21 @@ for package in open("requirements.txt", "r"):
 setup(
     name="survey",
     version=settings.VERSION,
-    author="Jessy Kate Schingler",
-    author_email="jessy@jessykate.com",
+    author="Pierre SASSOULAS",
+    author_email="pierre.sassoulas@gmail.com",
     license="AGPL",
-    url="https://github.com/jessykate/django-survey",
+    url="https://github.com/Pierre-Sassoulas/django-survey",
     packages=find_packages(exclude=["survey.tests*", ]),
     include_package_data=True,
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
+        "Natural Language :: English",
+        "Topic :: Utilities",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
-        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
         "Framework :: Django",
     ],
     install_requires=install_requires,
