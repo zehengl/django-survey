@@ -5,6 +5,7 @@ from __future__ import (
 )
 
 import logging
+from builtins import str
 
 from future import standard_library
 
@@ -23,7 +24,7 @@ class Survey2Csv(Survey2X):
         """ Write a line in the CSV. """
         new_line = u""
         for i, cell in enumerate(line):
-            cell = u" ".join(cell.split())
+            cell = u" ".join(str(cell).split())
             new_line += cell.replace(u",", u";")
             if i != len(line) - 1:
                 new_line += u","
