@@ -69,7 +69,7 @@ STATICFILES_DIRS = [
     os.path.normpath(os.path.join(ROOT, '..', "survey", "static")),
 ]
 
-VERSION = "0.2.1"
+VERSION = "1.0.0"
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'js*79rk(+s+x9)8co+10$zghe2f)+33jd1l2m#f)vl+pvtj24e'
