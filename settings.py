@@ -28,7 +28,8 @@ DATABASES = {
 TEX_DIR = u"tex"
 TEX_DOCUMENT_OPTION = None
 TEX_DOCUMENT_CLASS = u"article"
-TEX_HEADER = u"""\
+TEX_HEADER = """\
+\\usepackage[utf8]{inputenc}
 \\title{My title}
 \\author{John Doe\\\\Associate Survey Branch Manager}
 """
