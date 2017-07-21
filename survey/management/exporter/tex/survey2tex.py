@@ -8,14 +8,14 @@ import logging
 import os
 from builtins import super
 
+import yaml
 from django.conf import settings
+from django.utils.text import slugify
 from future import standard_library
 
 from survey.management.exporter.survey2x import Survey2X
+from survey.management.exporter.tex.latex_file import LatexFile
 from survey.management.exporter.tex.question2tex import Question2Tex
-from survey.management.exporter.tex.survey_report_latex_file import (
-    SurveyReportLatexFile
-)
 
 standard_library.install_aliases()
 
@@ -26,6 +26,28 @@ LOGGER = logging.getLogger(__name__)
 class Survey2Tex(Survey2X):
 
     ANALYSIS_FUNCTION = []
+
+    def __init__(self, survey, configuration_file=None):
+        Survey2X.__init__(self, survey)
+        if configuration_file is None:
+            configuration_file = settings.TEX_CONFIGURATION_FILE
+        with open(configuration_file, 'r') as f:
+            full_configuration = yaml.load(f)
+        self.conf = full_configuration["generic"]
+        specific = None
+        for key in full_configuration.keys():
+            if slugify(survey.name) == slugify(key):
+                specific = key
+        if specific is not None and full_configuration[specific] is not None:
+            for key in full_configuration[specific].keys():
+                try:
+                    LOGGER.debug("%s (%s) : replacing '%s' by '%s'",
+                                 survey.name, key, self.conf[key],
+                                 full_configuration[specific][key])
+                except KeyError:
+                    LOGGER.debug("%s (%s): setting '%s'", survey.name, key,
+                                 full_configuration[specific][key])
+                self.conf[key] = full_configuration[specific][key]
 
     def _synthesis(self, survey):
         """ Return a String of a synthesis of the report. """
@@ -63,7 +85,7 @@ class Survey2Tex(Survey2X):
         os.chdir(settings.ROOT)
 
     def survey_to_x(self):
-        ltxf = SurveyReportLatexFile()
+        ltxf = LatexFile(**self.conf)
         self._synthesis(self.survey)
         for question in self.survey.questions.all():
             ltxf.text += self.treat_question(question, self.survey)

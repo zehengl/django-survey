@@ -1,0 +1,36 @@
+# This file containt default values for tex configuration
+
+generic:
+    document_class: article
+    document_option: 12pt
+    date:
+    header:
+        \usepackage{pgf-pie}
+        \usepackage{pgfplots}
+        \usepackage{pgfplotstable}
+        \usetikzlibrary{patterns}
+        \usepackage[section]{placeins}
+    intro:
+    footer:
+    categories_type: section
+    question_type: subsection
+
+    categories:
+    questions:
+
+    chart:
+        min_cardinality: 0
+
+    pie:
+        pos:
+        rotate:
+        radius: 4
+        color:
+        explode:
+        sum:
+        auto:
+        after number:
+        scale font:
+        text: legend
+        style:
+        type: pie

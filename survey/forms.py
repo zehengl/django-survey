@@ -21,7 +21,6 @@ from survey.widgets import ImageSelectWidget
 standard_library.install_aliases()
 
 
-
 LOGGER = logging.getLogger(__name__)
 
 

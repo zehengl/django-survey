@@ -5,4 +5,5 @@ django-registration==2.2 # account logic, views and workflows
 pytz==2017.2
 future==0.16.0
 ordereddict==1.1
+PyYAML==3.12
 

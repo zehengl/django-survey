@@ -1,0 +1,48 @@
+generic:
+    document_option: 11pt
+    document_class: article
+    header:
+        \usepackage{pgf-pie}
+        \usepackage{pgfplots}
+        \usepackage{pgfplotstable}
+        \usetikzlibrary{patterns}
+        \usepackage[section]{placeins}
+        \\usepackage[utf8]{inputenc}
+        \\title{My title}
+        \\author{John Doe\\\\Associate Survey Branch Manager}
+    intro:
+        \\maketitle{}
+        \\section*{Introduction}
+        This report has been automatically generated.
+    footer:
+        This is the footer.
+
+short-survey:
+    footer:
+        Short survey footer.
+
+Test Management Survëy:
+    footer:
+        Test management survey footer.
+
+Test Survey:
+    # (The real name is "Test survëy")
+    document_class: report
+
+    chart:
+        group_together:
+            Agree:
+                Yes, Yës, Whatever
+            Disagree:
+                Maybe, No
+
+    categories:
+        lorem:
+            pie:
+                type: cloud
+
+    questions:
+        Ipsum dolor sit amët, consectetur adipiscing elit.:
+            pie:
+                type: cloud
+                text: inside

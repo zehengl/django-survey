@@ -23,26 +23,7 @@ DATABASES = {
     }
 }
 
-# Survey generation ###########################################################
-
-TEX_DIR = u"tex"
-TEX_DOCUMENT_OPTION = None
-TEX_DOCUMENT_CLASS = u"article"
-TEX_HEADER = """\
-\\usepackage[utf8]{inputenc}
-\\title{My title}
-\\author{John Doe\\\\Associate Survey Branch Manager}
-"""
-# Can be left empty, current date will be used
-TEX_DATE = None
-TEX_INTRO = u"""\
-    \\maketitle{}
-    \\section*{Introduction}
-        This report has been automatically generated.
-"""
-TEX_FOOTER = u" "
-
-# Survey generation ###########################################################
+TEX_CONFIGURATION_FILE = os.path.join(ROOT, "example_conf.yaml")
 
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
