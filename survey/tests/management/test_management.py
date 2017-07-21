@@ -19,7 +19,7 @@ class TestManagement(BaseTest):
 
     def setUp(self):
         BaseTest.setUp(self)
-        self.test_managament_survey_name = u"TestManagementSurvëy"
+        self.test_managament_survey_name = u"Test Management Survëy"
         self.survey = Survey.objects.create(
             name=self.test_managament_survey_name, is_published=True,
             need_logged_user=True, display_by_question=True,

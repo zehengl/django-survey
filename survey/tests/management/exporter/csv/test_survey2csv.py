@@ -48,4 +48,4 @@ class TestSurvey2Csv(TestManagement):
     def test_filename(self):
         """ Filename is not an unicode object or os.path and others fail. """
         name = self.s2csv.file_name()
-        self.assertIn("csv/testmanagementsurvey.csv", name)
+        self.assertIn("csv/test-management-survey.csv", name)
