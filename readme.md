@@ -24,6 +24,13 @@ You will have to change the settings in order to suit your need.
 
 ## Getting started as a contributor
 
+You may want to use a virtualenv for python 2.7 or 3+ :
+
+	python3.5 -m venv .3env/
+	# Resp. for python 2.7 : virtualenv .env
+	source .3env/bin/activate
+	# Resp. for python 2.7 : source .env/bin/activate
+
 In order to get started, install the dev requirements, create the database,
 create a superuser, load the test dump, then launch the server :
 
@@ -32,6 +39,7 @@ create a superuser, load the test dump, then launch the server :
 	python manage.py createsuperuser
 	python manage.py loaddata survey/tests/testdump.json
 	python manage.py runserver
+
 
 ### Test :
 
