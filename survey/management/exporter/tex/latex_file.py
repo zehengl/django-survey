@@ -4,10 +4,13 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
+import logging
 from builtins import open
 from datetime import datetime
 
 from future import standard_library
+
+LOGGER = logging.getLogger(__name__)
 
 standard_library.install_aliases()
 
@@ -16,18 +19,28 @@ class LatexFile(object):
 
     """ Permit to handle the content of a LatexFile """
 
-    def __init__(self, document_class, document_option="", use="",
-                 header="", intro="", footer="", date=None):
+    def __init__(self, document_class, document_option=None, header=None,
+                 intro=None,                 footer=None, date=None, **kwargs):
+        LOGGER.debug(
+            "Creating a document skeleton with document_class=%s, \
+document_option=%s, header=%s, intro=%s, footer=%s, date=%s",
+            document_class, document_option, header, intro, footer, date
+        )
+        self.document_class = document_class
         self.text = ""
+        self.document_option = self.set_value(document_option)
+        self._header = self.set_value(header)
+        self.intro = self.set_value(intro)
+        self._footer = self.set_value(footer)
         if date is None:
             date = datetime.now().strftime("%B %d, %Y")
-        self.document_class = document_class
-        self.document_option = document_option
-        self.use = use
-        self._header = header
-        self.intro = intro
-        self._footer = footer
         self.date = date
+
+    def set_value(self, value):
+        """ Return the value we need for null text. """
+        if value is None:
+            return ""
+        return value
 
     @property
     def header(self):
@@ -39,7 +52,6 @@ class LatexFile(object):
             header += u"[{}]".format(self.document_option)
         header += u"{%s}\n" % self.document_class
         header += u"\date{%s}\n" % self.date
-        header += u"%s\n" % self.use
         header += u"%s\n" % self._header
         header += u"\\begin{document}\n"
         header += u"%s\n" % self.intro
@@ -50,7 +62,9 @@ class LatexFile(object):
         """ Return the footer of a .tex file.
 
         :rtype: String """
-        end = "\n\\end{document}\n"
+        end = """
+\\end{document}
+"""
         if self._footer:
             return self._footer + end
         else:

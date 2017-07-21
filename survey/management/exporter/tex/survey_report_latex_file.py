@@ -39,7 +39,8 @@ class SurveyReportLatexFile(LatexFile):
         date = self.__get_optional_setting("TEX_DATE")
         footer = self.__get_optional_setting("TEX_FOOTER")
         super(SurveyReportLatexFile, self).__init__(
-            document_class, document_option, SurveyReportLatexFile.USE, header,
+            document_class, document_option,
+            "{}{}".format(SurveyReportLatexFile.USE, header),
             intro, footer, date
         )
 
