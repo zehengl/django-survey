@@ -79,7 +79,7 @@ class Answer(models.Model):
                     msg += " should be in {} ".format(choices)
                     raise ValidationError(msg)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{} to '{}' : '{}'".format(
             self.__class__.__name__, self.question, self.body
         )

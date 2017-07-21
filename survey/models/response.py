@@ -34,7 +34,7 @@ class Response(models.Model):
         verbose_name = _('response')
         verbose_name_plural = _('responses')
 
-    def __unicode__(self):
+    def __str__(self):
         msg = u"Response to {} by {}".format(self.survey, self.user)
         msg += u" on {}".format(self.created)
         return msg

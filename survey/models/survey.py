@@ -26,7 +26,7 @@ class Survey(models.Model):
         verbose_name = _('survey')
         verbose_name_plural = _('surveys')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def latest_answer_date(self):

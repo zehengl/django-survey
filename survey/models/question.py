@@ -134,7 +134,7 @@ class Question(models.Model):
         choices_tuple = tuple(choices_list)
         return choices_tuple
 
-    def __unicode__(self):
+    def __str__(self):
         msg = u"Question '{}' ".format(self.text)
         if self.required:
             msg += u"(*) "
