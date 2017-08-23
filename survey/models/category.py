@@ -19,7 +19,7 @@ standard_library.install_aliases()
 class Category(models.Model):
 
     name = models.CharField(max_length=400)
-    survey = models.ForeignKey(Survey)
+    survey = models.ForeignKey(Survey, related_name="categories")
     order = models.IntegerField(blank=True, null=True)
     description = models.CharField(max_length=2000, blank=True, null=True)
 
