@@ -62,20 +62,28 @@ adipiscing elit."
 
     def test_answers_cardinality(self):
         """ We can get the cardinality of each answers. """
-        self.assertEqual(self.question.answers_cardinality,
+        self.assertEqual(self.question.answers_cardinality(),
                          {u"Maybe": 1, u"Yës": 2})
+        self.assertEqual(self.question.answers_cardinality(min_cardinality=2),
+                         {"Other": 1, u"Yës": 2})
         question = Question.objects.get(text="Ipsum dolor sit amët, <strong> \
 consectetur </strong>  adipiscing elit.")
-        self.assertEqual({u'': 2},
-                         question.answers_cardinality)
+        self.assertEqual({u'No': 1, "Yës": 1},
+                         question.answers_cardinality())
         question = Question.objects.get(text="Dolor sit amët, <strong> \
 consectetur</strong>  adipiscing elit.")
         self.assertEqual({u'': 1, u'Text for a response': 1},
-                         question.answers_cardinality)
+                         question.answers_cardinality())
         question = Question.objects.get(text="Ipsum dolor sit amët, consectetur\
  <strong> adipiscing </strong> elit.")
-        self.assertEqual({u'1': 2}, question.answers_cardinality)
+        self.assertEqual({u'1': 1, "2": 1}, question.answers_cardinality())
         question = Question.objects.get(text="Dolor sit amët, consectetur<stron\
 g>  adipiscing</strong>  elit.")
         self.assertEqual({u'No': 1, u'Whatever': 1, u'Yës': 1},
-                         question.answers_cardinality)
+                         question.answers_cardinality())
+        self.assertEqual(
+            {u'Näh': 2, u'Yës': 1},
+            question.answers_cardinality(
+                group_together={"Näh": "No, Whatever"}
+            )
+        )

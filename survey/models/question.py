@@ -4,7 +4,7 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-from builtins import object, str, super
+from builtins import object, super
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -16,8 +16,6 @@ from .category import Category
 from .survey import Survey
 
 standard_library.install_aliases()
-
-
 
 try:
     from _collections import OrderedDict
@@ -109,18 +107,34 @@ class Question(models.Model):
                 answers_as_text.append(value)
         return answers_as_text
 
-    @property
-    def answers_cardinality(self):
+    def _cardinality_plus_n(self, cardinality, value, n):
+        try:
+            cardinality[value] += n
+        except KeyError:
+            cardinality[value] = n
+
+    def answers_cardinality(self, min_cardinality=None, group_together=None):
         """ Return a dictionary with answers as key and cardinality as value
 
         :rtype: Dict """
+        if min_cardinality is None:
+            min_cardinality = 0
+        if group_together is None:
+            group_together = {}
         cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
-                try:
-                    cardinality[value] += 1
-                except KeyError:
-                    cardinality[value] = 1
+                for key, values in group_together.items():
+                    # User can use a,b,c or a, b, c in configuration
+                    if value in values.split(",") + values.split(", "):
+                        value = key
+                self._cardinality_plus_n(cardinality, value, 1)
+        if min_cardinality is not None:
+            for value in cardinality:
+                if cardinality[value] < min_cardinality:
+                    self._cardinality_plus_n(cardinality, "Other",
+                                             cardinality[value])
+                    del cardinality[value]
         return cardinality
 
     def get_choices(self):
