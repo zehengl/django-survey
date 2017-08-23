@@ -33,8 +33,16 @@ class Configuration(object):
             self._conf = {}
 
     def __str__(self, *args, **kwargs):
-        return yaml.dump(self._conf, default_flow_style=False,
-                         allow_unicode=True)
+        # Default flow style prevent
+        # b:
+        #   c: 3
+        #   d: 4
+        # To become the ugly :
+        # b: {c: 3, d: 4}
+        return yaml.safe_dump(
+            self._conf, default_flow_style=False, encoding=None,
+            allow_unicode=True
+        )
 
     @property
     def valid_survey_names(self):
