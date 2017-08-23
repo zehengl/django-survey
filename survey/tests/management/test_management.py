@@ -4,6 +4,9 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
+import os
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from future import standard_library
 
@@ -16,6 +19,17 @@ standard_library.install_aliases()
 class TestManagement(BaseTest):
 
     """ Permit to check if export result is working as intended. """
+
+    def create_answers(self, username, a1, a2, a3):
+        self.other_response = Response.objects.create(
+            survey=self.survey, user=User.objects.create(username=username)
+        )
+        Answer.objects.create(response=self.other_response, question=self.qst1,
+                              body=a1)
+        Answer.objects.create(response=self.other_response, question=self.qst2,
+                              body=a2)
+        Answer.objects.create(response=self.other_response, question=self.qst3,
+                              body=a3)
 
     def setUp(self):
         BaseTest.setUp(self)
@@ -30,6 +44,8 @@ class TestManagement(BaseTest):
                                             required=False, survey=self.survey)
         self.qst3 = Question.objects.create(text="Cède?", order=3,
                                             required=True, survey=self.survey)
+        self.qst4 = Question.objects.create(text="Dèef?", order=4,
+                                            required=False, survey=self.survey)
         self.response = Response.objects.create(survey=self.survey,
                                                 user=User.objects.all()[0])
         self.ans1 = Answer.objects.create(
@@ -47,18 +63,23 @@ class TestManagement(BaseTest):
         self.empty = Answer.objects.create(
             response=self.response_null, question=self.qst3, body=""
         )
-        self.other_response = Response.objects.create(
-            survey=self.survey, user=User.objects.create(username="SlctMltipl")
+        username = "SlctMltipl"
+        self.create_answers(
+            username, "[u'1', u'1a', u'1b']", "[u'2', u'2a', u'2b']",
+            "[u'3', u'3a', u'3b']"
         )
-        Answer.objects.create(response=self.other_response, question=self.qst1,
-                              body="""[u'1', u'1a', u'1b']""")
-        Answer.objects.create(response=self.other_response, question=self.qst2,
-                              body="""[u'2', u'2a', u'2b']""")
-        Answer.objects.create(response=self.other_response, question=self.qst3,
-                              body="""[u'3', u'3a', u'3b']""")
+        other_username = "SlctSimilar"
+        self.create_answers(
+            other_username, "[u'1e', u'1é', u'1ë']", "[u'2e', u'2é', u'2ë']",
+            "[u'3e', u'3é', u'3ë']"
+        )
         self.expected_content = u"""\
-user,Aèbc?,Bècd?,Cède?
-ps250112,1é,2é,3é
-pierre,,,
-SlctMltipl,1|1a|1b,2|2a|2b,3|3a|3b"""
-        self.expected_header = [u'user', u'Aèbc?', u'Bècd?', u'Cède?']
+user,Aèbc?,Bècd?,Cède?,Dèef?
+ps250112,1é,2é,3é,
+pierre,,,,
+{},1|1a|1b,2|2a|2b,3|3a|3b,
+{},1e|1é|1ë,2e|2é|2ë,3e|3é|3ë,""".format(username, other_username)
+        self.expected_header = ['user', 'Aèbc?', 'Bècd?', 'Cède?', 'Dèef?']
+        self.conf_dir = os.path.join(settings.ROOT, "survey", "tests",
+                                     "management", "exporter", "tex")
+        self.test_conf_path = os.path.join(self.conf_dir, "test_conf.yaml")

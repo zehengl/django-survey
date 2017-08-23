@@ -23,16 +23,20 @@ class TestQuestion2Tex(TestManagement):
         """ The header and order of the question is correct. """
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIsNotNone(Question2Tex.chart(question))
-        colors = OrderedDict()
-        colors["1b"] = "green!80"
-        colors["1a"] = "cyan!50"
-        colors["1é"] = "red!80"
+        color = OrderedDict()
+        group_together = {'1é': '1e, 1é, 1ë', '2é': '2e, 2é, 2ë',
+                          '3é': '3e, 3é, 3ë', }
+        color["1b"] = "green!80"
+        color["1a"] = "cyan!50"
+        color["1é"] = "red!80"
         self.assertRaises(ValueError, Question2Tex.chart, question,
-                          colors=colors)
-        colors["1"] = "yellow!70"
-        chart = Question2Tex.chart(question, colors=colors)
-        self.assertIn("{red!80, yellow!70, cyan!50, green!80}", chart)
-        self.assertIn("""1/1é,
+                          color=color, group_together=group_together)
+        color["1"] = "yellow!70"
+        chart = Question2Tex.chart(question, color=color,
+                                   group_together=group_together)
+        expected_colors = "{red!80, yellow!70, cyan!50, green!80}"
+        self.assertIn(expected_colors, chart)
+        self.assertIn("""4/1é,
             1/1,
             1/1a,
             1/1b""", chart)
@@ -40,15 +44,13 @@ class TestQuestion2Tex(TestManagement):
     def test_cloud_chart(self):
         """ We can create a cloud chart. """
         question = self.survey.questions.get(text="Aèbc?")
-        self.assertIsNotNone(Question2Tex.chart(question, cloud=True))
-        self.assertRaises(ValueError, Question2Tex.chart, question, cloud=True,
-                          pie=True)
+        self.assertIsNotNone(Question2Tex.chart(question, type="cloud"))
 
     def test_no_results(self):
         """ We manage having no result at all. """
-        question = self.survey.questions.get(text="Aèbc?")
+        question = self.survey.questions.get(text="Dèef?")
         self.assertIn("No answers for this question.",
-                      Question2Tex.chart(question, min_cardinality=2))
+                      Question2Tex.chart(question))
 
     def test_html2latex(self):
         """ We correctly translate a question to the latex equivalent. """

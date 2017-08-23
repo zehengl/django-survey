@@ -1,0 +1,100 @@
+generic:
+    document_option: 11pt
+    document_class: article
+    header:
+        \usepackage{pgf-pie}
+        \usepackage{pgfplots}
+        \usepackage{pgfplotstable}
+        \usetikzlibrary{patterns}
+        \usepackage[section]{placeins}
+        \usetikzlibrary{arrows,shadows}
+        \usepackage[utf8]{inputenc}
+        \title{My title}
+        \author{John Doe\\\\Associate Survey Branch Manager}
+    intro:
+        \maketitle{}
+        \section*{Introduction}
+        This report has been automatically generated.
+    footer:
+        This is the footer.
+
+Short Survëy:
+    footer:
+        Short survey footer.
+
+Test Management Survëy:
+    footer:
+        Test management footer.
+
+    chart:
+        group_together:
+            1é:
+                1e, 1é, 1ë
+            2é:
+                2e, 2é, 2ë
+            3é:
+                3e, 3é, 3ë
+
+    pie:
+        color:
+            "": "white!100"
+
+            "1b": "green!80"
+            "1a": "cyan!50"
+            "1é": "red!80"
+            "1": "yellow!70"
+
+            "2b": "green!80"
+            "2a": "cyan!50"
+            "2é": "red!80"
+            "2": "yellow!70"
+
+            "3b": "green!80"
+            "3a": "cyan!50"
+            "3é": "red!80"
+            "3": "yellow!70"
+
+Test survëy:
+    document_class: report
+
+    intro:
+        \maketitle{}
+        \section*{Introduction}
+        This is a report for Test Survëy. It permit to test question specific
+        configurations and various chart and pie options.
+
+    pie:
+        radius: 3
+
+    questions:
+
+        Ipsum dolor sit amët, consectetur <strong> adipiscing </strong> elit.:
+            chart:
+                min_cardinality: 1
+            pie:
+                rotate: 20
+                style: "drop shadow"
+                scale_font: True
+                after_number: "\\%"
+                before_number: "\\$"
+                sum: 3
+        Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.:
+            pie:
+                pos: 8, 0
+                explode: 0.5
+
+        Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.:
+            pie:
+                type: polar
+                text: pin
+
+        Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.:
+            pie:
+                radius: 5
+                type: cloud
+                text: inside
+
+        Dolor sit amët, <strong> consectetur</strong>  adipiscing elit.:
+            pie:
+                type: square
+                color: {"Text for a response": "yellow!70", "": "white!100"}

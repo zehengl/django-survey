@@ -8,9 +8,7 @@ import logging
 import os
 from builtins import super
 
-import yaml
 from django.conf import settings
-from django.utils.text import slugify
 from future import standard_library
 
 from survey.management.exporter.survey2x import Survey2X
@@ -27,27 +25,9 @@ class Survey2Tex(Survey2X):
 
     ANALYSIS_FUNCTION = []
 
-    def __init__(self, survey, configuration_file=None):
+    def __init__(self, survey, configuration=None):
         Survey2X.__init__(self, survey)
-        if configuration_file is None:
-            configuration_file = settings.TEX_CONFIGURATION_FILE
-        with open(configuration_file, 'r') as f:
-            full_configuration = yaml.load(f)
-        self.conf = full_configuration["generic"]
-        specific = None
-        for key in full_configuration.keys():
-            if slugify(survey.name) == slugify(key):
-                specific = key
-        if specific is not None and full_configuration[specific] is not None:
-            for key in full_configuration[specific].keys():
-                try:
-                    LOGGER.debug("%s (%s) : replacing '%s' by '%s'",
-                                 survey.name, key, self.conf[key],
-                                 full_configuration[specific][key])
-                except KeyError:
-                    LOGGER.debug("%s (%s): setting '%s'", survey.name, key,
-                                 full_configuration[specific][key])
-                self.conf[key] = full_configuration[specific][key]
+        self.tconf = configuration
 
     def _synthesis(self, survey):
         """ Return a String of a synthesis of the report. """
@@ -61,7 +41,14 @@ class Survey2Tex(Survey2X):
 
     def treat_question(self, question, survey):
         LOGGER.info("Treating, %s %s", question.pk, question.text)
-        chart = Question2Tex().chart(question)
+        options = {}
+        chart = self.tconf.get("chart", survey_name=self.survey.name,
+                               question_text=question.text)
+        pie = self.tconf.get("pie", survey_name=self.survey.name,
+                             question_text=question.text)
+        options.update(chart)
+        options.update(pie)
+        chart = Question2Tex().chart(question, **options)
         section_title = Question2Tex.html2latex(question.text)
         return u"""
 \\clearpage{}
@@ -85,7 +72,11 @@ class Survey2Tex(Survey2X):
         os.chdir(settings.ROOT)
 
     def survey_to_x(self):
-        ltxf = LatexFile(**self.conf)
+        document_class = self.tconf.get("document_class",
+                                        survey_name=self.survey.name)
+        kwargs = self.tconf.get(survey_name=self.survey.name)
+        del kwargs["document_class"]
+        ltxf = LatexFile(document_class, **kwargs)
         self._synthesis(self.survey)
         for question in self.survey.questions.all():
             ltxf.text += self.treat_question(question, self.survey)

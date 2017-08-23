@@ -42,7 +42,8 @@ class TestExportresult(TestManagement):
             os.remove(first_csv)
         if os.path.exists(second_csv):
             os.remove(second_csv)
-        call_command("exportresult")
+        call_command("exportresult", self.test_conf_path, "--tex", "--csv",
+                     "-f")
         self.assertMultiLineEqual(self.expected_content,
                                   self.get_file_content(first_csv))
         expected = u"""\
@@ -52,6 +53,6 @@ Dolor sit amët; <strong> consectetur</strong> adipiscing elit.,Lorem ipsum\
  dolor sit amët; consectetur<strong> adipiscing </strong> elit.,Ipsum dolor \
 sit amët; consectetur <strong> adipiscing </strong> elit.,Dolor sit amët; \
 consectetur<strong> adipiscing</strong> elit.
-pierre,Yës|Maybe,,Text for a response,,1,No|Whatever
-ps250112,Yës,,,,1,Yës"""
+pierre,Yës|Maybe,No,Text for a response,,2,No|Whatever
+ps250112,Yës,Yës,,,1,Yës"""
         self.assertMultiLineEqual(expected, self.get_file_content(second_csv))

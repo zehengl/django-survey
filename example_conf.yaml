@@ -13,10 +13,6 @@ generic: # Apply to every survey unless overriden
     categories_type: section
     question_type: subsection
 
-    categories:
-        Multiple survey category:
-            pie:
-                rotate: 30
     questions:
         Do you understand this is the full text of a question asked in multiple surveys ?:
             pie:
@@ -69,11 +65,6 @@ generic: # Apply to every survey unless overriden
 Fake exemple-survey: # ...defined by something that permit to get the slug (The real name might be "Fake exemple survëy")
 
     document_class: report # Override what is in generic
-
-    categories:
-        Example category:
-            pie: # All pie in this category will be of type cloud
-                type: cloud
 
     questions:
         Do you understand this is the full text of an example survey's question ?:

@@ -130,11 +130,13 @@ class Question(models.Model):
                         value = key
                 self._cardinality_plus_n(cardinality, value, 1)
         if min_cardinality is not None:
+            temp = {}
             for value in cardinality:
                 if cardinality[value] < min_cardinality:
-                    self._cardinality_plus_n(cardinality, "Other",
-                                             cardinality[value])
-                    del cardinality[value]
+                    self._cardinality_plus_n(temp, "Other", cardinality[value])
+                else:
+                    temp[value] = cardinality[value]
+            cardinality = temp
         return cardinality
 
     def get_choices(self):

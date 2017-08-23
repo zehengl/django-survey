@@ -30,7 +30,7 @@ class TestSurvey2Csv(TestManagement):
         """ The header and order of the question is correct. """
         header, order = self.s2csv.get_header_and_order()
         self.assertEqual(header, self.expected_header)
-        self.assertEqual(len(order), 4)
+        self.assertEqual(len(order), len(self.expected_header))
 
     def test_get_survey_as_csv(self):
         """ The content of the CSV is correct. """

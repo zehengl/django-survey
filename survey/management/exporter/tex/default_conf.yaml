@@ -20,6 +20,7 @@ generic:
 
     chart:
         min_cardinality: 0
+        group_together:
 
     pie:
         pos:
@@ -27,10 +28,10 @@ generic:
         radius: 4
         color:
         explode:
-        sum:
-        auto:
-        after number:
-        scale font:
+        sum: auto
+        after_number:
+        before_number:
+        scale_font:
         text: legend
         style:
         type: pie
