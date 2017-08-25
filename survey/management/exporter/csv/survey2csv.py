@@ -7,6 +7,7 @@ from __future__ import (
 import logging
 from builtins import str
 
+from django.utils.translation import ugettext_lazy as _
 from future import standard_library
 
 from survey.management.exporter.survey2x import Survey2X
@@ -35,7 +36,11 @@ class Survey2Csv(Survey2X):
         """ Creating a line for a user """
         LOGGER.debug(u"\tTreating answer from %s", response.user)
         user_answers = {}
-        user_answers[u"user"] = response.user.username
+        try:
+            user_answers[u"user"] = response.user.username
+        except AttributeError:
+            # 'NoneType' object has no attribute 'username'
+            user_answers[u"user"] = _("Anonymous")
         # user_answers[u"entity"] = response.user.entity
         for answer in response.answers.all():
             answers = answer.values
