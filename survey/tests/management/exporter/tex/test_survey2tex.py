@@ -21,6 +21,7 @@ class TestSurvey2Tex(TestManagement):
 
     def setUp(self):
         TestManagement.setUp(self)
+        self.create_big_ranking_survey()
         conf = Configuration(os.path.join(self.conf_dir, "test_conf.yaml"))
         self.generic = Survey2Tex(self.survey, conf)
         self.test_survey = Survey.objects.get(name="Test survëy")

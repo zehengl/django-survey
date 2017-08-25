@@ -31,8 +31,7 @@ class TestManagement(BaseTest):
         Answer.objects.create(response=self.other_response, question=self.qst3,
                               body=a3)
 
-    def setUp(self):
-        BaseTest.setUp(self)
+    def create_survey(self):
         self.test_managament_survey_name = u"Test Management Survëy"
         self.survey = Survey.objects.create(
             name=self.test_managament_survey_name, is_published=True,
@@ -63,22 +62,52 @@ class TestManagement(BaseTest):
         self.empty = Answer.objects.create(
             response=self.response_null, question=self.qst3, body=""
         )
-        username = "SlctMltipl"
+        self.username = "SlctMltipl"
         self.create_answers(
-            username, "[u'1', u'1a', u'1b']", "[u'2', u'2a', u'2b']",
+            self.username, "[u'1', u'1a', u'1b']", "[u'2', u'2a', u'2b']",
             "[u'3', u'3a', u'3b']"
         )
-        other_username = "SlctSimilar"
+        self.other_username = "SlctSimilar"
         self.create_answers(
-            other_username, "[u'1e', u'1é', u'1ë']", "[u'2e', u'2é', u'2ë']",
-            "[u'3e', u'3é', u'3ë']"
+            self.other_username, "[u'1e', u'1é', u'1ë']",
+            "[u'2e', u'2é', u'2ë']", "[u'3e', u'3é', u'3ë']"
         )
+
+    def create_big_ranking_survey(self):
+        """ Load a big survey with Anonymous user rating question from 1 to
+        5 à la Amazon review."""
+        ranking_survey_name = "Big ranking survey"
+        number_of_question = 10
+        number_of_participant = 100
+        ranking_survey = Survey.objects.create(
+           name=ranking_survey_name, is_published=True,
+           need_logged_user=False, display_by_question=True,
+        )
+        questions = []
+        question_choices = ["1, 2,3,4,5"]
+        for i in range(number_of_question):
+            question = Question.objects.create(
+                text="How much do you like question {} ?".format(i + 1),
+                order=i, required=True, survey=ranking_survey,
+                choices=question_choices
+            )
+            questions.append(question)
+        for j in range(number_of_participant):
+            response = Response.objects.create(survey=ranking_survey)
+            for i, question in enumerate(questions):
+                answer = j % (i + 1) % 5 + 1
+                Answer.objects.create(response=response, question=question,
+                                      body=answer)
+
+    def setUp(self):
+        BaseTest.setUp(self)
+        self.create_survey()
         self.expected_content = u"""\
 user,Aèbc?,Bècd?,Cède?,Dèef?
 ps250112,1é,2é,3é,
 pierre,,,,
 {},1|1a|1b,2|2a|2b,3|3a|3b,
-{},1e|1é|1ë,2e|2é|2ë,3e|3é|3ë,""".format(username, other_username)
+{},1e|1é|1ë,2e|2é|2ë,3e|3é|3ë,""".format(self.username, self.other_username)
         self.expected_header = ['user', 'Aèbc?', 'Bècd?', 'Cède?', 'Dèef?']
         self.conf_dir = os.path.join(settings.ROOT, "survey", "tests",
                                      "management", "exporter", "tex")

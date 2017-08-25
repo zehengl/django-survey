@@ -24,6 +24,7 @@ class TestSurvey2Csv(TestManagement):
 
     def setUp(self):
         TestManagement.setUp(self)
+        self.maxDiff = None
         self.s2csv = Survey2Csv(self.survey)
 
     def test_get_header_and_order(self):
