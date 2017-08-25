@@ -26,7 +26,7 @@ class TestConfigurationBuilder(TestManagement):
         self.assertIsInstance(one_survey_conf[self.survey.name], dict)
         for name in all_survey_names:
             if name != self.survey.name:
-                self.assertRaises(KeyError, one_survey_conf.__getitem__, name)
+                self.assertRaises(ValueError, one_survey_conf.get, name)
         all_survey_conf = ConfigurationBuilder()
         for name in all_survey_names:
             self.assertIsInstance(all_survey_conf[name], dict)

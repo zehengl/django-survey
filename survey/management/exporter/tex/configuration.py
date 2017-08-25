@@ -131,7 +131,7 @@ class Configuration(object):
             self.check_survey_exists(survey_name)
             if type(survey_name) is Survey:
                 survey_name = survey_name.name
-            self.recursive_update(conf, self._conf[survey_name])
+            self.recursive_update(conf, self._conf.get(survey_name, {}))
         if conf.get("questions"):
             for question in conf.get("questions"):
                 qdc = self.get_default_question_conf(conf)
