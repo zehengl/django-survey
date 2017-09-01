@@ -7,6 +7,7 @@ from __future__ import (
 import logging
 from builtins import object
 
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from future import standard_library
 
@@ -48,7 +49,7 @@ class Question2Tex(object):
 
         The ordering is reversed for same cardinality value so we have aa
         before zz. """
-        return sorted(cardinality.items(), key=lambda x: (-x[1], x[0]))
+        return sorted(cardinality.items())
 
     @staticmethod
     def get_colors(cardinality, colors_dict):
@@ -61,19 +62,27 @@ class Question2Tex(object):
         :param Question question: The question..
         :param Dict colors_dict: Color to use (String answer: String color)
         """
-        colors = u""
+        colors = []
         for answer in Question2Tex._sorted_cardinality(cardinality):
+            answer = Question2Tex.get_clean_answer(answer[0])
             try:
-                colors += u"{},".format(colors_dict[answer[0]])
+                colors.append(colors_dict[answer])
             except (KeyError, ValueError):
-                msg = u"Color for '%s' not provided. You could " % answer[0]
-                msg += "add '%s: \"red!50\"', in your dictionary." % answer[0]
-                raise ValueError(msg)
-        final_colors = []
-        for color in colors.split(","):
-            if color:
-                final_colors.append(color)
-        return u", ".join(final_colors)
+                msg = u"Color for '%s' not provided. You could " % answer
+                msg += "add '%s: \"red!50\"', in your color config." % answer
+                LOGGER.warning(msg)
+                colors.append(settings.SURVEY_DEFAULT_PIE_COLOR)
+        return "{%s}" % ", ".join(colors)
+
+    @staticmethod
+    def get_clean_answer(answer):
+        if not answer or answer == "[]":
+            answer = _("Left blank")
+        else:
+            replace_list = [",", "\n", "\r", "/", " "]
+            for char in replace_list:
+                answer = answer.replace(char, " ")
+        return answer
 
     @staticmethod
     def get_results(cardinality):
@@ -84,9 +93,11 @@ class Question2Tex(object):
         """
         pie = u""
         for ans, c in Question2Tex._sorted_cardinality(cardinality):
-            if not ans:
+            if not ans or ans == "[]":
+                # [] is Multiselect answer with no answer
                 ans = _("Left blank")
-            pie += "{}/{},".format(c, ans)
+            answer = Question2Tex.get_clean_answer(ans)
+            pie += "{}/{},".format(c, answer)
         if not pie:
             return u""
         final_answers = []
@@ -136,11 +147,10 @@ class Question2Tex(object):
 
     @staticmethod
     def chart(question, min_cardinality=0, group_by_letter_case=None,
-              group_by_slugify=None, group_together=None,
-              pos=None, rotate=None, radius=None, color=None,
-              explode=None, sum=None, after_number=None,
-              before_number=None, scale_font=None, text=None, style=None,
-              type=None):
+              group_by_slugify=None, group_together=None, pos=None, rotate=None,
+              radius=None, color=None, explode=None, sum=None,
+              after_number=None, before_number=None, scale_font=None, text=None,
+              style=None, type=None):
         """ Return a pfg-pie pie chart of a question.
 
         You must use pgf-pie in your latex file for this to works ::
@@ -157,7 +167,7 @@ class Question2Tex(object):
         )
         if color:
             # We must remove color that are not used in the chart.
-            color = "{%s}" % Question2Tex.get_colors(cardinality, color)
+            color = Question2Tex.get_colors(cardinality, color)
         options = Question2Tex.get_pie_options(
             pos, rotate, radius, color, explode, sum, after_number,
             before_number, scale_font, text, style, type

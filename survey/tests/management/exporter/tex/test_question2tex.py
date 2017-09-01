@@ -5,10 +5,12 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
+from django.conf import settings
 from future import standard_library
 
 from survey.management.exporter.tex.question2tex import Question2Tex
 from survey.tests.management.test_management import TestManagement
+
 
 standard_library.install_aliases()
 try:
@@ -24,22 +26,22 @@ class TestQuestion2Tex(TestManagement):
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIsNotNone(Question2Tex.chart(question))
         color = OrderedDict()
-        group_together = {'1é': '1e, 1é, 1ë', '2é': '2e, 2é, 2ë',
-                          '3é': '3e, 3é, 3ë', }
+        groups = {'1é': '1e, 1é, 1ë', '2é': '2e, 2é, 2ë', '3é': '3e, 3é, 3ë', }
         color["1b"] = "green!80"
         color["1a"] = "cyan!50"
         color["1é"] = "red!80"
-        self.assertRaises(ValueError, Question2Tex.chart, question,
-                          color=color, group_together=group_together)
+        chart = Question2Tex.chart(question, color=color, group_together=groups)
+        expected_color = settings.SURVEY_DEFAULT_PIE_COLOR
+        self.assertIn(expected_color, chart)
         color["1"] = "yellow!70"
-        chart = Question2Tex.chart(question, color=color,
-                                   group_together=group_together)
-        expected_colors = "{red!80, yellow!70, cyan!50, green!80}"
-        self.assertIn(expected_colors, chart)
-        self.assertIn("""4/1é,
-            1/1,
+        chart = Question2Tex.chart(question, color=color, group_together=groups)
+        expected_colors = ["red!80", "yellow!70", "cyan!50", "green!80"]
+        for color in expected_colors:
+            self.assertIn(color, chart)
+        self.assertIn("""1/1,
             1/1a,
-            1/1b""", chart)
+            1/1b,
+            4/1é""", chart)
 
     def test_cloud_chart(self):
         """ We can create a cloud chart. """
