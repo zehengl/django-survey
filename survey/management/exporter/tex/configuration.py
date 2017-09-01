@@ -142,9 +142,11 @@ class Configuration(object):
                 try:
                     conf = conf["questions"][question_text]
                     qconf = True
+                    LOGGER.info("Using custom configuration for question '%s'",
+                                question_text)
+
                 except KeyError:
-                    LOGGER.warning("No configuration for question '%s'",
-                                   question_text)
+                    pass
             if not qconf:
                 conf = self.get_default_question_conf(conf)
         if key is None:
