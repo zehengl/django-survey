@@ -21,6 +21,8 @@ generic:
     chart:
         min_cardinality: 0
         group_together:
+        group_by_slugify:
+        group_by_letter_case:
 
     pie:
         pos:

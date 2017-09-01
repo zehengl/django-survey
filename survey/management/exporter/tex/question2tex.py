@@ -135,7 +135,8 @@ class Question2Tex(object):
             return ""
 
     @staticmethod
-    def chart(question, min_cardinality=0, group_together=None,
+    def chart(question, min_cardinality=0, group_by_letter_case=None,
+              group_by_slugify=None, group_together=None,
               pos=None, rotate=None, radius=None, color=None,
               explode=None, sum=None, after_number=None,
               before_number=None, scale_font=None, text=None, style=None,
@@ -150,7 +151,9 @@ class Question2Tex(object):
 
         :param Question question: The question we want to plot """
         cardinality = question.answers_cardinality(
-            min_cardinality=min_cardinality, group_together=group_together
+            min_cardinality=min_cardinality, group_together=group_together,
+            group_by_letter_case=group_by_letter_case,
+            group_by_slugify=group_by_slugify,
         )
         if color:
             # We must remove color that are not used in the chart.

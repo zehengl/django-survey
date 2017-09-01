@@ -113,7 +113,8 @@ class Question(models.Model):
         except KeyError:
             cardinality[value] = n
 
-    def answers_cardinality(self, min_cardinality=None, group_together=None):
+    def answers_cardinality(self, min_cardinality=None, group_together=None,
+                            group_by_letter_case=None, group_by_slugify=None,):
         """ Return a dictionary with answers as key and cardinality as value
 
         :rtype: Dict """
@@ -124,9 +125,18 @@ class Question(models.Model):
         cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
+                if group_by_slugify:
+                    value = slugify(value)
+                if group_by_letter_case:
+                    value = value.lower()
                 for key, values in group_together.items():
                     # User can use a,b,c or a, b, c in configuration
-                    if value in values.split(",") + values.split(", "):
+                    grouped_values = values.split(",") + values.split(", ")
+                    if group_by_slugify:
+                        grouped_values = [slugify(v) for v in grouped_values]
+                    if group_by_letter_case:
+                        grouped_values = [v.lower() for v in grouped_values]
+                    if value in grouped_values:
                         value = key
                 self._cardinality_plus_n(cardinality, value, 1)
         if min_cardinality is not None:

@@ -9,7 +9,7 @@ from builtins import str
 from django.core.exceptions import ValidationError
 from future import standard_library
 
-from survey.models import Question
+from survey.models import Answer, Question, Response, Survey
 from survey.tests.models import BaseModelTest
 
 standard_library.install_aliases()
@@ -87,3 +87,39 @@ g>  adipiscing</strong>  elit.")
                 group_together={"Näh": "No, Whatever"}
             )
         )
+
+    def test_answers_cardinality_grouped(self):
+        """ We can group answers following letter case or slugifying. """
+        self.questions[0].choices = "abé cé, Abë-cè, Abé Cé, dé, Dé, dë"
+        survey = Survey.objects.create(
+            name="Test", is_published=True, need_logged_user=False,
+            display_by_question=False
+        )
+        for choice in self.questions[0].choices.split(", "):
+            Answer.objects.create(
+                question=self.questions[0], body=choice,
+                response=Response.objects.create(survey=survey)
+            )
+        crd = self.questions[0].answers_cardinality()
+        self.assertEqual(crd, {u'abé cé': 1, u'Abé Cé': 1, u'Abë-cè': 1,
+                               u'dé': 1, u'dë': 1, u'Dé': 1, })
+        crd = self.questions[0].answers_cardinality(
+            group_together={
+                "ABC": "abé cé, Abë-cè, Abé Cé",
+                "D": "dé, Dé, dë"
+            }
+        )
+        self.assertEqual(crd, {u'ABC': 3, u'D': 3})
+        crd = self.questions[0].answers_cardinality(group_by_letter_case=True)
+        self.assertEqual(crd, {u'abé cé': 2, u'abë-cè': 1, u'dé': 2, u'dë': 1})
+        crd = self.questions[0].answers_cardinality(group_by_slugify=True)
+        self.assertEqual(crd, {u'abe-ce': 3, u'de': 3})
+        crd = self.questions[0].answers_cardinality(
+            group_by_slugify=True, group_together={"ABCD": "abe-ce, de", }
+        )
+        self.assertEqual(crd, {u'ABCD': 6})
+        crd = self.questions[0].answers_cardinality(
+            group_by_letter_case=True,
+            group_together={"ABCD": "Abë-cè, Abé Cé, Dé, dë", }
+        )
+        self.assertEqual(crd, {u'ABCD': 6})
