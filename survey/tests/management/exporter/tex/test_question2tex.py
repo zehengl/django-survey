@@ -34,14 +34,31 @@ class TestQuestion2Tex(TestManagement):
         expected_color = settings.SURVEY_DEFAULT_PIE_COLOR
         self.assertIn(expected_color, chart)
         color["1"] = "yellow!70"
-        chart = Question2Tex.chart(question, color=color, group_together=groups)
+        chart = Question2Tex.chart(
+            question, color=color, group_together=groups,
+            sort_answer={"1b": 1, "1a": 2, "1": 3, "1é": 4}
+        )
         expected_colors = ["red!80", "yellow!70", "cyan!50", "green!80"]
-        for color in expected_colors:
-            self.assertIn(color, chart)
-        self.assertIn("""1/1,
-            1/1a,
-            1/1b,
-            4/1é""", chart)
+        for expected_color in expected_colors:
+            self.assertIn(expected_color, chart)
+        self.assertIn(
+            "1/1b,\n            1/1a,\n            1/1,\n            4/1é",
+            chart
+        )
+        chart = Question2Tex.chart(question, color=color, group_together=groups,
+                                   sort_answer="cardinal")
+        self.assertIn(
+            "4/1\xe9,\n            1/1,\n            1/1a,\n            1/1b",
+            chart
+        )
+        chart = Question2Tex.chart(
+            question, color=color, group_together=groups,
+            sort_answer="alphanumeric"
+        )
+        self.assertIn(
+            "1/1,\n            1/1a,\n            1/1b,\n            4/1é",
+            chart
+        )
 
     def test_cloud_chart(self):
         """ We can create a cloud chart. """

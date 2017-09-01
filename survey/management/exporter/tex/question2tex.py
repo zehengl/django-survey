@@ -44,15 +44,27 @@ class Question2Tex(object):
         return html_text
 
     @staticmethod
-    def _sorted_cardinality(cardinality):
+    def _sorted_cardinality(cardinality, sort_answer=None):
         """ Mostly to have reliable tests, but marginally nicer too...
 
         The ordering is reversed for same cardinality value so we have aa
         before zz. """
+        if sort_answer is None or sort_answer == "alphanumeric":
+            return sorted(cardinality.items())
+        if type(sort_answer) is dict:
+            # User defined dict
+            return sorted(cardinality.items(),
+                          key=lambda x: sort_answer.get(x[0]))
+        if sort_answer == "cardinal":
+            return sorted(cardinality.items(), key=lambda x: (-x[1], x[0]))
+        LOGGER.warning(
+            "Unrecognized option '%s' for 'sort_answer': %s", sort_answer,
+            "use nothing, a dict (answer: rank), 'alphanumeric' or 'cardinal'."
+        )
         return sorted(cardinality.items())
 
     @staticmethod
-    def get_colors(cardinality, colors_dict):
+    def get_colors(cardinality, colors_dict, sort_answer=None):
         """ Return a formated string for a tikz pgf-pie chart.
 
         TODO : Right now color are all or nothing, so you can't set up just
@@ -63,7 +75,7 @@ class Question2Tex(object):
         :param Dict colors_dict: Color to use (String answer: String color)
         """
         colors = []
-        for answer in Question2Tex._sorted_cardinality(cardinality):
+        for answer in Question2Tex._sorted_cardinality(cardinality, sort_answer):
             answer = Question2Tex.get_clean_answer(answer[0])
             try:
                 colors.append(colors_dict[answer])
@@ -85,19 +97,18 @@ class Question2Tex(object):
         return answer
 
     @staticmethod
-    def get_results(cardinality):
+    def get_results(cardinality, sort_answer=None):
         """ Return a formated string for a tikz pgf-pie chart.
 
         :param Question question: The question..
         :param Dict colors_dict: Color to use (String answer: String color)
         """
         pie = u""
-        for ans, c in Question2Tex._sorted_cardinality(cardinality):
-            if not ans or ans == "[]":
-                # [] is Multiselect answer with no answer
+        for answer in Question2Tex._sorted_cardinality(cardinality, sort_answer):
+            if not answer[0]:
                 ans = _("Left blank")
-            answer = Question2Tex.get_clean_answer(ans)
-            pie += "{}/{},".format(c, answer)
+            ans = Question2Tex.get_clean_answer(answer[0])
+            pie += "{}/{},".format(answer[1], ans)
         if not pie:
             return u""
         final_answers = []
@@ -147,10 +158,11 @@ class Question2Tex(object):
 
     @staticmethod
     def chart(question, min_cardinality=0, group_by_letter_case=None,
-              group_by_slugify=None, group_together=None, pos=None, rotate=None,
-              radius=None, color=None, explode=None, sum=None,
-              after_number=None, before_number=None, scale_font=None, text=None,
-              style=None, type=None):
+              group_by_slugify=None, group_together=None, sort_answer=None,
+              pos=None, rotate=None, radius=None, color=None,
+              explode=None, sum=None, after_number=None,
+              before_number=None, scale_font=None, text=None, style=None,
+              type=None):
         """ Return a pfg-pie pie chart of a question.
 
         You must use pgf-pie in your latex file for this to works ::
@@ -167,12 +179,12 @@ class Question2Tex(object):
         )
         if color:
             # We must remove color that are not used in the chart.
-            color = Question2Tex.get_colors(cardinality, color)
+            color = Question2Tex.get_colors(cardinality, color, sort_answer)
         options = Question2Tex.get_pie_options(
             pos, rotate, radius, color, explode, sum, after_number,
             before_number, scale_font, text, style, type
         )
-        results = Question2Tex.get_results(cardinality)
+        results = Question2Tex.get_results(cardinality, sort_answer)
         if not results:
             return _("No answers for this question.")
         chart = """\\pie%s{

@@ -20,14 +20,25 @@ generic: # Apply to every survey unless overriden
 
     chart:
         min_cardinality: 0 # Display only answer with more this number of occurence
-        group_together: # Permit to group answers together and replace them by a placeholder, for example
+        group_together: # Permit to group answers together and replace them by
+        # a placeholder, for example :
         #    Agree
         #        Yes, Rather yes
         #    Disagree
         #        No, Rather No
-        # If you add the neccesary double dot will group "yes" and "rather yes" under the placeholder "Agree" etc.
+        # If you add the neccesary double dot will group "yes" and "rather yes"
+        # under the placeholder "Agree" etc.
         group_by_slugify: # Permit to group answer if their slugified value is the sale
         group_by_letter_case: # Permit to group answer regardless of their capitalization
+        sort_answer: # Permit to sort answers. Possible values are:
+        # - None (Default to Alphanumeric if we need to colorize in pgf-pie
+        #   else what come from the python dict.)
+        # - "alphanumeric" (Alphanumeric)
+        # - "cardinal" (Cardinality then alphanumeric)
+        # - user defined ie :{ "Answer": "rank1", "OtherAnswer": "rank2"} will
+        #   be sorted by value of the keys
+
+        # The following option refer to pgfpie
         # See http://mirrors.ircam.fr/pub/CTAN/graphics/pgf/contrib/pgf-pie/pgf-pie-manual.pdf
         pos: {0,0} # Sets the centre of the chart to the value {⟨x⟩,⟨y⟩}.
         rotate: 0 # Rotates the chart by the given number of degrees.

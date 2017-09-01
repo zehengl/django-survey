@@ -23,6 +23,7 @@ generic:
         group_together:
         group_by_slugify:
         group_by_letter_case:
+        sort_answer:
         pos:
         rotate:
         radius: 4
