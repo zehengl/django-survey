@@ -111,8 +111,7 @@ class Configuration(object):
         return d
 
     def get_default_question_conf(self, conf):
-        return {"pie": copy.deepcopy(conf["pie"]),
-                "chart": copy.deepcopy(conf["chart"]), }
+        return {"chart": copy.deepcopy(conf["chart"]), }
 
     def get(self, key=None, survey_name=None, question_text=None):
         """ Get a configuration file for a survey or a specific question.

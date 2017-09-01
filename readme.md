@@ -36,11 +36,11 @@ Test survëy:
     document_class: report
     questions:
   Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.:
-      pie:
+      chart:
           type: polar
           text: pin
   Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.:
-      pie:
+      chart:
           type: cloud
           text: inside
 ~~~~

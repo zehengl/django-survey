@@ -41,13 +41,8 @@ class Survey2Tex(Survey2X):
 
     def treat_question(self, question, survey):
         LOGGER.info("Treating, %s %s", question.pk, question.text)
-        options = {}
-        chart = self.tconf.get("chart", survey_name=self.survey.name,
-                               question_text=question.text)
-        pie = self.tconf.get("pie", survey_name=self.survey.name,
-                             question_text=question.text)
-        options.update(chart)
-        options.update(pie)
+        options = self.tconf.get("chart", survey_name=self.survey.name,
+                                 question_text=question.text)
         chart = Question2Tex().chart(question, **options)
         section_title = Question2Tex.html2latex(question.text)
         return u"""

@@ -79,13 +79,13 @@ class TestConfiguration(TestManagement):
             question_text="Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit."
         )
         self.assertEqual(ss_conf["chart"]["min_cardinality"], 0)
-        self.assertEqual(ss_conf["pie"]["type"], "pie")
-        self.assertEqual(ss_conf["pie"]["radius"], 3)
-        self.assertEqual(ss_conf["pie"]["text"], "legend")
+        self.assertEqual(ss_conf["chart"]["type"], "pie")
+        self.assertEqual(ss_conf["chart"]["radius"], 3)
+        self.assertEqual(ss_conf["chart"]["text"], "legend")
         self.assertEqual(qst_conf["chart"]["min_cardinality"], 0)
-        self.assertEqual(qst_conf["pie"]["type"], "cloud")
-        self.assertEqual(qst_conf["pie"]["radius"], 5)
-        self.assertEqual(qst_conf["pie"]["text"], "inside")
+        self.assertEqual(qst_conf["chart"]["type"], "cloud")
+        self.assertEqual(qst_conf["chart"]["radius"], 5)
+        self.assertEqual(qst_conf["chart"]["text"], "inside")
 
     def test_value_doesnt_exists(self):
         """ Get when a value does not exists. """

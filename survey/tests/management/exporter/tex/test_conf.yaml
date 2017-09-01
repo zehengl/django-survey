@@ -34,8 +34,6 @@ Test Management Survëy:
                 2e, 2é, 2ë
             3é:
                 3e, 3é, 3ë
-
-    pie:
         color:
             "": "white!100"
 
@@ -63,7 +61,7 @@ Test survëy:
         This is a report for Test Survëy. It permit to test question specific
         configurations and various chart and pie options.
 
-    pie:
+    chart:
         radius: 3
 
     questions:
@@ -71,7 +69,6 @@ Test survëy:
         Ipsum dolor sit amët, consectetur <strong> adipiscing </strong> elit.:
             chart:
                 min_cardinality: 1
-            pie:
                 rotate: 20
                 style: "drop shadow"
                 scale_font: True
@@ -79,22 +76,22 @@ Test survëy:
                 before_number: "\\$"
                 sum: 3
         Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.:
-            pie:
+            chart:
                 pos: 8, 0
                 explode: 0.5
 
         Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.:
-            pie:
+            chart:
                 type: polar
                 text: pin
 
         Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.:
-            pie:
+            chart:
                 radius: 5
                 type: cloud
                 text: inside
 
         Dolor sit amët, <strong> consectetur</strong>  adipiscing elit.:
-            pie:
+            chart:
                 type: square
                 color: {"Text for a response": "yellow!70", "": "white!100"}
