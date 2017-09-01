@@ -64,7 +64,6 @@ class Survey2Tex(Survey2X):
         """ Generate the pdf. """
         dir_name, file_name = os.path.split(path)
         os.chdir(dir_name)
-        os.system("pwd")
         os.system("pdflatex {}".format(file_name))
         os.system("pdflatex {}".format(file_name))
         if output is not None:
