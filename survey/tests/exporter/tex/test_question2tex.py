@@ -8,9 +8,8 @@ from __future__ import (
 from django.conf import settings
 from future import standard_library
 
-from survey.management.exporter.tex.question2tex import Question2Tex
+from survey.exporter.tex.question2tex import Question2Tex
 from survey.tests.management.test_management import TestManagement
-
 
 standard_library.install_aliases()
 try:

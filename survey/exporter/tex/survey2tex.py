@@ -11,9 +11,9 @@ from builtins import super
 from django.conf import settings
 from future import standard_library
 
-from survey.management.exporter.survey2x import Survey2X
-from survey.management.exporter.tex.latex_file import LatexFile
-from survey.management.exporter.tex.question2tex import Question2Tex
+from survey.exporter.survey2x import Survey2X
+from survey.exporter.tex.latex_file import LatexFile
+from survey.exporter.tex.question2tex import Question2Tex
 
 standard_library.install_aliases()
 

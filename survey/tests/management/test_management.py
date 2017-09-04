@@ -110,5 +110,5 @@ pierre,,,,
 {},1e|1é|1ë,2e|2é|2ë,3e|3é|3ë,""".format(self.username, self.other_username)
         self.expected_header = ['user', 'Aèbc?', 'Bècd?', 'Cède?', 'Dèef?']
         self.conf_dir = os.path.join(settings.ROOT, "survey", "tests",
-                                     "management", "exporter", "tex")
+                                     "exporter", "tex")
         self.test_conf_path = os.path.join(self.conf_dir, "test_conf.yaml")

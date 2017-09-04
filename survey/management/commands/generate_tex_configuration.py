@@ -8,7 +8,7 @@ from builtins import open, str
 
 from future import standard_library
 
-from survey.management.exporter.tex import ConfigurationBuilder
+from survey.exporter.tex import ConfigurationBuilder
 from survey.management.survey_command import SurveyCommand
 
 standard_library.install_aliases()

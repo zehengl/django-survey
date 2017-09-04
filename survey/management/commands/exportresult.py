@@ -8,9 +8,9 @@ import logging
 
 from future import standard_library
 
-from survey.management.exporter.csv import Survey2Csv
-from survey.management.exporter.tex.configuration import Configuration
-from survey.management.exporter.tex.survey2tex import Survey2Tex
+from survey.exporter.csv import Survey2Csv
+from survey.exporter.tex.configuration import Configuration
+from survey.exporter.tex.survey2tex import Survey2Tex
 from survey.management.survey_command import SurveyCommand
 from survey.models import Survey
 

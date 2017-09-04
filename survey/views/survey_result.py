@@ -11,11 +11,10 @@ from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404
 from future import standard_library
 
-from survey.management.exporter.csv.survey2csv import Survey2Csv
+from survey.exporter.csv.survey2csv import Survey2Csv
 from survey.models import Survey
 
 standard_library.install_aliases()
-
 
 
 def serve_unprotected_result_csv(survey):

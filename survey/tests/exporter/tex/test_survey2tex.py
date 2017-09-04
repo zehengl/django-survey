@@ -9,8 +9,8 @@ import os
 
 from future import standard_library
 
-from survey.management.exporter.tex.configuration import Configuration
-from survey.management.exporter.tex.survey2tex import Survey2Tex
+from survey.exporter.tex.configuration import Configuration
+from survey.exporter.tex.survey2tex import Survey2Tex
 from survey.models import Survey
 from survey.tests.management.test_management import TestManagement
 
