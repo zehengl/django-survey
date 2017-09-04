@@ -157,6 +157,19 @@ class Question2Tex(object):
             return ""
 
     @staticmethod
+    def raw(answers):
+        """ Return all the answer as quote in latex. """
+        raw_answers = ""
+        for i, answer in enumerate(answers):
+            if answer:
+                raw_answers += """
+\\begin{quote}
+%s
+\\end{quote} \hfill (%s n\\textsuperscript{o}%s)
+            """ % (answer, _("Participant"), i)
+        return raw_answers
+
+    @staticmethod
     def chart(question, min_cardinality=0, group_by_letter_case=None,
               group_by_slugify=None, group_together=None, sort_answer=None,
               pos=None, rotate=None, radius=None, color=None,
@@ -177,6 +190,8 @@ class Question2Tex(object):
             group_by_letter_case=group_by_letter_case,
             group_by_slugify=group_by_slugify,
         )
+        if type == "raw":
+            return Question2Tex.raw(cardinality.keys())
         if color:
             # We must remove color that are not used in the chart.
             color = Question2Tex.get_colors(cardinality, color, sort_answer)

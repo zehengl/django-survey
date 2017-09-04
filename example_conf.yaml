@@ -68,7 +68,8 @@ generic: # Apply to every survey unless overriden
         # - inside (place the text label inside the segment above the value)
         # - legend (create a legend). The default is label.
         style: drop shadow # Apply a shadow on the pie chart
-        type: pie # pie or cloud or square or polar
+        type: pie # pie or cloud or square or polar or raw
+        # raw permit to read all the answers as quote. Useful for long unique answer
         # The polar area diagram is similar to a usual pie chart, except sectors
         # are equal angles and differ rather in how far each sector extends from
         # the center of the circle. Explode has no affects in square chart.
