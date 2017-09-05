@@ -113,8 +113,36 @@ class Question(models.Model):
         except KeyError:
             cardinality[value] = n
 
+    def str_to_list(self, csv_string):
+        """ Return a list of string from a csv string.
+
+        :param csv_string: A string of string separated by comma
+        :rtype: List"""
+        # User can use a,b,c or a, b, c in configuration
+        return set(csv_string.split(",") + csv_string.split(", "))
+
+    def standardize(self, value, group_by_letter_case=None,
+                    group_by_slugify=None):
+        """ Standardize a value in order to group by slugify or letter case """
+        if group_by_slugify:
+            value = slugify(value)
+        if group_by_letter_case:
+            value = value.lower()
+        return value
+
+    def standardize_csv_string(self, csv_string, group_by_letter_case=None,
+                               group_by_slugify=None):
+        """ Return a list of standardized string from a csv string.."""
+        values = []
+        for value in self.str_to_list(csv_string):
+            values.append(
+                self.standardize(value, group_by_letter_case, group_by_slugify)
+            )
+        return values
+
     def answers_cardinality(self, min_cardinality=None, group_together=None,
-                            group_by_letter_case=None, group_by_slugify=None,):
+                            group_by_letter_case=None, group_by_slugify=None,
+                            filter=None):
         """ Return a dictionary with answers as key and cardinality as value
 
         :rtype: Dict """
@@ -122,23 +150,24 @@ class Question(models.Model):
             min_cardinality = 0
         if group_together is None:
             group_together = {}
+        if filter is None:
+            filter = []
+        else:
+            filter = self.standardize_csv_string(filter, group_by_letter_case,
+                                                 group_by_slugify)
         cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
-                if group_by_slugify:
-                    value = slugify(value)
-                if group_by_letter_case:
-                    value = value.lower()
+                value = self.standardize(value, group_by_letter_case,
+                                         group_by_slugify)
                 for key, values in group_together.items():
-                    # User can use a,b,c or a, b, c in configuration
-                    grouped_values = values.split(",") + values.split(", ")
-                    if group_by_slugify:
-                        grouped_values = [slugify(v) for v in grouped_values]
-                    if group_by_letter_case:
-                        grouped_values = [v.lower() for v in grouped_values]
+                    grouped_values = self.standardize_csv_string(
+                        values, group_by_letter_case, group_by_slugify
+                    )
                     if value in grouped_values:
                         value = key
-                self._cardinality_plus_n(cardinality, value, 1)
+                if value not in filter:
+                    self._cardinality_plus_n(cardinality, value, 1)
         if min_cardinality is not None:
             temp = {}
             for value in cardinality:

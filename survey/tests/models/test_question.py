@@ -22,6 +22,16 @@ class TestQuestion(BaseModelTest):
         text = "Lorem ipsum dolor sit amët, <strong> consectetur </strong> \
 adipiscing elit."
         self.question = Question.objects.get(text=text)
+        self.questions[0].choices = "abé cé, Abë-cè, Abé Cé, dé, Dé, dë"
+        survey = Survey.objects.create(
+            name="Test", is_published=True, need_logged_user=False,
+            display_by_question=False
+        )
+        for choice in self.questions[0].choices.split(", "):
+            Answer.objects.create(
+                question=self.questions[0], body=choice,
+                response=Response.objects.create(survey=survey)
+            )
 
     def test_unicode(self):
         """ Unicode generation. """
@@ -90,16 +100,6 @@ g>  adipiscing</strong>  elit.")
 
     def test_answers_cardinality_grouped(self):
         """ We can group answers following letter case or slugifying. """
-        self.questions[0].choices = "abé cé, Abë-cè, Abé Cé, dé, Dé, dë"
-        survey = Survey.objects.create(
-            name="Test", is_published=True, need_logged_user=False,
-            display_by_question=False
-        )
-        for choice in self.questions[0].choices.split(", "):
-            Answer.objects.create(
-                question=self.questions[0], body=choice,
-                response=Response.objects.create(survey=survey)
-            )
         crd = self.questions[0].answers_cardinality()
         self.assertEqual(crd, {u'abé cé': 1, u'Abé Cé': 1, u'Abë-cè': 1,
                                u'dé': 1, u'dë': 1, u'Dé': 1, })
@@ -123,3 +123,14 @@ g>  adipiscing</strong>  elit.")
             group_together={"ABCD": "Abë-cè, Abé Cé, Dé, dë", }
         )
         self.assertEqual(crd, {u'ABCD': 6})
+
+    def test_answers_cardinality_filtered(self):
+        """ We can filter answer with a csv string. """
+        crd = self.questions[0].answers_cardinality(filter="abé cé, Abë-cè",
+                                                    group_by_slugify=True)
+        self.assertEqual(crd, {u'de': 3})
+        crd = self.questions[0].answers_cardinality(filter="abé cé, Abë-cè",
+                                                    group_by_letter_case=True)
+        self.assertEqual(crd, {u'dé': 2, u'dë': 1})
+        crd = self.questions[0].answers_cardinality(filter="abé cé, Abë-cè")
+        self.assertEqual(crd, {u'Abé Cé': 1, u'dé': 1, u'dë': 1, u'Dé': 1, })

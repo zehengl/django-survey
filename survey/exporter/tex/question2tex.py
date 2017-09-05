@@ -175,7 +175,7 @@ class Question2Tex(object):
               pos=None, rotate=None, radius=None, color=None,
               explode=None, sum=None, after_number=None,
               before_number=None, scale_font=None, text=None, style=None,
-              type=None):
+              type=None, filter=None):
         """ Return a pfg-pie pie chart of a question.
 
         You must use pgf-pie in your latex file for this to works ::
@@ -188,7 +188,7 @@ class Question2Tex(object):
         cardinality = question.answers_cardinality(
             min_cardinality=min_cardinality, group_together=group_together,
             group_by_letter_case=group_by_letter_case,
-            group_by_slugify=group_by_slugify,
+            group_by_slugify=group_by_slugify, filter=filter
         )
         if type == "raw":
             return Question2Tex.raw(cardinality.keys())
