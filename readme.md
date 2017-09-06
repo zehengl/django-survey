@@ -61,11 +61,13 @@ command, it will create the default skeleton for every survey and question.
 In order to get started, install the requirements, create the database, create
 a superuser, launch the server, then create your survey in the django admin :
 
+~~~~
   pip install -r requirements.txt
   python manage.py migrate
   python manage.py createsuperuser
   python manage.py runserver
   # Create survey in interface
+~~~~
 
 You will have to change the settings in order to suit your need.
 
@@ -73,44 +75,51 @@ You will have to change the settings in order to suit your need.
 
 You may want to use a virtualenv for python 2.7 or 3+ :
 
+~~~~
   python3.5 -m venv .3env/
   # Resp. for python 2.7 : virtualenv .env
   source .3env/bin/activate
   # Resp. for python 2.7 : source .env/bin/activate
+~~~~
 
 In order to get started, install the dev requirements, create the database,
 create a superuser, load the test dump, then launch the server :
 
+~~~~
   pip install -r requirements_dev.txt
   python manage.py migrate
   python manage.py createsuperuser
   python manage.py loaddata survey/tests/testdump.json
   python manage.py runserver
-
+~~~~
 
 ### Test :
 
+~~~~
   python manage.py test survey
+~~~~
 
 ### Coverage :
 
+~~~~
   coverage run --source=survey ./manage.py test;coverage html
   xdg-open htmlcov/index.html
+~~~~
 
 ### Internationalisation :
-
+~~~~
   python manage.py makemessages --no-obsolete --no-wrap
   python manage.py runserver
   # Access http://localhost:8000/rosetta
-
+~~~~
 ### Lint :
-
+~~~~
   pylint survey
-
+~~~~
 ### Build the package :
-
+~~~~
     python setup.py build
-
+~~~~
 # Credits
 
 some inspiration came from an older
