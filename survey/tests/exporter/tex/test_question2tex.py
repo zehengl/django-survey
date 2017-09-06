@@ -64,6 +64,11 @@ class TestQuestion2Tex(TestManagement):
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIsNotNone(Question2Tex.chart(question, type="cloud"))
 
+    def test_raw_chart(self):
+        """ We can create a raw chart. """
+        question = self.survey.questions.get(text="Aèbc?")
+        self.assertIsNotNone(Question2Tex.chart(question, type="raw"))
+
     def test_no_results(self):
         """ We manage having no result at all. """
         question = self.survey.questions.get(text="Dèef?")
