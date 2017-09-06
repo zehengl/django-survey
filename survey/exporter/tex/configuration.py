@@ -120,10 +120,6 @@ class Configuration(object):
         :param String survey_name: The name of a specific survey.
         :param String question_text: The text of a specific question.
         :param String category_name """
-        LOGGER.debug(
-            "Configuration.get(key=%s, survey_name=%s, question_text=%s",
-            key, survey_name, question_text
-        )
         conf = copy.deepcopy(self._default["generic"])
         self.optional_update(conf, self._conf, "generic")
         if survey_name is not None:
@@ -154,6 +150,11 @@ class Configuration(object):
         try:
             return conf[key]
         except KeyError:
-            msg = "{} does not exists. ".format(key)
+            msg = ""
+            if survey_name:
+                msg += "for survey '{}', ".format(survey_name)
+            if question_text:
+                msg += "and question '{}', ".format(question_text)
+            msg += "key '{}' does not exists. ".format(key)
             msg += "Possible values : {}".format(conf.keys())
             raise ValueError(msg)

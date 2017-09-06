@@ -76,7 +76,8 @@ class TestConfiguration(TestManagement):
         ss_conf = self.conf.get(survey_name="Test survëy")
         qst_conf = self.conf.get(
             survey_name="Test survëy",
-            question_text="Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit."
+            question_text="Dolor sit amët, consectetur<strong>  adipiscing"
+            "</strong>  elit."
         )
         self.assertEqual(ss_conf["chart"]["min_cardinality"], 0)
         self.assertEqual(ss_conf["chart"]["type"], "pie")
@@ -90,3 +91,10 @@ class TestConfiguration(TestManagement):
     def test_value_doesnt_exists(self):
         """ Get when a value does not exists. """
         self.assertRaises(ValueError, self.conf.get, key="noexists")
+        self.assertRaises(ValueError, self.conf.get, survey_name="Test survëy",
+                          key="noexists")
+        self.assertRaises(
+            ValueError, self.conf.get, survey_name="Test survëy",
+            question_text="Dolor sit amët, consectetur<strong>  adipiscing"
+            "</strong>  elit.", key="noexists"
+        )
