@@ -25,7 +25,8 @@ class TestQuestion2Tex(TestManagement):
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIsNotNone(Question2Tex.chart(question))
         color = OrderedDict()
-        groups = {'1é': '1e, 1é, 1ë', '2é': '2e, 2é, 2ë', '3é': '3e, 3é, 3ë', }
+        groups = {'1é': ['1e', '1é', '1ë'], '2é': ['2e', '2é', '2ë'],
+                  '3é': ['3e', '3é', '3ë'], }
         color["1b"] = "green!80"
         color["1a"] = "cyan!50"
         color["1é"] = "red!80"

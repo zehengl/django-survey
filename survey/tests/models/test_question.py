@@ -94,7 +94,7 @@ g>  adipiscing</strong>  elit.")
         self.assertEqual(
             {u'Näh': 2, u'Yës': 1},
             question.answers_cardinality(
-                group_together={"Näh": "No, Whatever"}
+                group_together={"Näh": ["No", "Whatever"]}
             )
         )
 
@@ -105,8 +105,8 @@ g>  adipiscing</strong>  elit.")
                                u'dé': 1, u'dë': 1, u'Dé': 1, })
         crd = self.questions[0].answers_cardinality(
             group_together={
-                "ABC": "abé cé, Abë-cè, Abé Cé",
-                "D": "dé, Dé, dë"
+                "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
+                "D": ["dé", "Dé", "dë"]
             }
         )
         self.assertEqual(crd, {u'ABC': 3, u'D': 3})
@@ -115,22 +115,22 @@ g>  adipiscing</strong>  elit.")
         crd = self.questions[0].answers_cardinality(group_by_slugify=True)
         self.assertEqual(crd, {u'abe-ce': 3, u'de': 3})
         crd = self.questions[0].answers_cardinality(
-            group_by_slugify=True, group_together={"ABCD": "abe-ce, de", }
+            group_by_slugify=True, group_together={"ABCD": ["abe-ce", "de"], }
         )
         self.assertEqual(crd, {u'ABCD': 6})
         crd = self.questions[0].answers_cardinality(
             group_by_letter_case=True,
-            group_together={"ABCD": "Abë-cè, Abé Cé, Dé, dë", }
+            group_together={"ABCD": ["Abë-cè", "Abé Cé", "Dé", "dë"], }
         )
         self.assertEqual(crd, {u'ABCD': 6})
 
     def test_answers_cardinality_filtered(self):
         """ We can filter answer with a csv string. """
-        crd = self.questions[0].answers_cardinality(filter="abé cé, Abë-cè",
+        crd = self.questions[0].answers_cardinality(filter=["abé cé", "Abë-cè"],
                                                     group_by_slugify=True)
         self.assertEqual(crd, {u'de': 3})
-        crd = self.questions[0].answers_cardinality(filter="abé cé, Abë-cè",
+        crd = self.questions[0].answers_cardinality(filter=["abé cé", "Abë-cè"],
                                                     group_by_letter_case=True)
         self.assertEqual(crd, {u'dé': 2, u'dë': 1})
-        crd = self.questions[0].answers_cardinality(filter="abé cé, Abë-cè")
+        crd = self.questions[0].answers_cardinality(filter=["abé cé", "Abë-cè"])
         self.assertEqual(crd, {u'Abé Cé': 1, u'dé': 1, u'dë': 1, u'Dé': 1, })

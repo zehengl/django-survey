@@ -29,11 +29,17 @@ Test Management Survëy:
     chart:
         group_together:
             1é:
-                1e, 1é, 1ë
+                - 1e
+                - 1é
+                - 1ë
             2é:
-                2e, 2é, 2ë
+                - 2e
+                - 2é
+                - 2ë
             3é:
-                3e, 3é, 3ë
+                - 3e
+                - 3é
+                - 3ë
         color:
             "": "white!100"
 
