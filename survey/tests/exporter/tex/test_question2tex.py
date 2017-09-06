@@ -59,6 +59,12 @@ class TestQuestion2Tex(TestManagement):
             "1/1,\n            1/1a,\n            1/1b,\n            4/1é",
             chart
         )
+        chart = Question2Tex.chart(question, group_together=groups,
+                                   sort_answer="unknown_option")
+        self.assertIn(
+            "1/1,\n            1/1a,\n            1/1b,\n            4/1é",
+            chart
+        )
 
     def test_cloud_chart(self):
         """ We can create a cloud chart. """

@@ -60,6 +60,7 @@ class Question2Tex(object):
         LOGGER.warning(
             "Unrecognized option '%s' for 'sort_answer': %s", sort_answer,
             "use nothing, a dict (answer: rank), 'alphanumeric' or 'cardinal'."
+            " We used the default alphanumeric sorting."
         )
         return sorted(cardinality.items())
 
