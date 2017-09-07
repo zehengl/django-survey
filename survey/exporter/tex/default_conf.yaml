@@ -17,7 +17,7 @@ generic:
     multiple_chart_type: subsubsection
 
     categories:
-    questions:
+    questions: {}
 
     multiple_charts:
     chart:

@@ -135,22 +135,21 @@ class Configuration(object):
         conf = copy.deepcopy(self._default["generic"])
         # We update it with the generic configuration of the user if it exists
         self.optional_update(conf, self._conf, "generic")
-        if survey_name is not None:
+        if survey_name:
             self.check_survey_exists(survey_name)
             if type(survey_name) is Survey:
                 # If a dev gave a Survey object we do not bother him with type
                 survey_name = survey_name.name
             # We update the generic configuration with the survey configuration
             self.recursive_update(conf, self._conf.get(survey_name, {}))
-        if conf.get("questions"):
-            for question in conf.get("questions"):
-                # We deepcopy the configuration and update it with question
-                # specific configuration, then we copy it in the general conf
-                qdc = self.get_default_question_conf(conf)
-                # LOGGER.info("Using custom conf for '%s': %s", question,
-                #            conf["questions"][question])
-                self.recursive_update(qdc, conf["questions"][question])
-                conf["questions"][question] = qdc
+        for question in conf.get("questions", []):
+            # We deepcopy the configuration and update it with question
+            # specific configuration, then we copy it in the general conf
+            qdc = self.get_default_question_conf(conf)
+            # LOGGER.info("Using custom conf for '%s': %s", question,
+            #            conf["questions"][question])
+            self.recursive_update(qdc, conf["questions"][question])
+            conf["questions"][question] = qdc
         if question_text:
             if conf.get("questions") and conf["questions"].get(question_text):
                 conf = conf["questions"][question_text]
