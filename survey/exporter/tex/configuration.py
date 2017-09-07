@@ -147,20 +147,14 @@ class Configuration(object):
                 # We deepcopy the configuration and update it with question
                 # specific configuration, then we copy it in the general conf
                 qdc = self.get_default_question_conf(conf)
+                # LOGGER.info("Using custom conf for '%s': %s", question,
+                #            conf["questions"][question])
                 self.recursive_update(qdc, conf["questions"][question])
                 conf["questions"][question] = qdc
         if question_text:
-            qconf = False
-            if conf.get("questions"):
-                try:
-                    conf = conf["questions"][question_text]
-                    qconf = True
-                    LOGGER.info("Using custom configuration for question '%s'",
-                                question_text)
-
-                except KeyError:
-                    pass
-            if not qconf:
+            if conf.get("questions") and conf["questions"].get(question_text):
+                conf = conf["questions"][question_text]
+            else:
                 conf = self.get_default_question_conf(conf)
         if key is None:
             return conf
