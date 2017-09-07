@@ -110,13 +110,22 @@ class Configuration(object):
                 d[k] = u[k]
         return d
 
+    def update(self, d, u):
+        """ Update a dictionary and handle the multiple charts values. """
+        self.recursive_update(d, u)
+        for chart, chart_conf in d.get("multiple_charts", {}).items():
+            chart_conf = copy.deepcopy(d["chart"])
+            umc = u.get("multiple_charts", {}).get(chart, {})
+            self.recursive_update(chart_conf, umc)
+            d["multiple_charts"][chart] = chart_conf
+
     def get_default_question_conf(self, conf):
         """ A deepcopy of what we deem necessary in the question config.
 
         We want to avoid copying everything in the conf. For example we do not
         need the document type in a question configuration.
 
-        :param dict conf: Full configuration with useless element for questions.
+        :param dict conf: Full configuration with useless element for questions
         """
         return {
             "chart": copy.deepcopy(conf["chart"]),
@@ -141,14 +150,12 @@ class Configuration(object):
                 # If a dev gave a Survey object we do not bother him with type
                 survey_name = survey_name.name
             # We update the generic configuration with the survey configuration
-            self.recursive_update(conf, self._conf.get(survey_name, {}))
+            self.update(conf, self._conf.get(survey_name, {}))
         for question in conf.get("questions", []):
             # We deepcopy the configuration and update it with question
             # specific configuration, then we copy it in the general conf
             qdc = self.get_default_question_conf(conf)
-            # LOGGER.info("Using custom conf for '%s': %s", question,
-            #            conf["questions"][question])
-            self.recursive_update(qdc, conf["questions"][question])
+            self.update(qdc, conf["questions"][question])
             conf["questions"][question] = qdc
         if question_text:
             if conf.get("questions") and conf["questions"].get(question_text):
@@ -167,4 +174,5 @@ class Configuration(object):
                 msg += "and question '{}', ".format(question_text)
             msg += "key '{}' does not exists. ".format(key)
             msg += "Possible values : {}".format(conf.keys())
+            LOGGER.error(msg)
             raise ValueError(msg)

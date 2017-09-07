@@ -16,10 +16,9 @@ generic:
     question_type: subsection
     multiple_chart_type: subsubsection
 
-    categories:
     questions: {}
 
-    multiple_charts:
+    multiple_charts: {}
     chart:
         min_cardinality: 0
         group_together:

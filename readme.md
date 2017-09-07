@@ -6,7 +6,23 @@ This means you will be able to migrate from an ancient version of django-survey.
 This has been refactored, ported to python 3, and test has been added as well as
 exports as csv and pdf for the survey's results.
 
-## Create survey
+## Getting started
+
+
+In order to get started, install the requirements, create the database, create
+a superuser, launch the server, then create your survey in the django admin :
+
+~~~~
+  pip install -r requirements.txt
+  python manage.py migrate
+  python manage.py createsuperuser
+  python manage.py runserver
+  # Create survey in interface
+~~~~
+
+You will have to change the settings in order to suit your need.
+
+### Creating a survey
 
 Using the admin interface you can create surveys, add questions, give questions
 categories, and mark them as required or not. You can define choices for answers
@@ -20,13 +36,14 @@ to render them.
 
 ![Answering a survey](doc/answering_questions.png "Answering a survey")
 
-## Handling the results
+### Handling the results
 
 Submitted responses can be viewed via the admin backend, in an exported csv
 or in a pdf generated with latex. The way the pdf is generated is
 configurable in a yaml file, globally, survey by survey, or question by
-question. You can also limit the answers shown by cardinality or group them
-together. This is an example of a configuration file
+question. This is an example of a configuration file
+
+#### Basic example
 
 ~~~~
 generic:
@@ -51,25 +68,37 @@ The pdf is then generated using the very good pgf-pie library.
 
 ![The generated pdf for the cloud and inside options](doc/report_2.png "The generated pdf for the cloud and inside options")
 
+#### Advanced example
+
+You can also limit the answers shown by cardinality, filter them, group them
+together and choose the color for each answer or group of answers.
+
+If you use this configuration for the previous question:
+~~~~
+Test survëy:
+  Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.:
+    multiple_charts:
+	Sub Sub Section with radius=3 :
+	    color: {"Yës": "blue!50", "No": "red!50",
+		    "Whatever": "red!50!blue!50"}
+	    radius: 3
+	Sub Sub Section with text=pin :
+	    group_together: {"Nah": ["No", "Whatever"], "K.": ["Yës"]}
+	    color: {"Nah": "blue!33!red!66", "K.": "blue!50"}
+	    text: pin
+    chart:
+	radius: 2
+	type: cloud
+	text: inside
+~~~~
+
+You get this as a result:
+
+![The generated pdf for the multiple charts example](doc/multicharts.png "The generated pdf for the multiple charts example")
+
 For a full example of a configuration file look at `example_conf.yaml`, you can
 also generate your configuration file with the `generate_tex_configuration`
 command, it will create the default skeleton for every survey and question.
-
-## Getting started
-
-
-In order to get started, install the requirements, create the database, create
-a superuser, launch the server, then create your survey in the django admin :
-
-~~~~
-  pip install -r requirements.txt
-  python manage.py migrate
-  python manage.py createsuperuser
-  python manage.py runserver
-  # Create survey in interface
-~~~~
-
-You will have to change the settings in order to suit your need.
 
 ## Getting started as a contributor
 

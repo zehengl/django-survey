@@ -202,7 +202,7 @@ class Question2Tex(object):
         )
         results = Question2Tex.get_results(cardinality, sort_answer)
         if not results:
-            return _("No answers for this question.")
+            return str(_("No answers for this question."))
         chart = """\\pie%s{
 %s
         }

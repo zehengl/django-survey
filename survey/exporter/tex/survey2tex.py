@@ -41,9 +41,18 @@ class Survey2Tex(Survey2X):
 
     def treat_question(self, question, survey):
         LOGGER.info("Treating, %s %s", question.pk, question.text)
-        options = self.tconf.get("chart", survey_name=self.survey.name,
+        options = self.tconf.get(survey_name=self.survey.name,
                                  question_text=question.text)
-        chart = Question2Tex().chart(question, **options)
+        multiple_charts = options.get("multiple_charts")
+        if not multiple_charts:
+            multiple_charts = {"": options.get("chart")}
+        question_synthesis = ""
+        for chart_title, chart_options in multiple_charts.items():
+            if chart_title:
+                # "" is False by default we
+                mct = options["multiple_chart_type"]
+                question_synthesis += "\%s{%s}" % (mct, chart_title)
+            question_synthesis += Question2Tex().chart(question, **chart_options)
         section_title = Question2Tex.html2latex(question.text)
         return u"""
 \\clearpage{}
@@ -53,7 +62,7 @@ class Survey2Tex(Survey2X):
 
 %s
 
-""" % (section_title, question.pk, chart)
+""" % (section_title, question.pk, question_synthesis)
 
     def generate(self, path, output=None):
         """ Generate the pdf. """

@@ -23,6 +23,18 @@ class TestConfiguration(TestManagement):
         TestManagement.setUp(self)
         self.conf = Configuration(self.test_conf_path)
         self.default = Configuration()
+        self.ts_conf = self.conf.get(survey_name="Test survëy")
+        self.qts_conf = self.conf.get(
+            survey_name="Test survëy",
+            question_text="Dolor sit amët, consectetur<strong>  adipiscing"
+            "</strong>  elit."
+        )
+        self.qts_expected_conf = {
+            "min_cardinality": 0,
+            "type": "cloud",
+            "radius": 2,
+            "text": "inside"
+        }
 
     def test_name_doesnt_exists(self):
         """ Value error raised when the name does not exists. """
@@ -73,24 +85,34 @@ class TestConfiguration(TestManagement):
 
     def test_get_questions(self):
         """ We have something coherent when we get by question_text. """
-        ss_conf = self.conf.get(survey_name="Test survëy")
-        qst_conf = self.conf.get(
-            survey_name="Test survëy",
-            question_text="Dolor sit amët, consectetur<strong>  adipiscing"
-            "</strong>  elit."
-        )
-        self.assertEqual(ss_conf["multiple_charts"], None)
-        self.assertEqual(ss_conf["multiple_chart_type"], "subsubsection")
-        self.assertEqual(ss_conf["chart"]["min_cardinality"], 0)
-        self.assertEqual(ss_conf["chart"]["type"], "pie")
-        self.assertEqual(ss_conf["chart"]["radius"], 3)
-        self.assertEqual(ss_conf["chart"]["text"], "legend")
-        self.assertIsNotNone(qst_conf["multiple_charts"])
-        self.assertEqual(qst_conf["multiple_chart_type"], "subsubsection")
-        self.assertEqual(qst_conf["chart"]["min_cardinality"], 0)
-        self.assertEqual(qst_conf["chart"]["type"], "cloud")
-        self.assertEqual(qst_conf["chart"]["radius"], 5)
-        self.assertEqual(qst_conf["chart"]["text"], "inside")
+        self.assertEqual(self.ts_conf["chart"]["min_cardinality"], 0)
+        self.assertEqual(self.ts_conf["chart"]["type"], "pie")
+        self.assertEqual(self.ts_conf["chart"]["radius"], 3)
+        self.assertEqual(self.ts_conf["chart"]["text"], "legend")
+        for key, value in self.qts_expected_conf.items():
+            self.assertEqual(self.qts_conf["chart"][key], value)
+
+    def test_get_question_multiple_charts(self):
+        """ We have set multiple charts when we get by question text. """
+        self.assertEqual(self.ts_conf["multiple_charts"], {})
+        self.assertEqual(self.ts_conf["multiple_chart_type"], "subsubsection")
+        self.assertEqual(self.qts_conf["multiple_chart_type"], "subsubsection")
+        qts_charts = ['Sub Sub Section with radius=3',
+                      'Sub Sub Section with text=pin']
+        self.assertEqual(self.qts_conf["multiple_charts"].keys(), qts_charts)
+        for chart in qts_charts:
+            for key, expected_value in self.qts_expected_conf.items():
+                value = self.qts_conf["multiple_charts"][chart][key]
+                if chart == "Sub Sub Section with radius=3" and key == "radius":
+                    expected_value = 3
+                elif chart == 'Sub Sub Section with text=pin' and key == "text":
+                    expected_value = "pin"
+                self.assertEqual(
+                    value, expected_value,
+                    "Expected '{}' for '{}' in '{}' and got '{}'".format(
+                        expected_value, key, chart, value
+                    )
+                )
 
     def test_value_doesnt_exists(self):
         """ Get when a value does not exists. """
