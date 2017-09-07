@@ -79,10 +79,14 @@ class TestConfiguration(TestManagement):
             question_text="Dolor sit amët, consectetur<strong>  adipiscing"
             "</strong>  elit."
         )
+        self.assertEqual(ss_conf["multiple_charts"], None)
+        self.assertEqual(ss_conf["multiple_chart_type"], "subsubsection")
         self.assertEqual(ss_conf["chart"]["min_cardinality"], 0)
         self.assertEqual(ss_conf["chart"]["type"], "pie")
         self.assertEqual(ss_conf["chart"]["radius"], 3)
         self.assertEqual(ss_conf["chart"]["text"], "legend")
+        self.assertIsNotNone(qst_conf["multiple_charts"])
+        self.assertEqual(qst_conf["multiple_chart_type"], "subsubsection")
         self.assertEqual(qst_conf["chart"]["min_cardinality"], 0)
         self.assertEqual(qst_conf["chart"]["type"], "cloud")
         self.assertEqual(qst_conf["chart"]["radius"], 5)

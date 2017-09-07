@@ -92,6 +92,11 @@ Test survëy:
                 text: pin
 
         Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.:
+            multiple_charts:
+                Sub Sub Section with radius=4 :
+                    radius: 4
+                Sub Sub Section with type=pin :
+                    type: pin
             chart:
                 radius: 5
                 type: cloud

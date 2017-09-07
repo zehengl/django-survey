@@ -111,7 +111,18 @@ class Configuration(object):
         return d
 
     def get_default_question_conf(self, conf):
-        return {"chart": copy.deepcopy(conf["chart"]), }
+        """ A deepcopy of what we deem necessary in the question config.
+
+        We want to avoid copying everything in the conf. For example we do not
+        need the document type in a question configuration.
+
+        :param dict conf: Full configuration with useless element for questions.
+        """
+        return {
+            "chart": copy.deepcopy(conf["chart"]),
+            "multiple_charts": copy.deepcopy(conf["multiple_charts"]),
+            "multiple_chart_type": copy.deepcopy(conf["multiple_chart_type"]),
+        }
 
     def get(self, key=None, survey_name=None, question_text=None):
         """ Get a configuration file for a survey or a specific question.
@@ -120,15 +131,21 @@ class Configuration(object):
         :param String survey_name: The name of a specific survey.
         :param String question_text: The text of a specific question.
         :param String category_name """
+        # We create a new dictionary from a deepcopy of the default conf
         conf = copy.deepcopy(self._default["generic"])
+        # We update it with the generic configuration of the user if it exists
         self.optional_update(conf, self._conf, "generic")
         if survey_name is not None:
             self.check_survey_exists(survey_name)
             if type(survey_name) is Survey:
+                # If a dev gave a Survey object we do not bother him with type
                 survey_name = survey_name.name
+            # We update the generic configuration with the survey configuration
             self.recursive_update(conf, self._conf.get(survey_name, {}))
         if conf.get("questions"):
             for question in conf.get("questions"):
+                # We deepcopy the configuration and update it with question
+                # specific configuration, then we copy it in the general conf
                 qdc = self.get_default_question_conf(conf)
                 self.recursive_update(qdc, conf["questions"][question])
                 conf["questions"][question] = qdc
