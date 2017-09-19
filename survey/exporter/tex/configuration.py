@@ -110,12 +110,18 @@ class Configuration(object):
                 d[k] = u[k]
         return d
 
+    def get_multiple_charts(self, d):
+        """ Permit to get a dict while the default value is None. """
+        multiple_charts = d.get("multiple_charts")
+        return {} if multiple_charts is None else multiple_charts
+
     def update(self, d, u):
         """ Update a dictionary and handle the multiple charts values. """
         self.recursive_update(d, u)
-        for chart, chart_conf in d.get("multiple_charts", {}).items():
+        multiple_charts = self.get_multiple_charts(d)
+        for chart, chart_conf in multiple_charts.items():
             chart_conf = copy.deepcopy(d["chart"])
-            umc = u.get("multiple_charts", {}).get(chart, {})
+            umc = self.get_multiple_charts(u).get(chart, {})
             self.recursive_update(chart_conf, umc)
             d["multiple_charts"][chart] = chart_conf
 

@@ -18,7 +18,7 @@ generic:
 
     questions: {}
 
-    multiple_charts: {}
+    multiple_charts:
     chart:
         min_cardinality: 0
         group_together:

@@ -94,7 +94,7 @@ class TestConfiguration(TestManagement):
 
     def test_get_question_multiple_charts(self):
         """ We have set multiple charts when we get by question text. """
-        self.assertEqual(self.ts_conf["multiple_charts"], {})
+        self.assertEqual(self.ts_conf["multiple_charts"], None)
         self.assertEqual(self.ts_conf["multiple_chart_type"], "subsubsection")
         self.assertEqual(self.qts_conf["multiple_chart_type"], "subsubsection")
         qts_charts = ['Sub Sub Section with radius=3',
