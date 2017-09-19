@@ -1,7 +1,7 @@
 generic:
     document_option: 11pt
     document_class: article
-    header:
+    header: |
         \usepackage{pgf-pie}
         \usepackage{pgfplots}
         \usepackage{pgfplotstable}

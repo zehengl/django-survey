@@ -2,7 +2,7 @@ generic: # Apply to every survey unless overriden
     document_class: article
     document_option: 12pt # If left empty, no option will be passed
     date: # If left empty, current date will be used
-    header: # Text just before \begin{document}
+    header: | # Text just before \begin{document}
         \usepackage{pgf-pie}
         \usepackage{pgfplots}
         \usepackage{pgfplotstable}
