@@ -47,12 +47,15 @@ class Survey2Tex(Survey2X):
         if not multiple_charts:
             multiple_charts = {"": options.get("chart")}
         question_synthesis = ""
+        i = 0
         for chart_title, chart_options in multiple_charts.items():
+            i += 1
             if chart_title:
                 # "" is False by default we
                 mct = options["multiple_chart_type"]
                 question_synthesis += "\%s{%s}" % (mct, chart_title)
-            question_synthesis += Question2Tex().chart(question, **chart_options)
+            question_synthesis += Question2Tex().chart(question, latex_label=i,
+                                                       **chart_options)
         section_title = Question2Tex.html2latex(question.text)
         return u"""
 \\clearpage{}

@@ -176,7 +176,7 @@ class Question2Tex(object):
               pos=None, rotate=None, radius=None, color=None,
               explode=None, sum=None, after_number=None,
               before_number=None, scale_font=None, text=None, style=None,
-              type=None, filter=None):
+              type=None, filter=None, latex_label=1):
         """ Return a pfg-pie pie chart of a question.
 
         You must use pgf-pie in your latex file for this to works ::
@@ -207,8 +207,8 @@ class Question2Tex(object):
 %s
         }
 """ % (options, results)
-        caption = "\label{figure:q%d} %s '%s'" % (
-            question.pk, _("Answers to the question"),
+        caption = "\label{figure:q%d-%d} %s '%s'" % (
+            question.pk, latex_label, _("Answers to the question"),
             Question2Tex.html2latex(question.text)
         )
         return """
