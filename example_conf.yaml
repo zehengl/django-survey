@@ -5,6 +5,7 @@ generic: # Apply to every survey unless overriden
     header: | # Text just before \begin{document}
         \usepackage{pgf-pie}
         \usepackage{pgfplots}
+        \pgfplotsset{compat=1.13}
         \usepackage{pgfplotstable}
         \usetikzlibrary{patterns}
         \usepackage[section]{placeins}
