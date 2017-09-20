@@ -91,6 +91,10 @@ class TestQuestion2Tex(TestManagement):
                                      {"No": ["No", "Maybe"], "Yes": ["Kay"]},
                                      {"No": 2})
         )
+        self.assertIn(
+            "Repartition of answers for the question 'Cède?'.",
+            Question2Tex.get_caption(qst, mc, flt, {"Yes": ["Kay"]}, {"No": 2})
+        )
 
     def test_raw_chart(self):
         """ We can create a raw chart. """

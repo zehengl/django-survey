@@ -196,14 +196,20 @@ class Question2Tex(object):
             else:
                 # Looping only on the value really sued in the answers
                 loop_dict = cardinality
+            has_and = False
             for key in loop_dict:
+                values = group_together.get(key)
+                if values is None:
+                    continue
                 # We duplicate the translations so makemessage find it
                 caption += "with '{}' standing for ".format(key)
-                for value in group_together.get(key, []):
+                for value in values:
                     caption += "'{}' {} ".format(value, _("or"))
                 caption = caption[:-len("{} ".format(_("or")))]
+                has_and = True
                 caption += "{} ".format(_("and"))
-            caption = caption[:-len("{} ".format(_("and")))]
+            if has_and:
+                caption = caption[:-len("{} ".format(_("and")))]
         return "{}.".format(caption[:-1])
 
     @staticmethod
