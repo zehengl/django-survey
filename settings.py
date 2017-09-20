@@ -108,7 +108,7 @@ INSTALLED_APPS = (
 )
 
 LOCALE_PATHS = (
-    os.path.join(ROOT, "..", 'survey', "locale"),
+    os.path.join(ROOT, 'survey', "locale"),
 )
 LANGUAGE_CODE = 'en'
 LANGUAGES = (
