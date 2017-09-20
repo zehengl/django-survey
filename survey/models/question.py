@@ -113,8 +113,8 @@ class Question(models.Model):
         except KeyError:
             cardinality[value] = n
 
-    def standardize(self, value, group_by_letter_case=None,
-                    group_by_slugify=None):
+    @staticmethod
+    def standardize(value, group_by_letter_case=None, group_by_slugify=None):
         """ Standardize a value in order to group by slugify or letter case """
         if group_by_slugify:
             value = slugify(value)
@@ -122,12 +122,13 @@ class Question(models.Model):
             value = value.lower()
         return value
 
-    def standardize_list(self, string_list, group_by_letter_case=None,
+    @staticmethod
+    def standardize_list(string_list, group_by_letter_case=None,
                          group_by_slugify=None):
         """ Return a list of standardized string from a csv string.."""
         return [
-            self.standardize(v, group_by_letter_case, group_by_slugify)
-            for v in string_list
+            Question.standardize(strng, group_by_letter_case, group_by_slugify)
+            for strng in string_list
         ]
 
     def answers_cardinality(self, min_cardinality=None, group_together=None,
@@ -143,15 +144,15 @@ class Question(models.Model):
         if filter is None:
             filter = []
         else:
-            filter = self.standardize_list(filter, group_by_letter_case,
-                                           group_by_slugify)
+            filter = Question.standardize_list(filter, group_by_letter_case,
+                                               group_by_slugify)
         cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
-                value = self.standardize(value, group_by_letter_case,
-                                         group_by_slugify)
+                value = Question.standardize(value, group_by_letter_case,
+                                             group_by_slugify)
                 for key, values in group_together.items():
-                    grouped_values = self.standardize_list(
+                    grouped_values = Question.standardize_list(
                         values, group_by_letter_case, group_by_slugify
                     )
                     if value in grouped_values:
