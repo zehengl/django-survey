@@ -143,9 +143,11 @@ class Question(models.Model):
             group_together = {}
         if filter is None:
             filter = []
+            standardized_filter = []
         else:
-            filter = Question.standardize_list(filter, group_by_letter_case,
-                                               group_by_slugify)
+            standardized_filter = Question.standardize_list(
+                filter, group_by_letter_case, group_by_slugify
+            )
         cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
@@ -157,7 +159,8 @@ class Question(models.Model):
                     )
                     if value in grouped_values:
                         value = key
-                if value not in filter:
+
+                if value not in filter and value not in standardized_filter:
                     self._cardinality_plus_n(cardinality, value, 1)
         if min_cardinality is not None:
             temp = {}

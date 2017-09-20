@@ -129,6 +129,14 @@ g>  adipiscing</strong>  elit.")
         crd = self.questions[0].answers_cardinality(filter=["abé cé", "Abë-cè"],
                                                     group_by_slugify=True)
         self.assertEqual(crd, {u'de': 3})
+        crd = self.questions[0].answers_cardinality(filter=["abe-ce"],
+                                                    group_by_slugify=True)
+        self.assertEqual(crd, {u'de': 3})
+        crd = self.questions[0].answers_cardinality(
+            group_together={"ABC": ["abe-ce"], }, filter=["ABC"],
+            group_by_slugify=True
+        )
+        self.assertEqual(crd, {u'de': 3})
         crd = self.questions[0].answers_cardinality(filter=["abé cé", "Abë-cè"],
                                                     group_by_letter_case=True)
         self.assertEqual(crd, {u'dé': 2, u'dë': 1})
