@@ -87,7 +87,9 @@ class TestQuestion2Tex(TestManagement):
         )
         self.assertIn(
             "with 'No' standing for 'No' or 'Maybe'.",
-            Question2Tex.get_caption(qst, mc, flt, {"No": ["No", "Maybe"]})
+            Question2Tex.get_caption(qst, mc, flt,
+                                     {"No": ["No", "Maybe"], "Yes": ["Kay"]},
+                                     {"No": 2})
         )
 
     def test_raw_chart(self):

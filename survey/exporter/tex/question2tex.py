@@ -172,7 +172,8 @@ class Question2Tex(object):
         return raw_answers
 
     @staticmethod
-    def get_caption(question, min_cardinality, filter, group_together):
+    def get_caption(question, min_cardinality, filter, group_together,
+                    cardinality=None):
         """ Return a caption with an appropriate description of the chart. """
         caption = "{} ".format(_("Repartition of answers"))
         if min_cardinality > 0:
@@ -190,10 +191,15 @@ class Question2Tex(object):
             _("for the question"), Question2Tex.html2latex(question.text)
         )
         if group_together:
-            for key, values in group_together.items():
+            if cardinality is None:
+                loop_dict = group_together
+            else:
+                # Looping only on the value really sued in the answers
+                loop_dict = cardinality
+            for key in loop_dict:
                 # We duplicate the translations so makemessage find it
                 caption += "with '{}' standing for ".format(key)
-                for value in values:
+                for value in group_together.get(key, []):
                     caption += "'{}' {} ".format(value, _("or"))
                 caption = caption[:-len("{} ".format(_("or")))]
                 caption += "{} ".format(_("and"))
@@ -234,7 +240,7 @@ class Question2Tex(object):
         if not results:
             return str(_("No answers for this question."))
         caption = Question2Tex.get_caption(question, min_cardinality, filter,
-                                           group_together)
+                                           group_together, cardinality)
         return """
 \\begin{figure}[h!]
     \\begin{tikzpicture}
