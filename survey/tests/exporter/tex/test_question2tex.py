@@ -82,7 +82,11 @@ class TestQuestion2Tex(TestManagement):
         self.assertIn("excluding 'Toto' ",
                       Question2Tex.get_caption(qst, mc, ["Toto"], gt))
         self.assertIn(
-            "excluding 'Toto', 'Titi', 'Tutu' ",
+            "excluding 'Toto', and 'Titi' ",
+            Question2Tex.get_caption(qst, mc, ["Toto", "Titi"], gt)
+        )
+        self.assertIn(
+            "excluding 'Toto', 'Titi', and 'Tutu' ",
             Question2Tex.get_caption(qst, mc, ["Toto", "Titi", "Tutu"], gt)
         )
         self.assertIn(

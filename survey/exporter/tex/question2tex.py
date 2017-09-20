@@ -187,8 +187,10 @@ class Question2Tex(object):
             )
         if filter:
             caption += "{} ".format(_("excluding"))
-            for excluded in filter:
+            for i, excluded in enumerate(filter):
                 caption += "'{}', ".format(excluded)
+                if len(filter) >= 2 and i == len(filter) - 2:
+                    caption += "{} ".format(_("and"))
             caption = "{} ".format(caption[:-2])
         caption += "%s '%s' " % (
             _("for the question"), Question2Tex.html2latex(question.text)
