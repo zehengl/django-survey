@@ -32,7 +32,7 @@ class TestConfiguration(TestManagement):
         self.qts_expected_conf = {
             "min_cardinality": 0,
             "type": "cloud",
-            "radius": 2,
+            "radius": 1,
             "text": "inside"
         }
 

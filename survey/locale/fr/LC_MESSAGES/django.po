@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-20 11:33+0000\n"
-"PO-Revision-Date: 2017-09-20 11:33+0000\n"
+"POT-Creation-Date: 2017-09-20 10:56+0000\n"
+"PO-Revision-Date: 2017-09-20 10:58+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -34,22 +34,52 @@ msgstr "Marquer le questionnaire comme publié"
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: survey/exporter/tex/question2tex.py:93
-#: survey/exporter/tex/question2tex.py:110
+#: survey/exporter/tex/question2tex.py:94
+#: survey/exporter/tex/question2tex.py:111
 msgid "Left blank"
 msgstr "Laissé vide"
 
-#: survey/exporter/tex/question2tex.py:170
+#: survey/exporter/tex/question2tex.py:171
 msgid "Participant"
 msgstr "Participant"
 
-#: survey/exporter/tex/question2tex.py:205
-msgid "No answers for this question."
-msgstr "Aucune réponse à cette question"
+#: survey/exporter/tex/question2tex.py:177
+msgid "Repartition of answers"
+msgstr "Répartition des réponses"
 
-#: survey/exporter/tex/question2tex.py:211
-msgid "Answers to the question"
-msgstr "Réponse à la question"
+#: survey/exporter/tex/question2tex.py:179
+msgid "with"
+msgstr "avec"
+
+#: survey/exporter/tex/question2tex.py:180
+#, python-format
+msgid "%(min_cardinality)d respondants or more"
+msgid_plural "%(min_cardinality)d respondant or more"
+msgstr[0] "%(min_cardinality)d réponse ou plus"
+msgstr[1] "%(min_cardinality)d réponses ou plus"
+
+#: survey/exporter/tex/question2tex.py:185
+msgid "excluding"
+msgstr "excluant"
+
+#: survey/exporter/tex/question2tex.py:190
+#| msgid "question"
+msgid "for the question"
+msgstr "pour la question"
+
+#: survey/exporter/tex/question2tex.py:197
+#: survey/exporter/tex/question2tex.py:198
+msgid "or"
+msgstr "ou"
+
+#: survey/exporter/tex/question2tex.py:199
+#: survey/exporter/tex/question2tex.py:200
+msgid "and"
+msgstr "et"
+
+#: survey/exporter/tex/question2tex.py:235
+msgid "No answers for this question."
+msgstr "Aucune réponse pour cette question."
 
 #: survey/models/category.py:28
 msgid "category"
@@ -172,3 +202,4 @@ msgstr "Questions"
 #: survey/templates/survey/survey.html:48
 msgid "I'm done!"
 msgstr "J'ai fini"
+

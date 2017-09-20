@@ -9,6 +9,7 @@ from builtins import object
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ungettext
 from future import standard_library
 
 standard_library.install_aliases()
@@ -171,6 +172,35 @@ class Question2Tex(object):
         return raw_answers
 
     @staticmethod
+    def get_caption(question, min_cardinality, filter, group_together):
+        """ Return a caption with an appropriate description of the chart. """
+        caption = "{} ".format(_("Repartition of answers"))
+        if min_cardinality > 0:
+            caption += "{} {} ".format(_("with"), ungettext(
+                "%(min_cardinality)d respondants or more",
+                "%(min_cardinality)d respondant or more",
+                min_cardinality) % {'min_cardinality': min_cardinality, }
+            )
+        if filter:
+            caption += "{} ".format(_("excluding"))
+            for excluded in filter:
+                caption += "'{}', ".format(excluded)
+            caption = "{} ".format(caption[:-2])
+        caption += "%s '%s' " % (
+            _("for the question"), Question2Tex.html2latex(question.text)
+        )
+        if group_together:
+            for key, values in group_together.items():
+                # We duplicate the translations so makemessage find it
+                caption += "with '{}' standing for ".format(key)
+                for value in values:
+                    caption += "'{}' {} ".format(value, _("or"))
+                caption = caption[:-len("{} ".format(_("or")))]
+                caption += "{} ".format(_("and"))
+            caption = caption[:-len("{} ".format(_("and")))]
+        return "{}.".format(caption[:-1])
+
+    @staticmethod
     def chart(question, min_cardinality=0, group_by_letter_case=None,
               group_by_slugify=None, group_together=None, sort_answer=None,
               pos=None, rotate=None, radius=None, color=None,
@@ -203,19 +233,15 @@ class Question2Tex(object):
         results = Question2Tex.get_results(cardinality, sort_answer)
         if not results:
             return str(_("No answers for this question."))
-        chart = """\\pie%s{
-%s
-        }
-""" % (options, results)
-        caption = "\label{figure:q%d-%d} %s '%s'" % (
-            question.pk, latex_label, _("Answers to the question"),
-            Question2Tex.html2latex(question.text)
-        )
+        caption = Question2Tex.get_caption(question, min_cardinality, filter,
+                                           group_together)
         return """
 \\begin{figure}[h!]
     \\begin{tikzpicture}
-        %s
+        \\pie%s{
+%s
+        }
     \\end{tikzpicture}
-    \\caption{%s}
+    \\caption{\label{figure:q%d-%d}%s}
 \\end{figure}
-""" % (chart, caption)
+""" % (options, results, question.pk, latex_label, caption)

@@ -78,18 +78,18 @@ If you use this configuration for the previous question:
 Test survëy:
   Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.:
     multiple_charts:
-	Sub Sub Section with radius=3 :
-	    color: {"Yës": "blue!50", "No": "red!50",
-		    "Whatever": "red!50!blue!50"}
-	    radius: 3
-	Sub Sub Section with text=pin :
-	    group_together: {"Nah": ["No", "Whatever"], "K.": ["Yës"]}
-	    color: {"Nah": "blue!33!red!66", "K.": "blue!50"}
-	    text: pin
+      Sub Sub Section with radius=3 :
+        color: {"Yës": "blue!50", "No": "red!50",
+                "Whatever": "red!50!blue!50"}
+        radius: 3
+      Sub Sub Section with text=pin :
+        group_together: {"Nah": ["No", "Whatever"], "K.": ["Yës"]}
+        color: {"Nah": "blue!33!red!66", "K.": "blue!50"}
+        text: pin
     chart:
-	radius: 2
-	type: cloud
-	text: inside
+      radius: 1
+      type: cloud
+      text: inside
 ~~~~
 
 You get this as a result:

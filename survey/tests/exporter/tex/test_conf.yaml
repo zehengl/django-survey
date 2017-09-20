@@ -103,7 +103,7 @@ Test survëy:
                     color: {"Nah": "blue!33!red!66", "K.": "blue!50"}
                     text: pin
             chart:
-                radius: 2
+                radius: 1
                 type: cloud
                 text: inside
 

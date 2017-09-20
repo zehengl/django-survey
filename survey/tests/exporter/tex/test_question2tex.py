@@ -71,6 +71,25 @@ class TestQuestion2Tex(TestManagement):
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIsNotNone(Question2Tex.chart(question, type="cloud"))
 
+    def test_get_caption(self):
+        """ We can create a filtered chart with a proper caption. """
+        qst = self.survey.questions.get(text="Cède?")
+        mc = 0
+        flt = {}
+        gt = {}
+        self.assertIn("2 respondant or more",
+                      Question2Tex.get_caption(qst, 2, flt, gt))
+        self.assertIn("excluding 'Toto' ",
+                      Question2Tex.get_caption(qst, mc, ["Toto"], gt))
+        self.assertIn(
+            "excluding 'Toto', 'Titi', 'Tutu' ",
+            Question2Tex.get_caption(qst, mc, ["Toto", "Titi", "Tutu"], gt)
+        )
+        self.assertIn(
+            "with 'No' standing for 'No' or 'Maybe'.",
+            Question2Tex.get_caption(qst, mc, flt, {"No": ["No", "Maybe"]})
+        )
+
     def test_raw_chart(self):
         """ We can create a raw chart. """
         question = self.survey.questions.get(text="Aèbc?")
