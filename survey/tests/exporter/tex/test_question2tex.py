@@ -90,6 +90,11 @@ class TestQuestion2Tex(TestManagement):
             Question2Tex.get_caption(qst, mc, ["Toto", "Titi", "Tutu"], gt)
         )
         self.assertIn(
+            "excluding 'Toto', and 'Left blank' ",
+            Question2Tex.get_caption(qst, mc, ["Toto", ""], gt,
+                                     {"Toto": 2, "": 1})
+        )
+        self.assertIn(
             "with 'No' standing for 'No' or 'Maybe'.",
             Question2Tex.get_caption(qst, mc, flt,
                                      {"No": ["No", "Maybe"], "Yes": ["Kay"]},

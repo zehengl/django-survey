@@ -188,6 +188,7 @@ class Question2Tex(object):
         if filter:
             caption += "{} ".format(_("excluding"))
             for i, excluded in enumerate(filter):
+                excluded = Question2Tex.get_clean_answer(excluded)
                 caption += "'{}', ".format(excluded)
                 if len(filter) >= 2 and i == len(filter) - 2:
                     caption += "{} ".format(_("and"))
