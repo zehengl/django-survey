@@ -12,6 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ungettext
 from future import standard_library
 
+from survey.models.question import Question
+
 standard_library.install_aliases()
 
 
@@ -173,7 +175,8 @@ class Question2Tex(object):
 
     @staticmethod
     def get_caption(question, min_cardinality, filter, group_together,
-                    cardinality=None):
+                    cardinality=None, group_by_letter_case=None,
+                    group_by_slugify=None,):
         """ Return a caption with an appropriate description of the chart. """
         caption = "{} ".format(_("Repartition of answers"))
         if min_cardinality > 0:
@@ -194,12 +197,25 @@ class Question2Tex(object):
             if cardinality is None:
                 loop_dict = group_together
             else:
-                # Looping only on the value really sued in the answers
+                # Looping only on the value really used in the answers
                 loop_dict = cardinality
             has_and = False
             for key in loop_dict:
                 values = group_together.get(key)
                 if values is None:
+                    # group_together does not contain every answers
+                    continue
+                standardized_values = Question.standardize_list(
+                    values, group_by_letter_case, group_by_slugify
+                )
+                standardized_key = Question.standardize(
+                    key, group_by_letter_case, group_by_slugify
+                )
+                relevant_values = [v for v in standardized_values
+                                   if v != standardized_key]
+                if not relevant_values:
+                    # If there is no relevant value the group_together was just
+                    # a placeholder ex Yes for [yes Yës yEs]
                     continue
                 # We duplicate the translations so makemessage find it
                 caption += "with '{}' standing for ".format(key)
@@ -209,6 +225,7 @@ class Question2Tex(object):
                 has_and = True
                 caption += "{} ".format(_("and"))
             if has_and:
+                # We remove the final "and " if there is one
                 caption = caption[:-len("{} ".format(_("and")))]
         return "{}.".format(caption[:-1])
 
@@ -245,8 +262,10 @@ class Question2Tex(object):
         results = Question2Tex.get_results(cardinality, sort_answer)
         if not results:
             return str(_("No answers for this question."))
-        caption = Question2Tex.get_caption(question, min_cardinality, filter,
-                                           group_together, cardinality)
+        caption = Question2Tex.get_caption(
+            question, min_cardinality, filter, group_together, cardinality,
+            group_by_letter_case, group_by_slugify
+        )
         return """
 \\begin{figure}[h!]
     \\begin{tikzpicture}

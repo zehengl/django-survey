@@ -91,6 +91,13 @@ class TestQuestion2Tex(TestManagement):
                                      {"No": ["No", "Maybe"], "Yes": ["Kay"]},
                                      {"No": 2})
         )
+        # We do not signal if group_together is just a placeholder.
+        self.assertIn(
+            "Repartition of answers for the question 'Cède?'.",
+            Question2Tex.get_caption(qst, mc, flt,
+                                     {"No": ["No", "Nö", "NO"]},
+                                     {"No": 2}, True, True)
+        )
         self.assertIn(
             "Repartition of answers for the question 'Cède?'.",
             Question2Tex.get_caption(qst, mc, flt, {"Yes": ["Kay"]}, {"No": 2})
