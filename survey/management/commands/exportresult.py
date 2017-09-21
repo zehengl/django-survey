@@ -39,11 +39,15 @@ class Command(SurveyCommand):
         )
         parser.add_argument(
             '--csv', action="store_true",
-            help='Force the generation, even if the file already exists.'
+            help='Without this option we do not export as csv.'
         )
         parser.add_argument(
             '--tex', action="store_true",
-            help='Force the generation, even if the file already exists.'
+            help='Without this option we do not export as tex.'
+        )
+        parser.add_argument(
+            '--pdf', action="store_true",
+            help='Equivalent to --tex but we will also try to compile the pdf.'
         )
         parser.add_argument(
             '--language',
@@ -55,8 +59,8 @@ class Command(SurveyCommand):
         super(Command, self).handle(*args, **options)
         translation.activate(options.get("language"))
         configuration = Configuration(options["configuration_file"][0])
-        if not options["csv"] and not options["tex"]:
-            exit("Nothing to do : add option --tex, --csv, or both.")
+        if not options["csv"] and not options["tex"] and not options["pdf"]:
+            exit("Nothing to do : add option --tex or --pdf, --csv,  or both.")
         if self.survey is None:
             surveys = Survey.objects.all()
         else:
@@ -66,11 +70,13 @@ class Command(SurveyCommand):
             exporters = []
             if options["csv"]:
                 exporters.append(Survey2Csv(survey))
-            if options["tex"]:
+            if options["tex"] or options["pdf"]:
                 exporters.append(Survey2Tex(survey, configuration))
             for exporter in exporters:
                 if options["force"] or exporter.need_update():
                     exporter.generate_file()
+                    if options["pdf"] and type(exporter) is Survey2Tex:
+                        exporter.generate_pdf()
                 else:
                     LOGGER.info("\t- %s's %s were already generated use the\
  --force (-f) option to generate anyway.", survey, exporter._get_X())

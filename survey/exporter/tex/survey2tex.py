@@ -68,7 +68,7 @@ class Survey2Tex(Survey2X):
 """ % (section_title, question.pk, question_synthesis)
 
     def generate(self, path, output=None):
-        """ Generate the pdf. """
+        """ Compile the pdf from the tex file. """
         dir_name, file_name = os.path.split(path)
         os.chdir(dir_name)
         os.system("pdflatex {}".format(file_name))
@@ -89,6 +89,7 @@ class Survey2Tex(Survey2X):
         self._additional_analysis(self.survey, ltxf)
         return ltxf.document
 
-    def generate_file(self):
-        super(Survey2Tex, self).generate_file()
+    def generate_pdf(self):
+        """ Compile the pdf from the tex file. """
+        self.generate_file()
         self.generate(self.file_name())
