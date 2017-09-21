@@ -6,6 +6,7 @@ from __future__ import (
 
 import logging
 
+from django.utils import translation
 from future import standard_library
 
 from survey.exporter.csv import Survey2Csv
@@ -44,9 +45,15 @@ class Command(SurveyCommand):
             '--tex', action="store_true",
             help='Force the generation, even if the file already exists.'
         )
+        parser.add_argument(
+            '--language',
+            help='Permit to change the language used for generation (default '
+                 'is defined in the settings).'
+        )
 
     def handle(self, *args, **options):
         super(Command, self).handle(*args, **options)
+        translation.activate(options.get("language"))
         configuration = Configuration(options["configuration_file"][0])
         if not options["csv"] and not options["tex"]:
             exit("Nothing to do : add option --tex, --csv, or both.")
