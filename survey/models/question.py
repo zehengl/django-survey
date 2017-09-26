@@ -5,6 +5,7 @@ from __future__ import (
 )
 
 from builtins import object, super
+import logging
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -14,6 +15,9 @@ from future import standard_library
 
 from .category import Category
 from .survey import Survey
+
+
+LOGGER = logging.getLogger(__name__)
 
 standard_library.install_aliases()
 
@@ -171,6 +175,27 @@ class Question(models.Model):
                     temp[value] = cardinality[value]
             cardinality = temp
         return cardinality
+
+    def sorted_answers_cardinality(self, sort_answer=None, **kwargs):
+        """ Mostly to have reliable tests, but marginally nicer too...
+
+        The ordering is reversed for same cardinality value so we have aa
+        before zz. """
+        cardinality = self.answers_cardinality(**kwargs)
+        if sort_answer is None or sort_answer == "alphanumeric":
+            return sorted(cardinality.items())
+        if type(sort_answer) is dict:
+            # User defined dict
+            return sorted(cardinality.items(),
+                          key=lambda x: sort_answer.get(x[0]))
+        if sort_answer == "cardinal":
+            return sorted(cardinality.items(), key=lambda x: (-x[1], x[0]))
+        LOGGER.warning(
+            "Unrecognized option '%s' for 'sort_answer': %s", sort_answer,
+            "use nothing, a dict (answer: rank), 'alphanumeric' or 'cardinal'."
+            " We used the default alphanumeric sorting."
+        )
+        return sorted(cardinality.items())
 
     def get_choices(self):
         """

@@ -32,6 +32,9 @@ adipiscing elit."
                 question=self.questions[0], body=choice,
                 response=Response.objects.create(survey=survey)
             )
+        # Shortcut for the first question's answer cardinality's function
+        self.ac = self.questions[0].answers_cardinality
+        self.sac = self.questions[0].sorted_answers_cardinality
 
     def test_unicode(self):
         """ Unicode generation. """
@@ -41,10 +44,10 @@ adipiscing elit."
         """ We can get a list of choices for a widget from choices text. """
         self.questions[0].choices = "A éa,B éb"
         self.assertEqual(self.questions[0].get_choices(),
-                         ((u'a-ea', u'A éa'), (u'b-eb', u'B éb')))
+                         (('a-ea', 'A éa'), ('b-eb', 'B éb')))
         self.questions[0].choices = "A()a,  ,C()c"
         self.assertEqual(self.questions[0].get_choices(),
-                         ((u'aa', u'A()a'), (u'cc', u'C()c')))
+                         (('aa', 'A()a'), ('cc', 'C()c')))
 
     def test_validate_choices(self):
         """  List are validated for comma. """
@@ -65,7 +68,7 @@ adipiscing elit."
         """ We can get a list of answers to this question. """
         qat = self.question.answers_as_text
         self.assertEqual(3, len(qat))
-        expected = [u"Yës", u'Maybe', u"Yës"]
+        expected = [u"Yës", 'Maybe', u"Yës"]
         expected.sort()
         qat.sort()
         self.assertEqual(qat, expected)
@@ -78,67 +81,72 @@ adipiscing elit."
                          {"Other": 1, u"Yës": 2})
         question = Question.objects.get(text="Ipsum dolor sit amët, <strong> \
 consectetur </strong>  adipiscing elit.")
-        self.assertEqual({u'No': 1, "Yës": 1},
+        self.assertEqual({'No': 1, "Yës": 1},
                          question.answers_cardinality())
         question = Question.objects.get(text="Dolor sit amët, <strong> \
 consectetur</strong>  adipiscing elit.")
-        self.assertEqual({u'': 1, u'Text for a response': 1},
+        self.assertEqual({'': 1, 'Text for a response': 1},
                          question.answers_cardinality())
         question = Question.objects.get(text="Ipsum dolor sit amët, consectetur\
  <strong> adipiscing </strong> elit.")
-        self.assertEqual({u'1': 1, "2": 1}, question.answers_cardinality())
+        self.assertEqual({'1': 1, "2": 1}, question.answers_cardinality())
         question = Question.objects.get(text="Dolor sit amët, consectetur<stron\
 g>  adipiscing</strong>  elit.")
-        self.assertEqual({u'No': 1, u'Whatever': 1, u'Yës': 1},
+        self.assertEqual({'No': 1, 'Whatever': 1, 'Yës': 1},
                          question.answers_cardinality())
         self.assertEqual(
-            {u'Näh': 2, u'Yës': 1},
+            {'Näh': 2, 'Yës': 1},
             question.answers_cardinality(
                 group_together={"Näh": ["No", "Whatever"]}
             )
         )
 
     def test_answers_cardinality_grouped(self):
-        """ We can group answers following letter case or slugifying. """
-        crd = self.questions[0].answers_cardinality()
-        self.assertEqual(crd, {u'abé cé': 1, u'Abé Cé': 1, u'Abë-cè': 1,
-                               u'dé': 1, u'dë': 1, u'Dé': 1, })
-        crd = self.questions[0].answers_cardinality(
-            group_together={
-                "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
-                "D": ["dé", "Dé", "dë"]
-            }
-        )
-        self.assertEqual(crd, {u'ABC': 3, u'D': 3})
-        crd = self.questions[0].answers_cardinality(group_by_letter_case=True)
-        self.assertEqual(crd, {u'abé cé': 2, u'abë-cè': 1, u'dé': 2, u'dë': 1})
-        crd = self.questions[0].answers_cardinality(group_by_slugify=True)
-        self.assertEqual(crd, {u'abe-ce': 3, u'de': 3})
-        crd = self.questions[0].answers_cardinality(
-            group_by_slugify=True, group_together={"ABCD": ["abe-ce", "de"], }
-        )
-        self.assertEqual(crd, {u'ABCD': 6})
-        crd = self.questions[0].answers_cardinality(
+        """ We can group answers foself.sac letter case or slugifying. """
+        self.assertEqual(self.ac(), {'abé cé': 1, 'Abé Cé': 1, 'Abë-cè': 1,
+                                     'dé': 1, 'dë': 1, 'Dé': 1, })
+        rslt = self.ac(group_together={"ABC": ["abé cé", "Abë-cè", "Abé Cé"],
+                                       "D": ["dé", "Dé", "dë"]})
+        self.assertEqual(rslt, {'ABC': 3, 'D': 3})
+        rslt = self.ac(group_by_letter_case=True)
+        self.assertEqual(rslt, {'abé cé': 2, 'abë-cè': 1, 'dé': 2, 'dë': 1})
+        rslt = self.ac(group_by_slugify=True)
+        self.assertEqual(rslt, {'abe-ce': 3, 'de': 3})
+        rslt = self.ac(group_by_slugify=True,
+                       group_together={"ABCD": ["abe-ce", "de"]})
+        self.assertEqual(rslt, {'ABCD': 6})
+        rslt = self.ac(
             group_by_letter_case=True,
-            group_together={"ABCD": ["Abë-cè", "Abé Cé", "Dé", "dë"], }
+            group_together={"ABCD": ["Abë-cè", "Abé Cé", "Dé", "dë"]}
         )
-        self.assertEqual(crd, {u'ABCD': 6})
+        self.assertEqual(rslt, {'ABCD': 6})
 
     def test_answers_cardinality_filtered(self):
         """ We can filter answer with a csv string. """
-        crd = self.questions[0].answers_cardinality(filter=["abé cé", "Abë-cè"],
-                                                    group_by_slugify=True)
-        self.assertEqual(crd, {u'de': 3})
-        crd = self.questions[0].answers_cardinality(filter=["abe-ce"],
-                                                    group_by_slugify=True)
-        self.assertEqual(crd, {u'de': 3})
-        crd = self.questions[0].answers_cardinality(
+        rslt = self.ac(filter=["abé cé", "Abë-cè"], group_by_slugify=True)
+        self.assertEqual(rslt, {'de': 3})
+        rslt = self.ac(filter=["abe-ce"], group_by_slugify=True)
+        self.assertEqual(rslt, {'de': 3})
+        rslt = self.ac(
             group_together={"ABC": ["abe-ce"], }, filter=["ABC"],
             group_by_slugify=True
         )
-        self.assertEqual(crd, {u'de': 3})
-        crd = self.questions[0].answers_cardinality(filter=["abé cé", "Abë-cè"],
-                                                    group_by_letter_case=True)
-        self.assertEqual(crd, {u'dé': 2, u'dë': 1})
-        crd = self.questions[0].answers_cardinality(filter=["abé cé", "Abë-cè"])
-        self.assertEqual(crd, {u'Abé Cé': 1, u'dé': 1, u'dë': 1, u'Dé': 1, })
+        self.assertEqual(rslt, {'de': 3})
+        rslt = self.ac(filter=["abé cé", "Abë-cè"], group_by_letter_case=True)
+        self.assertEqual(rslt, {'dé': 2, 'dë': 1})
+        rslt = self.ac(filter=["abé cé", "Abë-cè"])
+        self.assertEqual(rslt, {'Abé Cé': 1, 'dé': 1, 'dë': 1, 'Dé': 1, })
+
+    def test_sorted_answers_cardinality(self):
+        """ We can sort answer with the sort_answer parameter. """
+        alphanumeric = [('abé cé', 2), ('abë-cè', 1), ('dé', 2), ('dë', 1)]
+        cardinal = [('abé cé', 2), ('dé', 2), ('abë-cè', 1), ('dë', 1)]
+        user_defined = {"dé": 1, 'abë-cè': 2, 'dë': 3, 'abé cé': 4, }
+        specific = [('dé', 2), ('abë-cè', 1), ('dë', 1), ('abé cé', 2), ]
+        self.assertEqual(self.sac(group_by_letter_case=True), alphanumeric)
+        rslt = self.sac(group_by_letter_case=True, sort_answer="alphanumeric")
+        self.assertEqual(rslt, alphanumeric)
+        rslt = self.sac(group_by_letter_case=True, sort_answer="cardinal")
+        self.assertEqual(rslt, cardinal)
+        rslt = self.sac(group_by_letter_case=True, sort_answer=user_defined)
+        self.assertEqual(rslt, specific)
