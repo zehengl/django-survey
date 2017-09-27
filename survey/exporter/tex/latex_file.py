@@ -20,12 +20,9 @@ class LatexFile(object):
     """ Permit to handle the content of a LatexFile """
 
     def __init__(self, document_class, document_option=None, header=None,
-                 intro=None,                 footer=None, date=None, **kwargs):
-        LOGGER.debug(
-            "Creating a document skeleton with document_class=%s, \
-document_option=%s, header=%s, intro=%s, footer=%s, date=%s",
-            document_class, document_option, header, intro, footer, date
-        )
+                 intro=None, footer=None, date=None, **kwargs):
+        LOGGER.debug("Creating a document skeleton with document_class=%s, "
+                     "document_option=%s", document_class, document_option)
         self.document_class = document_class
         self.text = ""
         self.document_option = self.set_value(document_option)
