@@ -6,7 +6,6 @@ from __future__ import (
 
 import logging
 import os
-from builtins import super
 
 from django.conf import settings
 from future import standard_library
@@ -14,6 +13,9 @@ from future import standard_library
 from survey.exporter.survey2x import Survey2X
 from survey.exporter.tex.latex_file import LatexFile
 from survey.exporter.tex.question2tex import Question2Tex
+from survey.exporter.tex.question2tex_chart import Question2TexChart
+from survey.exporter.tex.question2tex_raw import Question2TexRaw
+from survey.exporter.tex.question2tex_sankey import Question2TexSankey
 
 standard_library.install_aliases()
 
@@ -48,14 +50,20 @@ class Survey2Tex(Survey2X):
             multiple_charts = {"": options.get("chart")}
         question_synthesis = ""
         i = 0
-        for chart_title, chart_options in multiple_charts.items():
+        for chart_title, opts in multiple_charts.items():
             i += 1
             if chart_title:
-                # "" is False by default we
+                # "" is False, by default we do not add section or anything
                 mct = options["multiple_chart_type"]
                 question_synthesis += "\%s{%s}" % (mct, chart_title)
-            question_synthesis += Question2Tex().chart(question, latex_label=i,
-                                                       **chart_options)
+            tex_type = opts.get("type")
+            if tex_type == "raw":
+                q2tex = Question2TexRaw(question, **opts)
+            elif tex_type == "sankey":
+                q2tex = Question2TexSankey(question)
+            else:
+                q2tex = Question2TexChart(question, latex_label=i, **opts)
+            question_synthesis += q2tex.tex()
         section_title = Question2Tex.html2latex(question.text)
         return u"""
 \\clearpage{}

@@ -4,8 +4,8 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-from builtins import object, super
 import logging
+from builtins import object, super
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -15,7 +15,6 @@ from future import standard_library
 
 from .category import Category
 from .survey import Survey
-
 
 LOGGER = logging.getLogger(__name__)
 
@@ -49,6 +48,7 @@ def validate_choices(choices):
 
 
 class Question(models.Model):
+
     TEXT = 'text'
     SHORT_TEXT = 'short-text'
     RADIO = 'radio'
@@ -176,12 +176,19 @@ class Question(models.Model):
             cardinality = temp
         return cardinality
 
-    def sorted_answers_cardinality(self, sort_answer=None, **kwargs):
+    def sorted_answers_cardinality(self, min_cardinality=None,
+                                   group_together=None,
+                                   group_by_letter_case=None,
+                                   group_by_slugify=None, filter=None,
+                                   sort_answer=None):
         """ Mostly to have reliable tests, but marginally nicer too...
 
         The ordering is reversed for same cardinality value so we have aa
         before zz. """
-        cardinality = self.answers_cardinality(**kwargs)
+        cardinality = self.answers_cardinality(
+            min_cardinality, group_together, group_by_letter_case,
+            group_by_slugify, filter
+        )
         if sort_answer is None or sort_answer == "alphanumeric":
             return sorted(cardinality.items())
         if type(sort_answer) is dict:

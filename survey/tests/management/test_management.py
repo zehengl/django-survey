@@ -80,8 +80,8 @@ class TestManagement(BaseTest):
         number_of_question = 10
         number_of_participant = 100
         ranking_survey = Survey.objects.create(
-           name=ranking_survey_name, is_published=True,
-           need_logged_user=False, display_by_question=True,
+            name=ranking_survey_name, is_published=True,
+            need_logged_user=False, display_by_question=True,
         )
         questions = []
         question_choices = ["1, 2,3,4,5"]

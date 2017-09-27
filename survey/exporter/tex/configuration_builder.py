@@ -36,9 +36,7 @@ class ConfigurationBuilder(Configuration):
         """ Return the default configuration. """
         default_value_generic = self._conf["generic"]
         default_value_chart = self._conf["generic"]["chart"]
-        default_values = {
-              "chart": default_value_chart,
-        }
+        default_values = {"chart": default_value_chart, }
         for survey in Survey.objects.all():
             if self._conf.get(survey.name) is None:
                 self._conf[survey.name] = default_value_generic
