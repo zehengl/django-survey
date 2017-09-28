@@ -7,11 +7,14 @@ from __future__ import (
 import logging
 from builtins import object, super
 
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from future import standard_library
+
+from survey.models.response import Response
 
 from .category import Category
 from .survey import Survey
@@ -111,12 +114,6 @@ class Question(models.Model):
                 answers_as_text.append(value)
         return answers_as_text
 
-    def _cardinality_plus_n(self, cardinality, value, n):
-        try:
-            cardinality[value] += n
-        except KeyError:
-            cardinality[value] = n
-
     @staticmethod
     def standardize(value, group_by_letter_case=None, group_by_slugify=None):
         """ Standardize a value in order to group by slugify or letter case """
@@ -177,33 +174,31 @@ class Question(models.Model):
                     other_question, other_question.__class__.__name__
                 )
                 raise TypeError(msg)
-            else:
-                raise NotImplementedError("Sorry, we're working on it.")
-        return self.__answer_cardinality(
+        return self.__answers_cardinality(
             min_cardinality, group_together, group_by_letter_case,
             group_by_slugify, filter, standardized_filter, other_question
         )
 
-    def __answer_cardinality(self, min_cardinality, group_together,
-                             group_by_letter_case, group_by_slugify,
-                             filter, standardized_filter, other_question):
-        cardinality = OrderedDict()
+    def __answers_cardinality(self, min_cardinality, group_together,
+                              group_by_letter_case, group_by_slugify,
+                              filter, standardized_filter, other_question):
+        cardinality = {}
         for answer in self.answers.all():
-            # user = answer.response.user
-            # if user is not None and other_question is not None:
-            #       print(user, other_question)
             for value in answer.values:
-                value = Question.standardize(value, group_by_letter_case,
-                                             group_by_slugify)
-                for key, values in group_together.items():
-                    grouped_values = Question.standardize_list(
-                        values, group_by_letter_case, group_by_slugify
-                    )
-                    if value in grouped_values:
-                        value = key
-
+                value = self.__get_cardinality_value(
+                    value, group_by_letter_case, group_by_slugify,
+                    group_together
+                )
                 if value not in filter and value not in standardized_filter:
-                    self._cardinality_plus_n(cardinality, value, 1)
+                    user = answer.response.user
+                    if other_question is None or user is None:
+                        self._cardinality_plus_n(cardinality, value, 1)
+                    else:
+                        self.__add_user_cardinality(
+                            cardinality, user, value, other_question,
+                            group_by_letter_case, group_by_slugify,
+                            group_together
+                        )
         if min_cardinality != 0:
             temp = {}
             for value in cardinality:
@@ -241,6 +236,68 @@ class Question(models.Model):
             " We used the default alphanumeric sorting."
         )
         return sorted(cardinality.items())
+
+    def _cardinality_plus_answer(self, cardinality, value,
+                                 other_question_value):
+        """ The user answered 'value' to our question and
+        'other_question_value' to the other question. """
+        if cardinality.get(value) is None:
+            cardinality[value] = {other_question_value: 1}
+        elif isinstance(cardinality[value], int):
+            # Previous answer did not had an answer to other question
+            cardinality[value] = {
+                _(settings.USER_DID_NOT_ANSWER): cardinality[value],
+                other_question_value: 1, }
+        else:
+            if cardinality[value].get(other_question_value) is None:
+                cardinality[value][other_question_value] = 1
+            else:
+                cardinality[value][other_question_value] += 1
+
+    def _cardinality_plus_n(self, cardinality, value, n):
+        """ We don't know what is the answer to other question but the
+        user answered 'value'. """
+        if cardinality.get(value) is None:
+            cardinality[value] = n
+        elif isinstance(cardinality[value], int):
+            cardinality[value] += n
+        else:
+            cardinality[value][_(settings.USER_DID_NOT_ANSWER)] += n
+
+    def __get_cardinality_value(self, value, group_by_letter_case,
+                                group_by_slugify, group_together):
+        """ Return the value we should use for cardinality. """
+        value = Question.standardize(value, group_by_letter_case,
+                                     group_by_slugify)
+        for key, values in group_together.items():
+            grouped_values = Question.standardize_list(
+                values, group_by_letter_case, group_by_slugify
+            )
+            if value in grouped_values:
+                value = key
+        return value
+
+    def __add_user_cardinality(self, cardinality, user, value, other_question,
+                               group_by_letter_case, group_by_slugify,
+                               group_together):
+        found_answer = False
+        for other_answer in other_question.answers.all():
+            if other_answer.response.user == user:
+                # We suppose there is only a response per user
+                # Why would you want this info if it is
+                # possible to answer multiple time ?
+                found_answer = True
+                break
+        if found_answer:
+            values = other_answer.values
+        else:
+            values = [_(settings.USER_DID_NOT_ANSWER)]
+        for other_value in values:
+            other_value = self.__get_cardinality_value(
+                other_value, group_by_letter_case, group_by_slugify,
+                group_together
+            )
+            self._cardinality_plus_answer(cardinality, value, other_value)
 
     def get_choices(self):
         """

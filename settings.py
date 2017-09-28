@@ -23,6 +23,8 @@ DATABASES = {
     }
 }
 
+USER_DID_NOT_ANSWER = "Left blank"
+
 TEX_CONFIGURATION_FILE = os.path.join(ROOT, "example_conf.yaml")
 SURVEY_DEFAULT_PIE_COLOR = "red!50"
 

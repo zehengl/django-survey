@@ -7,6 +7,7 @@ from __future__ import (
 import logging
 from builtins import object
 
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from future import standard_library
 
@@ -61,7 +62,7 @@ class Question2Tex(object):
     @staticmethod
     def get_clean_answer(answer):
         if not answer or answer == "[]":
-            answer = _("Left blank")
+            answer = _(settings.USER_DID_NOT_ANSWER)
         else:
             replace_list = [",", "\n", "\r", "/", " "]
             for char in replace_list:

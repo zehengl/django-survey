@@ -6,7 +6,10 @@ from __future__ import (
 
 from builtins import str
 
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 from future import standard_library
 
 from survey.models import Answer, Question, Response, Survey
@@ -22,16 +25,25 @@ class TestQuestion(BaseModelTest):
         text = "Lorem ipsum dolor sit amët, <strong> consectetur </strong> \
 adipiscing elit."
         self.question = Question.objects.get(text=text)
-        self.questions[0].choices = "abé cé, Abë-cè, Abé Cé, dé, Dé, dë"
-        survey = Survey.objects.create(
+        choices = "abé cé, Abë-cè, Abé Cé, dé, Dé, dë"
+        self.questions[0].choices = choices
+        self.questions[2].choices = choices
+        self.survey = Survey.objects.create(
             name="Test", is_published=True, need_logged_user=False,
             display_by_question=False
         )
-        for choice in self.questions[0].choices.split(", "):
-            Answer.objects.create(
-                question=self.questions[0], body=choice,
-                response=Response.objects.create(survey=survey)
-            )
+        user_number = len(self.questions[0].choices.split(", "))
+        for i in range(user_number):
+            user = User.objects.create(username="User {}".format(i))
+            Response.objects.create(survey=self.survey, user=user)
+        for i, choice in enumerate(self.questions[0].choices.split(", ")):
+            user = User.objects.get(username="User {}".format(i))
+            response = Response.objects.get(user=user, survey=self.survey)
+            Answer.objects.create(question=self.questions[0], body=choice,
+                                  response=response)
+            q2_choice = "dë" if "b" in choice else "Abë-cè"
+            Answer.objects.create(question=self.questions[2], body=q2_choice,
+                                  response=response)
         # Shortcut for the first question's answer cardinality's function
         self.ac = self.questions[0].answers_cardinality
         self.sac = self.questions[0].sorted_answers_cardinality
@@ -136,6 +148,37 @@ g>  adipiscing</strong>  elit.")
         self.assertEqual(rslt, {'dé': 2, 'dë': 1})
         rslt = self.ac(filter=["abé cé", "Abë-cè"])
         self.assertEqual(rslt, {'Abé Cé': 1, 'dé': 1, 'dë': 1, 'Dé': 1, })
+
+    def test_answers_cardinality_linked(self):
+        """ We can get the answer to another question instead"""
+        q1ac = self.questions[0].answers_cardinality
+        self.assertRaises(TypeError, q1ac, other_question="str")
+        q2 = self.questions[2]
+        self.assertEqual(q1ac(other_question=q2),
+                         {'abé cé': {'dë': 1},
+                          'Abë-cè': {'dë': 1},
+                          'Abé Cé': {'dë': 1},
+                          'dé': {'Abë-cè': 1},
+                          'Dé': {'Abë-cè': 1},
+                          'dë': {'Abë-cè': 1}, })
+        card = q1ac(other_question=q2, group_together={
+            "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
+            "D": ["dé", "Dé", "dë"]
+        })
+        self.assertEqual(card, {"ABC": {"D": 3}, "D": {"ABC": 3}})
+        for i in [0, 2]:
+            user = User.objects.get(username="User {}".format(i))
+            response = Response.objects.get(survey=self.survey, user=user)
+            answer = Answer.objects.get(question=q2, response=response)
+            # print("Deleting, ", answer)
+            answer.delete()
+        card = q1ac(other_question=q2, group_together={
+            "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
+            "D": ["dé", "Dé", "dë"]
+        })
+        self.assertEqual(card,
+                         {"ABC": {"D": 1, _(settings.USER_DID_NOT_ANSWER): 2},
+                          "D": {"ABC": 3}})
 
     def test_sorted_answers_cardinality(self):
         """ We can sort answer with the sort_answer parameter. """

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-20 10:56+0000\n"
+"POT-Creation-Date: 2017-09-28 16:01+0000\n"
 "PO-Revision-Date: 2017-09-20 10:58+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,52 +34,51 @@ msgstr "Marquer le questionnaire comme publié"
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: survey/exporter/tex/question2tex.py:94
-#: survey/exporter/tex/question2tex.py:111
+#: survey/exporter/tex/question2tex_chart.py:82
 msgid "Left blank"
 msgstr "Laissé vide"
 
-#: survey/exporter/tex/question2tex.py:171
-msgid "Participant"
-msgstr "Participant"
-
-#: survey/exporter/tex/question2tex.py:177
+#: survey/exporter/tex/question2tex_chart.py:130
 msgid "Repartition of answers"
 msgstr "Répartition des réponses"
 
-#: survey/exporter/tex/question2tex.py:179
+#: survey/exporter/tex/question2tex_chart.py:133
 msgid "with"
 msgstr "avec"
 
-#: survey/exporter/tex/question2tex.py:180
+#: survey/exporter/tex/question2tex_chart.py:135
 #, python-format
 msgid "%(min_cardinality)d respondants or more"
 msgid_plural "%(min_cardinality)d respondant or more"
 msgstr[0] "%(min_cardinality)d réponse ou plus"
 msgstr[1] "%(min_cardinality)d réponses ou plus"
 
-#: survey/exporter/tex/question2tex.py:185
+#: survey/exporter/tex/question2tex_chart.py:141
 msgid "excluding"
 msgstr "excluant"
 
-#: survey/exporter/tex/question2tex.py:190
-#| msgid "question"
-msgid "for the question"
-msgstr "pour la question"
-
-#: survey/exporter/tex/question2tex.py:197
-#: survey/exporter/tex/question2tex.py:198
-msgid "or"
-msgstr "ou"
-
-#: survey/exporter/tex/question2tex.py:199
-#: survey/exporter/tex/question2tex.py:200
+#: survey/exporter/tex/question2tex_chart.py:146
+#: survey/exporter/tex/question2tex_chart.py:181
+#: survey/exporter/tex/question2tex_chart.py:184
 msgid "and"
 msgstr "et"
 
-#: survey/exporter/tex/question2tex.py:235
+#: survey/exporter/tex/question2tex_chart.py:149
+msgid "for the question"
+msgstr "pour la question"
+
+#: survey/exporter/tex/question2tex_chart.py:178
+#: survey/exporter/tex/question2tex_chart.py:179
+msgid "or"
+msgstr "ou"
+
+#: survey/exporter/tex/question2tex_chart.py:195
 msgid "No answers for this question."
 msgstr "Aucune réponse pour cette question."
+
+#: survey/exporter/tex/question2tex_raw.py:34
+msgid "Participant"
+msgstr "Participant"
 
 #: survey/models/category.py:28
 msgid "category"
@@ -89,51 +88,47 @@ msgstr "catégorie"
 msgid "categories"
 msgstr "catégories"
 
-#: survey/models/question.py:26
+#: survey/models/question.py:32
 msgid ""
 "The choices field is only used if the question type\n"
 "if the question type is 'radio', 'select', or\n"
 "'select multiple' provide a comma-separated list of\n"
 "options for this question ."
-msgstr ""
-"Le champ choix est utilisé seulement si la question est de type 'bouton "
-"radio', 'liste déroulante', ou 'liste à choix multiple', il faut fournir la "
-"liste des options pour cette question sous la forme d'une liste séparée par "
-"des virgules."
+msgstr "Le champ choix est utilisé seulement si la question est de type 'bouton radio', 'liste déroulante', ou 'liste à choix multiple', il faut fournir la liste des options pour cette question sous la forme d'une liste séparée par des virgules."
 
-#: survey/models/question.py:57
+#: survey/models/question.py:64
 msgid "text (multiple line)"
 msgstr "Texte (plusieurs lignes)"
 
-#: survey/models/question.py:58
+#: survey/models/question.py:65
 msgid "short text (one line)"
 msgstr "Texte court (une ligne)"
 
-#: survey/models/question.py:59
+#: survey/models/question.py:66
 msgid "radio"
 msgstr "Bouton radio"
 
-#: survey/models/question.py:60
+#: survey/models/question.py:67
 msgid "select"
 msgstr "Liste déroulante"
 
-#: survey/models/question.py:61
+#: survey/models/question.py:68
 msgid "Select Multiple"
 msgstr "Liste à choix multiple"
 
-#: survey/models/question.py:62
+#: survey/models/question.py:69
 msgid "Select Image"
 msgstr "Séléctionnez l'image"
 
-#: survey/models/question.py:63
+#: survey/models/question.py:70
 msgid "integer"
 msgstr "Chiffre"
 
-#: survey/models/question.py:78
+#: survey/models/question.py:85
 msgid "question"
 msgstr "question"
 
-#: survey/models/question.py:79
+#: survey/models/question.py:86
 msgid "questions"
 msgstr "questions"
 
@@ -202,4 +197,3 @@ msgstr "Questions"
 #: survey/templates/survey/survey.html:48
 msgid "I'm done!"
 msgstr "J'ai fini"
-
