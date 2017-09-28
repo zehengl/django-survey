@@ -16,6 +16,7 @@ from survey.exporter.tex.question2tex import Question2Tex
 from survey.exporter.tex.question2tex_chart import Question2TexChart
 from survey.exporter.tex.question2tex_raw import Question2TexRaw
 from survey.exporter.tex.question2tex_sankey import Question2TexSankey
+from survey.models.question import Question
 
 standard_library.install_aliases()
 
@@ -58,12 +59,15 @@ class Survey2Tex(Survey2X):
                 question_synthesis += "\%s{%s}" % (mct, chart_title)
             tex_type = opts.get("type")
             if tex_type == "raw":
-                q2tex = Question2TexRaw(question, **opts)
+                question_synthesis += Question2TexRaw(question, **opts).tex()
             elif tex_type == "sankey":
+                other_question_text = opts["question"]
+                other_question = Question.objects.get(text=other_question_text)
                 q2tex = Question2TexSankey(question)
+                question_synthesis += q2tex.tex(other_question)
             else:
                 q2tex = Question2TexChart(question, latex_label=i, **opts)
-            question_synthesis += q2tex.tex()
+                question_synthesis += q2tex.tex()
         section_title = Question2Tex.html2latex(question.text)
         return u"""
 \\clearpage{}

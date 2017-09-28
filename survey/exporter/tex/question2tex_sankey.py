@@ -5,13 +5,13 @@ from __future__ import (
 )
 
 import logging
-from builtins import object
 
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ungettext
 from future import standard_library
+from pandas.core.frame import DataFrame
 
+from survey.exporter.tex.question2tex import Question2Tex
+from survey.exporter.tex.sankey import sankey
 from survey.models.question import Question
 
 standard_library.install_aliases()
@@ -20,101 +20,68 @@ standard_library.install_aliases()
 LOGGER = logging.getLogger(__name__)
 
 
-class Question2TexSankey(object):
+class Question2TexSankey(Question2Tex):
 
     """
         This class permit to generate latex code directly from the Question
         object.
     """
 
+    TEX_SKELETON = """
+\\begin{figure}[h!]
+    \\includegraphics[width=\\paperwidth]{%s}
+    \\caption{\\label{figure:q%dvsq%d}%s}
+\\end{figure}
+"""
+
+    def get_caption_specifics(self):
+        caption = "%s '%s' (%s) " % (
+            _("for the question"),
+            Question2Tex.html2latex(self.question.text),  _("left"),
+        )
+        caption += "%s '%s' (%s) " % (
+            _("in relation with the question"),
+            Question2Tex.html2latex(self.other_question.text), _("right"),
+        )
+        return caption
+
+    def __init__(self, question, **options):
+        super(Question2TexSankey, self).__init__(question, **options)
+        self.total_quantity = 120 % len(self.question.answers.all())
+
     def tex(self, other_question):
         """ Return a tikz Sankey Diagram of two questions.
+
+        The question used during initialization will be left and down the other
+        question will be right and up. Cardinality constraint used for the
+        other question are the same for both question.
 
         See this question https://tex.stackexchange.com/questions/40159/
         in order for it to work with your latex file.
 
-        :param Question question: Answers will be left and down
-        :param Question other_question: Answers will be right and up """
-        sankey = """
-\begin{tikzpicture}[x=1pt,y=1pt]
-
-  \begin{sankeydiagram}[
-    sankey tot length=90pt,%
-    sankey tot quantity=6,%
-    sankey min radius=15pt,%
-    sankey fill/.style={
-      draw,line width=0pt,
-      fill,
-      lime!50,
-    },
-    sankey draw/.style={
-      draw=black,
-      line width=1pt,
-      line cap=round,
-      line join=round,
-    },
-    sankey debug,
-    ]
-    \sankeynodestart{6}{-90}{p0}{0,100};
-    \sankeyadvance{p0}{50pt}
-
-    \sankeyfork{p0}{3/p1,3/p2}
-
-    \sankeyturn{p1}{90}
-    \sankeyadvance{p1}{20pt}
-
-    \sankeyadvance{p2}{60pt}
-
-    \sankeyfork{p2}{2/p3,1/p4}
-
-    \sankeyturn{p3}{90}
-    \sankeyadvance{p3}{50pt}
-
-    \sankeyfork{p3}{1/p5,1/p6}
-
-    \sankeyadvance{p5}{70pt}
-
-    \sankeyfork{p1}{1/p7,1/p8,1/p9}
-    \sankeyadvance{p7}{50pt}
-    \sankeyadvance{p9}{50pt}
-
-    \sankeyadvance{p4}{40pt}
-    \sankeyturn{p4}{90}
-    \sankeyadvance{p4}{65pt}
-
-    \sankeyadvance{p7}{40pt}
-
-    \sankeynode{3}{0}{p11}{[shift={(50pt,-15pt)}]p7}
-    \sankeyfork{p11}{1/p7a,1/p9a,1/p5a}
-    \path (p7) to[sankey flow] (p7a);
-    \path (p9) to[sankey flow] (p9a);
-    \path (p5) to[sankey flow] (p5a);
-    \sankeyadvance{p11}{30pt}
-    \sankeynodeend{3}{0}{p11}{p11}
-
-    {
-      \tikzset{
-        sankey fill/.append style={
-          line width=0pt,
-          lime!50!green!50,
-        }
-      }
-      \sankeyturn{p8}{-90}
-      \sankeyadvance{p8}{40pt}
-
-      \sankeyturn{p6}{-90}
-      \sankeyturn{p4}{-90}
-
-      \sankeynode{3}{-90}{p10}{[shift={(-15pt,-60pt)}]p8}
-      \sankeyfork{p10}{1/p8a,1/p6a,1/p4a}
-      \path (p4) to[sankey flow] (p4a);
-      \path (p6) to[sankey flow] (p6a);
-      \path (p8) to[sankey flow] (p8a);
-      \sankeyadvance{p10}{30pt}
-      \sankeynodeend{3}{-90}{p10}{p10}
-    }
-
-  \end{sankeydiagram}
-\end{tikzpicture}
-"""
-        return sankey
+        :param Question other_question: the question we compare to. """
+        if not isinstance(other_question, Question):
+            msg = "Expected a 'Question' and got '{}'".format(other_question)
+            msg += " (a '{}').".format(other_question.__class__.__name__)
+            raise TypeError(msg)
+        self.other_question = other_question
+        self.cardinality = self.question.sorted_answers_cardinality(
+            self.min_cardinality, self.group_together,
+            self.group_by_letter_case, self.group_by_slugify, self.filter,
+            self.sort_answer, other_question=other_question
+        )
+        q1 = []
+        q2 = []
+        for answer_to_q1, cardinality_to_q2 in self.cardinality.items():
+            for answer_to_q2, number_of_time in cardinality_to_q2.items():
+                for _ in range(number_of_time):
+                    q1.append(answer_to_q1)
+                    q2.append(answer_to_q2)
+        df = DataFrame(data={self.question.text: q1, other_question.text: q2})
+        name = "tex/q{}_vs_q{}".format(self.question.pk, other_question.pk)
+        sankey(df[self.question.text], df[other_question.text], aspect=20,
+               fontsize=10, figure_name=name)
+        return Question2TexSankey.TEX_SKELETON % (name[4:],
+                                                  self.question.pk,
+                                                  other_question.pk,
+                                                  self.get_caption())

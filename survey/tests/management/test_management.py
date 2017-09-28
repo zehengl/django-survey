@@ -73,7 +73,7 @@ class TestManagement(BaseTest):
             "[u'2e', u'2é', u'2ë']", "[u'3e', u'3é', u'3ë']"
         )
 
-    def create_big_ranking_survey(self):
+    def create_big_ranking_survey(self, with_user=False):
         """ Load a big survey with Anonymous user rating question from 1 to
         5 à la Amazon review."""
         ranking_survey_name = "Big ranking survey"
@@ -85,6 +85,9 @@ class TestManagement(BaseTest):
         )
         questions = []
         question_choices = ["1, 2,3,4,5"]
+        if with_user:
+            for j in range(number_of_participant):
+                User.objects.get_or_create(username=j)
         for i in range(number_of_question):
             question = Question.objects.create(
                 text="How much do you like question {} ?".format(i + 1),
@@ -93,7 +96,11 @@ class TestManagement(BaseTest):
             )
             questions.append(question)
         for j in range(number_of_participant):
-            response = Response.objects.create(survey=ranking_survey)
+            user = None
+            if with_user:
+                user = User.objects.get(username=j)
+            response = Response.objects.create(survey=ranking_survey,
+                                               user=user)
             for i, question in enumerate(questions):
                 answer = j % (i + 1) % 5 + 1
                 Answer.objects.create(response=response, question=question,

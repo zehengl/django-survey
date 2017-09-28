@@ -88,9 +88,14 @@ Test survëy:
                 explode: 0.5
 
         Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.:
-            chart:
-                type: polar
-                text: pin
+            multiple_charts:
+                Polar pin:
+                    type: polar
+                    text: pin
+                    radius: 1
+                Sankey:
+                    type: sankey
+                    question: Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.
 
         Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.:
             multiple_charts:

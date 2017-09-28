@@ -41,7 +41,10 @@ to render them.
 Submitted responses can be viewed via the admin backend, in an exported csv
 or in a pdf generated with latex. The way the pdf is generated is
 configurable in a yaml file, globally, survey by survey, or question by
-question. This is an example of a configuration file
+question. In order to render pdf you will need to install texlive and python-tk
+or python3-tk for sankey's diagram.
+
+This is an example of a configuration file
 
 #### Basic example
 
