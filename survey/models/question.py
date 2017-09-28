@@ -166,7 +166,7 @@ class Question(models.Model):
 
                 if value not in filter and value not in standardized_filter:
                     self._cardinality_plus_n(cardinality, value, 1)
-        if min_cardinality is not None:
+        if min_cardinality != 0:
             temp = {}
             for value in cardinality:
                 if cardinality[value] < min_cardinality:
