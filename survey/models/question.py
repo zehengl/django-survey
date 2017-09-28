@@ -137,9 +137,26 @@ class Question(models.Model):
 
     def answers_cardinality(self, min_cardinality=None, group_together=None,
                             group_by_letter_case=None, group_by_slugify=None,
-                            filter=None):
-        """ Return a dictionary with answers as key and cardinality as value
+                            filter=None, other_question=None):
+        """ Return a dictionary with answers as key and cardinality (int or
+            dict) as value
 
+        :param int min_cardinality: The minimum of answer we need to take it
+            into account.
+        :param dict group_together: A dictionary of value we need to group
+            together. The key (a string) is a placeholder for the list of value
+            it represent (A list of string)
+        :param boolean group_by_letter_case: If true we will group 'Aa' with
+            'aa and 'aA'. You can use group_together as a placeholder if you
+            want everything to be named 'Aa' and not 'aa'.
+        :param boolean group_by_slugify: If true we will group 'Aé b' with
+            'ae-b' and 'aè-B'. You can use group_together as a placeholder if
+            you want everything to be named 'Aé B' and not 'ae-b'.
+        :param list filter: We will exclude every string in this list.
+        :param Question other_question: Instead of returning the number of
+            person that answered the key as value, we will give the cardinality
+            for another answer taking only the user that answered the key into
+            account.
         :rtype: Dict """
         if min_cardinality is None:
             min_cardinality = 0
@@ -152,8 +169,29 @@ class Question(models.Model):
             standardized_filter = Question.standardize_list(
                 filter, group_by_letter_case, group_by_slugify
             )
+        if other_question is not None:
+            if not isinstance(other_question, Question):
+                msg = "Question.answer_cardinality expect a 'Question' for "
+                msg += "the 'other_question' parameter and got"
+                msg += " '{}' (a '{}')".format(
+                    other_question, other_question.__class__.__name__
+                )
+                raise TypeError(msg)
+            else:
+                raise NotImplementedError("Sorry, we're working on it.")
+        return self.__answer_cardinality(
+            min_cardinality, group_together, group_by_letter_case,
+            group_by_slugify, filter, standardized_filter, other_question
+        )
+
+    def __answer_cardinality(self, min_cardinality, group_together,
+                             group_by_letter_case, group_by_slugify,
+                             filter, standardized_filter, other_question):
         cardinality = OrderedDict()
         for answer in self.answers.all():
+            # user = answer.response.user
+            # if user is not None and other_question is not None:
+            #       print(user, other_question)
             for value in answer.values:
                 value = Question.standardize(value, group_by_letter_case,
                                              group_by_slugify)
