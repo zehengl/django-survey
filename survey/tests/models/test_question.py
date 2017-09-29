@@ -15,6 +15,11 @@ from future import standard_library
 from survey.models import Answer, Question, Response, Survey
 from survey.tests.models import BaseModelTest
 
+try:
+    from _collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
+
 standard_library.install_aliases()
 
 
@@ -84,6 +89,11 @@ adipiscing elit."
         expected.sort()
         qat.sort()
         self.assertEqual(qat, expected)
+
+    def test_answer_cardinality_type(self):
+        """ We always return an OrderedDict. """
+        self.assertIsInstance(self.ac(), OrderedDict)
+        self.assertIsInstance(self.sac(), OrderedDict)
 
     def test_answers_cardinality(self):
         """ We can get the cardinality of each answers. """
@@ -186,10 +196,11 @@ g>  adipiscing</strong>  elit.")
         cardinal = [('abé cé', 2), ('dé', 2), ('abë-cè', 1), ('dë', 1)]
         user_defined = {"dé": 1, 'abë-cè': 2, 'dë': 3, 'abé cé': 4, }
         specific = [('dé', 2), ('abë-cè', 1), ('dë', 1), ('abé cé', 2), ]
-        self.assertEqual(self.sac(group_by_letter_case=True), alphanumeric)
+        rslt = self.sac(group_by_letter_case=True)
+        self.assertEqual(rslt, OrderedDict(alphanumeric))
         rslt = self.sac(group_by_letter_case=True, sort_answer="alphanumeric")
-        self.assertEqual(rslt, alphanumeric)
+        self.assertEqual(rslt, OrderedDict(alphanumeric))
         rslt = self.sac(group_by_letter_case=True, sort_answer="cardinal")
-        self.assertEqual(rslt, cardinal)
+        self.assertEqual(rslt, OrderedDict(cardinal))
         rslt = self.sac(group_by_letter_case=True, sort_answer=user_defined)
-        self.assertEqual(rslt, specific)
+        self.assertEqual(rslt, OrderedDict(specific))

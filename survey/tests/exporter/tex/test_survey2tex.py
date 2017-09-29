@@ -33,6 +33,7 @@ class TestSurvey2Tex(TestManagement):
         should_contain = [
             "documentclass[11pt]{article}", "title{My title}",
             "Test management footer.", "Aèbc?", "Bècd?", "Cède?",
+            ""
         ]
         for text in should_contain:
             self.assertIn(text, generic)
@@ -40,6 +41,8 @@ class TestSurvey2Tex(TestManagement):
         should_contain = [
             "documentclass[11pt]{report}", "title{My title}",
             "This is the footer.", "{Lorem ipsum dolor sit amët",
+            "adipiscing}  elit.'", "with 'K.' standing for 'Yës' and with "
+            "'Nah' standing for 'No' or 'Whatever'"
         ]
         for text in should_contain:
             self.assertIn(text, specific)

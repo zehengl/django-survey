@@ -64,7 +64,7 @@ class Question2TexChart(Question2Tex):
         """
         colors = []
         for answer in self.cardinality:
-            answer = Question2Tex.get_clean_answer(answer[0])
+            answer = Question2Tex.get_clean_answer(answer)
             try:
                 colors.append(self.color[answer])
             except (KeyError, ValueError):
@@ -77,7 +77,7 @@ class Question2TexChart(Question2Tex):
     def get_results(self):
         """ Return a formated string for a tikz pgf-pie chart. """
         pie = u""
-        for answer, cardinality in self.cardinality:
+        for answer, cardinality in self.cardinality.items():
             if not answer:
                 ans = _("Left blank")
             ans = Question2Tex.get_clean_answer(answer)

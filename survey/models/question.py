@@ -182,7 +182,7 @@ class Question(models.Model):
     def __answers_cardinality(self, min_cardinality, group_together,
                               group_by_letter_case, group_by_slugify,
                               filter, standardized_filter, other_question):
-        cardinality = {}
+        cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
                 value = self.__get_cardinality_value(
@@ -223,19 +223,22 @@ class Question(models.Model):
             group_by_slugify, filter, other_question
         )
         if sort_answer is None or sort_answer == "alphanumeric":
-            return sorted(cardinality.items())
+            return OrderedDict(sorted(cardinality.items()))
         if type(sort_answer) is dict:
             # User defined dict
-            return sorted(cardinality.items(),
-                          key=lambda x: sort_answer.get(x[0]))
+            return OrderedDict(sorted(
+                cardinality.items(), key=lambda x: sort_answer.get(x[0])
+            ))
         if sort_answer == "cardinal":
-            return sorted(cardinality.items(), key=lambda x: (-x[1], x[0]))
+            return OrderedDict(sorted(
+                cardinality.items(), key=lambda x: (-x[1], x[0])
+            ))
         LOGGER.warning(
             "Unrecognized option '%s' for 'sort_answer': %s", sort_answer,
             "use nothing, a dict (answer: rank), 'alphanumeric' or 'cardinal'."
             " We used the default alphanumeric sorting."
         )
-        return sorted(cardinality.items())
+        return OrderedDict(sorted(cardinality.items()))
 
     def _cardinality_plus_answer(self, cardinality, value,
                                  other_question_value):

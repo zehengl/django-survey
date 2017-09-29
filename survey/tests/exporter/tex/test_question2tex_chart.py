@@ -122,6 +122,13 @@ class TestQuestion2TexChart(TestManagement):
         )
         self.assertIn("with 'No' standing for 'No' or 'Maybe'.",
                       get_result(**options))
+        options = get_options(
+            group_together={"No": ["No", "Maybe"], "Yes": ["Kay"]},
+            cardinality={"No": 2, "Yes": 1}
+        )
+        result = get_result(**options)
+        self.assertIn("'Yes' standing for 'Kay'", result)
+        self.assertIn("'No' standing for 'No' or 'Maybe'", result)
         # We do not signal if group_together is just a placeholder.
         options = get_options(
             group_together={"No": ["No", "Nö", "NO"]},
