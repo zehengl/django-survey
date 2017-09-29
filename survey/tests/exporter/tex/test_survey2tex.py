@@ -41,7 +41,7 @@ class TestSurvey2Tex(TestManagement):
         should_contain = [
             "documentclass[11pt]{report}", "title{My title}",
             "This is the footer.", "{Lorem ipsum dolor sit amët",
-            "adipiscing}  elit.'", "with 'K.' standing for 'Yës' and with "
+            "adipiscing}  elit.'", "with 'K.' standing for 'Yës'",
             "'Nah' standing for 'No' or 'Whatever'"
         ]
         for text in should_contain:

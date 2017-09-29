@@ -14,19 +14,17 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from future import standard_library
 
-from survey.models.response import Response
-
 from .category import Category
 from .survey import Survey
-
-LOGGER = logging.getLogger(__name__)
-
-standard_library.install_aliases()
 
 try:
     from _collections import OrderedDict
 except ImportError:
     from ordereddict import OrderedDict
+
+LOGGER = logging.getLogger(__name__)
+
+standard_library.install_aliases()
 
 
 CHOICES_HELP_TEXT = _(u"""The choices field is only used if the question type
@@ -48,6 +46,11 @@ def validate_choices(choices):
         msg = "The selected field requires an associated list of choices."
         msg += " Choices must contain more than one item."
         raise ValidationError(msg)
+
+
+class SortAnswer(object):
+    CARDINAL = "cardinal"
+    ALPHANUMERIC = "alphanumeric"
 
 
 class Question(models.Model):
@@ -222,23 +225,34 @@ class Question(models.Model):
             min_cardinality, group_together, group_by_letter_case,
             group_by_slugify, filter, other_question
         )
-        if sort_answer is None or sort_answer == "alphanumeric":
-            return OrderedDict(sorted(cardinality.items()))
-        if type(sort_answer) is dict:
-            # User defined dict
-            return OrderedDict(sorted(
+        # We handle SortAnswer without enum because using "type" as a variable
+        # name break the enum module and we want to use type in
+        # answer_cardinality for simplicity
+        possibles_values = [SortAnswer.ALPHANUMERIC, SortAnswer.CARDINAL]
+        undefined = sort_answer is None
+        user_defined = isinstance(sort_answer, dict)
+        valid = user_defined or sort_answer in possibles_values
+        if not valid:
+            msg = "Unrecognized option '%s' for 'sort_answer': " % sort_answer
+            msg += "use nothing, a dict (answer: rank), "
+            for option in possibles_values:
+                msg += "'{}', or".format(option)
+            msg += msg[:-3]
+            msg += ". We used the default cardinal sorting."
+            LOGGER.warning(msg)
+        if undefined or not valid:
+            sort_answer = SortAnswer.CARDINAL
+        sorted_cardinality = None
+        if user_defined:
+            sorted_cardinality = sorted(
                 cardinality.items(), key=lambda x: sort_answer.get(x[0])
-            ))
-        if sort_answer == "cardinal":
-            return OrderedDict(sorted(
-                cardinality.items(), key=lambda x: (-x[1], x[0])
-            ))
-        LOGGER.warning(
-            "Unrecognized option '%s' for 'sort_answer': %s", sort_answer,
-            "use nothing, a dict (answer: rank), 'alphanumeric' or 'cardinal'."
-            " We used the default alphanumeric sorting."
-        )
-        return OrderedDict(sorted(cardinality.items()))
+            )
+        if sort_answer == SortAnswer.ALPHANUMERIC:
+            sorted_cardinality = sorted(cardinality.items())
+        if sort_answer == SortAnswer.CARDINAL:
+            sorted_cardinality = sorted(cardinality.items(),
+                                        key=lambda x: (-x[1], x[0]))
+        return OrderedDict(sorted_cardinality)
 
     def _cardinality_plus_answer(self, cardinality, value,
                                  other_question_value):

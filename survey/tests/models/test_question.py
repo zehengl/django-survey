@@ -197,7 +197,7 @@ g>  adipiscing</strong>  elit.")
         user_defined = {"dé": 1, 'abë-cè': 2, 'dë': 3, 'abé cé': 4, }
         specific = [('dé', 2), ('abë-cè', 1), ('dë', 1), ('abé cé', 2), ]
         rslt = self.sac(group_by_letter_case=True)
-        self.assertEqual(rslt, OrderedDict(alphanumeric))
+        self.assertEqual(rslt, OrderedDict(cardinal))
         rslt = self.sac(group_by_letter_case=True, sort_answer="alphanumeric")
         self.assertEqual(rslt, OrderedDict(alphanumeric))
         rslt = self.sac(group_by_letter_case=True, sort_answer="cardinal")
