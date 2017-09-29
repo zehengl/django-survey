@@ -213,14 +213,14 @@ class Question(models.Model):
                                    group_together=None,
                                    group_by_letter_case=None,
                                    group_by_slugify=None, filter=None,
-                                   sort_answer=None):
+                                   sort_answer=None, other_question=None):
         """ Mostly to have reliable tests, but marginally nicer too...
 
         The ordering is reversed for same cardinality value so we have aa
         before zz. """
         cardinality = self.answers_cardinality(
             min_cardinality, group_together, group_by_letter_case,
-            group_by_slugify, filter
+            group_by_slugify, filter, other_question
         )
         if sort_answer is None or sort_answer == "alphanumeric":
             return sorted(cardinality.items())
