@@ -247,9 +247,9 @@ class Question(models.Model):
             sorted_cardinality = sorted(
                 cardinality.items(), key=lambda x: sort_answer.get(x[0])
             )
-        if sort_answer == SortAnswer.ALPHANUMERIC:
+        elif sort_answer == SortAnswer.ALPHANUMERIC:
             sorted_cardinality = sorted(cardinality.items())
-        if sort_answer == SortAnswer.CARDINAL:
+        elif sort_answer == SortAnswer.CARDINAL:
             sorted_cardinality = sorted(cardinality.items(),
                                         key=lambda x: (-x[1], x[0]))
         return OrderedDict(sorted_cardinality)
