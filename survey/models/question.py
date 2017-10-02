@@ -228,16 +228,16 @@ class Question(models.Model):
         # We handle SortAnswer without enum because using "type" as a variable
         # name break the enum module and we want to use type in
         # answer_cardinality for simplicity
-        possibles_values = [SortAnswer.ALPHANUMERIC, SortAnswer.CARDINAL]
+        possibles_values = [SortAnswer.ALPHANUMERIC, SortAnswer.CARDINAL, None]
         undefined = sort_answer is None
         user_defined = isinstance(sort_answer, dict)
         valid = user_defined or sort_answer in possibles_values
         if not valid:
             msg = "Unrecognized option '%s' for 'sort_answer': " % sort_answer
-            msg += "use nothing, a dict (answer: rank), "
+            msg += "use nothing, a dict (answer: rank),"
             for option in possibles_values:
-                msg += "'{}', or".format(option)
-            msg += msg[:-3]
+                msg += " '{}', or".format(option)
+            msg = msg[:-4]
             msg += ". We used the default cardinal sorting."
             LOGGER.warning(msg)
         if undefined or not valid:
