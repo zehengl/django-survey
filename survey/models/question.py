@@ -250,8 +250,15 @@ class Question(models.Model):
         elif sort_answer == SortAnswer.ALPHANUMERIC:
             sorted_cardinality = sorted(cardinality.items())
         elif sort_answer == SortAnswer.CARDINAL:
-            sorted_cardinality = sorted(cardinality.items(),
-                                        key=lambda x: (-x[1], x[0]))
+            if other_question is None:
+                sorted_cardinality = sorted(cardinality.items(),
+                                            key=lambda x: (-x[1], x[0]))
+            else:
+                # There is a dict instead of an int
+                sorted_cardinality = sorted(
+                    cardinality.items(),
+                    key=lambda x: (-sum(x[1].values()), x[0])
+                )
         return OrderedDict(sorted_cardinality)
 
     def _cardinality_plus_answer(self, cardinality, value,

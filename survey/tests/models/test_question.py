@@ -196,11 +196,41 @@ g>  adipiscing</strong>  elit.")
         cardinal = [('abé cé', 2), ('dé', 2), ('abë-cè', 1), ('dë', 1)]
         user_defined = {"dé": 1, 'abë-cè': 2, 'dë': 3, 'abé cé': 4, }
         specific = [('dé', 2), ('abë-cè', 1), ('dë', 1), ('abé cé', 2), ]
+        msg = " sorting does not seem to work"
         rslt = self.sac(group_by_letter_case=True)
-        self.assertEqual(rslt, OrderedDict(cardinal))
+        self.assertEqual(rslt, OrderedDict(cardinal), "default" + msg)
         rslt = self.sac(group_by_letter_case=True, sort_answer="alphanumeric")
-        self.assertEqual(rslt, OrderedDict(alphanumeric))
+        self.assertEqual(rslt, OrderedDict(alphanumeric), "alphanumeric" + msg)
         rslt = self.sac(group_by_letter_case=True, sort_answer="cardinal")
-        self.assertEqual(rslt, OrderedDict(cardinal))
+        self.assertEqual(rslt, OrderedDict(cardinal), "cardinal" + msg)
         rslt = self.sac(group_by_letter_case=True, sort_answer=user_defined)
-        self.assertEqual(rslt, OrderedDict(specific))
+        self.assertEqual(rslt, OrderedDict(specific), "user defined" + msg)
+        oq_alphanumeric = [('abé cé', {'left blank': 2}),
+                           ('abë-cè', {'left blank': 1}),
+                           ('dé', {'left blank': 2}),
+                           ('dë', {'left blank': 1})]
+        oq_cardinal = [('abé cé', {'left blank': 2}),
+                       ('dé', {'left blank': 2}),
+                       ('abë-cè', {'left blank': 1}),
+                       ('dë', {'left blank': 1})]
+        oq_user_defined = [('dé', {'left blank': 2}),
+                           ('abë-cè', {'left blank': 1}),
+                           ('dë', {'left blank': 1}),
+                           ('abé cé', {'left blank': 2}), ]
+        oqmsg = " when in relation with another question"
+        rslt = self.sac(group_by_letter_case=True,
+                        other_question=self.questions[1])
+        self.assertEqual(rslt, OrderedDict(oq_cardinal),
+                         "default" + msg + oqmsg)
+        rslt = self.sac(group_by_letter_case=True, sort_answer="alphanumeric",
+                        other_question=self.questions[1])
+        self.assertEqual(rslt, OrderedDict(oq_alphanumeric),
+                         "alphanumeric" + msg + oqmsg)
+        rslt = self.sac(group_by_letter_case=True, sort_answer="cardinal",
+                        other_question=self.questions[1])
+        self.assertEqual(rslt, OrderedDict(oq_cardinal),
+                         "cardinal" + msg + oqmsg)
+        rslt = self.sac(group_by_letter_case=True, sort_answer=user_defined,
+                        other_question=self.questions[1])
+        self.assertEqual(rslt, OrderedDict(oq_user_defined),
+                         "user defined" + msg + oqmsg)
