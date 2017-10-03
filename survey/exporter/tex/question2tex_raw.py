@@ -29,8 +29,8 @@ class Question2TexRaw(Question2Tex):
         """ Return all the answer as quote in latex. """
         raw_answers = ""
         for i, answer in enumerate(self.cardinality):
-            if answer[0]:
+            if answer:
                 raw_answers += Question2TexRaw.TEX_SKELETON % (
-                    answer[0], _("Participant"), i
+                    answer, _("Participant"), i
                 )
         return raw_answers
