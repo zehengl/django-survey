@@ -14,6 +14,7 @@ from future import standard_library
 
 from survey.models import Answer, Question, Response, Survey
 from survey.tests.models import BaseModelTest
+from _collections import OrderedDict
 
 try:
     from _collections import OrderedDict
@@ -189,6 +190,36 @@ g>  adipiscing</strong>  elit.")
         self.assertEqual(card,
                          {"ABC": {"D": 1, _(settings.USER_DID_NOT_ANSWER): 2},
                           "D": {"ABC": 3}})
+
+    def test_answers_cardinality_linked_without_link(self):
+        """ When we want to link to another question and there is no link at
+        all, we still have a dict. """
+        survey = Survey.objects.create(
+            name="name", is_published=True,
+            need_logged_user=False, display_by_question=True,
+        )
+        questions = []
+        question_choices = "1,2,3"
+        for i in range(3):
+            question = Question.objects.create(
+                text=str(i + 1), order=i, required=True, survey=survey,
+                choices=question_choices
+            )
+            questions.append(question)
+        for j in range(3):
+            response = Response.objects.create(survey=survey)
+            for i, question in enumerate(questions):
+                answer = j + i
+                Answer.objects.create(response=response, question=question,
+                                      body=answer)
+        q0 = questions[0]
+        q1 = questions[1]
+        result = q0.sorted_answers_cardinality(other_question=q1)
+        expected = [
+            ('Left blank', {"1": 1, "2": 1, "3": 1}), ('0', {'Left blank': 1}),
+            ('1', {'Left blank': 1}), ('2', {'Left blank': 1}),
+        ]
+        self.assertEqual(result, OrderedDict(expected))
 
     def test_sorted_answers_cardinality(self):
         """ We can sort answer with the sort_answer parameter. """

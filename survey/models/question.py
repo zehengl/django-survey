@@ -194,7 +194,7 @@ class Question(models.Model):
                 )
                 if value not in filter and value not in standardized_filter:
                     user = answer.response.user
-                    if other_question is None or user is None:
+                    if other_question is None:
                         self._cardinality_plus_n(cardinality, value, 1)
                     else:
                         self.__add_user_cardinality(
@@ -210,6 +210,21 @@ class Question(models.Model):
                 else:
                     temp[value] = cardinality[value]
             cardinality = temp
+        if other_question is not None:
+            # Treating the value for Other question that were not answered in
+            # this question
+            for answer in other_question.answers.all():
+                for value in answer.values:
+                    value = self.__get_cardinality_value(
+                        value, group_by_letter_case, group_by_slugify,
+                        group_together
+                    )
+                    if value not in filter and value not in standardized_filter:
+                        if answer.response.user is None:
+                            self._cardinality_plus_answer(
+                                cardinality, _(settings.USER_DID_NOT_ANSWER),
+                                value
+                            )
         return cardinality
 
     def sorted_answers_cardinality(self, min_cardinality=None,
@@ -283,10 +298,8 @@ class Question(models.Model):
         user answered 'value'. """
         if cardinality.get(value) is None:
             cardinality[value] = n
-        elif isinstance(cardinality[value], int):
-            cardinality[value] += n
         else:
-            cardinality[value][_(settings.USER_DID_NOT_ANSWER)] += n
+            cardinality[value] += n
 
     def __get_cardinality_value(self, value, group_by_letter_case,
                                 group_by_slugify, group_together):
@@ -306,7 +319,9 @@ class Question(models.Model):
                                group_together):
         found_answer = False
         for other_answer in other_question.answers.all():
-            if other_answer.response.user == user:
+            if user is None:
+                break
+            elif other_answer.response.user == user:
                 # We suppose there is only a response per user
                 # Why would you want this info if it is
                 # possible to answer multiple time ?
