@@ -22,6 +22,9 @@ a superuser, launch the server, then create your survey in the django admin :
 
 You will have to change the settings in order to suit your need.
 
+If you want to use the Sankey's diagram you will have to install python-tk
+(for python 2.7) or python3-tk (for python 3.x).
+
 ### Creating a survey
 
 Using the admin interface you can create surveys, add questions, give questions
@@ -71,6 +74,22 @@ The pdf is then generated using the very good pgf-pie library.
 
 ![The generated pdf for the cloud and inside options](doc/report_2.png "The generated pdf for the cloud and inside options")
 
+#### Sankey diagram
+
+If you installed python-tk (for python 2.7) or python3-tk (for python 3.x), you
+can also show the relation between two questions using a sankey diagram :
+
+~~~~
+Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.:
+    chart:
+      type: sankey
+      question: Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.
+~~~~
+
+You get this as a result:
+
+![The generated pdf for the sankey example](doc/sankey.png "The generated pdf for the sankey example")
+
 #### Advanced example
 
 You can also limit the answers shown by cardinality, filter them, group them
@@ -98,6 +117,7 @@ Test survëy:
 You get this as a result:
 
 ![The generated pdf for the multiple charts example](doc/multicharts.png "The generated pdf for the multiple charts example")
+
 
 For a full example of a configuration file look at `example_conf.yaml`, you can
 also generate your configuration file with the `generate_tex_configuration`
@@ -154,7 +174,9 @@ create a superuser, load the test dump, then launch the server :
 ~~~~
 # Credits
 
-some inspiration came from an older
+Some inspiration came from an older
 [django-survey](https://github.com/flynnguy/django-survey) app, but this app
 uses a different model architecture and different mechanism for dynamic form
 generation.
+
+For the sankey's diagram we used [pysankey](https://github.com/anazalea/pySankey).
