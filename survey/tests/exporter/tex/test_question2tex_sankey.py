@@ -32,6 +32,7 @@ class TestQuestion2TexSankey(TestManagement):
         qtext = "How much do you like question {} ?"
         q4 = Question.objects.get(text=qtext.format(4))
         q5 = Question.objects.get(text=qtext.format(5))
-        q2tex_sankey = Question2TexSankey(q4)
+        q2tex_sankey = Question2TexSankey(q4, filter=["1"],
+                                          group_together={"A" : ["2", "3"]})
         q2tex_sankey.tex(q5)
 """

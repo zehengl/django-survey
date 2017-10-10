@@ -200,7 +200,7 @@ class Question(models.Model):
                         self.__add_user_cardinality(
                             cardinality, user, value, other_question,
                             group_by_letter_case, group_by_slugify,
-                            group_together
+                            group_together, filter, standardized_filter
                         )
         if min_cardinality != 0:
             temp = {}
@@ -219,7 +219,7 @@ class Question(models.Model):
                         value, group_by_letter_case, group_by_slugify,
                         group_together
                     )
-                    if value not in filter and value not in standardized_filter:
+                    if value not in filter + standardized_filter:
                         if answer.response.user is None:
                             self._cardinality_plus_answer(
                                 cardinality, _(settings.USER_DID_NOT_ANSWER),
@@ -316,7 +316,7 @@ class Question(models.Model):
 
     def __add_user_cardinality(self, cardinality, user, value, other_question,
                                group_by_letter_case, group_by_slugify,
-                               group_together):
+                               group_together, filter, standardized_filter):
         found_answer = False
         for other_answer in other_question.answers.all():
             if user is None:
@@ -336,7 +336,9 @@ class Question(models.Model):
                 other_value, group_by_letter_case, group_by_slugify,
                 group_together
             )
-            self._cardinality_plus_answer(cardinality, value, other_value)
+            if other_value not in filter + standardized_filter:
+                    self._cardinality_plus_answer(cardinality, value,
+                                                  other_value)
 
     def get_choices(self):
         """

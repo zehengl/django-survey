@@ -124,7 +124,7 @@ g>  adipiscing</strong>  elit.")
         )
 
     def test_answers_cardinality_grouped(self):
-        """ We can group answers foself.sac letter case or slugifying. """
+        """ We can group answers taking letter case or slug into account. """
         self.assertEqual(self.ac(), {'abé cé': 1, 'Abé Cé': 1, 'Abë-cè': 1,
                                      'dé': 1, 'dë': 1, 'Dé': 1, })
         rslt = self.ac(group_together={"ABC": ["abé cé", "Abë-cè", "Abé Cé"],
@@ -162,6 +162,13 @@ g>  adipiscing</strong>  elit.")
     def test_answers_cardinality_linked(self):
         """ We can get the answer to another question instead"""
         q1ac = self.questions[0].answers_cardinality
+        abc_together = {
+            "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
+        }
+        abcd_together = {
+            "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
+            "D": ["dé", "Dé", "dë"],
+        }
         self.assertRaises(TypeError, q1ac, other_question="str")
         q2 = self.questions[2]
         self.assertEqual(q1ac(other_question=q2),
@@ -171,21 +178,23 @@ g>  adipiscing</strong>  elit.")
                           'dé': {'Abë-cè': 1},
                           'Dé': {'Abë-cè': 1},
                           'dë': {'Abë-cè': 1}, })
-        card = q1ac(other_question=q2, group_together={
-            "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
-            "D": ["dé", "Dé", "dë"]
-        })
+        card = q1ac(other_question=q2, group_together=abcd_together)
         self.assertEqual(card, {"ABC": {"D": 3}, "D": {"ABC": 3}})
+        card = q1ac(other_question=q2, filter=["dé"],
+                    group_together=abc_together)
+        self.assertEqual(card, {
+            "ABC": {"dë": 3}, 'Dé': {"ABC": 1}, 'dë': {"ABC": 1}}
+        )
+        card = q1ac(other_question=q2, filter=["dë"],
+                    group_together=abc_together)
+        self.assertEqual(card, {'Dé': {"ABC": 1}, 'dé': {"ABC": 1}})
         for i in [0, 2]:
             user = User.objects.get(username="User {}".format(i))
             response = Response.objects.get(survey=self.survey, user=user)
             answer = Answer.objects.get(question=q2, response=response)
             # print("Deleting, ", answer)
             answer.delete()
-        card = q1ac(other_question=q2, group_together={
-            "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
-            "D": ["dé", "Dé", "dë"]
-        })
+        card = q1ac(other_question=q2, group_together=abcd_together)
         self.assertEqual(card,
                          {"ABC": {"D": 1, _(settings.USER_DID_NOT_ANSWER): 2},
                           "D": {"ABC": 3}})

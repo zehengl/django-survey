@@ -45,10 +45,6 @@ class Question2TexSankey(Question2Tex):
         )
         return caption
 
-    def __init__(self, question, **options):
-        super(Question2TexSankey, self).__init__(question, **options)
-        self.total_quantity = 120 % len(self.question.answers.all())
-
     def tex(self, other_question):
         """ Return a tikz Sankey Diagram of two questions.
 
