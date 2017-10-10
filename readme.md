@@ -2,9 +2,11 @@
 
 This is a django survey app, its based on and compatible with "django-survey".
 This means you will be able to migrate from an ancient version of django-survey.
+As the old 'django-survey' seem to be inactive and do not accept pull-request,
+this is **available on PyPi as "django-survey-and-report".**
 
-This has been refactored, ported to python 3, and test has been added as well as
-exports as csv and pdf for the survey's results.
+Compared to django-survey, it has been refactored, ported to python 3, and test
+has been added as well as exports as csv and pdf for the survey's results.
 
 ## Getting started
 

@@ -4,7 +4,7 @@
 *.swn
 *.pyc
 survey.db
-survey.egg-info
+django_survey_and_report.egg-info/
 survey_test/static/
 env
 survey_test_bak
@@ -15,4 +15,6 @@ survey_test_bak
 .settings/
 htmlcov/
 .coverage
+build/
+dist/
 
