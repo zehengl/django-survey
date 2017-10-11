@@ -9,7 +9,6 @@ from builtins import str
 
 from django.utils.translation import ugettext_lazy as _
 from future import standard_library
-
 from survey.exporter.survey2x import Survey2X
 
 standard_library.install_aliases()

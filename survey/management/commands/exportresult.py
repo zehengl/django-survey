@@ -8,7 +8,6 @@ import logging
 
 from django.utils import translation
 from future import standard_library
-
 from survey.exporter.csv import Survey2Csv
 from survey.exporter.tex.configuration import Configuration
 from survey.exporter.tex.survey2tex import Survey2Tex

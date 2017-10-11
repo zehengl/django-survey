@@ -8,7 +8,6 @@ from builtins import str
 
 from django.core.exceptions import ValidationError
 from future import standard_library
-
 from survey.models import Answer
 from survey.tests.models import BaseModelTest
 

@@ -6,7 +6,6 @@ from __future__ import (
 
 from future import standard_library
 from mock.mock import patch
-
 from survey.exporter.csv.survey2csv import Survey2Csv
 from survey.tests.management.test_management import TestManagement
 

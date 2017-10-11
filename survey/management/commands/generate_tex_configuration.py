@@ -7,7 +7,6 @@ from __future__ import (
 from builtins import open, str
 
 from future import standard_library
-
 from survey.exporter.tex import ConfigurationBuilder
 from survey.management.survey_command import SurveyCommand
 

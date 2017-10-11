@@ -72,21 +72,7 @@ Test survëy:
         radius: 3
 
     questions:
-
-        Ipsum dolor sit amët, consectetur <strong> adipiscing </strong> elit.:
-            chart:
-                min_cardinality: 1
-                rotate: 20
-                style: "drop shadow"
-                scale_font: True
-                after_number: "\\%"
-                before_number: "\\$"
-                sum: 3
-        Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.:
-            chart:
-                pos: 8, 0
-                explode: 0.5
-
+        # 1
         Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.:
             multiple_charts:
                 Polar pin:
@@ -97,6 +83,35 @@ Test survëy:
                     type: sankey
                     question: Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.
 
+        # 2
+        Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.:
+            chart:
+                pos: 8, 0
+                explode: 0.5
+
+        # 3
+        Dolor sit amët, <strong> consectetur</strong>  adipiscing elit.:
+            chart:
+                type: square
+                color: {"Text for a response": "yellow!70", "": "white!100"}
+
+        # 4
+        Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.:
+            chart:
+                type: survey.tests.exporter.tex.CustomQuestion2TexChild
+
+        # 5
+        Ipsum dolor sit amët, consectetur <strong> adipiscing </strong> elit.:
+            chart:
+                min_cardinality: 1
+                rotate: 20
+                style: "drop shadow"
+                scale_font: True
+                after_number: "\\%"
+                before_number: "\\$"
+                sum: 3
+
+        # 6
         Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.:
             multiple_charts:
                 Sub Sub Section with radius=3 :
@@ -112,7 +127,4 @@ Test survëy:
                 type: cloud
                 text: inside
 
-        Dolor sit amët, <strong> consectetur</strong>  adipiscing elit.:
-            chart:
-                type: square
-                color: {"Text for a response": "yellow!70", "": "white!100"}
+

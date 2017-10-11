@@ -6,7 +6,6 @@ from __future__ import (
 
 from django.conf.urls import url
 from future import standard_library
-
 from survey.views import ConfirmView, IndexView, SurveyCompleted, SurveyDetail
 from survey.views.survey_result import serve_result_csv
 

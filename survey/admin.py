@@ -6,7 +6,6 @@ from __future__ import (
 
 from django.contrib import admin
 from future import standard_library
-
 from survey.models import Answer, Category, Question, Response, Survey
 
 from .actions import make_published

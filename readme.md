@@ -124,6 +124,39 @@ You get this as a result:
 
 ![The generated pdf for the multiple charts example](doc/multicharts.png "The generated pdf for the multiple charts example")
 
+#### Custom treatment
+
+If you want to make your own treatment you can use your own class, for example.
+
+Configuration:
+~~~~
+Test survëy:
+    questions:
+        Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.:
+            chart:
+                type: survey.tests.exporter.tex.CustomQuestion2TexChild
+~~~~
+
+
+Code in `survey.tests.exporter.tex.CustomQuestion2TexChild`:
+
+~~~~
+from survey.exporter.tex.question2tex_chart import Question2TexChart
+
+
+class CustomQuestion2TexChild(Question2TexChart):
+
+    def get_results(self):
+        self.type = "polar"
+        return """        2/There were no answer at all,
+        3/But we have a custom treatment to show some,
+        2/You can make minor changes too !"""
+~~~~
+
+Result:
+
+![The generated pdf for the custom example](doc/custom.png "The generated pdf for the custom example")
+
 
 For a full example of a configuration file look at `example_conf.yaml` in doc,
 you can also generate your configuration file with the `generate_tex_configuration`

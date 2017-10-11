@@ -6,7 +6,6 @@ from __future__ import (
 )
 
 from future import standard_library
-
 from survey.exporter.tex.question2tex import Question2Tex
 from survey.tests.management.test_management import TestManagement
 

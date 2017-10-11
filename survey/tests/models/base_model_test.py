@@ -5,7 +5,6 @@ from __future__ import (
 )
 
 from future import standard_library
-
 from survey.models import Answer, Question, Response, Survey
 from survey.tests import BaseTest
 

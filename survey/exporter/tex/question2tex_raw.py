@@ -6,7 +6,6 @@ from __future__ import (
 
 from django.utils.translation import ugettext_lazy as _
 from future import standard_library
-
 from survey.exporter.tex.question2tex import Question2Tex
 
 standard_library.install_aliases()

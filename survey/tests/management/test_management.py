@@ -9,7 +9,6 @@ import os
 from django.conf import settings
 from django.contrib.auth.models import User
 from future import standard_library
-
 from survey.models import Answer, Question, Response, Survey
 from survey.tests import BaseTest
 

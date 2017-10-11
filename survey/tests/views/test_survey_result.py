@@ -6,7 +6,6 @@ from __future__ import (
 
 from django.urls.base import reverse
 from future import standard_library
-
 from survey.tests.management.test_management import TestManagement
 
 standard_library.install_aliases()

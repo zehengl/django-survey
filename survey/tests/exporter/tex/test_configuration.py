@@ -9,7 +9,6 @@ import os
 from builtins import str
 
 from future import standard_library
-
 from survey.exporter.tex.configuration import Configuration
 from survey.models.survey import Survey
 from survey.tests.management.test_management import TestManagement

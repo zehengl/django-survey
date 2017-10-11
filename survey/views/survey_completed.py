@@ -7,7 +7,6 @@ from __future__ import (
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 from future import standard_library
-
 from survey.models import Survey
 
 standard_library.install_aliases()

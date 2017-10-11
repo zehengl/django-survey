@@ -6,10 +6,11 @@ from __future__ import (
 
 import logging
 import os
+from pydoc import locate
 
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 from future import standard_library
-
 from survey.exporter.survey2x import Survey2X
 from survey.exporter.tex.latex_file import LatexFile
 from survey.exporter.tex.question2tex import Question2Tex
@@ -65,8 +66,27 @@ class Survey2Tex(Survey2X):
                 other_question = Question.objects.get(text=other_question_text)
                 q2tex = Question2TexSankey(question)
                 question_synthesis += q2tex.tex(other_question)
-            else:
+            elif tex_type in ["pie", "cloud", "square", "polar"]:
                 q2tex = Question2TexChart(question, latex_label=i, **opts)
+                question_synthesis += q2tex.tex()
+            elif locate(tex_type) is None:
+                msg = "{} '{}' {}".format(
+                    _("We could not render a chart because the type"),
+                    tex_type,
+                    _("is not a standard type nor the path to an "
+                      "importable valid Question2Tex child class. "
+                      "Choose between 'raw', 'sankey', 'pie', 'cloud', "
+                      "'square', 'polar' or 'package.path.MyQuestion2Tex"
+                      "CustomClass'")
+                )
+                LOGGER.error(msg)
+                question_synthesis += msg
+            else:
+                q2tex_class = locate(tex_type)
+                # The use will probably know what type he should use in his
+                # custom class
+                opts["type"] = None
+                q2tex = q2tex_class(question, latex_label=i, **opts)
                 question_synthesis += q2tex.tex()
         section_title = Question2Tex.html2latex(question.text)
         return u"""

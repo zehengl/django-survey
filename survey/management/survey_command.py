@@ -8,7 +8,6 @@ from builtins import str
 
 from django.core.management.base import BaseCommand
 from future import standard_library
-
 from survey.models import Survey
 
 standard_library.install_aliases()

@@ -12,7 +12,6 @@ from datetime import datetime
 from django.conf import settings
 from django.utils.text import slugify
 from future import standard_library
-
 from survey.models import Survey
 
 standard_library.install_aliases()
