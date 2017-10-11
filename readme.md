@@ -8,6 +8,8 @@ this is **available on PyPi as "django-survey-and-report".**
 Compared to django-survey, it has been refactored, ported to python 3, and test
 has been added as well as exports as csv and pdf for the survey's results.
 
+[![Build Status](https://travis-ci.org/Pierre-Sassoulas/django-survey.svg?branch=master)](https://travis-ci.org/Pierre-Sassoulas/django-survey)
+
 ## Getting started
 
 
@@ -156,7 +158,7 @@ create a superuser, load the test dump, then launch the server :
 ### Coverage :
 
 ~~~~
-  coverage run --source=survey ./manage.py test;coverage html
+  coverage.sh
   xdg-open htmlcov/index.html
 ~~~~
 
