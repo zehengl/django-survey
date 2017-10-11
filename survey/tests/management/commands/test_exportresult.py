@@ -31,6 +31,12 @@ class TestExportresult(TestManagement):
         file_.close()
         return content
 
+    def test_no_options(self):
+        """ If no options are given there are warning and error messages. """
+        self.assertRaises(SystemExit, call_command, "exportresult")
+        call_command("exportresult", "--pdf", survey_id="1")
+        call_command("exportresult", "--pdf", "--force", survey_id="1")
+
     def test_handle(self):
         """ The custom command export result create the right csv file. """
         self.maxDiff = None
@@ -42,8 +48,8 @@ class TestExportresult(TestManagement):
             os.remove(first_csv)
         if os.path.exists(second_csv):
             os.remove(second_csv)
-        call_command("exportresult", self.test_conf_path, "--tex", "--csv",
-                     "-f")
+        call_command("exportresult", "--tex", "--csv", "--force",
+                     configuration=self.test_conf_path)
         self.assertMultiLineEqual(self.expected_content,
                                   self.get_file_content(first_csv))
         expected = u"""\

@@ -10,6 +10,7 @@ generic:
         \usepackage{pgfplotstable}
         \usetikzlibrary{patterns}
         \usepackage[section]{placeins}
+        \usepackage[utf8]{inputenc}
     intro:
     footer:
     categories_type: section
