@@ -29,7 +29,7 @@ class Question2TexSankey(Question2Tex):
 
     TEX_SKELETON = """
 \\begin{figure}[h!]
-    \\includegraphics[width=\\paperwidth]{%s}
+    \\includegraphics[width=\\textwidth]{%s}
     \\caption{\\label{figure:q%dvsq%d}%s}
 \\end{figure}
 """
