@@ -185,6 +185,11 @@ class Question(models.Model):
     def __answers_cardinality(self, min_cardinality, group_together,
                               group_by_letter_case, group_by_slugify,
                               filter, standardized_filter, other_question):
+        """ Return an ordered dict but the insertion order is the order of
+        the related manager (ie question.answers).
+
+        If you want something sorted use sorted_answers_cardinality with a set
+        sort_answer parameter. """
         cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:

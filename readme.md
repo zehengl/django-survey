@@ -125,8 +125,8 @@ You get this as a result:
 ![The generated pdf for the multiple charts example](doc/multicharts.png "The generated pdf for the multiple charts example")
 
 
-For a full example of a configuration file look at `example_conf.yaml`, you can
-also generate your configuration file with the `generate_tex_configuration`
+For a full example of a configuration file look at `example_conf.yaml` in doc,
+you can also generate your configuration file with the `generate_tex_configuration`
 command, it will create the default skeleton for every survey and question.
 
 ## Getting started as a contributor
