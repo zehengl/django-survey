@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-03 10:23+0000\n"
+"POT-Creation-Date: 2017-10-11 13:56+0000\n"
 "PO-Revision-Date: 2017-10-03 10:24+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,33 +34,33 @@ msgstr "Marquer le questionnaire comme publié"
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: survey/exporter/tex/question2tex.py:68
+#: survey/exporter/tex/question2tex.py:70
 msgid "with"
 msgstr "avec"
 
-#: survey/exporter/tex/question2tex.py:70
+#: survey/exporter/tex/question2tex.py:72
 #, python-format
 msgid "%(min_cardinality)d respondants or more"
 msgid_plural "%(min_cardinality)d respondant or more"
 msgstr[0] "%(min_cardinality)d réponse ou plus"
 msgstr[1] "%(min_cardinality)d réponses ou plus"
 
-#: survey/exporter/tex/question2tex.py:81
+#: survey/exporter/tex/question2tex.py:83
 msgid "excluding"
 msgstr "excluant"
 
-#: survey/exporter/tex/question2tex.py:86
-#: survey/exporter/tex/question2tex.py:123
-#: survey/exporter/tex/question2tex.py:126
+#: survey/exporter/tex/question2tex.py:88
+#: survey/exporter/tex/question2tex.py:125
+#: survey/exporter/tex/question2tex.py:128
 msgid "and"
 msgstr "et"
 
-#: survey/exporter/tex/question2tex.py:120
-#: survey/exporter/tex/question2tex.py:121
+#: survey/exporter/tex/question2tex.py:122
+#: survey/exporter/tex/question2tex.py:123
 msgid "or"
 msgstr "ou"
 
-#: survey/exporter/tex/question2tex.py:135
+#: survey/exporter/tex/question2tex.py:137
 msgid "Repartition of answers"
 msgstr "Répartition des réponses"
 
@@ -69,7 +69,7 @@ msgid "Left blank"
 msgstr "Laissé vide"
 
 #: survey/exporter/tex/question2tex_chart.py:127
-#: survey/exporter/tex/question2tex_sankey.py:41
+#: survey/exporter/tex/question2tex_sankey.py:39
 msgid "for the question"
 msgstr "pour la question"
 
@@ -81,16 +81,15 @@ msgstr "Aucune réponse pour cette question."
 msgid "Participant"
 msgstr "Participant"
 
-#: survey/exporter/tex/question2tex_sankey.py:42
+#: survey/exporter/tex/question2tex_sankey.py:40
 msgid "left"
 msgstr "à gauche"
 
-#: survey/exporter/tex/question2tex_sankey.py:45
-#| msgid "for the question"
+#: survey/exporter/tex/question2tex_sankey.py:43
 msgid "in relation with the question"
 msgstr "mise en relation avec la question"
 
-#: survey/exporter/tex/question2tex_sankey.py:46
+#: survey/exporter/tex/question2tex_sankey.py:44
 msgid "right"
 msgstr "à droite"
 
@@ -108,11 +107,7 @@ msgid ""
 "if the question type is 'radio', 'select', or\n"
 "'select multiple' provide a comma-separated list of\n"
 "options for this question ."
-msgstr ""
-"Le champ choix est utilisé seulement si la question est de type 'bouton "
-"radio', 'liste déroulante', ou 'liste à choix multiple', il faut fournir la "
-"liste des options pour cette question sous la forme d'une liste séparée par "
-"des virgules."
+msgstr "Le champ choix est utilisé seulement si la question est de type 'bouton radio', 'liste déroulante', ou 'liste à choix multiple', il faut fournir la liste des options pour cette question sous la forme d'une liste séparée par des virgules."
 
 #: survey/models/question.py:67
 msgid "text (multiple line)"

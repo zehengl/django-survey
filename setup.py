@@ -15,7 +15,7 @@ def add_package(package_list, package):
 
 setup(
     name="django-survey-and-report",
-    version="1.0.4",
+    version="1.0.5",
     description="A django survey app, based on and compatible with "
                 "'django-survey'",
     long_description="A django survey app, based on and compatible with "

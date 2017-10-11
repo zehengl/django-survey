@@ -31,7 +31,7 @@ class Command(SurveyCommand):
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
-        parser.add_argument('--configuration', '-c', nargs='+', type=str,
+        parser.add_argument('--configuration-file', '-c', type=str,
                             help='Path to the tex configuration file.')
         parser.add_argument(
             '--force', "-f", action="store_true",
@@ -70,7 +70,7 @@ class Command(SurveyCommand):
             if options["csv"]:
                 exporters.append(Survey2Csv(survey))
             if options["tex"] or options["pdf"]:
-                configuration_file = options.get("configuration")
+                configuration_file = options.get("configuration_file")
                 if configuration_file is None:
                     msg = "No configuration file given, using default values."
                     LOGGER.warning(msg)
