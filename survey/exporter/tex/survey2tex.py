@@ -109,14 +109,16 @@ class Survey2Tex(Survey2X):
             os.system("mv {}.pdf {}".format(file_name[:-3], output))
         os.chdir(settings.ROOT)
 
-    def survey_to_x(self):
+    def survey_to_x(self, questions=None):
+        if questions is None:
+            questions = self.survey.questions.all()
         document_class = self.tconf.get("document_class",
                                         survey_name=self.survey.name)
         kwargs = self.tconf.get(survey_name=self.survey.name)
         del kwargs["document_class"]
         ltxf = LatexFile(document_class, **kwargs)
         self._synthesis(self.survey)
-        for question in self.survey.questions.all():
+        for question in questions:
             ltxf.text += self.treat_question(question, self.survey)
         self._additional_analysis(self.survey, ltxf)
         return ltxf.document

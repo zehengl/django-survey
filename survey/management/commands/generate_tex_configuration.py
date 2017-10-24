@@ -24,15 +24,20 @@ class Command(SurveyCommand):
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
-        parser.add_argument('output', nargs='+', type=str, help='Output file.')
+        parser.add_argument('output', nargs="+", type=str,
+                            help='Output prefix.')
+
+    def write_conf(self, name, conf):
+        file_ = open(name, "w")
+        file_.write(str(conf))
+        file_.close()
 
     def handle(self, *args, **options):
         super(Command, self).handle(*args, **options)
-        output = options["output"][0]
-        if self.survey is None:
-            conf = ConfigurationBuilder()
-        else:
-            conf = ConfigurationBuilder(self.survey)
-        file_ = open(output, "w")
-        file_.write(str(conf))
-        file_.close()
+        output = options["output"]
+        if len(output) != len(self.surveys):
+            exit("You want to generate {} surveys ".format(len(self.surveys)) +
+                 "but you only gave {} output names".format(len(output)))
+        for i, survey in enumerate(self.surveys):
+            conf = ConfigurationBuilder(survey)
+            self.write_conf(output[i], conf)

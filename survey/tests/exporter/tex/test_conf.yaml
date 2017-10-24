@@ -12,7 +12,7 @@ generic:
         \usepackage[utf8]{inputenc}
         \title{My title}
         \author{John Doe\\\\Associate Survey Branch Manager}
-    intro:
+    intro: |
         \maketitle{}
         \section*{Introduction}
         This report has been automatically generated.

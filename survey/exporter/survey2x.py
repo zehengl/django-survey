@@ -24,11 +24,14 @@ class Survey2X(object):
 
     """ Abstract class for Survey exporter. """
 
-    def __init__(self, survey):
+    def __init__(self, survey=None):
+        self._check_survey(survey)
+        self.survey = survey
+
+    def _check_survey(self, survey):
         if not isinstance(survey, Survey):
             msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
             raise TypeError(msg)
-        self.survey = survey
 
     def _get_X(self):
         return self.__class__.__name__.split("Survey2")[1].lower()

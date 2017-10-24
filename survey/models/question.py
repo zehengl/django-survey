@@ -17,9 +17,9 @@ from future import standard_library
 from .category import Category
 from .survey import Survey
 
-try:
+try:  # pragma: no cover
     from _collections import OrderedDict
-except ImportError:
+except ImportError:  # pragma: no cover
     from ordereddict import OrderedDict
 
 LOGGER = logging.getLogger(__name__)

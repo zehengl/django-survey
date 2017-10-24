@@ -4,7 +4,7 @@ generic:
     document_class: article
     document_option: 12pt
     date:
-    header:
+    header: |
         \usepackage{pgf-pie}
         \usepackage{pgfplots}
         \usepackage{pgfplotstable}

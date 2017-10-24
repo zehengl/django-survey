@@ -12,7 +12,6 @@ from survey.exporter.csv import Survey2Csv
 from survey.exporter.tex.configuration import Configuration
 from survey.exporter.tex.survey2tex import Survey2Tex
 from survey.management.survey_command import SurveyCommand
-from survey.models import Survey
 
 standard_library.install_aliases()
 
@@ -33,37 +32,35 @@ class Command(SurveyCommand):
         parser.add_argument('--configuration-file', '-c', type=str,
                             help='Path to the tex configuration file.')
         parser.add_argument(
-            '--force', "-f", action="store_true",
-            help='Force the generation, even if the file already exists.'
+            '--force', "-f", action="store_true", help='Force the generation, '
+            'even if the file already exists. Default is False.'
         )
         parser.add_argument(
             '--csv', action="store_true",
-            help='Without this option we do not export as csv.'
+            help='Export as csv. Default is False.'
         )
         parser.add_argument(
             '--tex', action="store_true",
-            help='Without this option we do not export as tex.'
+            help='Export as tex. Default is False.'
         )
         parser.add_argument(
             '--pdf', action="store_true",
             help='Equivalent to --tex but we will also try to compile the pdf.'
         )
         parser.add_argument(
-            '--language',
-            help='Permit to change the language used for generation (default '
-                 'is defined in the settings).'
+            '--language', help='Permit to change the language used for '
+            'generation (default is defined in the settings).'
         )
+
+    def check_nothing_at_all(self, options):
+        SurveyCommand.check_nothing_at_all(self, options)
+        if not options["csv"] and not options["tex"] and not options["pdf"]:
+            exit("Nothing to do : add option --tex or --pdf, --csv,  or both.")
 
     def handle(self, *args, **options):
         super(Command, self).handle(*args, **options)
         translation.activate(options.get("language"))
-        if not options["csv"] and not options["tex"] and not options["pdf"]:
-            exit("Nothing to do : add option --tex or --pdf, --csv,  or both.")
-        if self.survey is None:
-            surveys = Survey.objects.all()
-        else:
-            surveys = [self.survey]
-        for survey in surveys:
+        for survey in self.surveys:
             LOGGER.info("Generating results for '%s'", survey)
             exporters = []
             if options["csv"]:
@@ -81,5 +78,6 @@ class Command(SurveyCommand):
                     if options["pdf"] and type(exporter) is Survey2Tex:
                         exporter.generate_pdf()
                 else:
-                    LOGGER.info("\t- %s's %s were already generated use the\
- --force (-f) option to generate anyway.", survey, exporter._get_X())
+                    LOGGER.info("\t- %s's %s were already generated use the "
+                                "--force (-f) option to generate anyway.",
+                                survey, exporter._get_X())
