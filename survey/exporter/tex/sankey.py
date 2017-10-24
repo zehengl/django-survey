@@ -19,7 +19,9 @@ Produces simple Sankey Diagrams with matplotlib.
 from collections import defaultdict
 
 import matplotlib
+# matplotlib.use('Agg') must be before the other imports, do not change order
 matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
