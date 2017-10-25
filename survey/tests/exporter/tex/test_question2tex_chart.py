@@ -49,23 +49,25 @@ class TestQuestion2TexChart(TestManagement):
         chart = Question2TexChart(question, color=color, group_together=groups,
                                   sort_answer="cardinal").tex()
         self.assertIn(
-            "4/1\xe9,\n            1/1,\n            1/1a,\n            1/1b",
+            "4/1\xe9,\n            1/Left blank,\n            1/1,\n           "
+            " 1/1a,\n            1/1b",
             chart,
-            "Cardinal sort does not seem to works."
+            "Cardinal sort does not seem to works. {}".format(chart)
         )
         chart = Question2TexChart(question, color=color, group_together=groups,
                                   sort_answer="alphanumeric").tex()
         self.assertIn(
             "1/1,\n            1/1a,\n            1/1b,\n            4/1é",
             chart,
-            "Alphanumeric sort does not seem to works."
+            "Alphanumeric sort does not seem to works.. {}".format(chart)
         )
         chart = Question2TexChart(question, group_together=groups,
                                   sort_answer="unknown_option").tex()
         self.assertIn(
-            "4/1\xe9,\n            1/1,\n            1/1a,\n            1/1b",
+            "4/1\xe9,\n            1/Left blank,\n            1/1,\n           "
+            " 1/1a,\n            1/1b",
             chart,
-            "Default behavior does not sort by cardinality."
+            "Default behavior does not sort by cardinality. {}".format(chart)
         )
 
     def test_cloud_tex(self):

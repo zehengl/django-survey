@@ -20,15 +20,16 @@ class TestManagement(BaseTest):
     """ Permit to check if export result is working as intended. """
 
     def create_answers(self, username, a1, a2, a3):
-        self.other_response = Response.objects.create(
-            survey=self.survey, user=User.objects.create(username=username)
-        )
-        Answer.objects.create(response=self.other_response, question=self.qst1,
-                              body=a1)
-        Answer.objects.create(response=self.other_response, question=self.qst2,
-                              body=a2)
-        Answer.objects.create(response=self.other_response, question=self.qst3,
-                              body=a3)
+        if username:
+            response = Response.objects.create(
+                survey=self.survey, user=User.objects.create(username=username)
+            )
+        else:
+            response = Response.objects.create(survey=self.survey)
+        response.save()
+        Answer.objects.create(response=response, question=self.qst1, body=a1)
+        Answer.objects.create(response=response, question=self.qst2, body=a2)
+        Answer.objects.create(response=response, question=self.qst3, body=a3)
 
     def create_survey(self):
         self.test_managament_survey_name = u"Test Management Survëy"
@@ -71,6 +72,7 @@ class TestManagement(BaseTest):
             self.other_username, "[u'1e', u'1é', u'1ë']",
             "[u'2e', u'2é', u'2ë']", "[u'3e', u'3é', u'3ë']"
         )
+        self.create_answers(None, "", "", "",)
 
     def create_big_ranking_survey(self, with_user=False):
         """ Load a big survey with Anonymous user rating question from 1 to
@@ -113,7 +115,8 @@ user,Aèbc?,Bècd?,Cède?,Dèef?
 ps250112,1é,2é,3é,
 pierre,,,,
 {},1|1a|1b,2|2a|2b,3|3a|3b,
-{},1e|1é|1ë,2e|2é|2ë,3e|3é|3ë,""".format(self.username, self.other_username)
+{},1e|1é|1ë,2e|2é|2ë,3e|3é|3ë,
+Anonymous,,,,""".format(self.username, self.other_username)
         self.expected_header = ['user', 'Aèbc?', 'Bècd?', 'Cède?', 'Dèef?']
         self.conf_dir = os.path.join(settings.ROOT, "survey", "tests",
                                      "exporter", "tex")
