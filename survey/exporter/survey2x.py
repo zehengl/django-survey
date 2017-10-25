@@ -75,7 +75,7 @@ class Survey2X(object):
 
         :rtype String:
         """
-        raise NotImplemented("Please implement survey_to_x()")
+        raise NotImplementedError("Please implement survey_to_x()")
 
     def generate_file(self):
         """ Generate a x file corresponding to a Survey. """
