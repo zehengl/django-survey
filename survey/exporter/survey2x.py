@@ -48,25 +48,21 @@ class Survey2X(object):
         return path
 
     def need_update(self):
-        """ Does a file need an update ?
-
-        :param String file_name: The path to the file.
-        :param datetime:
-        """
-        # datetime : The date of the latest answer.
-        latest_answer = self.survey.latest_answer_date()
-        if not latest_answer:
-            return True
+        """ Does a file need an update ? """
+        latest_answer_date = self.survey.latest_answer_date()
         try:
-            # datetime : The date of the latest modification to the file.
+            # mtime : modification time of the file
             mtime = os.path.getmtime(self.file_name())
         except OSError:
-            # If the file do not exist, generate it.
+            # If the file do not exist, we need to update it.
             return True
+        if not latest_answer_date:
+            # There isn't any responses so if the file is created its up to date
+            return False
         mtime = datetime.fromtimestamp(mtime)
-        mtime = mtime.replace(tzinfo=latest_answer.tzinfo)
-        if latest_answer > mtime:
-            # If the file was generated before the last answer, generate it.
+        mtime = mtime.replace(tzinfo=latest_answer_date.tzinfo)
+        if latest_answer_date > mtime:
+            # If the file was generated before the last answer, it needs update.
             return True
         return False
 

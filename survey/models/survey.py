@@ -30,7 +30,9 @@ class Survey(models.Model):
         return self.name
 
     def latest_answer_date(self):
-        """ Return the latest answer date. """
+        """ Return the latest answer date.
+
+        Return None is there is no response. """
         min_ = None
         for response in self.responses.all():
             if min_ is None or min_ < response.updated:
