@@ -1,2 +1,2 @@
-coverage run --source=survey ./manage.py test
+coverage run --source=survey --omit=survey/migrations/* ./manage.py test
 coverage html
