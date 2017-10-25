@@ -53,7 +53,16 @@ configurable in a yaml file, globally, survey by survey, or question by
 question. In order to render pdf you will need to install texlive and python-tk
 or python3-tk for sankey's diagram.
 
-This is an example of a configuration file
+The results are generated for the server only when needed, but you can force
+it as a developper with:
+~~~~
+python manage.py exportresult -h
+~~~~
+
+Following is an example of a configuration file. you can generate one with:
+~~~~
+python manage.py generatetexconf -h
+~~~~
 
 #### Basic example
 
@@ -159,8 +168,9 @@ Result:
 
 
 For a full example of a configuration file look at `example_conf.yaml` in doc,
-you can also generate your configuration file with the `generate_tex_configuration`
-command, it will create the default skeleton for every survey and question.
+you can also generate your configuration file with
+`python manage.py generatetexconf -h`, it will create the default skeleton
+for every survey and question.
 
 ## Getting started as a contributor
 

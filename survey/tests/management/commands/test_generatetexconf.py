@@ -18,12 +18,12 @@ class TestGenerateTexConfiguration(TestManagement):
     def assert_command_create_file(self, arg=None, value=None):
         file = "output"
         if arg and value:
-            call_command("generate_tex_configuration", file, arg, value)
+            call_command("generatetexconf", file, arg, value)
             self.assertTrue(os.path.exists(file))
             if os.path.exists(file):
                 os.remove(file)
         else:
-            call_command("generate_tex_configuration", file + "1", file + "2",
+            call_command("generatetexconf", file + "1", file + "2",
                          file + "3", "--survey-all")
             for path in [file + "1", file + "2", file + "3"]:
                 self.assertTrue(os.path.exists(path))
@@ -37,11 +37,11 @@ class TestGenerateTexConfiguration(TestManagement):
 
     def test_error_message(self):
         self.assertRaises(ValueError, call_command,
-                          "generate_tex_configuration", "output",
+                          "generatetexconf", "output",
                           "--survey-id", 25)
         self.assertRaises(SystemExit, call_command,
-                          "generate_tex_configuration", "output",
+                          "generatetexconf", "output",
                           survey_all=True)
         self.assertRaises(ValueError, call_command,
-                          "generate_tex_configuration", "output",
+                          "generatetexconf", "output",
                           "--survey-name", "Do not exists")
