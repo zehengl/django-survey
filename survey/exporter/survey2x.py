@@ -56,14 +56,17 @@ class Survey2X(object):
         except OSError:
             # If the file do not exist, we need to update it.
             return True
-        if not latest_answer_date:
+        
+        if latest_answer_date is None:
             # There isn't any responses so if the file is created its up to date
             return False
+
         mtime = datetime.fromtimestamp(mtime)
         mtime = mtime.replace(tzinfo=latest_answer_date.tzinfo)
         if latest_answer_date > mtime:
             # If the file was generated before the last answer, it needs update.
             return True
+
         return False
 
     def survey_to_x(self):
