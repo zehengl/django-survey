@@ -85,7 +85,7 @@ class TestManagement(BaseTest):
             need_logged_user=False, display_by_question=True,
         )
         questions = []
-        question_choices = ["1, 2,3,4,5"]
+        question_choices = ["1,2,3,4,5"]
         if with_user:
             for j in range(number_of_participant):
                 User.objects.get_or_create(username=j)
