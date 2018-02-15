@@ -13,6 +13,15 @@ from future import standard_library
 
 from .survey import Survey
 
+try:
+    from django.conf import settings
+    if settings.AUTH_USER_MODEL:
+        user_model = settings.AUTH_USER_MODEL
+    else:
+        user_model = User
+except (ImportError, AttributeError):
+    user_model = User
+
 standard_library.install_aliases()
 
 
@@ -26,7 +35,7 @@ class Response(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     survey = models.ForeignKey(Survey, related_name="responses")
-    user = models.ForeignKey(User, null=True, blank=True)
+    user = models.ForeignKey(user_model, null=True, blank=True)
     interview_uuid = models.CharField(_(u"Interview unique identifier"),
                                       max_length=36)
 
