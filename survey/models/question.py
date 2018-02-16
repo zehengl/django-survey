@@ -265,7 +265,7 @@ class Question(models.Model):
         sorted_cardinality = None
         if user_defined:
             sorted_cardinality = sorted(
-                cardinality.items(), key=lambda x: sort_answer.get(x[0])
+                cardinality.items(), key=lambda x: sort_answer.get(x[0], 0)
             )
         elif sort_answer == SortAnswer.ALPHANUMERIC:
             sorted_cardinality = sorted(cardinality.items())
