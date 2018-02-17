@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 from django.forms import models
 from django.utils.text import slugify
 from future import standard_library
+
 from survey.models import Answer, Question, Response
 from survey.signals import survey_completed
 from survey.widgets import ImageSelectWidget

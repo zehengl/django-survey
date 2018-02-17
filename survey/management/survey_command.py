@@ -9,6 +9,7 @@ from sys import version_info
 
 from django.core.management.base import BaseCommand
 from future import standard_library
+
 from survey.models import Survey
 from survey.models.question import Question
 

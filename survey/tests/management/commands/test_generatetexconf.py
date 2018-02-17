@@ -8,6 +8,7 @@ import os
 
 from django.core.management import call_command
 from future import standard_library
+
 from survey.tests.management.test_management import TestManagement
 
 standard_library.install_aliases()

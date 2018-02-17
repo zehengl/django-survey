@@ -4,17 +4,16 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-from datetime import datetime
 import logging
 import os
 import time
+from datetime import datetime
 
 from django.conf import settings
 from future import standard_library
 
 from survey.exporter.survey2x import Survey2X
 from survey.tests.management.test_management import TestManagement
-
 
 standard_library.install_aliases()
 

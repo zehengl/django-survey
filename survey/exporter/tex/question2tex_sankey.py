@@ -9,6 +9,7 @@ import logging
 from django.utils.translation import ugettext_lazy as _
 from future import standard_library
 from pandas.core.frame import DataFrame
+
 from survey.exporter.tex.question2tex import Question2Tex
 from survey.exporter.tex.sankey import sankey
 from survey.models.question import Question

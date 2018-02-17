@@ -11,6 +11,7 @@ import os
 import yaml
 from django.conf import settings
 from future import standard_library
+
 from survey.models.survey import Survey
 
 standard_library.install_aliases()

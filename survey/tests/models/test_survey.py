@@ -8,6 +8,7 @@ from builtins import str
 from datetime import date
 
 from future import standard_library
+
 from survey.tests.models import BaseModelTest
 
 standard_library.install_aliases()

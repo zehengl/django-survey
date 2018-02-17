@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from future import standard_library
+
 from survey.models import Answer, Question, Response, Survey
 from survey.tests.models import BaseModelTest
 

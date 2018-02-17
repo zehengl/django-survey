@@ -6,6 +6,7 @@ from __future__ import (
 )
 
 from future import standard_library
+
 from survey.exporter.tex import ConfigurationBuilder
 from survey.models import Survey
 from survey.tests.management.test_management import TestManagement

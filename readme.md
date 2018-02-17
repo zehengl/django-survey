@@ -207,6 +207,12 @@ create a superuser, load the test dump, then launch the server :
   xdg-open htmlcov/index.html
 ~~~~
 
+### Sorting imports
+
+~~~~
+    isort -rc survey
+~~~~
+
 ### Internationalisation :
 ~~~~
   python manage.py makemessages --no-obsolete --no-wrap

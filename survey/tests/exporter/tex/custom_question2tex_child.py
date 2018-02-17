@@ -5,6 +5,7 @@ from __future__ import (
 )
 
 from future import standard_library
+
 from survey.exporter.tex.question2tex_chart import Question2TexChart
 
 standard_library.install_aliases()

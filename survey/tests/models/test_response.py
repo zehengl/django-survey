@@ -7,6 +7,7 @@ from __future__ import (
 from builtins import str
 
 from future import standard_library
+
 from survey.tests.models import BaseModelTest
 
 standard_library.install_aliases()

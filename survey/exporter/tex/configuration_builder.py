@@ -5,6 +5,7 @@ from __future__ import (
 )
 
 from future import standard_library
+
 from survey.models import Survey
 
 from .configuration import Configuration

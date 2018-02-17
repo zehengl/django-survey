@@ -8,6 +8,7 @@ from __future__ import (
 import os
 
 from future import standard_library
+
 from survey.exporter.tex.configuration import Configuration
 from survey.exporter.tex.survey2tex import Survey2Tex
 from survey.models import Survey

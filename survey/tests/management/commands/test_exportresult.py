@@ -11,6 +11,7 @@ from django.conf import settings
 from django.core.management import call_command
 from django.utils.text import slugify
 from future import standard_library
+
 from survey.tests.management.test_management import TestManagement
 
 standard_library.install_aliases()

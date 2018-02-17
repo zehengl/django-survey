@@ -8,6 +8,7 @@ from builtins import super
 
 from django.views.generic import TemplateView
 from future import standard_library
+
 from survey.models import Survey
 
 standard_library.install_aliases()

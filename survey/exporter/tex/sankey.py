@@ -14,6 +14,7 @@ Produces simple Sankey Diagrams with matplotlib.
                 |  |   |   |
                 |  |   |   |
                 '  |   '   |
+                isort:skip_file
 """
 
 from collections import defaultdict
