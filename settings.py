@@ -68,6 +68,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(ROOT, "survey", "templates"),
+            os.path.join(ROOT, "dev", "templates"),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,6 +123,8 @@ LANGUAGES = (
     ('en', 'english'),
     ('fr', 'french'),
 )
+
+LOGIN_REDIRECT_URL = '/'
 
 LOGGING = {
     'version': 1,
