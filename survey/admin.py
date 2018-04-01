@@ -14,11 +14,9 @@ from .actions import make_published
 standard_library.install_aliases()
 
 
-
-
 class QuestionInline(admin.TabularInline):
     model = Question
-    ordering = ('order', 'category', )
+    ordering = ('order', 'category',)
     extra = 1
 
 
@@ -38,25 +36,6 @@ class AnswerBaseInline(admin.StackedInline):
     fields = ('question', 'body')
     readonly_fields = ('question',)
     extra = 0
-
-
-class AnswerTextInline(AnswerBaseInline):
-    model = Answer
-
-
-class AnswerRadioInline(AnswerBaseInline):
-    model = Answer
-
-
-class AnswerSelectInline(AnswerBaseInline):
-    model = Answer
-
-
-class AnswerSelectMultipleInline(AnswerBaseInline):
-    model = Answer
-
-
-class AnswerIntegerInline(AnswerBaseInline):
     model = Answer
 
 
@@ -64,10 +43,7 @@ class ResponseAdmin(admin.ModelAdmin):
     list_display = ('interview_uuid', 'survey', 'created', 'user')
     list_filter = ('survey', 'created')
     date_hierarchy = 'created'
-    inlines = [
-        AnswerTextInline, AnswerRadioInline, AnswerSelectInline,
-        AnswerSelectMultipleInline, AnswerIntegerInline
-    ]
+    inlines = [AnswerBaseInline]
     # specifies the order as well as which fields to act on
     readonly_fields = (
         'survey', 'created', 'updated', 'interview_uuid', 'user'
