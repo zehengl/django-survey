@@ -50,26 +50,32 @@ class Survey2X(object):
         path = os.path.join(self._get_X_dir(), file_name)
         return path
 
+    def file_modification_time(self):
+        """ Return the modification time of the "x" file. """
+        if not os.path.exists(self.file_name()):
+            earliest_working_timestamp_for_windows = 86400
+            mtime = earliest_working_timestamp_for_windows
+        else:
+            mtime = os.path.getmtime(self.file_name())
+        mtime = datetime.utcfromtimestamp(mtime)
+        mtime = mtime.replace(tzinfo=pytz.timezone("UTC"))
+        return mtime
+
     def need_update(self):
         """ Does a file need an update ?
         If the file was generated before the last answer was given, it needs update. """
-        if not os.path.exists(self.file_name()):
-            return True
         latest_answer_date = self.survey.latest_answer_date()
         no_response_at_all = latest_answer_date is None
         if no_response_at_all:
             return False
-        modification_time = os.path.getmtime(self.file_name())
-        modification_time = datetime.utcfromtimestamp(modification_time)
-        modification_time = modification_time.replace(tzinfo=pytz.timezone("UTC"))
         LOGGER.debug(
             "We %sneed an update because latest_answer_date=%s > "
             "file_modification_time=%s is %s \n",
-            "" if latest_answer_date > modification_time else "do not ",
-            latest_answer_date, modification_time,
-            latest_answer_date > modification_time
+            "" if latest_answer_date > self.file_modification_time() else "do not ",
+            latest_answer_date, self.file_modification_time(),
+            latest_answer_date > self.file_modification_time()
         )
-        return latest_answer_date > modification_time
+        return latest_answer_date > self.file_modification_time()
 
     def survey_to_x(self):
         """ Return a string that will be written into a file.
