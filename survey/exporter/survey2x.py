@@ -9,7 +9,9 @@ import os
 from builtins import object, open
 from datetime import datetime
 
+import pytz
 from django.conf import settings
+from django.utils import timezone
 from django.utils.text import slugify
 from future import standard_library
 
@@ -58,8 +60,15 @@ class Survey2X(object):
         if no_response_at_all:
             return False
         modification_time = os.path.getmtime(self.file_name())
-        modification_time = datetime.fromtimestamp(modification_time)
-        modification_time = modification_time.replace(tzinfo=latest_answer_date.tzinfo)
+        modification_time = datetime.utcfromtimestamp(modification_time)
+        modification_time = modification_time.replace(tzinfo=pytz.timezone("UTC"))
+        LOGGER.debug(
+            "We %sneed an update because latest_answer_date=%s > "
+            "file_modification_time=%s is %s \n",
+            "" if latest_answer_date > modification_time else "do not ",
+            latest_answer_date, modification_time,
+            latest_answer_date > modification_time
+        )
         return latest_answer_date > modification_time
 
     def survey_to_x(self):

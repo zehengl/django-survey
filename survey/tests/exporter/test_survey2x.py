@@ -9,6 +9,7 @@ import os
 import time
 from datetime import datetime
 
+import pytz
 from django.conf import settings
 from future import standard_library
 
@@ -40,38 +41,17 @@ class TestSurvey2X(TestManagement):
         expected = os.path.join(settings.ROOT, "survey",
                                 "test-management-survey.survey")
         self.assertEqual(s2xi.file_name(), expected)
-
-        # survey output file shouldn't exist but responses are
-        # already created
-        responses = s2xi.survey.responses.all()
-        LOGGER.debug("Number of responses: %s", len(responses))
-        lad = s2xi.survey.latest_answer_date()
-        LOGGER.debug("latest_answer_date before file creation: %s", lad)
-        self.assertTrue(s2xi.need_update())
-        time.sleep(1)
-
-        # write dummy survey file
+        self.assertTrue(s2xi.need_update(), "No file exported and the survey "
+                        "contain response : we should need an update.")
         s2xi.survey_to_x()
-        mtime = os.path.getmtime(expected)
-        fctime = datetime.fromtimestamp(mtime)
-        fcztime = fctime.replace(tzinfo=lad.tzinfo)
-        LOGGER.debug("mtime: %s", fcztime)
-
-        # no responses saved Survey2X created need_update and
-        # should return False
-        lad = s2xi.survey.latest_answer_date()
-        LOGGER.debug("latest_answer_date after file creation: %s", lad)
-        self.assertFalse(s2xi.need_update())
-
-        # save response
+        time.sleep(1)
+        self.assertFalse(s2xi.need_update(), "We exported the file and there"
+                         " is no new response, we should not need an update.")
+        time.sleep(1)
         self.response.save()
-
-        # now need_update should return True
         lad = s2xi.survey.latest_answer_date()
-        LOGGER.debug("latest_answer_date after save(): %s", lad)
-        self.assertTrue(s2xi.need_update())
-
-        # remove survey file
+        self.assertTrue(s2xi.need_update(), "We exported the file but there"
+                         " is a new response, we should need an update.")
         if os.path.exists(expected):
             os.remove(expected)
         else:
