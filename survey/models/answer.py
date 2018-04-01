@@ -9,15 +9,17 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-import logging
 from builtins import super
+import logging
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from future import standard_library
 
 from .question import Question
 from .response import Response
+
 
 standard_library.install_aliases()
 
@@ -27,11 +29,13 @@ LOGGER = logging.getLogger(__name__)
 
 class Answer(models.Model):
 
-    question = models.ForeignKey(Question, related_name="answers")
-    response = models.ForeignKey(Response, related_name="answers")
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    body = models.TextField(blank=True, null=True)
+    question = models.ForeignKey(Question, verbose_name=_("Question"),
+                                 related_name="answers")
+    response = models.ForeignKey(Response, verbose_name=_("Response"),
+                                 related_name="answers")
+    created = models.DateTimeField(_("Creation date"), auto_now_add=True)
+    updated = models.DateTimeField(_("Update date"), auto_now=True)
+    body = models.TextField(_("Content"), blank=True, null=True)
 
     def __init__(self, *args, **kwargs):
         try:

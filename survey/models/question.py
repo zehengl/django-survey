@@ -4,8 +4,8 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-import logging
 from builtins import object, super
+import logging
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -25,7 +25,6 @@ except ImportError:  # pragma: no cover
 LOGGER = logging.getLogger(__name__)
 
 standard_library.install_aliases()
-
 
 CHOICES_HELP_TEXT = _(u"""The choices field is only used if the question type
 if the question type is 'radio', 'select', or
@@ -73,15 +72,17 @@ class Question(models.Model):
         (INTEGER, _(u'integer')),
     )
 
-    text = models.TextField()
-    order = models.IntegerField()
-    required = models.BooleanField()
-    category = models.ForeignKey(Category, blank=True, null=True,
+    text = models.TextField(_("Text"))
+    order = models.IntegerField(_("Order"),)
+    required = models.BooleanField(_("Required"),)
+    category = models.ForeignKey(Category, verbose_name=_("Category"),
+                                 blank=True, null=True,
                                  related_name="questions")
-    survey = models.ForeignKey(Survey, related_name="questions")
-    type = models.CharField(max_length=200, choices=QUESTION_TYPES,
+    survey = models.ForeignKey(Survey, verbose_name=_("Survey"),
+                               related_name="questions")
+    type = models.CharField(_("Type"), max_length=200, choices=QUESTION_TYPES,
                             default=TEXT)
-    choices = models.TextField(blank=True, null=True,
+    choices = models.TextField(_("Choices"), blank=True, null=True,
                                help_text=CHOICES_HELP_TEXT)
 
     class Meta(object):

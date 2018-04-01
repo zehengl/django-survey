@@ -32,16 +32,18 @@ class Response(models.Model):
         unique interview uuid.
     """
 
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    survey = models.ForeignKey(Survey, related_name="responses")
-    user = models.ForeignKey(user_model, null=True, blank=True)
+    created = models.DateTimeField(_("Creation date"), auto_now_add=True)
+    updated = models.DateTimeField(_("Update date"), auto_now=True)
+    survey = models.ForeignKey(Survey, verbose_name=_("Survey"),
+                               related_name="responses")
+    user = models.ForeignKey(user_model, verbose_name=_("User"), null=True,
+                             blank=True)
     interview_uuid = models.CharField(_(u"Interview unique identifier"),
                                       max_length=36)
 
     class Meta(object):
-        verbose_name = _('response')
-        verbose_name_plural = _('responses')
+        verbose_name = _('Set of answers to surveys')
+        verbose_name_plural = _('Sets of answers to surveys')
 
     def __str__(self):
         msg = u"Response to {} by {}".format(self.survey, self.user)
