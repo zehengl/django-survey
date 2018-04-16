@@ -1,13 +1,13 @@
 # django-survey-and-report's japanese i18n file
 # This file is distributed under the MIT license.
 # Nobukuni Suzue <nsuzue@me.com>, 2018.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-06 01:43-0700\n"
+"POT-Creation-Date: 2018-04-16 10:53+0200\n"
 "PO-Revision-Date: 2018-04-09 00:52+0000\n"
 "Last-Translator: b'  <nsuzue@me.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,14 +105,8 @@ msgid "We could not render a chart because the type"
 msgstr "チャートを描画できません。何故ならタイプ"
 
 #: .\survey\exporter\tex\survey2tex.py:77
-msgid ""
-"is not a standard type nor the path to an importable valid Question2Tex "
-"child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', "
-"'polar' or 'package.path.MyQuestion2TexCustomClass'"
-msgstr ""
-"は標準タイプでもインポート可能で有効なQuestion2Tex子クラスへのパスでもありません。 "
-"「raw」、「sankey」、「pie」、「cloud」、 "
-"「square」、「polar」または「package.path.MyQuestion2TexCustomClass」の中から選択してください。"
+msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
+msgstr "は標準タイプでもインポート可能で有効なQuestion2Tex子クラスへのパスでもありません。 「raw」、「sankey」、「pie」、「cloud」、 「square」、「polar」または「package.path.MyQuestion2TexCustomClass」の中から選択してください。"
 
 #: .\survey\models\answer.py:32
 msgid "Question"
@@ -165,8 +159,7 @@ msgid ""
 "if the question type is 'radio', 'select', or\n"
 "'select multiple' provide a comma-separated list of\n"
 "options for this question ."
-msgstr ""
-"選択肢フィールドは、質問のタイプが「ラジオボタン」、「リスト（単一選択）」、「リスト（複数選択）」の場合のみ有効です。選択肢はカンマで区切ってください。"
+msgstr "選択肢フィールドは、質問のタイプが「ラジオボタン」、「リスト（単一選択）」、「リスト（複数選択）」の場合のみ有効です。選択肢はカンマで区切ってください。"
 
 #: .\survey\models\question.py:66
 msgid "text (multiple line)"
