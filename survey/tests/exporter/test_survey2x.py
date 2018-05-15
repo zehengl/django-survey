@@ -37,21 +37,29 @@ class TestSurvey2X(TestManagement):
                 file_.write(".")
                 file_.close()
 
+        def get_more_info_on_fail(survey2x):
+            msg = "Latest answer date : {} ".format(survey2x.latest_answer_date)
+            msg += "File modification time : {}".format(survey2x.file_modification_time)
+            return msg
+
         s2xi = Survey2Survey(self.survey)
         expected = os.path.join(settings.ROOT, "survey",
                                 "test-management-survey.survey")
         self.assertEqual(s2xi.file_name(), expected)
         self.assertTrue(s2xi.need_update(), "No file exported and the survey "
-                        "contain response : we should need an update.")
+                        "contain response : we should need an update."
+                        "{}".format(get_more_info_on_fail(s2xi)))
         s2xi.survey_to_x()
         time.sleep(1)
         self.assertFalse(s2xi.need_update(), "We exported the file and there"
-                         " is no new response, we should not need an update.")
+                         " is no new response, we should not need an update."
+                         "{}".format(get_more_info_on_fail(s2xi)))
         time.sleep(1)
         self.response.save()
         lad = s2xi.survey.latest_answer_date()
         self.assertTrue(s2xi.need_update(), "We exported the file but there"
-                         " is a new response, we should need an update.")
+                         " is a new response, we should need an update."
+                         "{}".format(get_more_info_on_fail(s2xi)))
         if os.path.exists(expected):
             os.remove(expected)
         else:
