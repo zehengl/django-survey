@@ -19,7 +19,6 @@ from survey.models import Survey
 
 standard_library.install_aliases()
 
-
 LOGGER = logging.getLogger(__name__)
 
 
@@ -50,6 +49,7 @@ class Survey2X(object):
         path = os.path.join(self._get_X_dir(), file_name)
         return path
 
+    @property
     def file_modification_time(self):
         """ Return the modification time of the "x" file. """
         if not os.path.exists(self.file_name()):
@@ -61,21 +61,27 @@ class Survey2X(object):
         mtime = mtime.replace(tzinfo=pytz.timezone("UTC"))
         return mtime
 
+    @property
+    def latest_answer_date(self):
+        """ The date at which the last answer was given"""
+        return self.survey.latest_answer_date()
+
     def need_update(self):
         """ Does a file need an update ?
         If the file was generated before the last answer was given, it needs update. """
-        latest_answer_date = self.survey.latest_answer_date()
+        latest_answer_date = self.latest_answer_date
         no_response_at_all = latest_answer_date is None
         if no_response_at_all:
             return False
+        file_modification_time = self.file_modification_time
         LOGGER.debug(
             "We %sneed an update because latest_answer_date=%s > "
             "file_modification_time=%s is %s \n",
-            "" if latest_answer_date > self.file_modification_time() else "do not ",
-            latest_answer_date, self.file_modification_time(),
-            latest_answer_date > self.file_modification_time()
+            "" if latest_answer_date > file_modification_time else "do not ",
+            latest_answer_date, file_modification_time,
+            latest_answer_date > file_modification_time
         )
-        return latest_answer_date > self.file_modification_time()
+        return latest_answer_date > file_modification_time
 
     def survey_to_x(self):
         """ Return a string that will be written into a file.
