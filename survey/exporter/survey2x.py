@@ -81,7 +81,7 @@ class Survey2X(object):
             latest_answer_date, file_modification_time,
             latest_answer_date > file_modification_time
         )
-        return latest_answer_date > file_modification_time
+        return latest_answer_date >= file_modification_time
 
     def survey_to_x(self):
         """ Return a string that will be written into a file.
