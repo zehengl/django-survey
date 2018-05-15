@@ -2,6 +2,9 @@
 
 import logging
 import os
+from pip.utils.logging import colorama
+
+colorama.init()
 
 print("\033[33m"
       "You're using a dev settings file. It includes django rosetta (in order "
