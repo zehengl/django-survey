@@ -17,4 +17,10 @@ htmlcov/
 .coverage
 build/
 dist/
-
+csv/short-survey.csv
+csv/test-management-survey.csv
+csv/test-survey.csv
+tex/q9_vs_q9.png
+tex/short-survey.tex
+tex/test-management-survey.tex
+tex/test-survey.tex
