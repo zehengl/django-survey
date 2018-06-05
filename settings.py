@@ -2,7 +2,11 @@
 
 import logging
 import os
-from pip.utils.logging import colorama
+
+try:
+    import colorama
+except:
+    from pip._vendor import colorama
 
 colorama.init()
 
