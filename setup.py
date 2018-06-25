@@ -15,13 +15,13 @@ def add_package(package_list, package):
 
 setup(
     name="django-survey-and-report",
-    version="1.0.5",
+    version="1.1.0",
     description="A django survey app, based on and compatible with "
                 "'django-survey'",
-    long_description="A django survey app, based on and compatible with "
-    "'django-survey' (ie: you can migrate your old django-survey app and its "
-    "data), but ported to python 3 and allowing export and report as CSV or "
-    "PDF.",
+    long_description="A django survey app, based on and compatible with \"django-survey\"."
+"You will be able to migrate your data from an ancient version of "
+"django-survey, but you can use python 3 and export results as "
+"CSV or PDF using your native language.",
     author="Pierre SASSOULAS",
     author_email="pierre.sassoulas@gmail.com",
     license="AGPL",
