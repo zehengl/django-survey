@@ -19,10 +19,10 @@ standard_library.install_aliases()
 
 def serve_unprotected_result_csv(survey):
     """ Return the csv corresponding to a survey. """
-    s2csv = Survey2Csv(survey)
-    if s2csv.need_update():
-        s2csv.generate_file()
-    with open(s2csv.file_name(), 'r') as csv_file:
+    survey_to_csv = Survey2Csv(survey)
+    if survey_to_csv.need_update():
+        survey_to_csv.generate_file()
+    with open(survey_to_csv.file_name(), 'r') as csv_file:
         response = HttpResponse(csv_file.read(), content_type='text/csv')
     content_disposition = u'attachment; filename="{}.csv"'.format(survey.name)
     response['Content-Disposition'] = content_disposition
