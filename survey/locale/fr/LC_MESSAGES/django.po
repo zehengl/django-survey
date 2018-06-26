@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-01 11:50+0200\n"
+"POT-Creation-Date: 2018-06-26 18:52+0200\n"
 "PO-Revision-Date: 2018-04-01 11:49+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,23 +108,23 @@ msgstr "Nous n'avons pas pu générer un graphique car le type"
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "n'est pas un type standard, ni le chemin d'une classe fille de Question2Tex importable. Choisissez entre 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' ou 'package.chemin.MaClasseQuestion2TexPerso'"
 
-#: .\survey\models\answer.py:32
+#: .\survey\models\answer.py:31
 msgid "Question"
 msgstr "Question"
 
-#: .\survey\models\answer.py:34
+#: .\survey\models\answer.py:33
 msgid "Response"
 msgstr "Réponse"
 
-#: .\survey\models\answer.py:36 .\survey\models\response.py:35
+#: .\survey\models\answer.py:35 .\survey\models\response.py:35
 msgid "Creation date"
 msgstr "Date de création"
 
-#: .\survey\models\answer.py:37 .\survey\models\response.py:36
+#: .\survey\models\answer.py:36 .\survey\models\response.py:36
 msgid "Update date"
 msgstr "Date de mise à jour"
 
-#: .\survey\models\answer.py:38
+#: .\survey\models\answer.py:37
 msgid "Content"
 msgstr "Contenu"
 
