@@ -20,47 +20,49 @@ standard_library.install_aliases()
 
 LOGGER = logging.getLogger(__name__)
 
+class Survey2Survey(Survey2X):
+    def survey_to_x(self):
+        file_ = open(self.file_name(), "w")
+        file_.write(".")
+        file_.close()
 
 class TestSurvey2X(TestManagement):
 
     def setUp(self):
         TestManagement.setUp(self)
-        self.s2x = Survey2X(self.survey)
+        self.virtual_survey2x = Survey2X(self.survey)
+        self.actual_survey2x = Survey2Survey(self.survey)
+        self.expected_actual = os.path.join(settings.ROOT, "survey", "test-management-survey.survey")
+        self.expected_virtual = os.path.join(settings.ROOT, "x", "test-management-survey.x")
+
+    def get_fail_info(self, survey2x):
+        msg = "Latest answer date : {} ".format(survey2x.latest_answer_date)
+        msg += "File modification time : {}".format(survey2x.file_modification_time)
+        return msg
 
     def test_survey_2_x(self):
-        self.assertRaises(NotImplementedError, self.s2x.survey_to_x)
+        self.assertRaises(NotImplementedError, self.virtual_survey2x.survey_to_x)
+
+    def test_file_name(self):
+        self.assertEqual(self.actual_survey2x.file_name(), self.expected_actual)
+        self.assertEqual(self.virtual_survey2x.file_name(), self.expected_virtual)
 
     def test_need_update(self):
-        class Survey2Survey(Survey2X):
-            def survey_to_x(self):
-                file_ = open(self.file_name(), "w")
-                file_.write(".")
-                file_.close()
-
-        def get_more_info_on_fail(survey2x):
-            msg = "Latest answer date : {} ".format(survey2x.latest_answer_date)
-            msg += "File modification time : {}".format(survey2x.file_modification_time)
-            return msg
-
-        s2xi = Survey2Survey(self.survey)
-        expected = os.path.join(settings.ROOT, "survey",
-                                "test-management-survey.survey")
-        self.assertEqual(s2xi.file_name(), expected)
-        self.assertTrue(s2xi.need_update(), "No file exported and the survey "
+        self.assertTrue(self.actual_survey2x.need_update(), "No file exported and the survey "
                         "contain response : we should need an update."
-                        "{}".format(get_more_info_on_fail(s2xi)))
-        s2xi.survey_to_x()
+                        "{}".format(self.get_fail_info(self.actual_survey2x)))
+        self.actual_survey2x.survey_to_x()
         time.sleep(1)
-        self.assertFalse(s2xi.need_update(), "We exported the file and there"
+        self.assertFalse(self.actual_survey2x.need_update(), "We exported the file and there"
                          " is no new response, we should not need an update."
-                         "{}".format(get_more_info_on_fail(s2xi)))
+                         "{}".format(self.get_fail_info(self.actual_survey2x)))
         time.sleep(1)
         self.response.save()
-        lad = s2xi.survey.latest_answer_date()
-        self.assertTrue(s2xi.need_update(), "We exported the file but there"
+        lad = self.actual_survey2x.survey.latest_answer_date()
+        self.assertTrue(self.actual_survey2x.need_update(), "We exported the file but there"
                          " is a new response, we should need an update."
-                         "{}".format(get_more_info_on_fail(s2xi)))
-        if os.path.exists(expected):
-            os.remove(expected)
+                         "{}".format(self.get_fail_info(self.actual_survey2x)))
+        if os.path.exists(self.expected_actual):
+            os.remove(self.expected_actual)
         else:
-            LOGGER.error("Error removing '%s'", expected)
+            LOGGER.error("Error removing '%s'", self.expected_actual)
