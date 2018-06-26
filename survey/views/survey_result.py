@@ -42,5 +42,4 @@ def serve_result_csv(request, primary_key):
     survey = get_object_or_404(Survey, pk=primary_key)
     if survey.need_logged_user:
         return serve_protected_result(request, survey)
-    else:
-        return serve_unprotected_result_csv(survey)
+    return serve_unprotected_result_csv(survey)
