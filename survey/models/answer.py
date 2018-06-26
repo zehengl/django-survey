@@ -9,8 +9,8 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-from builtins import super
 import logging
+from builtins import super
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -19,7 +19,6 @@ from future import standard_library
 
 from .question import Question
 from .response import Response
-
 
 standard_library.install_aliases()
 

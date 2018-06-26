@@ -100,7 +100,7 @@ class TestConfiguration(TestManagement):
         qts_charts = ['Sub Sub Section with radius=3',
                       'Sub Sub Section with text=pin']
         qts_charts.sort()
-        qts_mc_results = list(self.qts_conf["multiple_charts"].keys())
+        qts_mc_results = list(self.qts_conf.get("multiple_charts").keys())
         qts_mc_results.sort()
         self.assertEqual(qts_mc_results, qts_charts)
         for chart in qts_charts:

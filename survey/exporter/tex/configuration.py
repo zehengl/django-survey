@@ -47,14 +47,15 @@ class Configuration(object):
     @property
     def valid_survey_names(self):
         """ Return a list of the valid name for a survey. """
-        vsn = [survey.name for survey in Survey.objects.all()]
-        vsn.append("generic")
-        return vsn
+        valid_survey_names = [survey.name for survey in Survey.objects.all()]
+        valid_survey_names.append("generic")
+        return valid_survey_names
 
     def check_survey_exists(self, survey_name):
         """ Check if the survey name exists.
 
         :param String survey_name: The name of a survey. """
+        LOGGER.info("Checking that '%s' is an existing survey.", survey_name)
         if type(survey_name) == Survey:
             msg = "Expecting a string for 'survey_name' and got a Survey "
             msg += " ('{}').".format(survey_name)

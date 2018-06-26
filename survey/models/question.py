@@ -4,8 +4,8 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-from builtins import object, super
 import logging
+from builtins import object, super
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
