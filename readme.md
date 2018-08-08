@@ -42,10 +42,11 @@ Add `django-survey-and-report` to your requirements and get it with pip.
 	echo 'django-survey-and-report' > requirements.txt
 	pip install -r requirements.txt
 
-Add `survey` in the `INSTALLED_APPS` in your settings :
+Add `bootstrapform` and `survey` in the `INSTALLED_APPS` in your settings :
 
 	INSTALLED_APPS = [
 		...
+		'bootstrapform',
 		'survey'
 	]
 
