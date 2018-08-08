@@ -42,12 +42,26 @@ Add `django-survey-and-report` to your requirements and get it with pip.
 	echo 'django-survey-and-report' > requirements.txt
 	pip install -r requirements.txt
 
-Add `django-survey-and-report` in the `INSTALLED_APPS` in your settings :
+Add `survey` in the `INSTALLED_APPS` in your settings :
 
 	INSTALLED_APPS = [
 		...
-		'django-survey-and-report'
+		'survey'
 	]
+
+Add an URL entry to your project’s urls.py, for example:
+
+    from django.conf import settings
+
+    if 'survey' in settings.INSTALLED_APPS:
+        urlpatterns += [
+            url(r'^survey/', include('survey.urls'))
+        ]
+
+Note: you can use whatever you wish as the URL prefix.
+
+To uninstall `django-survey-and-report`, simply comment out or remove the
+'survey' line in your `INSTALLED_APPS`.
 
 If you want to use the pdf rendering with the Sankey's diagram generation
 you will have to install python-tk (for python 2.7) or python3-tk (for python 3.x).
