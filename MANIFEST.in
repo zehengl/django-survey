@@ -1,1 +1,1 @@
-prune survey/tests*
+recursive-include survey *
