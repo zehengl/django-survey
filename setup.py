@@ -32,6 +32,7 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Natural Language :: English",
         "Natural Language :: French",
+        "Natural Language :: Japanese",
         "Topic :: Utilities",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
