@@ -2,8 +2,10 @@
 
 A django survey app, based on and compatible with "django-survey".
 You will be able to migrate your data from an ancient version of
-django-survey, but you can use python 3 and export results as
+django-survey, but it has been ported to python 3 and you can export results as
 CSV or PDF using your native language.
+
+The latest version still compatible with python 2.7 is 1.2.1.
 
 [![Build Status](https://travis-ci.org/Pierre-Sassoulas/django-survey.svg?branch=master)](https://travis-ci.org/Pierre-Sassoulas/django-survey)
 [![Coverage Status](https://coveralls.io/repos/github/Pierre-Sassoulas/django-survey/badge.svg?branch=master)](https://coveralls.io/github/Pierre-Sassoulas/django-survey?branch=master)
@@ -130,8 +132,8 @@ The pdf is then generated using the very good pgf-pie library.
 
 ## Sankey diagram
 
-If you installed python-tk (for python 2.7) or python3-tk (for python 3.x), you
-can also show the relation between two questions using a sankey diagram :
+If you installed python3-tk, you can also show the relation between two
+questions using a sankey diagram :
 
 ~~~~
 Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit.:
@@ -215,13 +217,11 @@ for every survey and question.
 
 ## Development environement
 
-You may want to use a virtualenv for python 2.7 or 3+ :
+You may want to use a virtualenv :
 
 ~~~~
-  python3.5 -m venv .3env/
-  # Resp. for python 2.7 : virtualenv .env
-  source .3env/bin/activate
-  # Resp. for python 2.7 : source .env/bin/activate
+  python3 -m venv .env/
+  source .env/bin/activate
 ~~~~
 
 In order to get started, install the dev requirements, create the database,
@@ -282,7 +282,8 @@ If your language already exists and you're a developper :
   # Access http://localhost:8000/rosetta
 ~~~~
 
-If your language is not yet available in rosetta, [this stack overflow question](https://stackoverflow.com/questions/12946830/how-to-add-new-languages-into-django)
+If your language is not yet available in rosetta,
+[this stack overflow question](https://stackoverflow.com/questions/12946830/how-to-add-new-languages-into-django)
 should work even for language not handled by django.
 
 ## As a translator
@@ -298,4 +299,5 @@ I will then integrate it to the project and credit you
 Based on [jessykate's django-survey](https://github.com/jessykate/django-survey),
 and contribution by jibaku, joshualoving, and ijasperyang in forks of jessykate's project.
 
-We use [anazalea's pySankey](https://github.com/anazalea/pySankey) for sankey's diagram during reporting.
+We use [anazalea's pySankey](https://github.com/anazalea/pySankey) for sankey's
+diagram during reporting.
