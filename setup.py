@@ -1,8 +1,10 @@
 
+import os
 import sys
 
 from setuptools import find_packages, setup
 
+ROOT = os.path.abspath(os.path.dirname(__file__))
 
 if sys.version_info < (3, 0):
     sys.exit('Sorry, Python < 3.0 is not supported')
@@ -13,15 +15,16 @@ def add_package(package_list, package):
     if package:
         package_list.append(package)
 
+
 setup(
     name="django-survey-and-report",
-    version="1.3.0",
+    version="1.2.2",
     description="A django survey app, based on and compatible with "
-                "'django-survey'",
-    long_description="A django survey app, based on and compatible with \"django-survey\"."
-"You will be able to migrate your data from an ancient version of "
-"django-survey, but it has been ported to python 3 and you can export results"
-" as CSV or PDF using your native language.",
+"\"django-survey\". You will be able to migrate your data from an ancient "
+"version of django-survey, but it has been ported to python 3 and you can "
+"export results as CSV or PDF using your native language.",
+    long_description=open(os.path.join(ROOT, 'readme.md')).read(),
+    long_description_content_type="text/markdown",
     author="Pierre SASSOULAS",
     author_email="pierre.sassoulas@gmail.com",
     license="AGPL",
