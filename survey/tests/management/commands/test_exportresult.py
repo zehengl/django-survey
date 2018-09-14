@@ -41,7 +41,7 @@ class TestExportresult(TestManagement):
         if os.path.exists(second_csv):
             os.remove(second_csv)
         call_command("exportresult", "--survey-all", "--tex", "--csv",
-                     "--force", configuration=self.test_conf_path)
+                     "--force", configuration_file=self.test_conf_path)
         self.assertMultiLineEqual(self.expected_content,
                                   self.get_file_content(first_csv))
         expected = """\

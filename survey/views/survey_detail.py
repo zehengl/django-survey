@@ -19,7 +19,7 @@ class SurveyDetail(View):
                 template_name = 'survey/survey.html'
             else:
                 template_name = 'survey/one_page_survey.html'
-        if survey.need_logged_user and not request.user.is_authenticated():
+        if survey.need_logged_user and not request.user.is_authenticated:
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
         categories = Category.objects.filter(survey=survey).order_by('order')
         form = ResponseForm(survey=survey, user=request.user,
@@ -34,7 +34,7 @@ class SurveyDetail(View):
 
     def post(self, request, *args, **kwargs):
         survey = get_object_or_404(Survey, is_published=True, id=kwargs['id'])
-        if survey.need_logged_user and not request.user.is_authenticated():
+        if survey.need_logged_user and not request.user.is_authenticated:
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
         categories = Category.objects.filter(survey=survey).order_by('order')
         form = ResponseForm(request.POST, survey=survey, user=request.user,

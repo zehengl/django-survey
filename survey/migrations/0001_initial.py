@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                 ('required', models.BooleanField()),
                 ('question_type', models.CharField(default=b'text', max_length=200, choices=[(b'text', 'text (multiple line)'), (b'short-text', 'short text (one line)'), (b'radio', 'radio'), (b'select', 'select'), (b'select-multiple', 'Select Multiple'), (b'select_image', 'Select Image'), (b'integer', 'integer')])),
                 ('choices', models.TextField(help_text="if the question type is 'radio', 'select', or 'select multiple' provide a comma-separated list of options for this question .", null=True, blank=True)),
-                ('category', models.ForeignKey(blank=True, to='survey.Category', null=True)),
+                ('category', models.ForeignKey(blank=True, to='survey.Category', null=True, on_delete=models.SET_NULL)),
             ],
             options={
                 'ordering': ('survey', 'order'),
@@ -87,7 +87,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('answerbase_ptr', models.OneToOneField(
                     parent_link=True, auto_created=True, primary_key=True,
-                    serialize=False, to='survey.AnswerBase')
+                    serialize=False, to='survey.AnswerBase', on_delete=models.CASCADE)
                  ),
                 ('body', models.IntegerField(null=True, blank=True)),
             ],
@@ -98,7 +98,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('answerbase_ptr', models.OneToOneField(
                     parent_link=True, auto_created=True, primary_key=True,
-                    serialize=False, to='survey.AnswerBase')
+                    serialize=False, to='survey.AnswerBase', on_delete=models.CASCADE)
                  ),
                 ('body', models.TextField(null=True, blank=True)),
             ],
@@ -109,7 +109,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('answerbase_ptr', models.OneToOneField(
                     parent_link=True, auto_created=True, primary_key=True,
-                    serialize=False, to='survey.AnswerBase')),
+                    serialize=False, to='survey.AnswerBase', on_delete=models.CASCADE)),
                 ('body', models.TextField(null=True, blank=True)),
             ],
             bases=('survey.answerbase',),
@@ -119,7 +119,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('answerbase_ptr', models.OneToOneField(
                     parent_link=True, auto_created=True, primary_key=True,
-                    serialize=False, to='survey.AnswerBase')),
+                    serialize=False, to='survey.AnswerBase', on_delete=models.CASCADE)),
                 ('body', models.TextField(null=True, blank=True)),
             ],
             bases=('survey.answerbase',),
@@ -129,7 +129,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('answerbase_ptr', models.OneToOneField(
                     parent_link=True, auto_created=True, primary_key=True,
-                    serialize=False, to='survey.AnswerBase')),
+                    serialize=False, to='survey.AnswerBase', on_delete=models.CASCADE)),
                 ('body', models.TextField(null=True, blank=True)),
             ],
             bases=('survey.answerbase',),
@@ -137,32 +137,32 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='response',
             name='survey',
-            field=models.ForeignKey(to='survey.Survey'),
+            field=models.ForeignKey(to='survey.Survey', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='response',
             name='user',
             field=models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL,
-                                    null=True),
+                                    null=True, on_delete=models.SET_NULL),
         ),
         migrations.AddField(
             model_name='question',
             name='survey',
-            field=models.ForeignKey(to='survey.Survey'),
+            field=models.ForeignKey(to='survey.Survey', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='category',
             name='survey',
-            field=models.ForeignKey(to='survey.Survey'),
+            field=models.ForeignKey(to='survey.Survey', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='answerbase',
             name='question',
-            field=models.ForeignKey(to='survey.Question'),
+            field=models.ForeignKey(to='survey.Question', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='answerbase',
             name='response',
-            field=models.ForeignKey(to='survey.Response'),
+            field=models.ForeignKey(to='survey.Response', on_delete=models.CASCADE),
         ),
     ]

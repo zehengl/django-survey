@@ -68,10 +68,12 @@ class Question(models.Model):
     text = models.TextField(_("Text"))
     order = models.IntegerField(_("Order"),)
     required = models.BooleanField(_("Required"),)
-    category = models.ForeignKey(Category, verbose_name=_("Category"),
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL,
+                                 verbose_name=_("Category"),
                                  blank=True, null=True,
                                  related_name="questions")
-    survey = models.ForeignKey(Survey, verbose_name=_("Survey"),
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE,
+                               verbose_name=_("Survey"),
                                related_name="questions")
     type = models.CharField(_("Type"), max_length=200, choices=QUESTION_TYPES,
                             default=TEXT)

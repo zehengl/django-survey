@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -30,6 +31,5 @@ class Survey(models.Model):
                 min_ = response.updated
         return min_
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('survey-detail', [self.pk])
+        return reverse('survey-detail', kwargs={"id": self.pk})
