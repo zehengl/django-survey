@@ -13,7 +13,7 @@ colorama.init()
 print("\033[33m"
       "You're using a dev settings file. It includes django rosetta (in order "
       " for dev to update translations) that is only useful for dev. "
-      "If you're a developper you need to 'pip install requirement_dev.txt', "
+      "If you're a developper you need to 'pip install -r requirement_dev.txt', "
       "If you want to use the app without doing your own settings you should"
       " remove django-rosetta from the installed apps in the settings."
       "\033[39m")
