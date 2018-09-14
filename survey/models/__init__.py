@@ -4,12 +4,6 @@
     Permit to import everything from survey.models without knowing the details.
 """
 
-
-
-
-
-from future import standard_library
-standard_library.install_aliases()
 import sys
 
 from .answer import Answer

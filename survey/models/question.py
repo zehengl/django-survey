@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 import logging
-from builtins import object, super
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-from future import standard_library
 
 from .category import Category
 from .survey import Survey
@@ -24,7 +18,6 @@ except ImportError:  # pragma: no cover
 
 LOGGER = logging.getLogger(__name__)
 
-standard_library.install_aliases()
 
 CHOICES_HELP_TEXT = _("""The choices field is only used if the question type
 if the question type is 'radio', 'select', or

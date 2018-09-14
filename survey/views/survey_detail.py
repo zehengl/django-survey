@@ -1,19 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
-from future import standard_library
 
 from survey.forms import ResponseForm
 from survey.models import Category, Survey
-
-standard_library.install_aliases()
-
 
 
 class SurveyDetail(View):

@@ -1,25 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 import logging
 import uuid
-from builtins import int, object, super
 
 from django import forms
 from django.core.urlresolvers import reverse
 from django.forms import models
 from django.utils.text import slugify
-from future import standard_library
 
 from survey.models import Answer, Question, Response
 from survey.signals import survey_completed
 from survey.widgets import ImageSelectWidget
-
-standard_library.install_aliases()
-
 
 LOGGER = logging.getLogger(__name__)
 

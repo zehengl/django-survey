@@ -1,23 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 import logging
 import os
-import time
 from datetime import datetime
 
 import pytz
 from django.conf import settings
-from future import standard_library
 from mock.mock import patch
 
 from survey.exporter.survey2x import Survey2X
 from survey.tests.management.test_management import TestManagement
-
-standard_library.install_aliases()
 
 LOGGER = logging.getLogger(__name__)
 

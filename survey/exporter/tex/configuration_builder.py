@@ -1,16 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
-from future import standard_library
-
 from survey.models import Survey
 
 from .configuration import Configuration
-
-standard_library.install_aliases()
 
 
 class ConfigurationBuilder(Configuration):

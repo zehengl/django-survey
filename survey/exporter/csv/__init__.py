@@ -1,10 +1,3 @@
-
-
-
-
-
-from future import standard_library
-standard_library.install_aliases()
 from .survey2csv import Survey2Csv
 
 __all__ = ["Survey2Csv"]

@@ -1,19 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
-from builtins import object, str
-
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-from future import standard_library
 
 from .survey import Survey
-
-standard_library.install_aliases()
 
 
 class Category(models.Model):

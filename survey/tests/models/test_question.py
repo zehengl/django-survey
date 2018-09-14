@@ -1,16 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
-from builtins import str
-
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from future import standard_library
 
 from survey.models import Answer, Question, Response, Survey
 from survey.tests.models import BaseModelTest
@@ -19,8 +12,6 @@ try:
     from _collections import OrderedDict
 except ImportError:
     from ordereddict import OrderedDict
-
-standard_library.install_aliases()
 
 
 class TestQuestion(BaseModelTest):

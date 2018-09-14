@@ -1,21 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 import copy
 import logging
 import os
 
 import yaml
 from django.conf import settings
-from future import standard_library
 
 from survey.models.survey import Survey
-
-standard_library.install_aliases()
-
 
 LOGGER = logging.getLogger(__name__)
 

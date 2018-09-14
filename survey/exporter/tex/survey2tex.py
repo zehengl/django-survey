@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 import logging
 import os
 from pydoc import locate
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from future import standard_library
 
 from survey.exporter.survey2x import Survey2X
 from survey.exporter.tex.latex_file import LatexFile
@@ -19,9 +14,6 @@ from survey.exporter.tex.question2tex_chart import Question2TexChart
 from survey.exporter.tex.question2tex_raw import Question2TexRaw
 from survey.exporter.tex.question2tex_sankey import Question2TexSankey
 from survey.models.question import Question
-
-standard_library.install_aliases()
-
 
 LOGGER = logging.getLogger(__name__)
 

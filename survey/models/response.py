@@ -1,15 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
-from builtins import object
-
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from future import standard_library
 
 from .survey import Survey
 
@@ -21,8 +14,6 @@ try:
         user_model = User
 except (ImportError, AttributeError):
     user_model = User
-
-standard_library.install_aliases()
 
 
 class Response(models.Model):

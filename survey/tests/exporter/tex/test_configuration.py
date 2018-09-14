@@ -1,20 +1,10 @@
 # -*- coding: utf-8 -*-
 
-
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 import os
-from builtins import str
-
-from future import standard_library
 
 from survey.exporter.tex.configuration import Configuration
 from survey.models.survey import Survey
 from survey.tests.management.test_management import TestManagement
-
-standard_library.install_aliases()
 
 
 class TestConfiguration(TestManagement):
