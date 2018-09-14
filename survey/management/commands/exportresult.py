@@ -25,7 +25,7 @@ class Command(SurveyCommand):
         See the "help" var.
     """
 
-    help = u"""This command permit to export all survey in the database as csv
+    help = """This command permit to export all survey in the database as csv
                and tex."""
 
     def add_arguments(self, parser):

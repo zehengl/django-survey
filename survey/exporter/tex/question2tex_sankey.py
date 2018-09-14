@@ -68,8 +68,8 @@ class Question2TexSankey(Question2Tex):
         )
         q1 = []
         q2 = []
-        for answer_to_q1, cardinality_to_q2 in self.cardinality.items():
-            for answer_to_q2, number_of_time in cardinality_to_q2.items():
+        for answer_to_q1, cardinality_to_q2 in list(self.cardinality.items()):
+            for answer_to_q2, number_of_time in list(cardinality_to_q2.items()):
                 for _ in range(number_of_time):
                     q1.append(answer_to_q1)
                     q2.append(answer_to_q2)

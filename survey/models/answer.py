@@ -83,6 +83,6 @@ class Answer(models.Model):
                     raise ValidationError(msg)
 
     def __str__(self):
-        return u"{} to '{}' : '{}'".format(
+        return "{} to '{}' : '{}'".format(
             self.__class__.__name__, self.question, self.body
         )

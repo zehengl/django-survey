@@ -17,9 +17,9 @@ def make_published(modeladmin, request, queryset):
     """
     count = queryset.update(is_published=True)
     message = ungettext(
-        u'%(count)d survey was successfully marked as published.',
-        u'%(count)d surveys were successfully marked as published',
+        '%(count)d survey was successfully marked as published.',
+        '%(count)d surveys were successfully marked as published',
         count
     ) % {'count': count, }
     modeladmin.message_user(request, message)
-    make_published.short_description = _(u"Mark selected surveys as published")
+    make_published.short_description = _("Mark selected surveys as published")

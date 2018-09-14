@@ -53,7 +53,7 @@ class Survey2Tex(Survey2X):
             multiple_charts = {"": options.get("chart")}
         question_synthesis = ""
         i = 0
-        for chart_title, opts in multiple_charts.items():
+        for chart_title, opts in list(multiple_charts.items()):
             i += 1
             if chart_title:
                 # "" is False, by default we do not add section or anything
@@ -90,7 +90,7 @@ class Survey2Tex(Survey2X):
                 q2tex = q2tex_class(question, latex_label=i, **opts)
                 question_synthesis += q2tex.tex()
         section_title = Question2Tex.html2latex(question.text)
-        return u"""
+        return """
 \\clearpage{}
 \\section{%s}
 

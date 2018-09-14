@@ -29,6 +29,6 @@ class TestAnswer(BaseModelTest):
 
     def test_values(self):
         """ We can have multiple nasty values ans it will be detected. """
-        self.assertEqual(self.answers[0].values, [u"Mytext"])
-        self.assertEqual(self.answers[4].values, [u"Yes"])
-        self.assertEqual(self.answers[6].values, [u"2", u"4"])
+        self.assertEqual(self.answers[0].values, ["Mytext"])
+        self.assertEqual(self.answers[4].values, ["Yes"])
+        self.assertEqual(self.answers[6].values, ["2", "4"])

@@ -53,7 +53,7 @@ class SurveyDetail(View):
             session_key = 'survey_%s' % (kwargs['id'],)
             if session_key not in request.session:
                 request.session[session_key] = {}
-            for key, value in form.cleaned_data.items():
+            for key, value in list(form.cleaned_data.items()):
                 request.session[session_key][key] = value
                 request.session.modified = True
 

@@ -38,7 +38,7 @@ class Response(models.Model):
                                related_name="responses")
     user = models.ForeignKey(user_model, verbose_name=_("User"), null=True,
                              blank=True)
-    interview_uuid = models.CharField(_(u"Interview unique identifier"),
+    interview_uuid = models.CharField(_("Interview unique identifier"),
                                       max_length=36)
 
     class Meta(object):
@@ -46,6 +46,6 @@ class Response(models.Model):
         verbose_name_plural = _('Sets of answers to surveys')
 
     def __str__(self):
-        msg = u"Response to {} by {}".format(self.survey, self.user)
-        msg += u" on {}".format(self.created)
+        msg = "Response to {} by {}".format(self.survey, self.user)
+        msg += " on {}".format(self.created)
         return msg

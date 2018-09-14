@@ -45,7 +45,7 @@ class Survey2X(object):
         """ Return the csv file name for a Survey.
 
         :param Survey survey: The survey we're treating. """
-        file_name = u"{}.{}".format(slugify(self.survey.name), self._get_X())
+        file_name = "{}.{}".format(slugify(self.survey.name), self._get_X())
         path = os.path.join(self._get_X_dir(), file_name)
         return path
 

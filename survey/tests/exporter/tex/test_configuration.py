@@ -89,7 +89,7 @@ class TestConfiguration(TestManagement):
         self.assertEqual(self.ts_conf["chart"]["type"], "pie")
         self.assertEqual(self.ts_conf["chart"]["radius"], 3)
         self.assertEqual(self.ts_conf["chart"]["text"], "legend")
-        for key, value in self.qts_expected_conf.items():
+        for key, value in list(self.qts_expected_conf.items()):
             self.assertEqual(self.qts_conf["chart"][key], value)
 
     def test_get_question_multiple_charts(self):
@@ -104,7 +104,7 @@ class TestConfiguration(TestManagement):
         qts_mc_results.sort()
         self.assertEqual(qts_mc_results, qts_charts)
         for chart in qts_charts:
-            for key, expected_value in self.qts_expected_conf.items():
+            for key, expected_value in list(self.qts_expected_conf.items()):
                 value = self.qts_conf["multiple_charts"][chart][key]
                 if chart == "Sub Sub Section with radius=3" and key == "radius":
                     expected_value = 3

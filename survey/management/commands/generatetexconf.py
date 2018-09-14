@@ -20,7 +20,7 @@ class Command(SurveyCommand):
         See the "help" var.
     """
 
-    help = u"""This command permit to generate the latex configuration in order
+    help = """This command permit to generate the latex configuration in order
     to manage the survey report generation. """
 
     def add_arguments(self, parser):

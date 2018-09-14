@@ -85,7 +85,7 @@ adipiscing elit."
         """ We can get a list of answers to this question. """
         qat = self.question.answers_as_text
         self.assertEqual(3, len(qat))
-        expected = [u"Yës", 'Maybe', u"Yës"]
+        expected = ["Yës", 'Maybe', "Yës"]
         expected.sort()
         qat.sort()
         self.assertEqual(qat, expected)
@@ -98,9 +98,9 @@ adipiscing elit."
     def test_answers_cardinality(self):
         """ We can get the cardinality of each answers. """
         self.assertEqual(self.question.answers_cardinality(),
-                         {u"Maybe": 1, u"Yës": 2})
+                         {"Maybe": 1, "Yës": 2})
         self.assertEqual(self.question.answers_cardinality(min_cardinality=2),
-                         {"Other": 1, u"Yës": 2})
+                         {"Other": 1, "Yës": 2})
         question = Question.objects.get(text="Ipsum dolor sit amët, <strong> \
 consectetur </strong>  adipiscing elit.")
         self.assertEqual({'No': 1, "Yës": 1},
