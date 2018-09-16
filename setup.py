@@ -18,7 +18,7 @@ def add_package(package_list, package):
 
 setup(
     name="django-survey-and-report",
-    version="1.2.2",
+    version="1.3.0",
     description="A django survey app, based on and compatible with "
 "\"django-survey\". You will be able to migrate your data from an ancient "
 "version of django-survey, but it has been ported to python 3 and you can "
