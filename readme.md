@@ -275,23 +275,33 @@ know a language that is not yet available.
 
 ## As a developper
 
-If your language already exists and you're a developper :
+If your language do not exists add it in the `LANGUAGE` variable in the
+settings, like [here](https://github.com/Pierre-Sassoulas/django-survey/commit/ee3bdba26c303ad12fc4584938e724b39223faa9#diff-bdf3ecebd8379ca98cc89e545fc90899).
+Do not forget to credit yourself like in the header seen
+[here](https://github.com/Pierre-Sassoulas/django-zxcvbn-password-validator/commit/274d7c9b27268a0455f80ea518c452532b970ea4#diff-8015f170326f20998060314fda9b92b1)
+
+Then you can translate with :
 
 ~~~~
-  python manage.py makemessages --no-obsolete --no-wrap
-  python manage.py runserver
-  # Access http://localhost:8000/rosetta
+    python manage.py makemessages
+    # python manage.py createsuperuser ? (You need to login for rosetta)
+    python manage.py runserver
+    # Access http://localhost:8000/admin to login
+    # Then go to http://localhost:8000/rosetta to translate
+    python manage.py makemessages --no-obsolete --no-wrap
 ~~~~
 
 If your language is not yet available in rosetta,
-[this stack overflow question](https://stackoverflow.com/questions/12946830/how-to-add-new-languages-into-django)
+[this stack overflow question](https://stackoverflow.com/questions/12946830/)
 should work even for language not handled by django.
 
 ## As a translator
 
 If you're not a developper, open an issue on github and ask for a .po
-file in your language. I will generate it for you, so you can edit it with an online editor.
-I will then integrate it to the project and credit you
+file in your language. I will generate it for you, so you can edit it with an
+online editor. I will then create the .po and commit them, so you can edit them
+with your github account or integrate it myself if you do not have one.
+You will be credited
 [here](https://github.com/Pierre-Sassoulas/django-survey#language-available).
 
 
