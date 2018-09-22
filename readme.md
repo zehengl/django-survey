@@ -5,7 +5,8 @@ You will be able to migrate your data from an ancient version of
 django-survey, but it has been ported to python 3 and you can export results as
 CSV or PDF using your native language.
 
-The latest version still compatible with python 2.7 is 1.2.1.
+If you want the latest version still compatible with python 2.7 you need a
+version < 1.3.0.
 
 [![Build Status](https://travis-ci.org/Pierre-Sassoulas/django-survey.svg?branch=master)](https://travis-ci.org/Pierre-Sassoulas/django-survey)
 [![Coverage Status](https://coveralls.io/repos/github/Pierre-Sassoulas/django-survey/badge.svg?branch=master)](https://coveralls.io/github/Pierre-Sassoulas/django-survey?branch=master)
