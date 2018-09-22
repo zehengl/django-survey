@@ -127,6 +127,7 @@ LOCALE_PATHS = (
 LANGUAGE_CODE = 'en'
 LANGUAGES = (
     ('en', 'english'),
+    ('es', 'spanish'),
     ('fr', 'french'),
     ('ja', 'Japanese'),
 )

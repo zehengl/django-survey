@@ -1,6 +1,7 @@
-# django-survey-and-report's i18n file
-# This file is distributed under the MIT license.
-# Pierre SASSOULAS <pierre.sassoulas@gmail.com>, 2018.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
@@ -8,150 +9,149 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-22 18:09+0000\n"
-"PO-Revision-Date: 2018-04-01 11:49+0000\n"
-"Last-Translator: b'  <>'\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: fr\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Translated-Using: django-rosetta 0.7.13\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: dev/templates/base.html:3
 msgid "en"
-msgstr "fr"
+msgstr ""
 
 #: dev/templates/base.html:5
 msgid "DEVELOPMENT django-Survey"
-msgstr "DÉVELOPPEMENT django-Survey"
+msgstr ""
 
 #: survey/actions.py:13
 #, python-format
 msgid "%(count)d survey was successfully marked as published."
 msgid_plural "%(count)d surveys were successfully marked as published"
-msgstr[0] "%(count)d questionnaire a été publié avec succès."
-msgstr[1] "%(count)d questionnaires ont été publiés avec succès."
+msgstr[0] ""
+msgstr[1] ""
 
 #: survey/actions.py:18
 msgid "Mark selected surveys as published"
-msgstr "Marquer le sondage comme publié"
+msgstr ""
 
 #: survey/exporter/csv/survey2csv.py:34
 msgid "Anonymous"
-msgstr "Anonyme"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:61
 msgid "with"
-msgstr "avec"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:63
 #, python-format
 msgid "%(min_cardinality)d respondants or more"
 msgid_plural "%(min_cardinality)d respondant or more"
-msgstr[0] "%(min_cardinality)d réponse ou plus"
-msgstr[1] "%(min_cardinality)d réponses ou plus"
+msgstr[0] ""
+msgstr[1] ""
 
 #: survey/exporter/tex/question2tex.py:74
 msgid "excluding"
-msgstr "excluant"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:79
 #: survey/exporter/tex/question2tex.py:116
 #: survey/exporter/tex/question2tex.py:119
 msgid "and"
-msgstr "et"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:113
 #: survey/exporter/tex/question2tex.py:114
 msgid "or"
-msgstr "ou"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:128
 msgid "Repartition of answers"
-msgstr "Répartition des réponses"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_chart.py:72
 msgid "Left blank"
-msgstr "Laissé vide"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_chart.py:119
 #: survey/exporter/tex/question2tex_sankey.py:31
 msgid "for the question"
-msgstr "pour la question"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_chart.py:130
 msgid "No answers for this question."
-msgstr "Aucune réponse pour cette question."
+msgstr ""
 
 #: survey/exporter/tex/question2tex_raw.py:27
 msgid "Participant"
-msgstr "Participant"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_sankey.py:32
 msgid "left"
-msgstr "à gauche"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_sankey.py:35
 msgid "in relation with the question"
-msgstr "mise en relation avec la question"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_sankey.py:36
 msgid "right"
-msgstr "à droite"
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:67
 msgid "We could not render a chart because the type"
-msgstr "Nous n'avons pas pu générer un graphique car le type"
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:69
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
-msgstr "n'est pas un type standard, ni le chemin d'une classe fille de Question2Tex importable. Choisissez entre 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' ou 'package.chemin.MaClasseQuestion2TexPerso'"
+msgstr ""
 
 #: survey/models/answer.py:24
 msgid "Question"
-msgstr "Question"
+msgstr ""
 
 #: survey/models/answer.py:27
 msgid "Response"
-msgstr "Réponse"
+msgstr ""
 
 #: survey/models/answer.py:29 survey/models/response.py:26
 msgid "Creation date"
-msgstr "Date de création"
+msgstr ""
 
 #: survey/models/answer.py:30 survey/models/response.py:27
 msgid "Update date"
-msgstr "Date de mise à jour"
+msgstr ""
 
 #: survey/models/answer.py:31
 msgid "Content"
-msgstr "Contenu"
+msgstr ""
 
 #: survey/models/category.py:12 survey/models/survey.py:10
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #: survey/models/category.py:14 survey/models/question.py:76
 #: survey/models/response.py:29
 msgid "Survey"
-msgstr "Sondage"
+msgstr ""
 
 #: survey/models/category.py:16
 msgid "Display order"
-msgstr "Ordre d'affichage"
+msgstr ""
 
 #: survey/models/category.py:17 survey/models/survey.py:11
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #: survey/models/category.py:22
 msgid "category"
-msgstr "catégorie"
+msgstr ""
 
 #: survey/models/category.py:23
 msgid "categories"
-msgstr "catégories"
+msgstr ""
 
 #: survey/models/question.py:22
 msgid ""
@@ -159,150 +159,150 @@ msgid ""
 "if the question type is 'radio', 'select', or\n"
 "'select multiple' provide a comma-separated list of\n"
 "options for this question ."
-msgstr "Le champ choix est utilisé seulement si la question est de type 'bouton radio', 'liste déroulante', ou 'liste à choix multiple', il faut fournir la liste des options pour cette question sous la forme d'une liste séparée par des virgules."
+msgstr ""
 
 #: survey/models/question.py:59
 msgid "text (multiple line)"
-msgstr "Texte (plusieurs lignes)"
+msgstr ""
 
 #: survey/models/question.py:60
 msgid "short text (one line)"
-msgstr "Texte court (une ligne)"
+msgstr ""
 
 #: survey/models/question.py:61
 msgid "radio"
-msgstr "Bouton radio"
+msgstr ""
 
 #: survey/models/question.py:62
 msgid "select"
-msgstr "Liste déroulante"
+msgstr ""
 
 #: survey/models/question.py:63
 msgid "Select Multiple"
-msgstr "Liste à choix multiple"
+msgstr ""
 
 #: survey/models/question.py:64
 msgid "Select Image"
-msgstr "Séléctionnez l'image"
+msgstr ""
 
 #: survey/models/question.py:65
 msgid "integer"
-msgstr "Chiffre"
+msgstr ""
 
 #: survey/models/question.py:68
 msgid "Text"
-msgstr "Texte"
+msgstr ""
 
 #: survey/models/question.py:69
 msgid "Order"
-msgstr "Ordre"
+msgstr ""
 
 #: survey/models/question.py:70
 msgid "Required"
-msgstr "Requise"
+msgstr ""
 
 #: survey/models/question.py:72
 msgid "Category"
-msgstr "Catégorie"
+msgstr ""
 
 #: survey/models/question.py:78
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #: survey/models/question.py:80
 msgid "Choices"
-msgstr "Choix"
+msgstr ""
 
 #: survey/models/question.py:84
 msgid "question"
-msgstr "question"
+msgstr ""
 
 #: survey/models/question.py:85
 msgid "questions"
-msgstr "questions"
+msgstr ""
 
 #: survey/models/response.py:32
 msgid "User"
-msgstr "Utilisateur"
+msgstr ""
 
 #: survey/models/response.py:34
 msgid "Interview unique identifier"
-msgstr "Identifiant unique de la réponse"
+msgstr ""
 
 #: survey/models/response.py:38
 msgid "Set of answers to surveys"
-msgstr "Ensemble de réponse aux sondages"
+msgstr ""
 
 #: survey/models/response.py:39
 msgid "Sets of answers to surveys"
-msgstr "Ensembles de réponse aux sondages"
+msgstr ""
 
 #: survey/models/survey.py:12
 msgid "Users can see it and answer it"
-msgstr "Les utilisateurs peuvent le voir et y répondre"
+msgstr ""
 
 #: survey/models/survey.py:13
 msgid "Only authenticated users can see it and answer it"
-msgstr "Seuls les utilisateurs authentifiés peuvent le voir et y répondre"
+msgstr ""
 
 #: survey/models/survey.py:14
 msgid "Display by question"
-msgstr "Affichage par question"
+msgstr ""
 
 #: survey/models/survey.py:15
 msgid "Template"
-msgstr "Modèle"
+msgstr ""
 
 #: survey/models/survey.py:18
 msgid "survey"
-msgstr "sondage"
+msgstr ""
 
 #: survey/models/survey.py:19
 msgid "surveys"
-msgstr "sondages"
+msgstr ""
 
 #: survey/templates/survey/completed.html:4
 #: survey/templates/survey/completed.html:7
 msgid "Survey completed"
-msgstr "Sondage terminé"
+msgstr ""
 
 #: survey/templates/survey/completed.html:8
 msgid "Sorry! Your already replied to our survey"
-msgstr "Désolé! Vous avez déjà répondu à ce sondage"
+msgstr ""
 
 #: survey/templates/survey/completed.html:9
 msgid "Back to survey list"
-msgstr "Retour à la liste de sondage"
+msgstr ""
 
 #: survey/templates/survey/confirm.html:4
 #: survey/templates/survey/confirm.html:7
 msgid "Survey submitted"
-msgstr "Sondage soumis"
+msgstr ""
 
 #: survey/templates/survey/confirm.html:10
 msgid "Thanks! Your answers have been saved"
-msgstr "Merci! Vos réponses ont été sauvegardées."
+msgstr ""
 
 #: survey/templates/survey/confirm.html:13
 msgid "You can always come back and change them."
-msgstr "Vous pouvez revenir les modifier plus tard."
+msgstr ""
 
 #: survey/templates/survey/list.html:6
 msgid "Welcome to the Django Survey app"
-msgstr "Bienvenue dans l'application Django-Survey"
+msgstr ""
 
 #: survey/templates/survey/list.html:10
 msgid "Take the Survey"
-msgstr "Réaliser le sondage"
+msgstr ""
 
 #: survey/templates/survey/survey.html:26
 msgid "Answer this part"
-msgstr "Répondre à cette partie"
+msgstr ""
 
 #: survey/templates/survey/survey.html:39
 msgid "Questions"
-msgstr "Questions"
+msgstr ""
 
 #: survey/templates/survey/survey.html:48
 msgid "I'm done!"
-msgstr "J'ai fini"
+msgstr ""
