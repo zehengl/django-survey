@@ -272,6 +272,7 @@ know a language that is not yet available.
 - [x] French thanks to Pierre Sassoulas (@Pierre-Sassoulas)
 - [x] English
 - [x] Japanese thanks to Nobukuni Suzue (@nsuzue)
+- [x] Spanish thanks to Javier Ordóñez (@ordonja)
 
 ## As a developper
 
