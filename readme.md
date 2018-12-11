@@ -232,21 +232,31 @@ python3 -m venv venv/
 source venv/bin/activate
 ~~~~
 
-In order to get started, install the dev requirements, create the database,
-create a superuser, load the test dump, then launch the server :
+In order to get started, install pre-commit, install the dev requirements,
+create the database, create a superuser, load the test dump, then launch
+the server :
 
 ~~~~bash
-pip install -r requirements_dev.txt
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py loaddata survey/tests/testdump.json
-python manage.py runserver
+pip3 install -r requirements_dev.txt
+pre-commit install
+python3 manage.py migrate
+python3 manage.py createsuperuser
+python3 manage.py loaddata survey/tests/testdump.json
+python3 manage.py runserver
 ~~~~
 
 ### Test
 
 ~~~~bash
-python manage.py test survey
+python3 manage.py test survey
+~~~~
+
+If you want to dump a test database after adding more test data :
+
+~~~~bash
+python3 manage.py dumpdata --format json -e contenttypes -e admin -e auth.Permission
+-e sessions.session -e sites.site --natural-foreign --indent 1
+-o survey/tests/testdump.json
 ~~~~
 
 ### Coverage
@@ -254,12 +264,6 @@ python manage.py test survey
 ~~~~bash
 coverage.sh
 xdg-open htmlcov/index.html
-~~~~
-
-### Sorting imports
-
-~~~~bash
-isort -rc survey
 ~~~~
 
 ### Lint
@@ -292,13 +296,13 @@ Do not forget to credit yourself like in the header seen
 Then you can translate with :
 
 ~~~~bash
-python manage.py makemessages
+python3 manage.py makemessages
 # python manage.py createsuperuser ? (You need to login for rosetta)
-python manage.py runserver
+python3 manage.py runserver
 # Access http://localhost:8000/admin to login
 # Then go to http://localhost:8000/rosetta to translate
-python manage.py makemessages --no-obsolete --no-wrap
-python manage.py compilemessages
+python3 manage.py makemessages --no-obsolete --no-wrap
+python3 manage.py compilemessages
 git add survey/locale/
 ...
 ~~~~
