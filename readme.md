@@ -228,8 +228,8 @@ for every survey and question.
 You may want to use a virtualenv :
 
 ~~~~bash
-python3 -m venv .env/
-source .env/bin/activate
+python3 -m venv venv/
+source venv/bin/activate
 ~~~~
 
 In order to get started, install the dev requirements, create the database,
