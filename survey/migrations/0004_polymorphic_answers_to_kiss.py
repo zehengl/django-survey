@@ -7,10 +7,15 @@ from django.db import migrations, models
 
 def migrate_answers(apps, schema_editor):
     classes = []
-    classes_str = ['AnswerText', 'AnswerInteger', 'AnswerRadio',
-                   'AnswerSelect', 'AnswerSelectMultiple']
+    classes_str = [
+        "AnswerText",
+        "AnswerInteger",
+        "AnswerRadio",
+        "AnswerSelect",
+        "AnswerSelectMultiple",
+    ]
     for class_name in classes_str:
-        classes.append(apps.get_model('survey', class_name))
+        classes.append(apps.get_model("survey", class_name))
     for class_ in classes:
         for answer in class_.objects.all():
             answer.new_body = answer.body
@@ -19,22 +24,20 @@ def migrate_answers(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('survey', '0003_auto_20170320_0337'),
-    ]
+    dependencies = [("survey", "0003_auto_20170320_0337")]
 
     operations = [
         migrations.AddField(
-            model_name='answerbase',
-            name='new_body',
+            model_name="answerbase",
+            name="new_body",
             field=models.TextField(blank=True, null=True),
         ),
         migrations.RunPython(migrate_answers),
-        migrations.DeleteModel(name='AnswerInteger',),
-        migrations.DeleteModel(name='AnswerRadio',),
-        migrations.DeleteModel(name='AnswerSelect',),
-        migrations.DeleteModel(name='AnswerSelectMultiple',),
-        migrations.DeleteModel(name='AnswerText',),
-        migrations.RenameField('AnswerBase', 'new_body', 'body'),
+        migrations.DeleteModel(name="AnswerInteger"),
+        migrations.DeleteModel(name="AnswerRadio"),
+        migrations.DeleteModel(name="AnswerSelect"),
+        migrations.DeleteModel(name="AnswerSelectMultiple"),
+        migrations.DeleteModel(name="AnswerText"),
+        migrations.RenameField("AnswerBase", "new_body", "body"),
         migrations.RenameModel("AnswerBase", "Answer"),
     ]

@@ -6,7 +6,6 @@ from survey.tests.management.test_management import TestManagement
 
 
 class TestConfigurationBuilder(TestManagement):
-
     def setUp(self):
         TestManagement.setUp(self)
 

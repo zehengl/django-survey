@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from survey.exporter.tex.question2tex_sankey import Question2TexSankey
-# from survey.models.question import Question
 from survey.tests.management.test_management import TestManagement
 
 
 class TestQuestion2TexSankey(TestManagement):
-
     def test_other_question_type(self):
         """ We get a type error if we do not give a Question. """
         question = self.survey.questions.get(text="Aèbc?")
@@ -14,6 +12,7 @@ class TestQuestion2TexSankey(TestManagement):
         other_question = self.survey.questions.get(text="Aèbc?")
         self.assertRaises(TypeError, q2s.tex, "other_question")
         self.assertIsNotNone(q2s.tex(other_question))
+
 
 # Creating a big ranking survey with user takes a long time
 """

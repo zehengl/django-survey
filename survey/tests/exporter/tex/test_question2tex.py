@@ -5,7 +5,6 @@ from survey.tests.management.test_management import TestManagement
 
 
 class TestQuestion2Tex(TestManagement):
-
     def test_html2latex(self):
         """ We correctly translate a question to the latex equivalent. """
         translation = Question2Tex.html2latex("&lt;filetype&gt; ?")

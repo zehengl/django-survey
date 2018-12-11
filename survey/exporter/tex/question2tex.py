@@ -29,9 +29,12 @@ class Question2Tex(object):
         self.sort_answer = options.get("sort_answer")
         self.filter = options.get("filter")
         self.cardinality = self.question.sorted_answers_cardinality(
-            self.min_cardinality, self.group_together,
-            self.group_by_letter_case, self.group_by_slugify, self.filter,
-            self.sort_answer
+            self.min_cardinality,
+            self.group_together,
+            self.group_by_letter_case,
+            self.group_by_slugify,
+            self.filter,
+            self.sort_answer,
         )
 
     @staticmethod
@@ -62,8 +65,9 @@ class Question2Tex(object):
                 ungettext(
                     "%(min_cardinality)d respondants or more",
                     "%(min_cardinality)d respondant or more",
-                    self.min_cardinality
-                ) % {'min_cardinality': self.min_cardinality, }
+                    self.min_cardinality,
+                )
+                % {"min_cardinality": self.min_cardinality},
             )
         return caption
 
@@ -101,8 +105,9 @@ class Question2Tex(object):
                 standardized_key = Question.standardize(
                     key, self.group_by_letter_case, self.group_by_slugify
                 )
-                relevant_values = [v for v in standardized_values
-                                   if v != standardized_key]
+                relevant_values = [
+                    v for v in standardized_values if v != standardized_key
+                ]
                 if not relevant_values:
                     # If there is no relevant value the group_together was just
                     # a placeholder ex Yes for [yes Yës yEs]
@@ -111,12 +116,12 @@ class Question2Tex(object):
                 caption += "with '{}' standing for ".format(key)
                 for value in values:
                     caption += "'{}' {} ".format(value, _("or"))
-                caption = caption[:-len("{} ".format(_("or")))]
+                caption = caption[: -len("{} ".format(_("or")))]
                 has_and = True
                 caption += "{} ".format(_("and"))
             if has_and:
                 # We remove the final "and " if there is one
-                caption = caption[:-len("{} ".format(_("and")))]
+                caption = caption[: -len("{} ".format(_("and")))]
         return caption
 
     def get_caption_specifics(self):

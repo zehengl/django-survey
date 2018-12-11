@@ -10,7 +10,6 @@ LOGGER = logging.getLogger(__name__)
 
 
 class Survey2Csv(Survey2X):
-
     @staticmethod
     def line_list_to_string(line):
         """ Write a line in the CSV. """

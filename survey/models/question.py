@@ -19,20 +19,22 @@ except ImportError:  # pragma: no cover
 LOGGER = logging.getLogger(__name__)
 
 
-CHOICES_HELP_TEXT = _("""The choices field is only used if the question type
+CHOICES_HELP_TEXT = _(
+    """The choices field is only used if the question type
 if the question type is 'radio', 'select', or
 'select multiple' provide a comma-separated list of
-options for this question .""")
+options for this question ."""
+)
 
 
 def validate_choices(choices):
     """  Verifies that there is at least two choices in choices
     :param String choices: The string representing the user choices.
     """
-    values = choices.split(',')
+    values = choices.split(",")
     empty = 0
     for value in values:
-        if value.replace(" ", '') == '':
+        if value.replace(" ", "") == "":
             empty += 1
     if len(values) < 2 + empty:
         msg = "The selected field requires an associated list of choices."
@@ -47,47 +49,55 @@ class SortAnswer(object):
 
 class Question(models.Model):
 
-    TEXT = 'text'
-    SHORT_TEXT = 'short-text'
-    RADIO = 'radio'
-    SELECT = 'select'
-    SELECT_IMAGE = 'select_image'
-    SELECT_MULTIPLE = 'select-multiple'
-    INTEGER = 'integer'
+    TEXT = "text"
+    SHORT_TEXT = "short-text"
+    RADIO = "radio"
+    SELECT = "select"
+    SELECT_IMAGE = "select_image"
+    SELECT_MULTIPLE = "select-multiple"
+    INTEGER = "integer"
 
     QUESTION_TYPES = (
-        (TEXT, _('text (multiple line)')),
-        (SHORT_TEXT, _('short text (one line)')),
-        (RADIO, _('radio')),
-        (SELECT, _('select')),
-        (SELECT_MULTIPLE, _('Select Multiple')),
-        (SELECT_IMAGE, _('Select Image')),
-        (INTEGER, _('integer')),
+        (TEXT, _("text (multiple line)")),
+        (SHORT_TEXT, _("short text (one line)")),
+        (RADIO, _("radio")),
+        (SELECT, _("select")),
+        (SELECT_MULTIPLE, _("Select Multiple")),
+        (SELECT_IMAGE, _("Select Image")),
+        (INTEGER, _("integer")),
     )
 
     text = models.TextField(_("Text"))
-    order = models.IntegerField(_("Order"),)
-    required = models.BooleanField(_("Required"),)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL,
-                                 verbose_name=_("Category"),
-                                 blank=True, null=True,
-                                 related_name="questions")
-    survey = models.ForeignKey(Survey, on_delete=models.CASCADE,
-                               verbose_name=_("Survey"),
-                               related_name="questions")
-    type = models.CharField(_("Type"), max_length=200, choices=QUESTION_TYPES,
-                            default=TEXT)
-    choices = models.TextField(_("Choices"), blank=True, null=True,
-                               help_text=CHOICES_HELP_TEXT)
+    order = models.IntegerField(_("Order"))
+    required = models.BooleanField(_("Required"))
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        verbose_name=_("Category"),
+        blank=True,
+        null=True,
+        related_name="questions",
+    )
+    survey = models.ForeignKey(
+        Survey,
+        on_delete=models.CASCADE,
+        verbose_name=_("Survey"),
+        related_name="questions",
+    )
+    type = models.CharField(
+        _("Type"), max_length=200, choices=QUESTION_TYPES, default=TEXT
+    )
+    choices = models.TextField(
+        _("Choices"), blank=True, null=True, help_text=CHOICES_HELP_TEXT
+    )
 
     class Meta(object):
-        verbose_name = _('question')
-        verbose_name_plural = _('questions')
-        ordering = ('survey', 'order')
+        verbose_name = _("question")
+        verbose_name_plural = _("questions")
+        ordering = ("survey", "order")
 
     def save(self, *args, **kwargs):
-        if self.type in [Question.RADIO, Question.SELECT,
-                         Question.SELECT_MULTIPLE]:
+        if self.type in [Question.RADIO, Question.SELECT, Question.SELECT_MULTIPLE]:
             validate_choices(self.choices)
         super(Question, self).save(*args, **kwargs)
 
@@ -96,7 +106,7 @@ class Question(models.Model):
         if self.choices is None:
             return []
         choices_list = []
-        for choice in self.choices.split(','):
+        for choice in self.choices.split(","):
             choice = choice.strip()
             if choice:
                 choices_list.append(choice)
@@ -123,17 +133,22 @@ class Question(models.Model):
         return value
 
     @staticmethod
-    def standardize_list(string_list, group_by_letter_case=None,
-                         group_by_slugify=None):
+    def standardize_list(string_list, group_by_letter_case=None, group_by_slugify=None):
         """ Return a list of standardized string from a csv string.."""
         return [
             Question.standardize(strng, group_by_letter_case, group_by_slugify)
             for strng in string_list
         ]
 
-    def answers_cardinality(self, min_cardinality=None, group_together=None,
-                            group_by_letter_case=None, group_by_slugify=None,
-                            filter=None, other_question=None):
+    def answers_cardinality(
+        self,
+        min_cardinality=None,
+        group_together=None,
+        group_by_letter_case=None,
+        group_by_slugify=None,
+        filter=None,
+        other_question=None,
+    ):
         """ Return a dictionary with answers as key and cardinality (int or
             dict) as value
 
@@ -174,13 +189,25 @@ class Question(models.Model):
                 )
                 raise TypeError(msg)
         return self.__answers_cardinality(
-            min_cardinality, group_together, group_by_letter_case,
-            group_by_slugify, filter, standardized_filter, other_question
+            min_cardinality,
+            group_together,
+            group_by_letter_case,
+            group_by_slugify,
+            filter,
+            standardized_filter,
+            other_question,
         )
 
-    def __answers_cardinality(self, min_cardinality, group_together,
-                              group_by_letter_case, group_by_slugify,
-                              filter, standardized_filter, other_question):
+    def __answers_cardinality(
+        self,
+        min_cardinality,
+        group_together,
+        group_by_letter_case,
+        group_by_slugify,
+        filter,
+        standardized_filter,
+        other_question,
+    ):
         """ Return an ordered dict but the insertion order is the order of
         the related manager (ie question.answers).
 
@@ -190,8 +217,7 @@ class Question(models.Model):
         for answer in self.answers.all():
             for value in answer.values:
                 value = self.__get_cardinality_value(
-                    value, group_by_letter_case, group_by_slugify,
-                    group_together
+                    value, group_by_letter_case, group_by_slugify, group_together
                 )
                 if value not in filter and value not in standardized_filter:
                     user = answer.response.user
@@ -199,9 +225,15 @@ class Question(models.Model):
                         self._cardinality_plus_n(cardinality, value, 1)
                     else:
                         self.__add_user_cardinality(
-                            cardinality, user, value, other_question,
-                            group_by_letter_case, group_by_slugify,
-                            group_together, filter, standardized_filter
+                            cardinality,
+                            user,
+                            value,
+                            other_question,
+                            group_by_letter_case,
+                            group_by_slugify,
+                            group_together,
+                            filter,
+                            standardized_filter,
                         )
         if min_cardinality != 0:
             temp = {}
@@ -217,29 +249,36 @@ class Question(models.Model):
             for answer in other_question.answers.all():
                 for value in answer.values:
                     value = self.__get_cardinality_value(
-                        value, group_by_letter_case, group_by_slugify,
-                        group_together
+                        value, group_by_letter_case, group_by_slugify, group_together
                     )
                     if value not in filter + standardized_filter:
                         if answer.response.user is None:
                             self._cardinality_plus_answer(
-                                cardinality, _(settings.USER_DID_NOT_ANSWER),
-                                value
+                                cardinality, _(settings.USER_DID_NOT_ANSWER), value
                             )
         return cardinality
 
-    def sorted_answers_cardinality(self, min_cardinality=None,
-                                   group_together=None,
-                                   group_by_letter_case=None,
-                                   group_by_slugify=None, filter=None,
-                                   sort_answer=None, other_question=None):
+    def sorted_answers_cardinality(
+        self,
+        min_cardinality=None,
+        group_together=None,
+        group_by_letter_case=None,
+        group_by_slugify=None,
+        filter=None,
+        sort_answer=None,
+        other_question=None,
+    ):
         """ Mostly to have reliable tests, but marginally nicer too...
 
         The ordering is reversed for same cardinality value so we have aa
         before zz. """
         cardinality = self.answers_cardinality(
-            min_cardinality, group_together, group_by_letter_case,
-            group_by_slugify, filter, other_question
+            min_cardinality,
+            group_together,
+            group_by_letter_case,
+            group_by_slugify,
+            filter,
+            other_question,
         )
         # We handle SortAnswer without enum because using "type" as a variable
         # name break the enum module and we want to use type in
@@ -267,18 +306,17 @@ class Question(models.Model):
             sorted_cardinality = sorted(cardinality.items())
         elif sort_answer == SortAnswer.CARDINAL:
             if other_question is None:
-                sorted_cardinality = sorted(list(cardinality.items()),
-                                            key=lambda x: (-x[1], x[0]))
+                sorted_cardinality = sorted(
+                    list(cardinality.items()), key=lambda x: (-x[1], x[0])
+                )
             else:
                 # There is a dict instead of an int
                 sorted_cardinality = sorted(
-                    list(cardinality.items()),
-                    key=lambda x: (-sum(x[1].values()), x[0])
+                    list(cardinality.items()), key=lambda x: (-sum(x[1].values()), x[0])
                 )
         return OrderedDict(sorted_cardinality)
 
-    def _cardinality_plus_answer(self, cardinality, value,
-                                 other_question_value):
+    def _cardinality_plus_answer(self, cardinality, value, other_question_value):
         """ The user answered 'value' to our question and
         'other_question_value' to the other question. """
         if cardinality.get(value) is None:
@@ -287,7 +325,8 @@ class Question(models.Model):
             # Previous answer did not had an answer to other question
             cardinality[value] = {
                 _(settings.USER_DID_NOT_ANSWER): cardinality[value],
-                other_question_value: 1, }
+                other_question_value: 1,
+            }
         else:
             if cardinality[value].get(other_question_value) is None:
                 cardinality[value][other_question_value] = 1
@@ -302,11 +341,11 @@ class Question(models.Model):
         else:
             cardinality[value] += n
 
-    def __get_cardinality_value(self, value, group_by_letter_case,
-                                group_by_slugify, group_together):
+    def __get_cardinality_value(
+        self, value, group_by_letter_case, group_by_slugify, group_together
+    ):
         """ Return the value we should use for cardinality. """
-        value = Question.standardize(value, group_by_letter_case,
-                                     group_by_slugify)
+        value = Question.standardize(value, group_by_letter_case, group_by_slugify)
         for key, values in list(group_together.items()):
             grouped_values = Question.standardize_list(
                 values, group_by_letter_case, group_by_slugify
@@ -315,9 +354,18 @@ class Question(models.Model):
                 value = key
         return value
 
-    def __add_user_cardinality(self, cardinality, user, value, other_question,
-                               group_by_letter_case, group_by_slugify,
-                               group_together, filter, standardized_filter):
+    def __add_user_cardinality(
+        self,
+        cardinality,
+        user,
+        value,
+        other_question,
+        group_by_letter_case,
+        group_by_slugify,
+        group_together,
+        filter,
+        standardized_filter,
+    ):
         found_answer = False
         for other_answer in other_question.answers.all():
             if user is None:
@@ -334,12 +382,10 @@ class Question(models.Model):
             values = [_(settings.USER_DID_NOT_ANSWER)]
         for other_value in values:
             other_value = self.__get_cardinality_value(
-                other_value, group_by_letter_case, group_by_slugify,
-                group_together
+                other_value, group_by_letter_case, group_by_slugify, group_together
             )
             if other_value not in filter + standardized_filter:
-                    self._cardinality_plus_answer(cardinality, value,
-                                                  other_value)
+                self._cardinality_plus_answer(cardinality, value, other_value)
 
     def get_choices(self):
         """

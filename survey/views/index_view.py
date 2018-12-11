@@ -13,5 +13,5 @@ class IndexView(TemplateView):
         surveys = Survey.objects.filter(is_published=True)
         if not self.request.user.is_authenticated:
             surveys = surveys.filter(need_logged_user=False)
-        context['surveys'] = surveys
+        context["surveys"] = surveys
         return context

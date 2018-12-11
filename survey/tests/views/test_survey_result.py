@@ -6,7 +6,6 @@ from survey.tests.management.test_management import TestManagement
 
 
 class TestSurveyResult(TestManagement):
-
     def test_survey_result(self):
         """ We need logging for survey result if the survey need login. """
         url = reverse("survey-result", args=(2,))

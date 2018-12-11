@@ -8,17 +8,16 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('survey', '0005_rename_question_related_name'),
-    ]
+    dependencies = [("survey", "0005_rename_question_related_name")]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='survey',
+            model_name="category",
+            name="survey",
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name='categories', to='survey.Survey'
+                related_name="categories",
+                to="survey.Survey",
             ),
-        ),
+        )
     ]

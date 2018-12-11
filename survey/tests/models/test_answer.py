@@ -7,7 +7,6 @@ from survey.tests.models import BaseModelTest
 
 
 class TestAnswer(BaseModelTest):
-
     def test_unicode(self):
         """ Unicode generation. """
         for answer in self.answers:
@@ -15,8 +14,13 @@ class TestAnswer(BaseModelTest):
 
     def test_init(self):
         """ We raise validation error if the answer is not a possible choice"""
-        self.assertRaises(ValidationError, Answer, response=self.response,
-                          question=self.questions[4], body="Dd")
+        self.assertRaises(
+            ValidationError,
+            Answer,
+            response=self.response,
+            question=self.questions[4],
+            body="Dd",
+        )
 
     def test_values(self):
         """ We can have multiple nasty values ans it will be detected. """

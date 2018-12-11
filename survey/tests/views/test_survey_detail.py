@@ -6,7 +6,6 @@ from survey.tests import BaseTest
 
 
 class TestSurveyDetail(BaseTest):
-
     def test_survey_result(self):
         """ We need logging for survey detail if the survey need login. """
         response = self.client.get(reverse("survey-detail", args=(2,)))

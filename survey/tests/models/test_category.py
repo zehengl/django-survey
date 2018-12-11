@@ -5,7 +5,6 @@ from survey.tests import BaseTest
 
 
 class TestCategory(BaseTest):
-
     def test_unicode(self):
         """ Unicode is not None and do not raise error. """
         cat = Category.objects.all()[0]

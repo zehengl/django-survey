@@ -14,7 +14,7 @@ class TestExportresult(TestManagement):
     """ Permit to check if export result is working as intended. """
 
     def get_csv_path(self, survey_name):
-        csv_name = '{}.csv'.format(slugify(survey_name))
+        csv_name = "{}.csv".format(slugify(survey_name))
         return os.path.join(settings.CSV_DIR, csv_name)
 
     def get_file_content(self, path):
@@ -33,17 +33,24 @@ class TestExportresult(TestManagement):
         """ The custom command export result create the right csv file. """
         self.maxDiff = None
         first_csv = self.get_csv_path(self.test_managament_survey_name)
-        second_csv = self.get_csv_path('Test survëy')
+        second_csv = self.get_csv_path("Test survëy")
         # Force to regenerate the csv, we want to test something not optimize
         # computing time.
         if os.path.exists(first_csv):
             os.remove(first_csv)
         if os.path.exists(second_csv):
             os.remove(second_csv)
-        call_command("exportresult", "--survey-all", "--tex", "--csv",
-                     "--force", configuration_file=self.test_conf_path)
-        self.assertMultiLineEqual(self.expected_content,
-                                  self.get_file_content(first_csv))
+        call_command(
+            "exportresult",
+            "--survey-all",
+            "--tex",
+            "--csv",
+            "--force",
+            configuration_file=self.test_conf_path,
+        )
+        self.assertMultiLineEqual(
+            self.expected_content, self.get_file_content(first_csv)
+        )
         expected = """\
 user,Lorem ipsum dolor sit amët; <strong> consectetur </strong> adipiscing \
 elit.,Ipsum dolor sit amët; <strong> consectetur </strong> adipiscing elit.,\

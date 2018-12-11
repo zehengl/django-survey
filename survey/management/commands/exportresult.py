@@ -23,27 +23,34 @@ class Command(SurveyCommand):
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
-        parser.add_argument('--configuration-file', '-c', type=str,
-                            help='Path to the tex configuration file.')
         parser.add_argument(
-            '--force', "-f", action="store_true", help='Force the generation, '
-            'even if the file already exists. Default is False.'
+            "--configuration-file",
+            "-c",
+            type=str,
+            help="Path to the tex configuration file.",
         )
         parser.add_argument(
-            '--csv', action="store_true",
-            help='Export as csv. Default is False.'
+            "--force",
+            "-f",
+            action="store_true",
+            help="Force the generation, "
+            "even if the file already exists. Default is False.",
         )
         parser.add_argument(
-            '--tex', action="store_true",
-            help='Export as tex. Default is False.'
+            "--csv", action="store_true", help="Export as csv. Default is False."
         )
         parser.add_argument(
-            '--pdf', action="store_true",
-            help='Equivalent to --tex but we will also try to compile the pdf.'
+            "--tex", action="store_true", help="Export as tex. Default is False."
         )
         parser.add_argument(
-            '--language', help='Permit to change the language used for '
-            'generation (default is defined in the settings).'
+            "--pdf",
+            action="store_true",
+            help="Equivalent to --tex but we will also try to compile the pdf.",
+        )
+        parser.add_argument(
+            "--language",
+            help="Permit to change the language used for "
+            "generation (default is defined in the settings).",
         )
 
     def check_nothing_at_all(self, options):
@@ -72,6 +79,9 @@ class Command(SurveyCommand):
                     if options["pdf"] and type(exporter) is Survey2Tex:
                         exporter.generate_pdf()
                 else:
-                    LOGGER.info("\t- %s's %s were already generated use the "
-                                "--force (-f) option to generate anyway.",
-                                survey, exporter._get_X())
+                    LOGGER.info(
+                        "\t- %s's %s were already generated use the "
+                        "--force (-f) option to generate anyway.",
+                        survey,
+                        exporter._get_X(),
+                    )

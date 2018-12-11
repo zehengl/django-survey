@@ -38,8 +38,9 @@ class Survey2Tex(Survey2X):
 
     def treat_question(self, question, survey):
         LOGGER.info("Treating, %s %s", question.pk, question.text)
-        options = self.tconf.get(survey_name=self.survey.name,
-                                 question_text=question.text)
+        options = self.tconf.get(
+            survey_name=self.survey.name, question_text=question.text
+        )
         multiple_charts = options.get("multiple_charts")
         if not multiple_charts:
             multiple_charts = {"": options.get("chart")}
@@ -66,11 +67,13 @@ class Survey2Tex(Survey2X):
                 msg = "{} '{}' {}".format(
                     _("We could not render a chart because the type"),
                     tex_type,
-                    _("is not a standard type nor the path to an "
-                      "importable valid Question2Tex child class. "
-                      "Choose between 'raw', 'sankey', 'pie', 'cloud', "
-                      "'square', 'polar' or 'package.path.MyQuestion2Tex"
-                      "CustomClass'")
+                    _(
+                        "is not a standard type nor the path to an "
+                        "importable valid Question2Tex child class. "
+                        "Choose between 'raw', 'sankey', 'pie', 'cloud', "
+                        "'square', 'polar' or 'package.path.MyQuestion2Tex"
+                        "CustomClass'"
+                    ),
                 )
                 LOGGER.error(msg)
                 question_synthesis += msg
@@ -90,7 +93,11 @@ class Survey2Tex(Survey2X):
 
 %s
 
-""" % (section_title, question.pk, question_synthesis)
+""" % (
+            section_title,
+            question.pk,
+            question_synthesis,
+        )
 
     def generate(self, path, output=None):
         """ Compile the pdf from the tex file. """
@@ -105,8 +112,7 @@ class Survey2Tex(Survey2X):
     def survey_to_x(self, questions=None):
         if questions is None:
             questions = self.survey.questions.all()
-        document_class = self.tconf.get("document_class",
-                                        survey_name=self.survey.name)
+        document_class = self.tconf.get("document_class", survey_name=self.survey.name)
         kwargs = self.tconf.get(survey_name=self.survey.name)
         del kwargs["document_class"]
         ltxf = LatexFile(document_class, **kwargs)

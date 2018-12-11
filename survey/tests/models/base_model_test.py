@@ -5,12 +5,13 @@ from survey.tests import BaseTest
 
 
 class BaseModelTest(BaseTest):
-
     def setUp(self):
         BaseTest.setUp(self)
         self.survey = Survey.objects.create(
-            name="Internal Test Survey", is_published=True,
-            need_logged_user=False, display_by_question=False
+            name="Internal Test Survey",
+            is_published=True,
+            need_logged_user=False,
+            display_by_question=False,
         )
         self.response = Response.objects.create(survey=self.survey)
         self.questions = []
@@ -28,12 +29,13 @@ class BaseModelTest(BaseTest):
         for i, data in enumerate(self.data):
             qtype, answer_body, answer_choices = data
             question = Question.objects.create(
-                text="{} question ?".format(qtype), choices=answer_choices,
-                order=i + 1, required=True, survey=self.survey,
+                text="{} question ?".format(qtype),
+                choices=answer_choices,
+                order=i + 1,
+                required=True,
+                survey=self.survey,
                 type=qtype,
             )
             self.questions.append(question)
-            answer = Answer(
-                response=self.response, question=question, body=answer_body
-            )
+            answer = Answer(response=self.response, question=question, body=answer_body)
             self.answers.append(answer)

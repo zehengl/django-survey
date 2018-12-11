@@ -5,7 +5,6 @@ from survey.tests.management.test_management import TestManagement
 
 
 class TestQuestion2TexRaw(TestManagement):
-
     def test_raw_tex(self):
         """ We can create a raw chart. """
         question = self.survey.questions.get(text="Aèbc?")

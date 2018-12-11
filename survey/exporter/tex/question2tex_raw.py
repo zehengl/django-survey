@@ -24,6 +24,8 @@ class Question2TexRaw(Question2Tex):
         for i, answer in enumerate(self.cardinality):
             if answer:
                 raw_answers += Question2TexRaw.TEX_SKELETON % (
-                    answer, _("Participant"), i
+                    answer,
+                    _("Participant"),
+                    i,
                 )
         return raw_answers

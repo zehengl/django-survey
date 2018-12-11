@@ -20,7 +20,7 @@ class TestSurveyAuthRequired(BaseTest):
             self.assertEqual(response.status_code, 200)
             self.logout()
         except Exception as exc:  # pragma: no cover
-            exc.args += (url),
+            exc.args += ((url),)
             raise
 
     def test_need_login(self):

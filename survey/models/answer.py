@@ -20,12 +20,18 @@ LOGGER = logging.getLogger(__name__)
 
 class Answer(models.Model):
 
-    question = models.ForeignKey(Question, on_delete=models.CASCADE,
-                                 verbose_name=_("Question"),
-                                 related_name="answers")
-    response = models.ForeignKey(Response, on_delete=models.CASCADE,
-                                 verbose_name=_("Response"),
-                                 related_name="answers")
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+        verbose_name=_("Question"),
+        related_name="answers",
+    )
+    response = models.ForeignKey(
+        Response,
+        on_delete=models.CASCADE,
+        verbose_name=_("Response"),
+        related_name="answers",
+    )
     created = models.DateTimeField(_("Creation date"), auto_now_add=True)
     updated = models.DateTimeField(_("Update date"), auto_now=True)
     body = models.TextField(_("Content"), blank=True, null=True)
@@ -59,8 +65,7 @@ class Answer(models.Model):
         return values
 
     def check_answer_body(self, question, body):
-        if question.type in [Question.RADIO, Question.SELECT,
-                             Question.SELECT_MULTIPLE]:
+        if question.type in [Question.RADIO, Question.SELECT, Question.SELECT_MULTIPLE]:
             choices = question.get_clean_choices()
             if body:
                 if body[0] == "[":

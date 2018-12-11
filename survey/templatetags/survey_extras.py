@@ -16,11 +16,11 @@ def collapse_form(form, category):
         return "in"
     return ""
 
-register.filter('collapse_form', collapse_form)
+
+register.filter("collapse_form", collapse_form)
 
 
 class CounterNode(template.Node):
-
     def __init__(self):
         self.count = 0
 

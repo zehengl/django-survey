@@ -14,8 +14,9 @@ LOGGER = logging.getLogger(__name__)
 
 class Configuration(object):
 
-    DEFAULT_PATH = os.path.join(settings.ROOT, "survey", "exporter", "tex",
-                                "default_conf.yaml")
+    DEFAULT_PATH = os.path.join(
+        settings.ROOT, "survey", "exporter", "tex", "default_conf.yaml"
+    )
 
     def __init__(self, configuration_file=None):
         self._default = self._init_from_file(self.DEFAULT_PATH)
@@ -32,8 +33,7 @@ class Configuration(object):
         # To become the ugly :
         # b: {c: 3, d: 4}
         return yaml.safe_dump(
-            self._conf, default_flow_style=False, encoding=None,
-            allow_unicode=True
+            self._conf, default_flow_style=False, encoding=None, allow_unicode=True
         )
 
     @property
@@ -69,7 +69,7 @@ class Configuration(object):
 
         :param String filepath: The path of the yaml configuration file.
         :rtype: Dict """
-        with open(filepath, 'r') as f:
+        with open(filepath, "r") as f:
             configuration = yaml.load(f)
         for survey_name in list(configuration.keys()):
             self.check_survey_exists(survey_name)
@@ -90,6 +90,7 @@ class Configuration(object):
         default and to be able to replace them by dictionaries.
         """
         import collections
+
         # print("d", d, "u", u)
         if d is None:
             return u

@@ -8,7 +8,6 @@ from survey.tests.management.test_management import TestManagement
 
 
 class TestConfiguration(TestManagement):
-
     def setUp(self):
         TestManagement.setUp(self)
         self.conf = Configuration(self.test_conf_path)
@@ -17,13 +16,13 @@ class TestConfiguration(TestManagement):
         self.qts_conf = self.conf.get(
             survey_name="Test survëy",
             question_text="Dolor sit amët, consectetur<strong>  adipiscing"
-            "</strong>  elit."
+            "</strong>  elit.",
         )
         self.qts_expected_conf = {
             "min_cardinality": 0,
             "type": "cloud",
             "radius": 1,
-            "text": "inside"
+            "text": "inside",
         }
 
     def test_name_doesnt_exists(self):
@@ -32,8 +31,12 @@ class TestConfiguration(TestManagement):
         path = os.path.join(self.conf_dir, "name_doesnt_exists.yaml")
         conf = Configuration(path)
         self.assertIsNotNone(conf.get(survey_name=name))
-        Survey.objects.create(name=name, is_published=True,
-                              need_logged_user=True, display_by_question=True)
+        Survey.objects.create(
+            name=name,
+            is_published=True,
+            need_logged_user=True,
+            display_by_question=True,
+        )
         conf = Configuration(path)
         self.assertIsNotNone(conf.get(survey_name=name))
 
@@ -65,11 +68,10 @@ class TestConfiguration(TestManagement):
         tm_conf = self.conf.get(survey_name=tm_survey.name)
         self.assertEqual(tm_conf.get("footer"), "Test management footer.")
         self.assertEqual(tm_conf.get("document_class"), "article")
-        self.assertEqual(self.conf.get("footer", "Test survëy"),
-                         "This is the footer.")
-        self.assertEqual(self.conf.get(key="document_class",
-                                       survey_name="Test survëy"),
-                         "report")
+        self.assertEqual(self.conf.get("footer", "Test survëy"), "This is the footer.")
+        self.assertEqual(
+            self.conf.get(key="document_class", survey_name="Test survëy"), "report"
+        )
         self.assertEqual(self.conf.get("footer"), "This is the footer.")
         self.assertEqual(self.conf.get("document_class"), "article")
 
@@ -87,8 +89,7 @@ class TestConfiguration(TestManagement):
         self.assertEqual(self.ts_conf["multiple_charts"], None)
         self.assertEqual(self.ts_conf["multiple_chart_type"], "subsubsection")
         self.assertEqual(self.qts_conf["multiple_chart_type"], "subsubsection")
-        qts_charts = ['Sub Sub Section with radius=3',
-                      'Sub Sub Section with text=pin']
+        qts_charts = ["Sub Sub Section with radius=3", "Sub Sub Section with text=pin"]
         qts_charts.sort()
         qts_mc_results = list(self.qts_conf.get("multiple_charts").keys())
         qts_mc_results.sort()
@@ -98,22 +99,27 @@ class TestConfiguration(TestManagement):
                 value = self.qts_conf["multiple_charts"][chart][key]
                 if chart == "Sub Sub Section with radius=3" and key == "radius":
                     expected_value = 3
-                elif chart == 'Sub Sub Section with text=pin' and key == "text":
+                elif chart == "Sub Sub Section with text=pin" and key == "text":
                     expected_value = "pin"
                 self.assertEqual(
-                    value, expected_value,
+                    value,
+                    expected_value,
                     "Expected '{}' for '{}' in '{}' and got '{}'".format(
                         expected_value, key, chart, value
-                    )
+                    ),
                 )
 
     def test_value_doesnt_exists(self):
         """ Get when a value does not exists. """
         self.assertRaises(ValueError, self.conf.get, key="noexists")
-        self.assertRaises(ValueError, self.conf.get, survey_name="Test survëy",
-                          key="noexists")
         self.assertRaises(
-            ValueError, self.conf.get, survey_name="Test survëy",
+            ValueError, self.conf.get, survey_name="Test survëy", key="noexists"
+        )
+        self.assertRaises(
+            ValueError,
+            self.conf.get,
+            survey_name="Test survëy",
             question_text="Dolor sit amët, consectetur<strong>  adipiscing"
-            "</strong>  elit.", key="noexists"
+            "</strong>  elit.",
+            key="noexists",
         )

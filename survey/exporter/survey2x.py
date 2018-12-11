@@ -69,8 +69,9 @@ class Survey2X(object):
             "We %sneed an update because latest_answer_date=%s > "
             "file_modification_time=%s is %s \n",
             "" if latest_answer_date > file_modification_time else "do not ",
-            latest_answer_date, file_modification_time,
-            latest_answer_date > file_modification_time
+            latest_answer_date,
+            file_modification_time,
+            latest_answer_date > file_modification_time,
         )
         return latest_answer_date >= file_modification_time
 

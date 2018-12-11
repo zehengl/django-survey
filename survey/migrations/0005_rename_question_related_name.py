@@ -7,26 +7,27 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('survey', '0004_polymorphic_answers_to_kiss'),
-    ]
+    dependencies = [("survey", "0004_polymorphic_answers_to_kiss")]
 
     operations = [
         migrations.AlterField(
-            model_name='question',
-            name='category',
+            model_name="question",
+            name="category",
             field=models.ForeignKey(
-                blank=True, null=True,
+                blank=True,
+                null=True,
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name='questions', to='survey.Category'
+                related_name="questions",
+                to="survey.Category",
             ),
         ),
         migrations.AlterField(
-            model_name='question',
-            name='survey',
+            model_name="question",
+            name="survey",
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name='questions', to='survey.Survey'
+                related_name="questions",
+                to="survey.Survey",
             ),
         ),
     ]

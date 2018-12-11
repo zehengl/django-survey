@@ -29,11 +29,13 @@ class Question2TexSankey(Question2Tex):
     def get_caption_specifics(self):
         caption = "%s '%s' (%s) " % (
             _("for the question"),
-            Question2Tex.html2latex(self.question.text),  _("left"),
+            Question2Tex.html2latex(self.question.text),
+            _("left"),
         )
         caption += "%s '%s' (%s) " % (
             _("in relation with the question"),
-            Question2Tex.html2latex(self.other_question.text), _("right"),
+            Question2Tex.html2latex(self.other_question.text),
+            _("right"),
         )
         return caption
 
@@ -54,9 +56,13 @@ class Question2TexSankey(Question2Tex):
             raise TypeError(msg)
         self.other_question = other_question
         self.cardinality = self.question.sorted_answers_cardinality(
-            self.min_cardinality, self.group_together,
-            self.group_by_letter_case, self.group_by_slugify, self.filter,
-            self.sort_answer, other_question=other_question
+            self.min_cardinality,
+            self.group_together,
+            self.group_by_letter_case,
+            self.group_by_slugify,
+            self.filter,
+            self.sort_answer,
+            other_question=other_question,
         )
         q1 = []
         q2 = []
@@ -67,9 +73,16 @@ class Question2TexSankey(Question2Tex):
                     q2.append(answer_to_q2)
         df = DataFrame(data={self.question.text: q1, other_question.text: q2})
         name = "tex/q{}_vs_q{}".format(self.question.pk, other_question.pk)
-        sankey(df[self.question.text], df[other_question.text], aspect=20,
-               fontsize=10, figure_name=name)
-        return Question2TexSankey.TEX_SKELETON % (name[4:],
-                                                  self.question.pk,
-                                                  other_question.pk,
-                                                  self.get_caption())
+        sankey(
+            df[self.question.text],
+            df[other_question.text],
+            aspect=20,
+            fontsize=10,
+            figure_name=name,
+        )
+        return Question2TexSankey.TEX_SKELETON % (
+            name[4:],
+            self.question.pk,
+            other_question.pk,
+            self.get_caption(),
+        )
