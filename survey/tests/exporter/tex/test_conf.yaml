@@ -23,6 +23,20 @@ Short Survëy:
     footer:
         Short survey footer.
 
+Unicode问卷:
+    header: |
+        \usepackage[UTF8]{ctex}
+        \usepackage{pgf-pie}
+        \usepackage{pgfplots}
+        \pgfplotsset{compat=1.13}
+        \usepackage{pgfplotstable}
+        \usetikzlibrary{patterns}
+        \usepackage[section]{placeins}
+        \usetikzlibrary{arrows,shadows}
+        \title{中国的例子}
+    intro: |
+        \maketitle{}
+
 Test Management Survëy:
     footer:
         Test management footer.

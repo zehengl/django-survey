@@ -103,8 +103,8 @@ class Survey2Tex(Survey2X):
         """ Compile the pdf from the tex file. """
         dir_name, file_name = os.path.split(path)
         os.chdir(dir_name)
-        os.system("pdflatex {}".format(file_name))
-        os.system("pdflatex {}".format(file_name))
+        os.system("xelatex {}".format(file_name))
+        os.system("xelatex {}".format(file_name))
         if output is not None:
             os.system("mv {}.pdf {}".format(file_name[:-3], output))
         os.chdir(settings.ROOT)
