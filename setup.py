@@ -33,7 +33,7 @@ extras_require = {"dev": [x.strip() for x in extras_require[2:]]}
 
 setuptools.setup(
     name="django-survey-and-report",
-    version="1.3.2",
+    version="1.3.3",
     description=description,
     long_description=long_description,
     long_description_content_type="text/markdown",
