@@ -16,6 +16,7 @@ htmlcov/
 .coverage
 build/
 dist/
+.tox/
 csv/short-survey.csv
 csv/test-management-survey.csv
 csv/test-survey.csv
