@@ -9,7 +9,6 @@ from survey.tests.management.test_management import TestManagement
 
 
 class TestGenerateTexConfiguration(TestManagement):
-
     def assert_command_create_file(self, arg=None, value=None):
         file = "output"
         if arg and value:
@@ -32,12 +31,17 @@ class TestGenerateTexConfiguration(TestManagement):
         self.assert_command_create_file("--survey-id", 1)
 
     def test_error_message(self):
-        self.assertRaises(ValueError, call_command,
-                          "generatetexconf", "output",
-                          "--survey-id", 25)
-        self.assertRaises(SystemExit, call_command,
-                          "generatetexconf", "output",
-                          survey_all=True)
-        self.assertRaises(ValueError, call_command,
-                          "generatetexconf", "output",
-                          "--survey-name", "Do not exists")
+        self.assertRaises(
+            ValueError, call_command, "generatetexconf", "output", "--survey-id", 25
+        )
+        self.assertRaises(
+            SystemExit, call_command, "generatetexconf", "output", survey_all=True
+        )
+        self.assertRaises(
+            ValueError,
+            call_command,
+            "generatetexconf",
+            "output",
+            "--survey-name",
+            "Do not exists",
+        )
