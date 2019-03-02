@@ -47,7 +47,10 @@ Add `bootstrapform` and `survey` in the `INSTALLED_APPS` in your settings :
 
 ~~~~python
 INSTALLED_APPS = [
-	...
+	# Your own installed apps here
+]
+
+INSTALLED_APPS += [
 	'bootstrapform',
 	'survey'
 ]
@@ -57,6 +60,11 @@ Add an URL entry to your project’s urls.py, for example:
 
 ~~~python
 from django.conf import settings
+from django.conf.urls import include, url
+
+urlpatterns = [
+    # Your own url pattern here
+]
 
 if 'survey' in settings.INSTALLED_APPS:
     urlpatterns += [
