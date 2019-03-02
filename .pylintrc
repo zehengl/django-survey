@@ -1,6 +1,10 @@
 [MESSAGES CONTROL]
 # I0011 Warning locally suppressed using disable-msg
-disable=I0011, no-member
+disable=
+    I0011,
+    no-member,
+    C0111, # We don't want docstring everywhere
+    C0330, # black handle this
 
 [MASTER]
 # We don't want to document the tests, thank you very much.
