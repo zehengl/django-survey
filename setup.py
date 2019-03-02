@@ -6,36 +6,23 @@ import setuptools
 if sys.version_info < (3, 0):
     sys.exit("Sorry, Python < 3.0 is not supported")
 
-description = "A django survey app, based on and compatible with "
-'"django-survey". You will be able to migrate your data from an ancient '
-"version of django-survey, but it has been ported to python 3 and you can "
-"export results as CSV or PDF using your native language."
+DESCRIPTION = (
+    "A django survey app, based on and compatible with "
+    '"django-survey". You will be able to migrate your data from an ancient '
+    "version of django-survey, but it has been ported to python 3 and you can "
+    "export results as CSV or PDF using your native language."
+)
 
+THIS_DIRECTORY = path.abspath(path.dirname(__file__))
+with open(path.join(THIS_DIRECTORY, "readme.md"), encoding="utf-8") as f:
+    LONG_DESCRIPTION = f.read()
 
-def add_package(package_list, package):
-    package = package.replace("\n", "").split("#")[0]
-    if package:
-        package_list.append(package)
-
-
-this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, "readme.md"), encoding="utf-8") as f:
-    long_description = f.read()
-
-with open("requirements.txt", "r") as fh:
-    require = fh.readlines()
-require = [x.strip() for x in require]
-
-with open("requirements_dev.txt", "r") as fh:
-    extras_require = fh.readlines()
-# Remove the first two line (-r requirements.txt and a blank line)
-extras_require = {"dev": [x.strip() for x in extras_require[2:]]}
 
 setuptools.setup(
     name="django-survey-and-report",
     version="1.3.5",
-    description=description,
-    long_description=long_description,
+    description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     author="Pierre SASSOULAS",
     author_email="pierre.sassoulas@gmail.com",
@@ -56,6 +43,27 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Framework :: Django",
     ],
-    install_requires=require,
-    extras_require=extras_require,
+    install_requires=[
+        "django~=2.1.6",
+        "django-bootstrap-form~=3.4",
+        "django-tastypie~=0.14.2",  # API
+        "django-registration~=3.0",  # account logic, views and workflows
+        "pytz~=2018.9",
+        "ordereddict~=1.1",
+        "pyyaml~=4.2b1",
+        "pySankeyBeta~=1.0.4",
+    ],
+    extras_require={
+        "dev": [
+            "django-rosetta",
+            "coverage==4.0.3",
+            "python-coveralls",
+            "mock",
+            "coveralls",
+            "colorama",
+            "pylint",
+            "flake8",
+            "pre-commit",
+        ]
+    },
 )

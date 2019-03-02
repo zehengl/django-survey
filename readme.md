@@ -230,37 +230,35 @@ you can also generate your configuration file with
 `python manage.py generatetexconf -h`, it will create the default skeleton
 for every survey and question.
 
-## Contributing as a developper
+## Contributing as a developer
 
-### Development environement
+### Development environment
 
-You may want to use a virtualenv :
-
-~~~~bash
-python3 -m venv venv/
-source venv/bin/activate
-~~~~
-
-In order to get started, install pre-commit, install the dev requirements,
-create the database, create a superuser, load the test dump, then launch
-the server :
+This is the typical command you should do to get started:
 
 ~~~~bash
-pip3 install -r requirements_dev.txt
-pre-commit install
-python3 manage.py migrate
+python3 -m venv venv/ # Create virtualenv
+source venv/bin/activate # Activate virtualenv
+pip3 install -e ".[dev]" # Install dev requirements
+pre-commit install # Install pre-commit hook framework
+python3 manage.py migrate # Create database
 python3 manage.py createsuperuser
-python3 manage.py loaddata survey/tests/testdump.json
-python3 manage.py runserver
+python3 manage.py loaddata survey/tests/testdump.json # Load test data
+python3 manage.py runserver # Launch server
 ~~~~
 
-### Test
+### Committing code
+
+#### Launching tests
 
 ~~~~bash
 python3 manage.py test survey
 ~~~~
 
-If you want to dump a test database after adding more test data :
+#### Adding test data
+
+If you want to dump a test database after adding data to it, this is
+the command to have a minimal diff :
 
 ~~~~bash
 python3 manage.py dumpdata --format json -e contenttypes -e admin -e auth.Permission
@@ -268,18 +266,17 @@ python3 manage.py dumpdata --format json -e contenttypes -e admin -e auth.Permis
 -o survey/tests/testdump.json
 ~~~~
 
-### Coverage
+#### Launching coverage
 
 ~~~~bash
-coverage.sh
+coverage run --source=survey --omit=survey/migrations/* ./manage.py test
+coverage html
 xdg-open htmlcov/index.html
 ~~~~
 
-### Lint
+#### Applying Lint
 
-~~~~bash
-pylint survey
-~~~~
+We're using `pre-commit`, it should take care of linting during commit.
 
 ## Translating the project
 
