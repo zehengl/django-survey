@@ -309,7 +309,6 @@ python3 manage.py runserver
 # Access http://localhost:8000/admin to login
 # Then go to http://localhost:8000/rosetta to translate
 python3 manage.py makemessages --no-obsolete --no-wrap
-python3 manage.py compilemessages
 git add survey/locale/
 ...
 ~~~~
