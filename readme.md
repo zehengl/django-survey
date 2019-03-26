@@ -293,6 +293,7 @@ The software is developed in english. Other available languages are :
 * [x] French thanks to [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
 * [x] Japanese thanks to [Nobukuni Suzue](https://github.com/nsuzue/)
 * [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/)
+* [x] Russian thanks to [Vlad M.](https://github.com/manchos/)
 
 ### As a developper
 

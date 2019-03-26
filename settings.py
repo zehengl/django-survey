@@ -127,6 +127,7 @@ LOCALE_PATHS = (os.path.join(ROOT, "survey", "locale"),)
 LANGUAGE_CODE = "en"
 LANGUAGES = (
     ("en", "english"),
+    ("ru", "russian"),
     ("es", "spanish"),
     ("fr", "french"),
     ("ja", "Japanese"),
