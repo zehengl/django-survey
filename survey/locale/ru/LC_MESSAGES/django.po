@@ -109,14 +109,8 @@ msgid "We could not render a chart because the type"
 msgstr "Мы не смогли отобразить диаграмму, потому что тип"
 
 #: survey/exporter/tex/survey2tex.py:71
-msgid ""
-"is not a standard type nor the path to an importable valid Question2Tex "
-"child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', "
-"'polar' or 'package.path.MyQuestion2TexCustomClass'"
-msgstr ""
-"не является стандартным типом или путем к импортируемому допустимому "
-"текстовому дочернему классу Question2Tex. Выбрать между 'raw', 'sankey', "
-"'pie', 'cloud', 'square', 'polar' o 'package.path.MyQuestion2TexCustomClass'"
+msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
+msgstr "не является стандартным типом или путем к импортируемому допустимому текстовому дочернему классу Question2Tex. Выбрать между 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' o 'package.path.MyQuestion2TexCustomClass'"
 
 #: survey/models/answer.py:26
 msgid "Question"
@@ -244,8 +238,7 @@ msgstr "Пользователь"
 msgid "Interview unique identifier"
 msgstr "Уникальный идентификатор интервью"
 
-
-#: survey/models/response.py:45вариант
+#: survey/models/response.py:45
 msgid "Set of answers to surveys"
 msgstr "Набор ответов на опросы"
 
@@ -259,8 +252,7 @@ msgstr "Пользователи могут увидеть его и ответ�
 
 #: survey/models/survey.py:14
 msgid "Only authenticated users can see it and answer it"
-msgstr ""
-"Только прошедшие проверку пользователи могут видеть его и отвечать на него"
+msgstr "Только прошедшие проверку пользователи могут видеть его и отвечать на него"
 
 #: survey/models/survey.py:16
 msgid "Display by question"
