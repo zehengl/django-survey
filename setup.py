@@ -20,7 +20,7 @@ with open(path.join(THIS_DIRECTORY, "readme.md"), encoding="utf-8") as f:
 
 setuptools.setup(
     name="django-survey-and-report",
-    version="1.3.5",
+    version="1.3.7",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
@@ -56,7 +56,7 @@ setuptools.setup(
     extras_require={
         "dev": [
             "django-rosetta",
-            "coverage==4.0.3",
+            "coverage~=4.0.3",
             "python-coveralls",
             "mock",
             "coveralls",
