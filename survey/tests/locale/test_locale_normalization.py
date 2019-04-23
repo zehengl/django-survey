@@ -1,6 +1,7 @@
 import os
 import subprocess
 import unittest
+import platform
 
 
 class TestLocaleNormalization(unittest.TestCase):
@@ -9,8 +10,11 @@ class TestLocaleNormalization(unittest.TestCase):
 
     def test_normalization(self):
         """ We test if the messages were properly created with makemessages --no-obsolete --no-wrap. """
-        makemessages_command = [
-            "python3",
+        if platform.system() == "Windows":
+            python_3 = ["py", "-3"]
+        else:
+            python_3 = ["python3"]
+        makemessages_command = python_3 + [
             "manage.py",
             "makemessages",
             "--no-obsolete",
