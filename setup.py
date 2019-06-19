@@ -3,8 +3,8 @@ from os import path
 
 import setuptools
 
-if sys.version_info < (3, 0):
-    sys.exit("Sorry, Python < 3.0 is not supported")
+if sys.version_info < (3, 6):
+    sys.exit("Sorry, Python < 3.6 is not supported")
 
 DESCRIPTION = (
     "A django survey app, based on and compatible with "
@@ -40,7 +40,8 @@ setuptools.setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Framework :: Django",
     ],
     install_requires=[
