@@ -56,7 +56,7 @@ setuptools.setup(
     extras_require={
         "dev": [
             "django-rosetta",
-            "coverage~=4.0.3",
+            "coverage",
             "python-coveralls",
             "mock",
             "coveralls",
