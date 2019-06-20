@@ -46,13 +46,13 @@ setuptools.setup(
     ],
     install_requires=[
         "django>=2.1.6",
-        "django-bootstrap-form~=3.4",
-        "django-tastypie~=0.14.2",  # API
-        "django-registration~=3.0",  # account logic, views and workflows
+        "django-bootstrap-form>=3.4",
+        "django-tastypie>=0.14.2",  # API
+        "django-registration>=3.0",  # account logic, views and workflows
         "pytz>=2018.9",
-        "ordereddict~=1.1",
-        "pyyaml~=4.2b1",
-        "pySankeyBeta~=1.0.5",
+        "ordereddict>=1.1",
+        "pyyaml>=4.2b1",
+        "pySankeyBeta>=1.0.5",
     ],
     extras_require={
         "dev": [
