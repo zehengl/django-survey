@@ -1,7 +1,7 @@
 import os
+import platform
 import subprocess
 import unittest
-import platform
 
 
 class TestLocaleNormalization(unittest.TestCase):
