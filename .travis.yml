@@ -28,7 +28,7 @@ jobs:
 install:
   - pip3 install --editable ".[dev]"
 script:
-  - python manage.py test
+  - python3 manage.py test
 after_success:
   - coverage run --source=survey --omit=survey/migrations/* ./manage.py test
   - coverage html
