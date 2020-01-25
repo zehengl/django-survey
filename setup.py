@@ -53,7 +53,7 @@ setuptools.setup(
         "pytz>=2018.9",
         "ordereddict>=1.1",
         "pyyaml>=4.2b1",
-        "pySankeyBeta>=1.0.5",
+        "pySankeyBeta~=1.2.2",
     ],
     extras_require={
         "dev": [
