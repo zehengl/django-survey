@@ -14,9 +14,7 @@ LOGGER = logging.getLogger(__name__)
 
 class Configuration(object):
 
-    DEFAULT_PATH = os.path.join(
-        settings.ROOT, "survey", "exporter", "tex", "default_conf.yaml"
-    )
+    DEFAULT_PATH = os.path.join(settings.ROOT, "survey", "exporter", "tex", "default_conf.yaml")
 
     def __init__(self, configuration_file=None):
         self._default = self._init_from_file(self.DEFAULT_PATH)
@@ -32,9 +30,7 @@ class Configuration(object):
         #   d: 4
         # To become the ugly :
         # b: {c: 3, d: 4}
-        return yaml.safe_dump(
-            self._conf, default_flow_style=False, encoding=None, allow_unicode=True
-        )
+        return yaml.safe_dump(self._conf, default_flow_style=False, encoding=None, allow_unicode=True)
 
     @property
     def valid_survey_names(self):

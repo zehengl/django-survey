@@ -14,16 +14,9 @@ class TestConfiguration(TestManagement):
         self.default = Configuration()
         self.ts_conf = self.conf.get(survey_name="Test survëy")
         self.qts_conf = self.conf.get(
-            survey_name="Test survëy",
-            question_text="Dolor sit amët, consectetur<strong>  adipiscing"
-            "</strong>  elit.",
+            survey_name="Test survëy", question_text="Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit."
         )
-        self.qts_expected_conf = {
-            "min_cardinality": 0,
-            "type": "cloud",
-            "radius": 1,
-            "text": "inside",
-        }
+        self.qts_expected_conf = {"min_cardinality": 0, "type": "cloud", "radius": 1, "text": "inside"}
 
     def test_name_doesnt_exists(self):
         """ Value error raised when the name does not exists. """
@@ -31,12 +24,7 @@ class TestConfiguration(TestManagement):
         path = os.path.join(self.conf_dir, "name_doesnt_exists.yaml")
         conf = Configuration(path)
         self.assertIsNotNone(conf.get(survey_name=name))
-        Survey.objects.create(
-            name=name,
-            is_published=True,
-            need_logged_user=True,
-            display_by_question=True,
-        )
+        Survey.objects.create(name=name, is_published=True, need_logged_user=True, display_by_question=True)
         conf = Configuration(path)
         self.assertIsNotNone(conf.get(survey_name=name))
 
@@ -69,9 +57,7 @@ class TestConfiguration(TestManagement):
         self.assertEqual(tm_conf.get("footer"), "Test management footer.")
         self.assertEqual(tm_conf.get("document_class"), "article")
         self.assertEqual(self.conf.get("footer", "Test survëy"), "This is the footer.")
-        self.assertEqual(
-            self.conf.get(key="document_class", survey_name="Test survëy"), "report"
-        )
+        self.assertEqual(self.conf.get(key="document_class", survey_name="Test survëy"), "report")
         self.assertEqual(self.conf.get("footer"), "This is the footer.")
         self.assertEqual(self.conf.get("document_class"), "article")
 
@@ -104,22 +90,17 @@ class TestConfiguration(TestManagement):
                 self.assertEqual(
                     value,
                     expected_value,
-                    "Expected '{}' for '{}' in '{}' and got '{}'".format(
-                        expected_value, key, chart, value
-                    ),
+                    "Expected '{}' for '{}' in '{}' and got '{}'".format(expected_value, key, chart, value),
                 )
 
     def test_value_doesnt_exists(self):
         """ Get when a value does not exists. """
         self.assertRaises(ValueError, self.conf.get, key="noexists")
-        self.assertRaises(
-            ValueError, self.conf.get, survey_name="Test survëy", key="noexists"
-        )
+        self.assertRaises(ValueError, self.conf.get, survey_name="Test survëy", key="noexists")
         self.assertRaises(
             ValueError,
             self.conf.get,
             survey_name="Test survëy",
-            question_text="Dolor sit amët, consectetur<strong>  adipiscing"
-            "</strong>  elit.",
+            question_text="Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.",
             key="noexists",
         )

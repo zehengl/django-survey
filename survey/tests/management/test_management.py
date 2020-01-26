@@ -15,9 +15,7 @@ class TestManagement(BaseTest):
 
     def create_answers(self, username, a1, a2, a3):
         if username:
-            response = Response.objects.create(
-                survey=self.survey, user=User.objects.create(username=username)
-            )
+            response = Response.objects.create(survey=self.survey, user=User.objects.create(username=username))
         else:
             response = Response.objects.create(survey=self.survey)
         response.save()
@@ -28,54 +26,23 @@ class TestManagement(BaseTest):
     def create_survey(self):
         self.test_managament_survey_name = "Test Management Survëy"
         self.survey = Survey.objects.create(
-            name=self.test_managament_survey_name,
-            is_published=True,
-            need_logged_user=True,
-            display_by_question=True,
+            name=self.test_managament_survey_name, is_published=True, need_logged_user=True, display_by_question=True
         )
-        self.qst1 = Question.objects.create(
-            text="Aèbc?", order=1, required=True, survey=self.survey
-        )
-        self.qst2 = Question.objects.create(
-            text="Bècd?", order=2, required=False, survey=self.survey
-        )
-        self.qst3 = Question.objects.create(
-            text="Cède?", order=3, required=True, survey=self.survey
-        )
-        self.qst4 = Question.objects.create(
-            text="Dèef?", order=4, required=False, survey=self.survey
-        )
-        self.response = Response.objects.create(
-            survey=self.survey, user=User.objects.all()[0]
-        )
-        self.ans1 = Answer.objects.create(
-            response=self.response, question=self.qst1, body="1é"
-        )
-        self.ans2 = Answer.objects.create(
-            response=self.response, question=self.qst2, body="2é"
-        )
-        self.ans3 = Answer.objects.create(
-            response=self.response, question=self.qst3, body="3é"
-        )
-        self.response_null = Response.objects.create(
-            survey=self.survey, user=User.objects.all()[1]
-        )
-        self.empty = Answer.objects.create(
-            response=self.response_null, question=self.qst3, body=""
-        )
+        self.qst1 = Question.objects.create(text="Aèbc?", order=1, required=True, survey=self.survey)
+        self.qst2 = Question.objects.create(text="Bècd?", order=2, required=False, survey=self.survey)
+        self.qst3 = Question.objects.create(text="Cède?", order=3, required=True, survey=self.survey)
+        self.qst4 = Question.objects.create(text="Dèef?", order=4, required=False, survey=self.survey)
+        self.response = Response.objects.create(survey=self.survey, user=User.objects.all()[0])
+        self.ans1 = Answer.objects.create(response=self.response, question=self.qst1, body="1é")
+        self.ans2 = Answer.objects.create(response=self.response, question=self.qst2, body="2é")
+        self.ans3 = Answer.objects.create(response=self.response, question=self.qst3, body="3é")
+        self.response_null = Response.objects.create(survey=self.survey, user=User.objects.all()[1])
+        self.empty = Answer.objects.create(response=self.response_null, question=self.qst3, body="")
         self.username = "SlctMltipl"
-        self.create_answers(
-            self.username,
-            "[u'1', u'1a', u'1b']",
-            "[u'2', u'2a', u'2b']",
-            "[u'3', u'3a', u'3b']",
-        )
+        self.create_answers(self.username, "[u'1', u'1a', u'1b']", "[u'2', u'2a', u'2b']", "[u'3', u'3a', u'3b']")
         self.other_username = "SlctSimilar"
         self.create_answers(
-            self.other_username,
-            "[u'1e', u'1é', u'1ë']",
-            "[u'2e', u'2é', u'2ë']",
-            "[u'3e', u'3é', u'3ë']",
+            self.other_username, "[u'1e', u'1é', u'1ë']", "[u'2e', u'2é', u'2ë']", "[u'3e', u'3é', u'3ë']"
         )
         self.create_answers(None, "", "", "")
 
@@ -86,10 +53,7 @@ class TestManagement(BaseTest):
         number_of_question = 10
         number_of_participant = 100
         ranking_survey = Survey.objects.create(
-            name=ranking_survey_name,
-            is_published=True,
-            need_logged_user=False,
-            display_by_question=True,
+            name=ranking_survey_name, is_published=True, need_logged_user=False, display_by_question=True
         )
         questions = []
         question_choices = ["1,2,3,4,5"]
@@ -127,7 +91,5 @@ Anonymous,,,,""".format(
             self.username, self.other_username
         )
         self.expected_header = ["user", "Aèbc?", "Bècd?", "Cède?", "Dèef?"]
-        self.conf_dir = os.path.join(
-            settings.ROOT, "survey", "tests", "exporter", "tex"
-        )
+        self.conf_dir = os.path.join(settings.ROOT, "survey", "tests", "exporter", "tex")
         self.test_conf_path = os.path.join(self.conf_dir, "test_conf.yaml")

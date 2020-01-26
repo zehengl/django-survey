@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:06+0000\n"
+"POT-Creation-Date: 2020-01-26 15:07+0000\n"
 "PO-Revision-Date: 2018-10-06 20:42+0000\n"
 "Last-Translator: Javier Ordóñez <>\n"
 "Language-Team: \n"
@@ -59,17 +59,17 @@ msgid "excluding"
 msgstr "excluyendo"
 
 #: survey/exporter/tex/question2tex.py:83
-#: survey/exporter/tex/question2tex.py:121
-#: survey/exporter/tex/question2tex.py:124
+#: survey/exporter/tex/question2tex.py:117
+#: survey/exporter/tex/question2tex.py:120
 msgid "and"
 msgstr "y"
 
-#: survey/exporter/tex/question2tex.py:118
-#: survey/exporter/tex/question2tex.py:119
+#: survey/exporter/tex/question2tex.py:114
+#: survey/exporter/tex/question2tex.py:115
 msgid "or"
 msgstr "o"
 
-#: survey/exporter/tex/question2tex.py:133
+#: survey/exporter/tex/question2tex.py:129
 msgid "Repartition of answers"
 msgstr "Distribución de respuestas"
 
@@ -77,58 +77,58 @@ msgstr "Distribución de respuestas"
 msgid "Left blank"
 msgstr "Dejada en blanco"
 
-#: survey/exporter/tex/question2tex_chart.py:120
-#: survey/exporter/tex/question2tex_sankey.py:31
+#: survey/exporter/tex/question2tex_chart.py:119
+#: survey/exporter/tex/question2tex_sankey.py:30
 msgid "for the question"
 msgstr "para la pregunta"
 
-#: survey/exporter/tex/question2tex_chart.py:132
+#: survey/exporter/tex/question2tex_chart.py:129
 msgid "No answers for this question."
 msgstr "No hay respuestas para esta pregunta."
 
-#: survey/exporter/tex/question2tex_raw.py:28
+#: survey/exporter/tex/question2tex_raw.py:26
 msgid "Participant"
 msgstr "Participante"
 
 #  as in "opposite of right"
-#: survey/exporter/tex/question2tex_sankey.py:33
+#: survey/exporter/tex/question2tex_sankey.py:30
 msgid "left"
 msgstr "izquierda"
 
-#: survey/exporter/tex/question2tex_sankey.py:36
+#: survey/exporter/tex/question2tex_sankey.py:32
 msgid "in relation with the question"
 msgstr "en relación con la pregunta"
 
 # as in "opposite of left"
-#: survey/exporter/tex/question2tex_sankey.py:38
+#: survey/exporter/tex/question2tex_sankey.py:34
 msgid "right"
 msgstr "derecha"
 
-#: survey/exporter/tex/survey2tex.py:68
+#: survey/exporter/tex/survey2tex.py:66
 msgid "We could not render a chart because the type"
 msgstr "no pudimos generar un gráfico porque el tipo"
 
-#: survey/exporter/tex/survey2tex.py:71
+#: survey/exporter/tex/survey2tex.py:69
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "no es un tipo estándar ni ruta a una subclase importable válida de Question2Tex. Escoje entre 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' o 'package.path.MyQuestion2TexCustomClass'"
 
-#: survey/models/answer.py:26
+#: survey/models/answer.py:23
 msgid "Question"
 msgstr "Pregunta"
 
-#: survey/models/answer.py:32
+#: survey/models/answer.py:24
 msgid "Response"
 msgstr "Respuesta"
 
-#: survey/models/answer.py:35 survey/models/response.py:27
+#: survey/models/answer.py:25 survey/models/response.py:27
 msgid "Creation date"
 msgstr "Fecha de creación"
 
-#: survey/models/answer.py:36 survey/models/response.py:28
+#: survey/models/answer.py:26 survey/models/response.py:28
 msgid "Update date"
 msgstr "Fecha de actualización"
 
-#: survey/models/answer.py:37
+#: survey/models/answer.py:27
 msgid "Content"
 msgstr "Contenido"
 
@@ -136,24 +136,24 @@ msgstr "Contenido"
 msgid "Name"
 msgstr "Nombre"
 
-#: survey/models/category.py:16 survey/models/question.py:84
-#: survey/models/response.py:32
+#: survey/models/category.py:13 survey/models/question.py:76
+#: survey/models/response.py:29
 msgid "Survey"
 msgstr "Encuesta"
 
-#: survey/models/category.py:19
+#: survey/models/category.py:14
 msgid "Display order"
 msgstr "Orden de presentación"
 
-#: survey/models/category.py:21 survey/models/survey.py:11
+#: survey/models/category.py:15 survey/models/survey.py:11
 msgid "Description"
 msgstr "Descripción"
 
-#: survey/models/category.py:26
+#: survey/models/category.py:19
 msgid "category"
 msgstr "categoría"
 
-#: survey/models/category.py:27
+#: survey/models/category.py:20
 msgid "categories"
 msgstr "categorías"
 
@@ -209,39 +209,39 @@ msgstr "Orden"
 msgid "Required"
 msgstr "Obligatorio"
 
-#: survey/models/question.py:76
+#: survey/models/question.py:74
 msgid "Category"
 msgstr "Categoría"
 
-#: survey/models/question.py:88
+#: survey/models/question.py:77
 msgid "Type"
 msgstr "Tipo"
 
-#: survey/models/question.py:91
+#: survey/models/question.py:78
 msgid "Choices"
 msgstr "Opciones"
 
-#: survey/models/question.py:95
+#: survey/models/question.py:81
 msgid "question"
 msgstr "pregunta"
 
-#: survey/models/question.py:96
+#: survey/models/question.py:82
 msgid "questions"
 msgstr "preguntas"
 
-#: survey/models/response.py:38
+#: survey/models/response.py:30
 msgid "User"
 msgstr "Usuario"
 
-#: survey/models/response.py:42
+#: survey/models/response.py:31
 msgid "Interview unique identifier"
 msgstr "Identificador único de entrevista"
 
-#: survey/models/response.py:45
+#: survey/models/response.py:34
 msgid "Set of answers to surveys"
 msgstr "Conjunto de respuestas a encuestas"
 
-#: survey/models/response.py:46
+#: survey/models/response.py:35
 msgid "Sets of answers to surveys"
 msgstr "Conjuntos de respuestas a encuestas"
 
@@ -249,27 +249,27 @@ msgstr "Conjuntos de respuestas a encuestas"
 msgid "Users can see it and answer it"
 msgstr "Los usuarios pueden ver y responder"
 
-#: survey/models/survey.py:14
+#: survey/models/survey.py:13
 msgid "Only authenticated users can see it and answer it"
 msgstr "Solo usuarios autenticados pueden ver y responder"
 
-#: survey/models/survey.py:17
+#: survey/models/survey.py:14
 msgid "Users can edit their answers afterwards"
 msgstr "Los usuarios pueden editar sus respuestas"
 
-#: survey/models/survey.py:19
+#: survey/models/survey.py:15
 msgid "Display by question"
 msgstr "Muestra por pregunta"
 
-#: survey/models/survey.py:20
+#: survey/models/survey.py:16
 msgid "Template"
 msgstr "Plantilla"
 
-#: survey/models/survey.py:23
+#: survey/models/survey.py:19
 msgid "survey"
 msgstr "encuesta"
 
-#: survey/models/survey.py:24
+#: survey/models/survey.py:20
 msgid "surveys"
 msgstr "encuestas"
 

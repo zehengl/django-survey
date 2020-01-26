@@ -14,15 +14,10 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name="response",
-            options={
-                "verbose_name": "Set of answers to surveys",
-                "verbose_name_plural": "Sets of answers to surveys",
-            },
+            options={"verbose_name": "Set of answers to surveys", "verbose_name_plural": "Sets of answers to surveys"},
         ),
         migrations.AlterField(
-            model_name="answer",
-            name="body",
-            field=models.TextField(blank=True, null=True, verbose_name="Content"),
+            model_name="answer", name="body", field=models.TextField(blank=True, null=True, verbose_name="Content")
         ),
         migrations.AlterField(
             model_name="answer",
@@ -50,28 +45,20 @@ class Migration(migrations.Migration):
             ),
         ),
         migrations.AlterField(
-            model_name="answer",
-            name="updated",
-            field=models.DateTimeField(auto_now=True, verbose_name="Update date"),
+            model_name="answer", name="updated", field=models.DateTimeField(auto_now=True, verbose_name="Update date")
         ),
         migrations.AlterField(
             model_name="category",
             name="description",
-            field=models.CharField(
-                blank=True, max_length=2000, null=True, verbose_name="Description"
-            ),
+            field=models.CharField(blank=True, max_length=2000, null=True, verbose_name="Description"),
         ),
         migrations.AlterField(
-            model_name="category",
-            name="name",
-            field=models.CharField(max_length=400, verbose_name="Name"),
+            model_name="category", name="name", field=models.CharField(max_length=400, verbose_name="Name")
         ),
         migrations.AlterField(
             model_name="category",
             name="order",
-            field=models.IntegerField(
-                blank=True, null=True, verbose_name="Display order"
-            ),
+            field=models.IntegerField(blank=True, null=True, verbose_name="Display order"),
         ),
         migrations.AlterField(
             model_name="category",
@@ -108,15 +95,9 @@ options for this question.""",
                 verbose_name="Choices",
             ),
         ),
+        migrations.AlterField(model_name="question", name="order", field=models.IntegerField(verbose_name="Order")),
         migrations.AlterField(
-            model_name="question",
-            name="order",
-            field=models.IntegerField(verbose_name="Order"),
-        ),
-        migrations.AlterField(
-            model_name="question",
-            name="required",
-            field=models.BooleanField(verbose_name="Required"),
+            model_name="question", name="required", field=models.BooleanField(verbose_name="Required")
         ),
         migrations.AlterField(
             model_name="question",
@@ -128,11 +109,7 @@ options for this question.""",
                 verbose_name="Survey",
             ),
         ),
-        migrations.AlterField(
-            model_name="question",
-            name="text",
-            field=models.TextField(verbose_name="Text"),
-        ),
+        migrations.AlterField(model_name="question", name="text", field=models.TextField(verbose_name="Text")),
         migrations.AlterField(
             model_name="question",
             name="type",
@@ -167,9 +144,7 @@ options for this question.""",
             ),
         ),
         migrations.AlterField(
-            model_name="response",
-            name="updated",
-            field=models.DateTimeField(auto_now=True, verbose_name="Update date"),
+            model_name="response", name="updated", field=models.DateTimeField(auto_now=True, verbose_name="Update date")
         ),
         migrations.AlterField(
             model_name="response",
@@ -183,9 +158,7 @@ options for this question.""",
             ),
         ),
         migrations.AlterField(
-            model_name="survey",
-            name="description",
-            field=models.TextField(verbose_name="Description"),
+            model_name="survey", name="description", field=models.TextField(verbose_name="Description")
         ),
         migrations.AlterField(
             model_name="survey",
@@ -198,22 +171,16 @@ options for this question.""",
             field=models.BooleanField(verbose_name="Users can see it and answer it"),
         ),
         migrations.AlterField(
-            model_name="survey",
-            name="name",
-            field=models.CharField(max_length=400, verbose_name="Name"),
+            model_name="survey", name="name", field=models.CharField(max_length=400, verbose_name="Name")
         ),
         migrations.AlterField(
             model_name="survey",
             name="need_logged_user",
-            field=models.BooleanField(
-                verbose_name="Only authenticated users can see it and answer it"
-            ),
+            field=models.BooleanField(verbose_name="Only authenticated users can see it and answer it"),
         ),
         migrations.AlterField(
             model_name="survey",
             name="template",
-            field=models.CharField(
-                blank=True, max_length=255, null=True, verbose_name="Template"
-            ),
+            field=models.CharField(blank=True, max_length=255, null=True, verbose_name="Template"),
         ),
     ]

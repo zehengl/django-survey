@@ -18,14 +18,7 @@ class ImageSelectWidget(forms.widgets.Widget):
         for index, choice in enumerate(self.choices):
             if choice[0] != "":
                 value, img_src = choice[0].split(":", 1)
-                choices.append(
-                    {
-                        "img_src": img_src,
-                        "value": value,
-                        "full_value": choice[0],
-                        "index": index,
-                    }
-                )
+                choices.append({"img_src": img_src, "value": value, "full_value": choice[0], "index": index})
         context = {"name": name, "choices": choices}
         html = render_to_string(template_name, context)
         return html

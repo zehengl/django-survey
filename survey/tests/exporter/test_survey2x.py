@@ -28,12 +28,8 @@ class TestSurvey2X(TestManagement):
         TestManagement.setUp(self)
         self.virtual_survey2x = Survey2X(self.survey)
         self.actual_survey2x = Survey2Survey(self.survey)
-        self.expected_actual = os.path.join(
-            settings.ROOT, "survey", "test-management-survey.survey"
-        )
-        self.expected_virtual = os.path.join(
-            settings.ROOT, "x", "test-management-survey.x"
-        )
+        self.expected_actual = os.path.join(settings.ROOT, "survey", "test-management-survey.survey")
+        self.expected_virtual = os.path.join(settings.ROOT, "x", "test-management-survey.x")
 
     def get_fail_info(self, survey2x):
         msg = "\nLatest answer date :     {}".format(survey2x.latest_answer_date)

@@ -7,13 +7,7 @@ from django.db import migrations, models
 
 def migrate_answers(apps, schema_editor):
     classes = []
-    classes_str = [
-        "AnswerText",
-        "AnswerInteger",
-        "AnswerRadio",
-        "AnswerSelect",
-        "AnswerSelectMultiple",
-    ]
+    classes_str = ["AnswerText", "AnswerInteger", "AnswerRadio", "AnswerSelect", "AnswerSelectMultiple"]
     for class_name in classes_str:
         classes.append(apps.get_model("survey", class_name))
     for class_ in classes:
@@ -27,11 +21,7 @@ class Migration(migrations.Migration):
     dependencies = [("survey", "0003_auto_20170320_0337")]
 
     operations = [
-        migrations.AddField(
-            model_name="answerbase",
-            name="new_body",
-            field=models.TextField(blank=True, null=True),
-        ),
+        migrations.AddField(model_name="answerbase", name="new_body", field=models.TextField(blank=True, null=True)),
         migrations.RunPython(migrate_answers),
         migrations.DeleteModel(name="AnswerInteger"),
         migrations.DeleteModel(name="AnswerRadio"),

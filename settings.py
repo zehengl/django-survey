@@ -24,10 +24,7 @@ DEBUG = True
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CSV_DIR = os.path.join(ROOT, "csv")
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(name)s.%(funcName)s() l.%(lineno)s -\033[32m %(message)s \033[39m",
-)
+logging.basicConfig(level=logging.DEBUG, format="%(name)s.%(funcName)s() l.%(lineno)s -\033[32m %(message)s \033[39m")
 
 DATABASES = {
     "default": {
@@ -77,10 +74,7 @@ SECRET_KEY = "js*79rk(+s+x9)8co+10$zghe2f)+33jd1l2m#f)vl+pvtj24e"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(ROOT, "survey", "templates"),
-            os.path.join(ROOT, "dev", "templates"),
-        ],
+        "DIRS": [os.path.join(ROOT, "survey", "templates"), os.path.join(ROOT, "dev", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "debug": DEBUG,
@@ -150,11 +144,5 @@ LOGGING = {
             "class": "django.utils.log.AdminEmailHandler",
         }
     },
-    "loggers": {
-        "django.request": {
-            "handlers": ["mail_admins"],
-            "level": "ERROR",
-            "propagate": True,
-        }
-    },
+    "loggers": {"django.request": {"handlers": ["mail_admins"], "level": "ERROR", "propagate": True}},
 }

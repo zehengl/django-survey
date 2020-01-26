@@ -71,25 +71,11 @@ class Question(models.Model):
     order = models.IntegerField(_("Order"))
     required = models.BooleanField(_("Required"))
     category = models.ForeignKey(
-        Category,
-        on_delete=models.SET_NULL,
-        verbose_name=_("Category"),
-        blank=True,
-        null=True,
-        related_name="questions",
+        Category, on_delete=models.SET_NULL, verbose_name=_("Category"), blank=True, null=True, related_name="questions"
     )
-    survey = models.ForeignKey(
-        Survey,
-        on_delete=models.CASCADE,
-        verbose_name=_("Survey"),
-        related_name="questions",
-    )
-    type = models.CharField(
-        _("Type"), max_length=200, choices=QUESTION_TYPES, default=TEXT
-    )
-    choices = models.TextField(
-        _("Choices"), blank=True, null=True, help_text=CHOICES_HELP_TEXT
-    )
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE, verbose_name=_("Survey"), related_name="questions")
+    type = models.CharField(_("Type"), max_length=200, choices=QUESTION_TYPES, default=TEXT)
+    choices = models.TextField(_("Choices"), blank=True, null=True, help_text=CHOICES_HELP_TEXT)
 
     class Meta(object):
         verbose_name = _("question")
@@ -135,10 +121,7 @@ class Question(models.Model):
     @staticmethod
     def standardize_list(string_list, group_by_letter_case=None, group_by_slugify=None):
         """ Return a list of standardized string from a csv string.."""
-        return [
-            Question.standardize(strng, group_by_letter_case, group_by_slugify)
-            for strng in string_list
-        ]
+        return [Question.standardize(strng, group_by_letter_case, group_by_slugify) for strng in string_list]
 
     def answers_cardinality(
         self,
@@ -177,16 +160,12 @@ class Question(models.Model):
             filter = []
             standardized_filter = []
         else:
-            standardized_filter = Question.standardize_list(
-                filter, group_by_letter_case, group_by_slugify
-            )
+            standardized_filter = Question.standardize_list(filter, group_by_letter_case, group_by_slugify)
         if other_question is not None:
             if not isinstance(other_question, Question):
                 msg = "Question.answer_cardinality expect a 'Question' for "
                 msg += "the 'other_question' parameter and got"
-                msg += " '{}' (a '{}')".format(
-                    other_question, other_question.__class__.__name__
-                )
+                msg += " '{}' (a '{}')".format(other_question, other_question.__class__.__name__)
                 raise TypeError(msg)
         return self.__answers_cardinality(
             min_cardinality,
@@ -216,9 +195,7 @@ class Question(models.Model):
         cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
-                value = self.__get_cardinality_value(
-                    value, group_by_letter_case, group_by_slugify, group_together
-                )
+                value = self.__get_cardinality_value(value, group_by_letter_case, group_by_slugify, group_together)
                 if value not in filter and value not in standardized_filter:
                     user = answer.response.user
                     if other_question is None:
@@ -248,14 +225,10 @@ class Question(models.Model):
             # this question
             for answer in other_question.answers.all():
                 for value in answer.values:
-                    value = self.__get_cardinality_value(
-                        value, group_by_letter_case, group_by_slugify, group_together
-                    )
+                    value = self.__get_cardinality_value(value, group_by_letter_case, group_by_slugify, group_together)
                     if value not in filter + standardized_filter:
                         if answer.response.user is None:
-                            self._cardinality_plus_answer(
-                                cardinality, _(settings.USER_DID_NOT_ANSWER), value
-                            )
+                            self._cardinality_plus_answer(cardinality, _(settings.USER_DID_NOT_ANSWER), value)
         return cardinality
 
     def sorted_answers_cardinality(
@@ -273,12 +246,7 @@ class Question(models.Model):
         The ordering is reversed for same cardinality value so we have aa
         before zz. """
         cardinality = self.answers_cardinality(
-            min_cardinality,
-            group_together,
-            group_by_letter_case,
-            group_by_slugify,
-            filter,
-            other_question,
+            min_cardinality, group_together, group_by_letter_case, group_by_slugify, filter, other_question
         )
         # We handle SortAnswer without enum because using "type" as a variable
         # name break the enum module and we want to use type in
@@ -299,21 +267,15 @@ class Question(models.Model):
             sort_answer = SortAnswer.CARDINAL
         sorted_cardinality = None
         if user_defined:
-            sorted_cardinality = sorted(
-                list(cardinality.items()), key=lambda x: sort_answer.get(x[0], 0)
-            )
+            sorted_cardinality = sorted(list(cardinality.items()), key=lambda x: sort_answer.get(x[0], 0))
         elif sort_answer == SortAnswer.ALPHANUMERIC:
             sorted_cardinality = sorted(cardinality.items())
         elif sort_answer == SortAnswer.CARDINAL:
             if other_question is None:
-                sorted_cardinality = sorted(
-                    list(cardinality.items()), key=lambda x: (-x[1], x[0])
-                )
+                sorted_cardinality = sorted(list(cardinality.items()), key=lambda x: (-x[1], x[0]))
             else:
                 # There is a dict instead of an int
-                sorted_cardinality = sorted(
-                    list(cardinality.items()), key=lambda x: (-sum(x[1].values()), x[0])
-                )
+                sorted_cardinality = sorted(list(cardinality.items()), key=lambda x: (-sum(x[1].values()), x[0]))
         return OrderedDict(sorted_cardinality)
 
     def _cardinality_plus_answer(self, cardinality, value, other_question_value):
@@ -323,10 +285,7 @@ class Question(models.Model):
             cardinality[value] = {other_question_value: 1}
         elif isinstance(cardinality[value], int):
             # Previous answer did not had an answer to other question
-            cardinality[value] = {
-                _(settings.USER_DID_NOT_ANSWER): cardinality[value],
-                other_question_value: 1,
-            }
+            cardinality[value] = {_(settings.USER_DID_NOT_ANSWER): cardinality[value], other_question_value: 1}
         else:
             if cardinality[value].get(other_question_value) is None:
                 cardinality[value][other_question_value] = 1
@@ -341,15 +300,11 @@ class Question(models.Model):
         else:
             cardinality[value] += n
 
-    def __get_cardinality_value(
-        self, value, group_by_letter_case, group_by_slugify, group_together
-    ):
+    def __get_cardinality_value(self, value, group_by_letter_case, group_by_slugify, group_together):
         """ Return the value we should use for cardinality. """
         value = Question.standardize(value, group_by_letter_case, group_by_slugify)
         for key, values in list(group_together.items()):
-            grouped_values = Question.standardize_list(
-                values, group_by_letter_case, group_by_slugify
-            )
+            grouped_values = Question.standardize_list(values, group_by_letter_case, group_by_slugify)
             if value in grouped_values:
                 value = key
         return value

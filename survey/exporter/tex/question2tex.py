@@ -102,12 +102,8 @@ class Question2Tex(object):
                 standardized_values = Question.standardize_list(
                     values, self.group_by_letter_case, self.group_by_slugify
                 )
-                standardized_key = Question.standardize(
-                    key, self.group_by_letter_case, self.group_by_slugify
-                )
-                relevant_values = [
-                    v for v in standardized_values if v != standardized_key
-                ]
+                standardized_key = Question.standardize(key, self.group_by_letter_case, self.group_by_slugify)
+                relevant_values = [v for v in standardized_values if v != standardized_key]
                 if not relevant_values:
                     # If there is no relevant value the group_together was just
                     # a placeholder ex Yes for [yes Yës yEs]

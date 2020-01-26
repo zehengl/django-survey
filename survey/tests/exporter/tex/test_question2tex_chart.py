@@ -17,11 +17,7 @@ class TestQuestion2TexChart(TestManagement):
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIsNotNone(Question2TexChart(question).tex())
         color = OrderedDict()
-        groups = {
-            "1é": ["1e", "1é", "1ë"],
-            "2é": ["2e", "2é", "2ë"],
-            "3é": ["3e", "3é", "3ë"],
-        }
+        groups = {"1é": ["1e", "1é", "1ë"], "2é": ["2e", "2é", "2ë"], "3é": ["3e", "3é", "3ë"]}
         color["1b"] = "green!80"
         color["1a"] = "cyan!50"
         color["1é"] = "red!80"
@@ -30,10 +26,7 @@ class TestQuestion2TexChart(TestManagement):
         self.assertIn(expected_color, chart)
         color["1"] = "yellow!70"
         chart = Question2TexChart(
-            question,
-            color=color,
-            group_together=groups,
-            sort_answer={"1b": 1, "1a": 2, "1": 3, "1é": 4},
+            question, color=color, group_together=groups, sort_answer={"1b": 1, "1a": 2, "1": 3, "1é": 4}
         ).tex()
         expected_colors = ["red!80", "yellow!70", "cyan!50", "green!80"]
         for expected_color in expected_colors:
@@ -43,29 +36,21 @@ class TestQuestion2TexChart(TestManagement):
             chart,
             "User defined sort does not seem to works.",
         )
-        chart = Question2TexChart(
-            question, color=color, group_together=groups, sort_answer="cardinal"
-        ).tex()
+        chart = Question2TexChart(question, color=color, group_together=groups, sort_answer="cardinal").tex()
         self.assertIn(
-            "4/1\xe9,\n            1/Left blank,\n            1/1,\n           "
-            " 1/1a,\n            1/1b",
+            "4/1\xe9,\n            1/Left blank,\n            1/1,\n            1/1a,\n            1/1b",
             chart,
             "Cardinal sort does not seem to works. {}".format(chart),
         )
-        chart = Question2TexChart(
-            question, color=color, group_together=groups, sort_answer="alphanumeric"
-        ).tex()
+        chart = Question2TexChart(question, color=color, group_together=groups, sort_answer="alphanumeric").tex()
         self.assertIn(
             "1/1,\n            1/1a,\n            1/1b,\n            4/1é",
             chart,
             "Alphanumeric sort does not seem to works.. {}".format(chart),
         )
-        chart = Question2TexChart(
-            question, group_together=groups, sort_answer="unknown_option"
-        ).tex()
+        chart = Question2TexChart(question, group_together=groups, sort_answer="unknown_option").tex()
         self.assertIn(
-            "4/1\xe9,\n            1/Left blank,\n            1/1,\n           "
-            " 1/1a,\n            1/1b",
+            "4/1\xe9,\n            1/Left blank,\n            1/1,\n            1/1a,\n            1/1b",
             chart,
             "Default behavior does not sort by cardinality. {}".format(chart),
         )
@@ -123,15 +108,9 @@ class TestQuestion2TexChart(TestManagement):
         self.assertIn("excluding 'Toto', 'Titi', and 'Tutu' ", get_result(**options))
         options = get_options(filter=["Toto", ""], cardinality={"Toto": 2, "": 1})
         self.assertIn("excluding 'Toto', and 'Left blank' ", get_result(**options))
-        options = get_options(
-            group_together={"No": ["No", "Maybe"], "Yes": ["Kay"]},
-            cardinality={"No": 2},
-        )
+        options = get_options(group_together={"No": ["No", "Maybe"], "Yes": ["Kay"]}, cardinality={"No": 2})
         self.assertIn("with 'No' standing for 'No' or 'Maybe'.", get_result(**options))
-        options = get_options(
-            group_together={"No": ["No", "Maybe"], "Yes": ["Kay"]},
-            cardinality={"No": 2, "Yes": 1},
-        )
+        options = get_options(group_together={"No": ["No", "Maybe"], "Yes": ["Kay"]}, cardinality={"No": 2, "Yes": 1})
         result = get_result(**options)
         self.assertIn("'Yes' standing for 'Kay'", result)
         self.assertIn("'No' standing for 'No' or 'Maybe'", result)
@@ -142,17 +121,11 @@ class TestQuestion2TexChart(TestManagement):
             group_by_lettercase=True,
             cardinality={"No": 2},
         )
-        self.assertIn(
-            "Repartition of answers for the question 'Cède?'.", get_result(**options)
-        )
+        self.assertIn("Repartition of answers for the question 'Cède?'.", get_result(**options))
         options = get_options(group_together={"Yes": ["Kay"]}, cardinality={"No": 2})
-        self.assertIn(
-            "Repartition of answers for the question 'Cède?'.", get_result(**options)
-        )
+        self.assertIn("Repartition of answers for the question 'Cède?'.", get_result(**options))
 
     def test_no_results(self):
         """ We manage having no result at all. """
         question = self.survey.questions.get(text="Dèef?")
-        self.assertIn(
-            "No answers for this question.", Question2TexChart(question).tex()
-        )
+        self.assertIn("No answers for this question.", Question2TexChart(question).tex())

@@ -16,7 +16,4 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-urlpatterns = [
-    url(r"^admin/", admin.site.urls),
-    url(r"^survey/", include("survey.urls")),
-]
+urlpatterns = [url(r"^admin/", admin.site.urls), url(r"^survey/", include("survey.urls"))]

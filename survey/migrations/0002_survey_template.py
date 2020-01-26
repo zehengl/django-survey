@@ -9,8 +9,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="survey",
-            name="template",
-            field=models.CharField(max_length=255, null=True, blank=True),
+            model_name="survey", name="template", field=models.CharField(max_length=255, null=True, blank=True)
         )
     ]

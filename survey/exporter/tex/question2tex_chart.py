@@ -116,10 +116,7 @@ class Question2TexChart(Question2Tex):
             return ""
 
     def get_caption_specifics(self):
-        return "%s '%s' " % (
-            _("for the question"),
-            Question2Tex.html2latex(self.question.text),
-        )
+        return "%s '%s' " % (_("for the question"), Question2Tex.html2latex(self.question.text))
 
     def tex(self):
         """ Return a pfg-pie pie chart of a question.

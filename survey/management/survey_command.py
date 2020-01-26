@@ -14,40 +14,14 @@ class SurveyCommand(BaseCommand):
 
     def add_arguments(self, parser):
         help_text = "The {}s of the {}s we want to generate. Default is None."
+        parser.add_argument("--survey-all", action="store_true", help="Use to generate all surveys. Default is False.")
+        parser.add_argument("--survey-id", nargs="+", type=int, help=help_text.format("primary key", "survey"))
+        parser.add_argument("--survey-name", nargs="+", type=str, help=help_text.format("name", "survey"))
         parser.add_argument(
-            "--survey-all",
-            action="store_true",
-            help="Use to " "generate all surveys. Default is False.",
+            "--question-all", action="store_true", help="Use to generate all questions. Default is False."
         )
-        parser.add_argument(
-            "--survey-id",
-            nargs="+",
-            type=int,
-            help=help_text.format("primary key", "survey"),
-        )
-        parser.add_argument(
-            "--survey-name",
-            nargs="+",
-            type=str,
-            help=help_text.format("name", "survey"),
-        )
-        parser.add_argument(
-            "--question-all",
-            action="store_true",
-            help="Use to" " generate all questions. Default is False.",
-        )
-        parser.add_argument(
-            "--question-id",
-            nargs="+",
-            type=int,
-            help=help_text.format("primary key", "question"),
-        )
-        parser.add_argument(
-            "--question-text",
-            nargs="+",
-            type=str,
-            help=help_text.format("text", "question"),
-        )
+        parser.add_argument("--question-id", nargs="+", type=int, help=help_text.format("primary key", "question"))
+        parser.add_argument("--question-text", nargs="+", type=str, help=help_text.format("text", "question"))
 
     def raise_value_error(self, error_type, value):
         """ Raise a ValueError with a clean error message in python 2.7 and 3.
@@ -89,22 +63,11 @@ class SurveyCommand(BaseCommand):
                 "while also using '--question-all'" + postfix
             )
         if all_surveys and some_surveys:
-            exit(
-                prefix + "survey with '--survey-id' or '--survey-name' "
-                "while also using '--survey-all'" + postfix
-            )
+            exit(prefix + "survey with '--survey-id' or '--survey-name' while also using '--survey-all'" + postfix)
 
     def check_nothing_at_all(self, options):
-        at_least_a_question = (
-            options.get("question_all")
-            or options.get("question_text")
-            or options.get("question_id")
-        )
-        at_least_a_survey = (
-            options.get("survey_all")
-            or options.get("survey_name")
-            or options.get("survey_id")
-        )
+        at_least_a_question = options.get("question_all") or options.get("question_text") or options.get("question_id")
+        at_least_a_survey = options.get("survey_all") or options.get("survey_name") or options.get("survey_id")
         if not at_least_a_question and not at_least_a_survey:
             exit(
                 "Nothing to do, add at least one of the following options :\n"

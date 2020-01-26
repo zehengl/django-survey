@@ -45,9 +45,7 @@ class TestSurvey2Tex(TestManagement):
 
     def test_custom_class_fail_import(self):
         """ We have an error message if the type is impossible to import. """
-        conf = Configuration(
-            os.path.join(self.conf_dir, "custom_class_doesnt_exists.yaml")
-        )
+        conf = Configuration(os.path.join(self.conf_dir, "custom_class_doesnt_exists.yaml"))
         self.test_survey = Survey.objects.get(name="Test survëy")
         fail_import = Survey2Tex(self.test_survey, conf).survey_to_x()
         should_contain = [

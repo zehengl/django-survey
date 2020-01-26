@@ -46,16 +46,11 @@ class TestSurveyDetail(BaseTest):
         LOGGER.info(response.content)
         self.assertEqual(response.status_code, 302)
 
-        response_saved = Response.objects.filter(
-            user__username=settings.DEBUG_ADMIN_NAME, survey__id=1
-        )
+        response_saved = Response.objects.filter(user__username=settings.DEBUG_ADMIN_NAME, survey__id=1)
         self.assertEqual(len(response_saved.all()), 1)
         self.assertEqual(response_saved[0].id, 15)
 
-        self.assertRedirects(
-            response,
-            reverse("survey-confirmation", args=(response_saved[0].interview_uuid,)),
-        )
+        self.assertRedirects(response, reverse("survey-confirmation", args=(response_saved[0].interview_uuid,)))
 
         response = self.client.post(
             reverse("survey-detail", args=(1,)),
@@ -76,31 +71,20 @@ class TestSurveyDetail(BaseTest):
         Checks that multipage survey is working.
         """
         self.login()
-        response = self.client.post(
-            reverse("survey-detail", args=(5,)), data={"question_11": 42}
-        )
+        response = self.client.post(reverse("survey-detail", args=(5,)), data={"question_11": 42})
         self.assertEqual(response.status_code, 302)
 
-        response_saved = Response.objects.filter(
-            user__username=settings.DEBUG_ADMIN_NAME, survey__id=5
-        )
+        response_saved = Response.objects.filter(user__username=settings.DEBUG_ADMIN_NAME, survey__id=5)
         self.assertEqual(len(response_saved.all()), 0)
 
         self.assertRedirects(response, reverse("survey-detail-step", args=(5, 1)))
 
-        response = self.client.post(
-            reverse("survey-detail-step", args=(5, 1)), data={"question_12": "yes"}
-        )
+        response = self.client.post(reverse("survey-detail-step", args=(5, 1)), data={"question_12": "yes"})
         self.assertEqual(response.status_code, 302)
 
-        response_saved = Response.objects.filter(
-            user__username=settings.DEBUG_ADMIN_NAME, survey__id=5
-        )
+        response_saved = Response.objects.filter(user__username=settings.DEBUG_ADMIN_NAME, survey__id=5)
         self.assertEqual(len(response_saved.all()), 1)
-        self.assertRedirects(
-            response,
-            reverse("survey-confirmation", args=(response_saved[0].interview_uuid,)),
-        )
+        self.assertRedirects(response, reverse("survey-confirmation", args=(response_saved[0].interview_uuid,)))
 
     def test_multipage_survey_edit(self):
         """
@@ -108,46 +92,28 @@ class TestSurveyDetail(BaseTest):
         """
         self.login()
         # first creates the initial response
-        response = self.client.post(
-            reverse("survey-detail", args=(5,)), data={"question_11": 42}
-        )
-        response = self.client.post(
-            reverse("survey-detail-step", args=(5, 1)), data={"question_12": "yes"}
-        )
-        response_saved = Response.objects.filter(
-            user__username=settings.DEBUG_ADMIN_NAME, survey__id=5
-        )
+        response = self.client.post(reverse("survey-detail", args=(5,)), data={"question_11": 42})
+        response = self.client.post(reverse("survey-detail-step", args=(5, 1)), data={"question_12": "yes"})
+        response_saved = Response.objects.filter(user__username=settings.DEBUG_ADMIN_NAME, survey__id=5)
         self.assertEqual(len(response_saved.all()), 1)
 
         # tries normal edit
-        response = self.client.post(
-            reverse("survey-detail", args=(5,)), data={"question_11": 56}
-        )
-        response = self.client.post(
-            reverse("survey-detail-step", args=(5, 1)), data={"question_12": "yes"}
-        )
-        response_saved = Response.objects.filter(
-            user__username=settings.DEBUG_ADMIN_NAME, survey__id=5
-        )
+        response = self.client.post(reverse("survey-detail", args=(5,)), data={"question_11": 56})
+        response = self.client.post(reverse("survey-detail-step", args=(5, 1)), data={"question_12": "yes"})
+        response_saved = Response.objects.filter(user__username=settings.DEBUG_ADMIN_NAME, survey__id=5)
         self.assertEqual(len(response_saved.all()), 1)
         answer_saved = Answer.objects.filter(
-            response__user__username=settings.DEBUG_ADMIN_NAME,
-            response__survey__id=5,
-            question__id=11,
+            response__user__username=settings.DEBUG_ADMIN_NAME, response__survey__id=5, question__id=11
         )
         self.assertEqual(len(answer_saved.all()), 1)
         self.assertEqual(answer_saved[0].body, "56")
 
         # tries forbidden edit (only a part of the form)
-        response = self.client.post(
-            reverse("survey-detail-step", args=(5, 1)), data={"question_12": "no"}
-        )
+        response = self.client.post(reverse("survey-detail-step", args=(5, 1)), data={"question_12": "no"})
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("survey-list"))
         answer_saved = Answer.objects.filter(
-            response__user__username=settings.DEBUG_ADMIN_NAME,
-            response__survey__id=5,
-            question__id=12,
+            response__user__username=settings.DEBUG_ADMIN_NAME, response__survey__id=5, question__id=12
         )
         self.assertEqual(len(answer_saved.all()), 1)
         self.assertEqual(answer_saved[0].body, "yes")

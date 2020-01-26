@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:06+0000\n"
+"POT-Creation-Date: 2020-01-26 15:07+0000\n"
 "PO-Revision-Date: 2019-03-10 22:53+0230\n"
 "Last-Translator: b'  <vladm.ru@gmail.com>'\n"
 "Language-Team: \n"
@@ -59,17 +59,17 @@ msgid "excluding"
 msgstr "за исключением"
 
 #: survey/exporter/tex/question2tex.py:83
-#: survey/exporter/tex/question2tex.py:121
-#: survey/exporter/tex/question2tex.py:124
+#: survey/exporter/tex/question2tex.py:117
+#: survey/exporter/tex/question2tex.py:120
 msgid "and"
 msgstr "и"
 
-#: survey/exporter/tex/question2tex.py:118
-#: survey/exporter/tex/question2tex.py:119
+#: survey/exporter/tex/question2tex.py:114
+#: survey/exporter/tex/question2tex.py:115
 msgid "or"
 msgstr "или"
 
-#: survey/exporter/tex/question2tex.py:133
+#: survey/exporter/tex/question2tex.py:129
 msgid "Repartition of answers"
 msgstr "Перераспределение ответов"
 
@@ -77,58 +77,58 @@ msgstr "Перераспределение ответов"
 msgid "Left blank"
 msgstr "Оставить пустым"
 
-#: survey/exporter/tex/question2tex_chart.py:120
-#: survey/exporter/tex/question2tex_sankey.py:31
+#: survey/exporter/tex/question2tex_chart.py:119
+#: survey/exporter/tex/question2tex_sankey.py:30
 msgid "for the question"
 msgstr "для вопроса"
 
-#: survey/exporter/tex/question2tex_chart.py:132
+#: survey/exporter/tex/question2tex_chart.py:129
 msgid "No answers for this question."
 msgstr "Нет ответов для этого вопроса."
 
-#: survey/exporter/tex/question2tex_raw.py:28
+#: survey/exporter/tex/question2tex_raw.py:26
 msgid "Participant"
 msgstr "Участник"
 
 #  as in "opposite of right"
-#: survey/exporter/tex/question2tex_sankey.py:33
+#: survey/exporter/tex/question2tex_sankey.py:30
 msgid "left"
 msgstr "не правильно"
 
-#: survey/exporter/tex/question2tex_sankey.py:36
+#: survey/exporter/tex/question2tex_sankey.py:32
 msgid "in relation with the question"
 msgstr "в связи с вопросом"
 
 # as in "opposite of left"
-#: survey/exporter/tex/question2tex_sankey.py:38
+#: survey/exporter/tex/question2tex_sankey.py:34
 msgid "right"
 msgstr "правильно"
 
-#: survey/exporter/tex/survey2tex.py:68
+#: survey/exporter/tex/survey2tex.py:66
 msgid "We could not render a chart because the type"
 msgstr "Мы не смогли отобразить диаграмму, потому что тип"
 
-#: survey/exporter/tex/survey2tex.py:71
+#: survey/exporter/tex/survey2tex.py:69
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "не является стандартным типом или путем к импортируемому допустимому текстовому дочернему классу Question2Tex. Выбрать между 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' o 'package.path.MyQuestion2TexCustomClass'"
 
-#: survey/models/answer.py:26
+#: survey/models/answer.py:23
 msgid "Question"
 msgstr "Вопрос"
 
-#: survey/models/answer.py:32
+#: survey/models/answer.py:24
 msgid "Response"
 msgstr "Ответ"
 
-#: survey/models/answer.py:35 survey/models/response.py:27
+#: survey/models/answer.py:25 survey/models/response.py:27
 msgid "Creation date"
 msgstr "Дата создания"
 
-#: survey/models/answer.py:36 survey/models/response.py:28
+#: survey/models/answer.py:26 survey/models/response.py:28
 msgid "Update date"
 msgstr "Дата обновления"
 
-#: survey/models/answer.py:37
+#: survey/models/answer.py:27
 msgid "Content"
 msgstr "Содержание"
 
@@ -136,24 +136,24 @@ msgstr "Содержание"
 msgid "Name"
 msgstr "Название"
 
-#: survey/models/category.py:16 survey/models/question.py:84
-#: survey/models/response.py:32
+#: survey/models/category.py:13 survey/models/question.py:76
+#: survey/models/response.py:29
 msgid "Survey"
 msgstr "Тест"
 
-#: survey/models/category.py:19
+#: survey/models/category.py:14
 msgid "Display order"
 msgstr "Порядок отображения"
 
-#: survey/models/category.py:21 survey/models/survey.py:11
+#: survey/models/category.py:15 survey/models/survey.py:11
 msgid "Description"
 msgstr "Описание"
 
-#: survey/models/category.py:26
+#: survey/models/category.py:19
 msgid "category"
 msgstr "категория"
 
-#: survey/models/category.py:27
+#: survey/models/category.py:20
 msgid "categories"
 msgstr "категории"
 
@@ -210,39 +210,39 @@ msgstr "Порядок"
 msgid "Required"
 msgstr "Требуемый"
 
-#: survey/models/question.py:76
+#: survey/models/question.py:74
 msgid "Category"
 msgstr "Категория"
 
-#: survey/models/question.py:88
+#: survey/models/question.py:77
 msgid "Type"
 msgstr "Тип"
 
-#: survey/models/question.py:91
+#: survey/models/question.py:78
 msgid "Choices"
 msgstr "Варианты"
 
-#: survey/models/question.py:95
+#: survey/models/question.py:81
 msgid "question"
 msgstr "вопрос"
 
-#: survey/models/question.py:96
+#: survey/models/question.py:82
 msgid "questions"
 msgstr "вопросы"
 
-#: survey/models/response.py:38
+#: survey/models/response.py:30
 msgid "User"
 msgstr "Пользователь"
 
-#: survey/models/response.py:42
+#: survey/models/response.py:31
 msgid "Interview unique identifier"
 msgstr "Уникальный идентификатор интервью"
 
-#: survey/models/response.py:45
+#: survey/models/response.py:34
 msgid "Set of answers to surveys"
 msgstr "Набор ответов на опросы"
 
-#: survey/models/response.py:46
+#: survey/models/response.py:35
 msgid "Sets of answers to surveys"
 msgstr "Наборы ответов на опросы"
 
@@ -250,29 +250,29 @@ msgstr "Наборы ответов на опросы"
 msgid "Users can see it and answer it"
 msgstr "Пользователи могут увидеть его и ответить на него"
 
-#: survey/models/survey.py:14
+#: survey/models/survey.py:13
 msgid "Only authenticated users can see it and answer it"
 msgstr "Только прошедшие проверку пользователи могут видеть его и отвечать на него"
 
-#: survey/models/survey.py:17
+#: survey/models/survey.py:14
 #, fuzzy
 #| msgid "Users can see it and answer it"
 msgid "Users can edit their answers afterwards"
 msgstr "Пользователи могут редактировать свои ответы впоследствии"
 
-#: survey/models/survey.py:19
+#: survey/models/survey.py:15
 msgid "Display by question"
 msgstr "Отображение по вопросу"
 
-#: survey/models/survey.py:20
+#: survey/models/survey.py:16
 msgid "Template"
 msgstr "Шаблон"
 
-#: survey/models/survey.py:23
+#: survey/models/survey.py:19
 msgid "survey"
 msgstr "опрос"
 
-#: survey/models/survey.py:24
+#: survey/models/survey.py:20
 msgid "surveys"
 msgstr "опросы"
 

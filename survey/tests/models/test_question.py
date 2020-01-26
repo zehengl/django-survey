@@ -25,10 +25,7 @@ adipiscing elit."
         self.questions[0].choices = choices
         self.questions[2].choices = choices
         self.survey = Survey.objects.create(
-            name="Test",
-            is_published=True,
-            need_logged_user=False,
-            display_by_question=False,
+            name="Test", is_published=True, need_logged_user=False, display_by_question=False
         )
         user_number = len(self.questions[0].choices.split(", "))
         for i in range(user_number):
@@ -37,13 +34,9 @@ adipiscing elit."
         for i, choice in enumerate(self.questions[0].choices.split(", ")):
             user = User.objects.get(username="User {}".format(i))
             response = Response.objects.get(user=user, survey=self.survey)
-            Answer.objects.create(
-                question=self.questions[0], body=choice, response=response
-            )
+            Answer.objects.create(question=self.questions[0], body=choice, response=response)
             q2_choice = "dë" if "b" in choice else "Abë-cè"
-            Answer.objects.create(
-                question=self.questions[2], body=q2_choice, response=response
-            )
+            Answer.objects.create(question=self.questions[2], body=q2_choice, response=response)
         # Shortcut for the first question's answer cardinality's function
         self.ac = self.questions[0].answers_cardinality
         self.sac = self.questions[0].sorted_answers_cardinality
@@ -55,58 +48,32 @@ adipiscing elit."
     def test_get_choices(self):
         """ We can get a list of choices for a widget from choices text. """
         self.questions[0].choices = "A éa,B éb"
-        self.assertEqual(
-            self.questions[0].get_choices(), (("a-éa", "A éa"), ("b-éb", "B éb"))
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("a-éa", "A éa"), ("b-éb", "B éb")))
         self.questions[0].choices = "A()a,  ,C()c"
-        self.assertEqual(
-            self.questions[0].get_choices(), (("aa", "A()a"), ("cc", "C()c"))
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("aa", "A()a"), ("cc", "C()c")))
         self.questions[0].choices = "Женщина,Мужчина"
-        self.assertEqual(
-            self.questions[0].get_choices(),
-            (("женщина", "Женщина"), ("мужчина", "Мужчина")),
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("женщина", "Женщина"), ("мужчина", "Мужчина")))
         self.questions[0].choices = "聖黎,はじむ"
-        self.assertEqual(
-            self.questions[0].get_choices(), (("聖黎", "聖黎"), ("はじむ", "はじむ"))
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("聖黎", "聖黎"), ("はじむ", "はじむ")))
 
     @override_settings(CHOICES_SEPARATOR="|")
     def test_get_choices_with_pipe(self):
         """ We can get a list of choices for a widget from choices text with_pipe. """
         self.questions[0].choices = "A éa|B éb"
-        self.assertEqual(
-            self.questions[0].get_choices(), (("a-éa", "A éa"), ("b-éb", "B éb"))
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("a-éa", "A éa"), ("b-éb", "B éb")))
         self.questions[0].choices = "A()a|  |C()c"
-        self.assertEqual(
-            self.questions[0].get_choices(), (("aa", "A()a"), ("cc", "C()c"))
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("aa", "A()a"), ("cc", "C()c")))
         self.questions[0].choices = "Yes, I do| No, I don't"
-        self.assertEqual(
-            self.questions[0].get_choices(),
-            (("yes-i-do", "Yes, I do"), ("no-i-dont", "No, I don't")),
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("yes-i-do", "Yes, I do"), ("no-i-dont", "No, I don't")))
         self.questions[0].choices = "Женщина|Мужчина"
-        self.assertEqual(
-            self.questions[0].get_choices(),
-            (("женщина", "Женщина"), ("мужчина", "Мужчина")),
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("женщина", "Женщина"), ("мужчина", "Мужчина")))
         self.questions[0].choices = "聖黎|はじむ"
-        self.assertEqual(
-            self.questions[0].get_choices(), (("聖黎", "聖黎"), ("はじむ", "はじむ"))
-        )
+        self.assertEqual(self.questions[0].get_choices(), (("聖黎", "聖黎"), ("はじむ", "はじむ")))
 
     def test_validate_choices(self):
         """  List are validated for comma. """
         question = Question.objects.create(
-            text="Q?",
-            choices="a,b,c",
-            order=1,
-            required=True,
-            survey=self.survey,
-            type=Question.SELECT_MULTIPLE,
+            text="Q?", choices="a,b,c", order=1, required=True, survey=self.survey, type=Question.SELECT_MULTIPLE
         )
         question.choices = "a"
         self.assertRaises(ValidationError, question.save)
@@ -121,12 +88,7 @@ adipiscing elit."
     def test_validate_choices_with_pipe(self):
         """  List are validated for pipe. """
         question = Question.objects.create(
-            text="Q?",
-            choices="a|b|c",
-            order=1,
-            required=True,
-            survey=self.survey,
-            type=Question.SELECT_MULTIPLE,
+            text="Q?", choices="a|b|c", order=1, required=True, survey=self.survey, type=Question.SELECT_MULTIPLE
         )
         question.choices = "a"
         self.assertRaises(ValidationError, question.save)
@@ -154,9 +116,7 @@ adipiscing elit."
     def test_answers_cardinality(self):
         """ We can get the cardinality of each answers. """
         self.assertEqual(self.question.answers_cardinality(), {"Maybe": 1, "Yës": 2})
-        self.assertEqual(
-            self.question.answers_cardinality(min_cardinality=2), {"Other": 1, "Yës": 2}
-        )
+        self.assertEqual(self.question.answers_cardinality(min_cardinality=2), {"Other": 1, "Yës": 2})
         question = Question.objects.get(
             text="Ipsum dolor sit amët, <strong> \
 consectetur </strong>  adipiscing elit."
@@ -166,9 +126,7 @@ consectetur </strong>  adipiscing elit."
             text="Dolor sit amët, <strong> \
 consectetur</strong>  adipiscing elit."
         )
-        self.assertEqual(
-            {"": 1, "Text for a response": 1}, question.answers_cardinality()
-        )
+        self.assertEqual({"": 1, "Text for a response": 1}, question.answers_cardinality())
         question = Question.objects.get(
             text="Ipsum dolor sit amët, consectetur\
  <strong> adipiscing </strong> elit."
@@ -178,26 +136,13 @@ consectetur</strong>  adipiscing elit."
             text="Dolor sit amët, consectetur<stron\
 g>  adipiscing</strong>  elit."
         )
-        self.assertEqual(
-            {"No": 1, "Whatever": 1, "Yës": 1}, question.answers_cardinality()
-        )
-        self.assertEqual(
-            {"Näh": 2, "Yës": 1},
-            question.answers_cardinality(group_together={"Näh": ["No", "Whatever"]}),
-        )
+        self.assertEqual({"No": 1, "Whatever": 1, "Yës": 1}, question.answers_cardinality())
+        self.assertEqual({"Näh": 2, "Yës": 1}, question.answers_cardinality(group_together={"Näh": ["No", "Whatever"]}))
 
     def test_answers_cardinality_grouped(self):
         """ We can group answers taking letter case or slug into account. """
-        self.assertEqual(
-            self.ac(),
-            {"abé cé": 1, "Abé Cé": 1, "Abë-cè": 1, "dé": 1, "dë": 1, "Dé": 1},
-        )
-        rslt = self.ac(
-            group_together={
-                "ABC": ["abé cé", "Abë-cè", "Abé Cé"],
-                "D": ["dé", "Dé", "dë"],
-            }
-        )
+        self.assertEqual(self.ac(), {"abé cé": 1, "Abé Cé": 1, "Abë-cè": 1, "dé": 1, "dë": 1, "Dé": 1})
+        rslt = self.ac(group_together={"ABC": ["abé cé", "Abë-cè", "Abé Cé"], "D": ["dé", "Dé", "dë"]})
         self.assertEqual(rslt, {"ABC": 3, "D": 3})
         rslt = self.ac(group_by_letter_case=True)
         self.assertEqual(rslt, {"abé cé": 2, "abë-cè": 1, "dé": 2, "dë": 1})
@@ -205,10 +150,7 @@ g>  adipiscing</strong>  elit."
         self.assertEqual(rslt, {"abe-ce": 3, "de": 3})
         rslt = self.ac(group_by_slugify=True, group_together={"ABCD": ["abe-ce", "de"]})
         self.assertEqual(rslt, {"ABCD": 6})
-        rslt = self.ac(
-            group_by_letter_case=True,
-            group_together={"ABCD": ["Abë-cè", "Abé Cé", "Dé", "dë"]},
-        )
+        rslt = self.ac(group_by_letter_case=True, group_together={"ABCD": ["Abë-cè", "Abé Cé", "Dé", "dë"]})
         self.assertEqual(rslt, {"ABCD": 6})
 
     def test_answers_cardinality_filtered(self):
@@ -217,9 +159,7 @@ g>  adipiscing</strong>  elit."
         self.assertEqual(rslt, {"de": 3})
         rslt = self.ac(filter=["abe-ce"], group_by_slugify=True)
         self.assertEqual(rslt, {"de": 3})
-        rslt = self.ac(
-            group_together={"ABC": ["abe-ce"]}, filter=["ABC"], group_by_slugify=True
-        )
+        rslt = self.ac(group_together={"ABC": ["abe-ce"]}, filter=["ABC"], group_by_slugify=True)
         self.assertEqual(rslt, {"de": 3})
         rslt = self.ac(filter=["abé cé", "Abë-cè"], group_by_letter_case=True)
         self.assertEqual(rslt, {"dé": 2, "dë": 1})
@@ -257,28 +197,17 @@ g>  adipiscing</strong>  elit."
             # print("Deleting, ", answer)
             answer.delete()
         card = q1ac(other_question=q2, group_together=abcd_together)
-        self.assertEqual(
-            card, {"ABC": {"D": 1, _(settings.USER_DID_NOT_ANSWER): 2}, "D": {"ABC": 3}}
-        )
+        self.assertEqual(card, {"ABC": {"D": 1, _(settings.USER_DID_NOT_ANSWER): 2}, "D": {"ABC": 3}})
 
     def test_answers_cardinality_linked_without_link(self):
         """ When we want to link to another question and there is no link at
         all, we still have a dict. """
-        survey = Survey.objects.create(
-            name="name",
-            is_published=True,
-            need_logged_user=False,
-            display_by_question=True,
-        )
+        survey = Survey.objects.create(name="name", is_published=True, need_logged_user=False, display_by_question=True)
         questions = []
         question_choices = "1,2,3"
         for i in range(3):
             question = Question.objects.create(
-                text=str(i + 1),
-                order=i,
-                required=True,
-                survey=survey,
-                choices=question_choices,
+                text=str(i + 1), order=i, required=True, survey=survey, choices=question_choices
             )
             questions.append(question)
         for j in range(3):
@@ -333,25 +262,9 @@ g>  adipiscing</strong>  elit."
         oqmsg = " when in relation with another question"
         rslt = self.sac(group_by_letter_case=True, other_question=self.questions[1])
         self.assertEqual(rslt, OrderedDict(oq_cardinal), "default" + msg + oqmsg)
-        rslt = self.sac(
-            group_by_letter_case=True,
-            sort_answer="alphanumeric",
-            other_question=self.questions[1],
-        )
-        self.assertEqual(
-            rslt, OrderedDict(oq_alphanumeric), "alphanumeric" + msg + oqmsg
-        )
-        rslt = self.sac(
-            group_by_letter_case=True,
-            sort_answer="cardinal",
-            other_question=self.questions[1],
-        )
+        rslt = self.sac(group_by_letter_case=True, sort_answer="alphanumeric", other_question=self.questions[1])
+        self.assertEqual(rslt, OrderedDict(oq_alphanumeric), "alphanumeric" + msg + oqmsg)
+        rslt = self.sac(group_by_letter_case=True, sort_answer="cardinal", other_question=self.questions[1])
         self.assertEqual(rslt, OrderedDict(oq_cardinal), "cardinal" + msg + oqmsg)
-        rslt = self.sac(
-            group_by_letter_case=True,
-            sort_answer=user_defined,
-            other_question=self.questions[1],
-        )
-        self.assertEqual(
-            rslt, OrderedDict(oq_user_defined), "user defined" + msg + oqmsg
-        )
+        rslt = self.sac(group_by_letter_case=True, sort_answer=user_defined, other_question=self.questions[1])
+        self.assertEqual(rslt, OrderedDict(oq_user_defined), "user defined" + msg + oqmsg)

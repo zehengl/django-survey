@@ -32,8 +32,6 @@ class TestLocaleNormalization(unittest.TestCase):
         msg = (
             "You did not update the translation following your changes. Maybe you did not use the "
             "normalized 'python3 manage.py makemessages --no-obsolete --no-wrap' ? If you're "
-            "working locally, just use 'git add {}', we launched it during tests.".format(
-                self.LOCALE_PATH
-            ),
+            "working locally, just use 'git add {}', we launched it during tests.".format(self.LOCALE_PATH),
         )
         self.assertEqual(number_of_change, number_of_language, msg)

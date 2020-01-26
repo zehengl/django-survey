@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="survey",
             name="editable_answers",
-            field=models.BooleanField(
-                default=True, verbose_name="Users can edit their answers afterwards"
-            ),
+            field=models.BooleanField(default=True, verbose_name="Users can edit their answers afterwards"),
         )
     ]

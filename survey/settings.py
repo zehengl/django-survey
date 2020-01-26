@@ -13,9 +13,7 @@ CSV_DIR = os.path.join(ROOT, "csv")
 
 USER_DID_NOT_ANSWER = getattr(settings, "USER_DID_NOT_ANSWER", "Left blank")
 
-TEX_CONFIGURATION_FILE = getattr(
-    settings, "TEX_CONFIGURATION_FILE", os.path.join(ROOT, "doc", "example_conf.yaml")
-)
+TEX_CONFIGURATION_FILE = getattr(settings, "TEX_CONFIGURATION_FILE", os.path.join(ROOT, "doc", "example_conf.yaml"))
 SURVEY_DEFAULT_PIE_COLOR = getattr(settings, "SURVEY_DEFAULT_PIE_COLOR", "red!50")
 
 CHOICES_SEPARATOR = getattr(settings, "CHOICES_SEPARATOR", ",")
@@ -34,10 +32,7 @@ STATICFILES_DIRS = [os.path.normpath(os.path.join(ROOT, "..", "survey", "static"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(ROOT, "survey", "templates"),
-            os.path.join(ROOT, "dev", "templates"),
-        ],
+        "DIRS": [os.path.join(ROOT, "survey", "templates"), os.path.join(ROOT, "dev", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -59,10 +54,4 @@ INSTALLED_APPS = ("survey", "bootstrapform")
 
 LOCALE_PATHS = (os.path.join(ROOT, "survey", "locale"),)
 LANGUAGE_CODE = "en"
-LANGUAGES = (
-    ("en", "english"),
-    ("ru-RU", "русский"),
-    ("es", "spanish"),
-    ("fr", "french"),
-    ("ja", "Japanese"),
-)
+LANGUAGES = (("en", "english"), ("ru-RU", "русский"), ("es", "spanish"), ("fr", "french"), ("ja", "Japanese"))

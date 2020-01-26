@@ -25,9 +25,7 @@ class Migration(migrations.Migration):
             model_name="question",
             name="survey",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE,
-                related_name="questions",
-                to="survey.Survey",
+                on_delete=django.db.models.deletion.CASCADE, related_name="questions", to="survey.Survey"
             ),
         ),
     ]

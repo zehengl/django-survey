@@ -27,11 +27,7 @@ class Question2TexSankey(Question2Tex):
 """
 
     def get_caption_specifics(self):
-        caption = "%s '%s' (%s) " % (
-            _("for the question"),
-            Question2Tex.html2latex(self.question.text),
-            _("left"),
-        )
+        caption = "%s '%s' (%s) " % (_("for the question"), Question2Tex.html2latex(self.question.text), _("left"))
         caption += "%s '%s' (%s) " % (
             _("in relation with the question"),
             Question2Tex.html2latex(self.other_question.text),
@@ -73,16 +69,5 @@ class Question2TexSankey(Question2Tex):
                     q2.append(answer_to_q2)
         df = DataFrame(data={self.question.text: q1, other_question.text: q2})
         name = "tex/q{}_vs_q{}".format(self.question.pk, other_question.pk)
-        sankey(
-            df[self.question.text],
-            df[other_question.text],
-            aspect=20,
-            fontsize=10,
-            figureName=name,
-        )
-        return Question2TexSankey.TEX_SKELETON % (
-            name[4:],
-            self.question.pk,
-            other_question.pk,
-            self.get_caption(),
-        )
+        sankey(df[self.question.text], df[other_question.text], aspect=20, fontsize=10, figureName=name)
+        return Question2TexSankey.TEX_SKELETON % (name[4:], self.question.pk, other_question.pk, self.get_caption())

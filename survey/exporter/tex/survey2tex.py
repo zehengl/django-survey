@@ -38,9 +38,7 @@ class Survey2Tex(Survey2X):
 
     def treat_question(self, question, survey):
         LOGGER.info("Treating, %s %s", question.pk, question.text)
-        options = self.tconf.get(
-            survey_name=self.survey.name, question_text=question.text
-        )
+        options = self.tconf.get(survey_name=self.survey.name, question_text=question.text)
         multiple_charts = options.get("multiple_charts")
         if not multiple_charts:
             multiple_charts = {"": options.get("chart")}

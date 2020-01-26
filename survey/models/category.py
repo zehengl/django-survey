@@ -10,16 +10,9 @@ from .survey import Survey
 class Category(models.Model):
 
     name = models.CharField(_("Name"), max_length=400)
-    survey = models.ForeignKey(
-        Survey,
-        on_delete=models.CASCADE,
-        verbose_name=_("Survey"),
-        related_name="categories",
-    )
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE, verbose_name=_("Survey"), related_name="categories")
     order = models.IntegerField(_("Display order"), blank=True, null=True)
-    description = models.CharField(
-        _("Description"), max_length=2000, blank=True, null=True
-    )
+    description = models.CharField(_("Description"), max_length=2000, blank=True, null=True)
 
     class Meta(object):
         # pylint: disable=too-few-public-methods

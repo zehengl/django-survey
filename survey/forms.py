@@ -80,9 +80,7 @@ class ResponseForm(models.ModelForm):
                     user=self.user, survey=self.survey
                 )
             except Response.DoesNotExist:
-                LOGGER.debug(
-                    "No saved response for '%s' for user %s", self.survey, self.user
-                )
+                LOGGER.debug("No saved response for '%s' for user %s", self.survey, self.user)
                 self.response = None
         return self.response
 
@@ -101,9 +99,7 @@ class ResponseForm(models.ModelForm):
         if response is None:
             self.answers = None
         try:
-            answers = Answer.objects.filter(response=response).prefetch_related(
-                "question"
-            )
+            answers = Answer.objects.filter(response=response).prefetch_related("question")
             self.answers = {answer.question.id: answer for answer in answers.all()}
         except Answer.DoesNotExist:
             self.answers = None
@@ -138,9 +134,7 @@ class ResponseForm(models.ModelForm):
                 elif "[" in answer.body and "]" in answer.body:
                     initial = []
                     unformated_choices = answer.body[1:-1].strip()
-                    for unformated_choice in unformated_choices.split(
-                        settings.CHOICES_SEPARATOR
-                    ):
+                    for unformated_choice in unformated_choices.split(settings.CHOICES_SEPARATOR):
                         choice = unformated_choice.split("'")[1]
                         initial.append(slugify(choice))
                 else:
@@ -234,9 +228,7 @@ class ResponseForm(models.ModelForm):
             return None
 
     def current_step_url(self):
-        return reverse(
-            "survey-detail-step", kwargs={"id": self.survey.id, "step": self.step}
-        )
+        return reverse("survey-detail-step", kwargs={"id": self.survey.id, "step": self.step})
 
     def save(self, commit=True):
         """ Save the response object """
@@ -255,11 +247,7 @@ class ResponseForm(models.ModelForm):
             response.user = self.user
         response.save()
         # response "raw" data as dict (for signal)
-        data = {
-            "survey_id": response.survey.id,
-            "interview_uuid": response.interview_uuid,
-            "responses": [],
-        }
+        data = {"survey_id": response.survey.id, "interview_uuid": response.interview_uuid, "responses": []}
         # create an answer object for each question and associate it with this
         # response.
         for field_name, field_value in list(self.cleaned_data.items()):
@@ -277,12 +265,7 @@ class ResponseForm(models.ModelForm):
                     # TODO
                 answer.body = field_value
                 data["responses"].append((answer.question.id, answer.body))
-                LOGGER.debug(
-                    "Creating answer for question %d of type %s : %s",
-                    q_id,
-                    answer.question.type,
-                    field_value,
-                )
+                LOGGER.debug("Creating answer for question %d of type %s : %s", q_id, answer.question.type, field_value)
                 answer.response = response
                 answer.save()
         survey_completed.send(sender=Response, instance=response, data=data)
