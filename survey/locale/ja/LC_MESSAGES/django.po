@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-26 15:07+0000\n"
+"POT-Creation-Date: 2020-01-26 17:43+0000\n"
 "PO-Revision-Date: 2018-04-09 00:52+0000\n"
 "Last-Translator: b'  <nsuzue@me.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -287,7 +287,7 @@ msgstr "調査が終了しました"
 msgid "Thanks! Your answers have been saved"
 msgstr "ありがとうございました。回答内容が保存されました。"
 
-#: survey/templates/survey/confirm.html:13
+#: survey/templates/survey/confirm.html:14
 msgid "You can always come back and change them."
 msgstr "あとで回答内容を変更することが出来ます。"
 

@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.urls.base import reverse
 
+from survey.models import Answer, Response, Survey
 from survey.tests import BaseTest
 
 
@@ -41,12 +42,15 @@ class TestSurveyAuthRequired(BaseTest):
 
     def test_accessible(self):
         """ If need_logged_user=False user do not need to authenticate. """
+        survey = Survey.objects.get(id=2)
+        responses = Response.objects.filter(survey=survey)
+        response = responses.all()[0]
         urls = [
             reverse("survey-list"),
             reverse("survey-detail", kwargs={"id": 2}),
             reverse("survey-completed", kwargs={"id": 2}),
             reverse("survey-detail-step", kwargs={"id": 2, "step": 1}),
-            reverse("survey-confirmation", kwargs={"uuid": "fake"}),
+            reverse("survey-confirmation", kwargs={"uuid": response.interview_uuid}),
         ]
         for url in urls:
             self.assert_accessible(url)

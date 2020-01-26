@@ -74,6 +74,7 @@
   "description": "Lorem ipsum dolor sit am\u00ebt, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "is_published": true,
   "need_logged_user": false,
+  "editable_answers": true,
   "display_by_question": false,
   "template": ""
  }
@@ -86,6 +87,7 @@
   "description": "\u8fd9\u662f\u4e00\u4e2a\u7528\u4e8e\u6d4b\u8bd5\u9009\u9879\u4e2d\u542b\u6709 Unicode \u5b57\u7b26\u7684 Survey",
   "is_published": true,
   "need_logged_user": false,
+  "editable_answers": true,
   "display_by_question": false,
   "template": null
  }
@@ -98,6 +100,7 @@
   "description": "Survey",
   "is_published": false,
   "need_logged_user": false,
+  "editable_answers": true,
   "display_by_question": false,
   "template": null
  }
@@ -110,6 +113,7 @@
   "description": "Multipage survey",
   "is_published": true,
   "need_logged_user": true,
+  "editable_answers": true,
   "display_by_question": true,
   "template": null
  }

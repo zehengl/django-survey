@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-26 15:07+0000\n"
+"POT-Creation-Date: 2020-01-26 17:43+0000\n"
 "PO-Revision-Date: 2018-04-01 11:49+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -287,7 +287,7 @@ msgstr "Sondage soumis"
 msgid "Thanks! Your answers have been saved"
 msgstr "Merci! Vos réponses ont été sauvegardées."
 
-#: survey/templates/survey/confirm.html:13
+#: survey/templates/survey/confirm.html:14
 msgid "You can always come back and change them."
 msgstr "Vous pouvez revenir les modifier plus tard."
 
