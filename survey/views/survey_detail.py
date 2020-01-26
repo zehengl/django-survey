@@ -73,8 +73,8 @@ class SurveyDetail(View):
                         response = save_form.save()
                     else:
                         LOGGER.warning(
-                            "A step of the multipage form failed \
-                            but should have been discovered before."
+                            "A step of the multipage form failed "
+                            "but should have been discovered before."
                         )
             else:
                 response = form.save()
