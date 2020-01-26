@@ -197,13 +197,12 @@ class Question(models.Model):
             for value in answer.values:
                 value = self.__get_cardinality_value(value, group_by_letter_case, group_by_slugify, group_together)
                 if value not in filter and value not in standardized_filter:
-                    user = answer.response.user
                     if other_question is None:
                         self._cardinality_plus_n(cardinality, value, 1)
                     else:
                         self.__add_user_cardinality(
                             cardinality,
-                            user,
+                            answer.response.user,
                             value,
                             other_question,
                             group_by_letter_case,
@@ -212,6 +211,20 @@ class Question(models.Model):
                             filter,
                             standardized_filter,
                         )
+        cardinality = self.filter_by_min_cardinality(cardinality, min_cardinality)
+        if other_question is not None:
+            self.__handle_other_question_cardinality(
+                cardinality,
+                filter,
+                group_by_letter_case,
+                group_by_slugify,
+                group_together,
+                other_question,
+                standardized_filter,
+            )
+        return cardinality
+
+    def filter_by_min_cardinality(self, cardinality, min_cardinality):
         if min_cardinality != 0:
             temp = {}
             for value in cardinality:
@@ -220,16 +233,25 @@ class Question(models.Model):
                 else:
                     temp[value] = cardinality[value]
             cardinality = temp
-        if other_question is not None:
-            # Treating the value for Other question that were not answered in
-            # this question
-            for answer in other_question.answers.all():
-                for value in answer.values:
-                    value = self.__get_cardinality_value(value, group_by_letter_case, group_by_slugify, group_together)
-                    if value not in filter + standardized_filter:
-                        if answer.response.user is None:
-                            self._cardinality_plus_answer(cardinality, _(settings.USER_DID_NOT_ANSWER), value)
         return cardinality
+
+    def __handle_other_question_cardinality(
+        self,
+        cardinality,
+        filter,
+        group_by_letter_case,
+        group_by_slugify,
+        group_together,
+        other_question,
+        standardized_filter,
+    ):
+        """Treating the value for Other question that were not answered in this question"""
+        for answer in other_question.answers.all():
+            for value in answer.values:
+                value = self.__get_cardinality_value(value, group_by_letter_case, group_by_slugify, group_together)
+                if value not in filter + standardized_filter:
+                    if answer.response.user is None:
+                        self._cardinality_plus_answer(cardinality, _(settings.USER_DID_NOT_ANSWER), value)
 
     def sorted_answers_cardinality(
         self,
