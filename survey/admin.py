@@ -2,9 +2,8 @@
 
 from django.contrib import admin
 
+from survey.actions import make_published
 from survey.models import Answer, Category, Question, Response, Survey
-
-from .actions import make_published
 
 
 class QuestionInline(admin.TabularInline):
