@@ -79,8 +79,9 @@ Note: you can use whatever you wish as the URL prefix.
 To uninstall `django-survey-and-report`, simply comment out or remove the
 'survey' line in your `INSTALLED_APPS`.
 
-If you want to use the pdf rendering with the Sankey's diagram generation
-you will have to install python-tk (for python 2.7) or python3-tk (for python 3.x).
+If you want to use the pdf rendering you need to install `xelatex`. If you're
+using the Sankey's diagram generation you will also have to install `python-tk`
+(for python 2.7) or `python3-tk` (for python 3.x).
 
 ## Making a survey
 
