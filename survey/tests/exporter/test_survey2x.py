@@ -5,7 +5,6 @@ import os
 from datetime import datetime
 from unittest.mock import patch
 
-import pytz
 from django.conf import settings
 
 from survey.exporter.survey2x import Survey2X
