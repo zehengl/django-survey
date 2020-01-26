@@ -18,6 +18,13 @@ LOGGER = logging.getLogger(__name__)
 
 class ResponseForm(models.ModelForm):
 
+    FIELDS = {
+        Question.TEXT: forms.CharField,
+        Question.SHORT_TEXT: forms.CharField,
+        Question.SELECT_MULTIPLE: forms.MultipleChoiceField,
+        Question.INTEGER: forms.IntegerField,
+    }
+
     WIDGETS = {
         Question.TEXT: forms.Textarea,
         Question.SHORT_TEXT: forms.TextInput,
@@ -178,15 +185,9 @@ class ResponseForm(models.ModelForm):
         :param **kwargs: A dict of parameter properly initialized in
             add_question.
         :rtype: django.forms.fields """
-        FIELDS = {
-            Question.TEXT: forms.CharField,
-            Question.SHORT_TEXT: forms.CharField,
-            Question.SELECT_MULTIPLE: forms.MultipleChoiceField,
-            Question.INTEGER: forms.IntegerField,
-        }
         # logging.debug("Args passed to field %s", kwargs)
         try:
-            return FIELDS[question.type](**kwargs)
+            return self.FIELDS[question.type](**kwargs)
         except KeyError:
             return forms.ChoiceField(**kwargs)
 
