@@ -76,7 +76,10 @@ class Migration(migrations.Migration):
                 (
                     "choices",
                     models.TextField(
-                        help_text="if the question type is 'radio', 'select', or 'select multiple' provide a comma-separated list of options for this question .",
+                        help_text=(
+                            "if the question type is 'radio', 'select', or 'select multiple' provide a "
+                            "comma-separated list of options for this question ."
+                        ),
                         null=True,
                         blank=True,
                     ),

@@ -100,7 +100,10 @@ class Migration(migrations.Migration):
             name="choices",
             field=models.TextField(
                 blank=True,
-                help_text="The choices field is only used if the question type\nif the question type is 'radio', 'select', or\n'select multiple' provide a comma-separated list of\noptions for this question .",
+                help_text="""The choices field is only used if the question type
+if the question type is 'radio', 'select', or
+'select multiple' provide a comma-separated list of
+options for this question.""",
                 null=True,
                 verbose_name="Choices",
             ),
