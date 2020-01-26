@@ -6,7 +6,6 @@
 survey.db
 django_survey_and_report.egg-info/
 survey_test/static/
-survey_test_bak
 venv/
 .idea/
 .project
@@ -32,3 +31,6 @@ csv/unicode.csv
 tex/q11_vs_q11.png
 tex/unicode.tex
 tex/unicode.pdf
+csv/multipage.csv
+tex/multipage.tex
+tex/q13_vs_q13.png
