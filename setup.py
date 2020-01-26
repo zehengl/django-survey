@@ -60,7 +60,6 @@ setuptools.setup(
             "django-rosetta",
             "coverage",
             "python-coveralls",
-            "mock",
             "coveralls",
             "colorama",
             "pylint",

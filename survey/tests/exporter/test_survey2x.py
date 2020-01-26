@@ -3,10 +3,10 @@
 import logging
 import os
 from datetime import datetime
+from unittest.mock import patch
 
 import pytz
 from django.conf import settings
-from mock.mock import patch
 
 from survey.exporter.survey2x import Survey2X
 from survey.tests.management.test_management import TestManagement
