@@ -5,7 +5,7 @@ import os
 from pydoc import locate
 
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from survey.exporter.survey2x import Survey2X
 from survey.exporter.tex.latex_file import LatexFile

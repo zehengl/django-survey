@@ -3,7 +3,7 @@
 import logging
 
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from survey.exporter.tex.question2tex import Question2Tex
 
