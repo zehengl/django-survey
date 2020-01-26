@@ -54,4 +54,12 @@ INSTALLED_APPS = ("survey", "bootstrapform")
 
 LOCALE_PATHS = (os.path.join(ROOT, "survey", "locale"),)
 LANGUAGE_CODE = "en"
-LANGUAGES = (("en", "english"), ("ru-RU", "русский"), ("es", "spanish"), ("fr", "french"), ("ja", "Japanese"))
+LANGUAGES = (
+    ("en", "english"),
+    ("ru-RU", "русский"),
+    ("es", "spanish"),
+    ("fr", "french"),
+    ("ja", "Japanese"),
+    ("zh", "Chinese"),
+    ("de", "German"),
+)
