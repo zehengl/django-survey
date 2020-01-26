@@ -14,7 +14,7 @@ DESCRIPTION = (
 )
 
 THIS_DIRECTORY = path.abspath(path.dirname(__file__))
-with open(path.join(THIS_DIRECTORY, "readme.md"), encoding="utf-8") as f:
+with open(path.join(THIS_DIRECTORY, "README.md"), encoding="utf-8") as f:
     LONG_DESCRIPTION = f.read()
 
 
