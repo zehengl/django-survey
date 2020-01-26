@@ -26,18 +26,18 @@ class Survey2X:
             msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
             raise TypeError(msg)
 
-    def _get_X(self):
+    def _get_x(self):
         return self.__class__.__name__.split("Survey2")[1].lower()
 
-    def _get_X_dir(self):
-        return os.path.join(settings.ROOT, self._get_X())
+    def _get_x_dir(self):
+        return os.path.join(settings.ROOT, self._get_x())
 
     def file_name(self):
         """ Return the csv file name for a Survey.
 
         :param Survey survey: The survey we're treating. """
-        file_name = "{}.{}".format(slugify(self.survey.name), self._get_X())
-        path = os.path.join(self._get_X_dir(), file_name)
+        file_name = "{}.{}".format(slugify(self.survey.name), self._get_x())
+        path = os.path.join(self._get_x_dir(), file_name)
         return path
 
     @property
@@ -84,12 +84,12 @@ class Survey2X:
     def generate_file(self):
         """ Generate a x file corresponding to a Survey. """
 
-        LOGGER.debug("Exporting survey '%s' to %s", self.survey, self._get_X())
+        LOGGER.debug("Exporting survey '%s' to %s", self.survey, self._get_x())
         try:
             with open(self.file_name(), "w", encoding="UTF-8") as f:
                 f.write(self.survey_to_x())
-            LOGGER.info("Wrote %s in %s", self._get_X(), self.file_name())
+            LOGGER.info("Wrote %s in %s", self._get_x(), self.file_name())
         except IOError as exc:
-            msg = "Must fix {} ".format(self._get_X_dir())
-            msg += "in order to generate {} : {}".format(self._get_X(), exc)
+            msg = "Must fix {} ".format(self._get_x_dir())
+            msg += "in order to generate {} : {}".format(self._get_x(), exc)
             raise IOError(msg)
