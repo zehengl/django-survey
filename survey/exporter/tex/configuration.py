@@ -44,8 +44,8 @@ class Configuration:
 
         :param String survey_name: The name of a survey. """
         LOGGER.info("Checking that '%s' is an existing survey.", survey_name)
-        if type(survey_name) == Survey:
-            msg = "Expecting a string for 'survey_name' and got a Survey "
+        if not isinstance(survey_name, str):
+            msg = "Expecting a string for 'survey_name' and got a {} ".format(type(survey_name))
             msg += " ('{}').".format(survey_name)
             raise TypeError(msg)
         if survey_name not in self.valid_survey_names:
@@ -142,8 +142,9 @@ class Configuration:
         self.optional_update(conf, self._conf, "generic")
         if survey_name:
             self.check_survey_exists(survey_name)
-            if type(survey_name) is Survey:
+            if isinstance(survey_name, Survey):
                 # If a dev gave a Survey object we do not bother him with type
+                # TODO document this with type annotation
                 survey_name = survey_name.name
             # We update the generic configuration with the survey configuration
             self.update(conf, self._conf.get(survey_name, {}))

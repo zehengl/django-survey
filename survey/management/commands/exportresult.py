@@ -63,7 +63,7 @@ class Command(SurveyCommand):
             for exporter in exporters:
                 if options["force"] or exporter.need_update():
                     exporter.generate_file()
-                    if options["pdf"] and type(exporter) is Survey2Tex:
+                    if options["pdf"] and isinstance(exporter, Survey2Tex):
                         exporter.generate_pdf()
                 else:
                     LOGGER.info(
