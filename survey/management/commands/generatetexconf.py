@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import sys
+
 from survey.exporter.tex import ConfigurationBuilder
 from survey.management.survey_command import SurveyCommand
 
@@ -26,10 +28,8 @@ class Command(SurveyCommand):
         super(Command, self).handle(*args, **options)
         output = options["output"]
         if len(output) != len(self.surveys):
-            exit(
-                "You want to generate {} surveys ".format(len(self.surveys))
-                + "but you only gave {} output names".format(len(output))
-            )
+            exit_msg = "You want to generate {} surveys but you only gave {} output names."
+            sys.exit(exit_msg.format(len(self.surveys), len(output)))
         for i, survey in enumerate(self.surveys):
             conf = ConfigurationBuilder(survey)
             self.write_conf(output[i], conf)

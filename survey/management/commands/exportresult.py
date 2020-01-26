@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import sys
 
 from django.utils import translation
 
@@ -42,7 +43,7 @@ class Command(SurveyCommand):
     def check_nothing_at_all(self, options):
         SurveyCommand.check_nothing_at_all(self, options)
         if not options["csv"] and not options["tex"] and not options["pdf"]:
-            exit("Nothing to do : add option --tex or --pdf, --csv,  or both.")
+            sys.exit("Nothing to do : add option --tex or --pdf, --csv,  or both.")
 
     def handle(self, *args, **options):
         super(Command, self).handle(*args, **options)

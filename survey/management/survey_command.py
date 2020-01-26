@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sys import version_info
+import sys
 
 from django.core.management.base import BaseCommand
 
@@ -43,7 +43,7 @@ class SurveyCommand(BaseCommand):
             msg += "but there is nothing in the database."
         # Compatibility for python 2.7 and 3
         # See: https://stackoverflow.com/questions/46076279/
-        if version_info.major == 2:  # pragma: no cover
+        if sys.version_info.major == 2:  # pragma: no cover
             raise ValueError(msg.encode("utf-8"))
         else:  # pragma: no cover
             raise ValueError(msg)
@@ -51,25 +51,24 @@ class SurveyCommand(BaseCommand):
     def check_mutually_exclusive(self, opts):
         """ We could use the ArgParse option for this, but the case is
         simple enough to be treated this way. """
-        prefix = "You cannot generate only some "
-        postfix = " to generate everything. Use one or the other."
+
         all_questions = opts.get("question_all")
         some_questions = opts.get("question_text") or opts.get("question_id")
         all_surveys = opts.get("survey_all")
         some_surveys = opts.get("survey_name") or opts.get("survey_id")
+        error_msg = "You cannot generate only some {} to generate everything. Use one or the other."
         if all_questions and some_questions:
-            exit(
-                prefix + "questions with '--question-id' or --question-text' "
-                "while also using '--question-all'" + postfix
+            sys.exit(
+                error_msg.format("questions with '--question-id' or --question-text' while also using '--question-all'")
             )
         if all_surveys and some_surveys:
-            exit(prefix + "survey with '--survey-id' or '--survey-name' while also using '--survey-all'" + postfix)
+            sys.exit(error_msg.format("survey with '--survey-id' or '--survey-name' while also using '--survey-all'"))
 
     def check_nothing_at_all(self, options):
         at_least_a_question = options.get("question_all") or options.get("question_text") or options.get("question_id")
         at_least_a_survey = options.get("survey_all") or options.get("survey_name") or options.get("survey_id")
         if not at_least_a_question and not at_least_a_survey:
-            exit(
+            sys.exit(
                 "Nothing to do, add at least one of the following options :\n"
                 "'--question-id', '--question-text' '--question-all',"
                 "'--survey-id', '--survey-name', '--survey-all'."
