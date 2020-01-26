@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.urls.base import reverse
 
-from survey.models import Answer, Response, Survey
+from survey.models import Response, Survey
 from survey.tests import BaseTest
 
 
