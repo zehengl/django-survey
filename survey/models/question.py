@@ -42,7 +42,7 @@ def validate_choices(choices):
         raise ValidationError(msg)
 
 
-class SortAnswer(object):
+class SortAnswer:
     CARDINAL = "cardinal"
     ALPHANUMERIC = "alphanumeric"
 
@@ -77,7 +77,7 @@ class Question(models.Model):
     type = models.CharField(_("Type"), max_length=200, choices=QUESTION_TYPES, default=TEXT)
     choices = models.TextField(_("Choices"), blank=True, null=True, help_text=CHOICES_HELP_TEXT)
 
-    class Meta(object):
+    class Meta:
         verbose_name = _("question")
         verbose_name_plural = _("questions")
         ordering = ("survey", "order")

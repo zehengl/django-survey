@@ -15,7 +15,7 @@ class Survey(models.Model):
     display_by_question = models.BooleanField(_("Display by question"))
     template = models.CharField(_("Template"), max_length=255, null=True, blank=True)
 
-    class Meta(object):
+    class Meta:
         verbose_name = _("survey")
         verbose_name_plural = _("surveys")
 

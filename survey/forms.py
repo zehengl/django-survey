@@ -27,7 +27,7 @@ class ResponseForm(models.ModelForm):
         Question.SELECT_MULTIPLE: forms.CheckboxSelectMultiple,
     }
 
-    class Meta(object):
+    class Meta:
         model = Response
         fields = ()
 

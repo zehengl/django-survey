@@ -14,7 +14,7 @@ class Category(models.Model):
     order = models.IntegerField(_("Display order"), blank=True, null=True)
     description = models.CharField(_("Description"), max_length=2000, blank=True, null=True)
 
-    class Meta(object):
+    class Meta:
         # pylint: disable=too-few-public-methods
         verbose_name = _("category")
         verbose_name_plural = _("categories")

@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 
 
 class ImageSelectWidget(forms.widgets.Widget):
-    class Media(object):
+    class Media:
         js = (
             "http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js",
             "http://maps.googleapis.com/maps/api/js?sensor=false",

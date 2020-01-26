@@ -30,7 +30,7 @@ class Response(models.Model):
     user = models.ForeignKey(user_model, on_delete=models.SET_NULL, verbose_name=_("User"), null=True, blank=True)
     interview_uuid = models.CharField(_("Interview unique identifier"), max_length=36)
 
-    class Meta(object):
+    class Meta:
         verbose_name = _("Set of answers to surveys")
         verbose_name_plural = _("Sets of answers to surveys")
 

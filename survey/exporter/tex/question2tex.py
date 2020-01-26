@@ -11,7 +11,7 @@ from survey.models.question import Question
 LOGGER = logging.getLogger(__name__)
 
 
-class Question2Tex(object):
+class Question2Tex:
 
     """
         This class permit to generate latex code directly from the Question

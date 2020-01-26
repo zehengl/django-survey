@@ -12,7 +12,7 @@ from survey.models.survey import Survey
 LOGGER = logging.getLogger(__name__)
 
 
-class Configuration(object):
+class Configuration:
 
     DEFAULT_PATH = os.path.join(settings.ROOT, "survey", "exporter", "tex", "default_conf.yaml")
 
