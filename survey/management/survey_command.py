@@ -115,22 +115,10 @@ class SurveyCommand(BaseCommand):
     def handle(self, *args, **options):
         self.check_mutually_exclusive(options)
         self.check_nothing_at_all(options)
-        if options.get("question_all"):
-            self.questions = Question.objects.all()
-        else:
-            self.questions = []
-            if options.get("question_text"):
-                for question_text in options["question_text"]:
-                    try:
-                        self.questions.append(Question.objects.get(text=question_text))
-                    except Question.DoesNotExist:
-                        self.raise_value_error("question-text", question_text)
-            if options.get("question_id"):
-                for question_id in options["question_id"]:
-                    try:
-                        self.questions.append(Question.objects.get(pk=question_id))
-                    except Question.DoesNotExist:
-                        self.raise_value_error("question-id", question_id)
+        self.set_questions(options)
+        self.set_surveys(options)
+
+    def set_surveys(self, options):
         if options.get("survey_all"):
             self.surveys = Survey.objects.all()
         else:
@@ -147,3 +135,21 @@ class SurveyCommand(BaseCommand):
                         self.surveys.append(Survey.objects.get(pk=survey_id))
                     except Survey.DoesNotExist:
                         self.raise_value_error("survey-id", survey_id)
+
+    def set_questions(self, options):
+        if options.get("question_all"):
+            self.questions = Question.objects.all()
+        else:
+            self.questions = []
+            if options.get("question_text"):
+                for question_text in options["question_text"]:
+                    try:
+                        self.questions.append(Question.objects.get(text=question_text))
+                    except Question.DoesNotExist:
+                        self.raise_value_error("question-text", question_text)
+            if options.get("question_id"):
+                for question_id in options["question_id"]:
+                    try:
+                        self.questions.append(Question.objects.get(pk=question_id))
+                    except Question.DoesNotExist:
+                        self.raise_value_error("question-id", question_id)
