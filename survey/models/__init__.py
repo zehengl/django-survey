@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-    Permit to import everything from survey.models without knowing the details.
+Permit to import everything from survey.models without knowing the details.
 """
-
-import sys
 
 from .answer import Answer
 from .category import Category
