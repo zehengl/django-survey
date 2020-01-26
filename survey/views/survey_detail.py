@@ -54,50 +54,12 @@ class SurveyDetail(View):
             return redirect(reverse("survey-list"))
         context = {"response_form": form, "survey": survey, "categories": categories}
         if form.is_valid():
-            session_key = "survey_%s" % (kwargs["id"],)
-            if session_key not in request.session:
-                request.session[session_key] = {}
-            for key, value in list(form.cleaned_data.items()):
-                request.session[session_key][key] = value
-                request.session.modified = True
+            return self.treat_valid_form(form, kwargs, request, survey)
+        return self.handle_invalid_form(context, form, request, survey)
 
-            next_url = form.next_step_url()
-            response = None
-            if survey.display_by_question:
-                # when it's the last step
-                if not form.has_next_step():
-                    save_form = ResponseForm(
-                        request.session[session_key], survey=survey, user=request.user
-                    )
-                    if save_form.is_valid():
-                        response = save_form.save()
-                    else:
-                        LOGGER.warning(
-                            "A step of the multipage form failed "
-                            "but should have been discovered before."
-                        )
-            else:
-                response = form.save()
-
-            # if there is a next step
-            if next_url is not None:
-                return redirect(next_url)
-            else:
-                del request.session[session_key]
-                if response is None:
-                    return redirect(reverse("survey-list"))
-                else:
-                    next_ = request.session.get("next", None)
-                    if next_ is not None:
-                        if "next" in request.session:
-                            del request.session["next"]
-                        return redirect(next_)
-                    else:
-                        return redirect(
-                            "survey-confirmation", uuid=response.interview_uuid
-                        )
-        else:
-            LOGGER.info("Non valid form: <%s>", form)
+    @staticmethod
+    def handle_invalid_form(context, form, request, survey):
+        LOGGER.info("Non valid form: <%s>", form)
         if survey.template is not None and len(survey.template) > 4:
             template_name = survey.template
         else:
@@ -106,3 +68,43 @@ class SurveyDetail(View):
             else:
                 template_name = "survey/one_page_survey.html"
         return render(request, template_name, context)
+
+    def treat_valid_form(self, form, kwargs, request, survey):
+        session_key = "survey_%s" % (kwargs["id"],)
+        if session_key not in request.session:
+            request.session[session_key] = {}
+        for key, value in list(form.cleaned_data.items()):
+            request.session[session_key][key] = value
+            request.session.modified = True
+        next_url = form.next_step_url()
+        response = None
+        if survey.display_by_question:
+            # when it's the last step
+            if not form.has_next_step():
+                save_form = ResponseForm(
+                    request.session[session_key], survey=survey, user=request.user
+                )
+                if save_form.is_valid():
+                    response = save_form.save()
+                else:
+                    LOGGER.warning(
+                        "A step of the multipage form failed "
+                        "but should have been discovered before."
+                    )
+        else:
+            response = form.save()
+        # if there is a next step
+        if next_url is not None:
+            return redirect(next_url)
+        else:
+            del request.session[session_key]
+            if response is None:
+                return redirect(reverse("survey-list"))
+            else:
+                next_ = request.session.get("next", None)
+                if next_ is not None:
+                    if "next" in request.session:
+                        del request.session["next"]
+                    return redirect(next_)
+                else:
+                    return redirect("survey-confirmation", uuid=response.interview_uuid)
