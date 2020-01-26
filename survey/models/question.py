@@ -325,7 +325,7 @@ class Question(models.Model):
         for other_answer in other_question.answers.all():
             if user is None:
                 break
-            elif other_answer.response.user == user:
+            if other_answer.response.user == user:
                 # We suppose there is only a response per user
                 # Why would you want this info if it is
                 # possible to answer multiple time ?

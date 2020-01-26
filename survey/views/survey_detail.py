@@ -80,15 +80,12 @@ class SurveyDetail(View):
         # if there is a next step
         if next_url is not None:
             return redirect(next_url)
-        else:
-            del request.session[session_key]
-            if response is None:
-                return redirect(reverse("survey-list"))
-            else:
-                next_ = request.session.get("next", None)
-                if next_ is not None:
-                    if "next" in request.session:
-                        del request.session["next"]
-                    return redirect(next_)
-                else:
-                    return redirect("survey-confirmation", uuid=response.interview_uuid)
+        del request.session[session_key]
+        if response is None:
+            return redirect(reverse("survey-list"))
+        next_ = request.session.get("next", None)
+        if next_ is not None:
+            if "next" in request.session:
+                del request.session["next"]
+            return redirect(next_)
+        return redirect("survey-confirmation", uuid=response.interview_uuid)

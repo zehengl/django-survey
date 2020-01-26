@@ -56,8 +56,7 @@ class LatexFile:
 """
         if self._footer:
             return self._footer + end
-        else:
-            return end
+        return end
 
     def save(self, path):
         """ Save the document on disk. """

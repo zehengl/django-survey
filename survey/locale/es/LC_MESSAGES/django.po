@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-26 17:43+0000\n"
+"POT-Creation-Date: 2020-01-26 18:37+0000\n"
 "PO-Revision-Date: 2018-10-06 20:42+0000\n"
 "Last-Translator: Javier Ordóñez <>\n"
 "Language-Team: \n"
@@ -77,12 +77,12 @@ msgstr "Distribución de respuestas"
 msgid "Left blank"
 msgstr "Dejada en blanco"
 
-#: survey/exporter/tex/question2tex_chart.py:119
+#: survey/exporter/tex/question2tex_chart.py:118
 #: survey/exporter/tex/question2tex_sankey.py:30
 msgid "for the question"
 msgstr "para la pregunta"
 
-#: survey/exporter/tex/question2tex_chart.py:129
+#: survey/exporter/tex/question2tex_chart.py:128
 msgid "No answers for this question."
 msgstr "No hay respuestas para esta pregunta."
 

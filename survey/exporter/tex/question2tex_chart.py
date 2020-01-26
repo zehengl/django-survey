@@ -112,8 +112,7 @@ class Question2TexChart(Question2Tex):
         options = options[:-1]
         if options:
             return "[{}]".format(options)
-        else:
-            return ""
+        return ""
 
     def get_caption_specifics(self):
         return "%s '%s' " % (_("for the question"), Question2Tex.html2latex(self.question.text))

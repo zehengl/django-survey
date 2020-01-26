@@ -53,8 +53,7 @@ class ResponseForm(models.ModelForm):
             is_current_step = i != self.step and self.step is not None
             if self.survey.display_by_question and is_current_step:
                 continue
-            else:
-                self.add_question(question, data)
+            self.add_question(question, data)
 
         self._get_preexisting_response()
 
@@ -224,8 +223,6 @@ class ResponseForm(models.ModelForm):
         if self.has_next_step():
             context = {"id": self.survey.id, "step": self.step + 1}
             return reverse("survey-detail-step", kwargs=context)
-        else:
-            return None
 
     def current_step_url(self):
         return reverse("survey-detail-step", kwargs={"id": self.survey.id, "step": self.step})

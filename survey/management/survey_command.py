@@ -45,8 +45,8 @@ class SurveyCommand(BaseCommand):
         # See: https://stackoverflow.com/questions/46076279/
         if sys.version_info.major == 2:  # pragma: no cover
             raise ValueError(msg.encode("utf-8"))
-        else:  # pragma: no cover
-            raise ValueError(msg)
+        # pragma: no cover
+        raise ValueError(msg)
 
     def check_mutually_exclusive(self, opts):
         """ We could use the ArgParse option for this, but the case is
