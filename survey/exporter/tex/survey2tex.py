@@ -51,7 +51,7 @@ class Survey2Tex(Survey2X):
             if chart_title:
                 # "" is False, by default we do not add section or anything
                 mct = options["multiple_chart_type"]
-                question_synthesis += "\%s{%s}" % (mct, chart_title)
+                question_synthesis += "\\%s{%s}" % (mct, chart_title)
             tex_type = opts.get("type")
             if tex_type == "raw":
                 question_synthesis += Question2TexRaw(question, **opts).tex()
@@ -89,7 +89,7 @@ class Survey2Tex(Survey2X):
 \\clearpage{}
 \\section{%s}
 
-\label{sec:%s}
+\\label{sec:%s}
 
 %s
 

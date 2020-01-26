@@ -15,7 +15,7 @@ class Question2TexRaw(Question2Tex):
     TEX_SKELETON = """
 \\begin{quote}
 %s
-\\end{quote} \hfill (%s n\\textsuperscript{o}%s)
+\\end{quote} \\hfill (%s n\\textsuperscript{o}%s)
 """
 
     def tex(self):

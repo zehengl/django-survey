@@ -52,7 +52,7 @@ class LatexFile(object):
         if self.document_option:
             header += "[{}]".format(self.document_option)
         header += "{%s}\n" % self.document_class
-        header += "\date{%s}\n" % self.date
+        header += "\\date{%s}\n" % self.date
         header += "%s\n" % self._header
         header += "\\begin{document}\n"
         header += "%s\n" % self.intro
