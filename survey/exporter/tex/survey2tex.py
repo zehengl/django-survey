@@ -36,7 +36,7 @@ class Survey2Tex(Survey2X):
             LOGGER.info("Performing additional analysis with %s", function_)
             latex_file.text += function_(survey)
 
-    def treat_question(self, question, survey):
+    def treat_question(self, question):
         LOGGER.info("Treating, %s %s", question.pk, question.text)
         options = self.tconf.get(survey_name=self.survey.name, question_text=question.text)
         multiple_charts = options.get("multiple_charts")
@@ -116,7 +116,7 @@ class Survey2Tex(Survey2X):
         ltxf = LatexFile(document_class, **kwargs)
         self._synthesis(self.survey)
         for question in questions:
-            ltxf.text += self.treat_question(question, self.survey)
+            ltxf.text += self.treat_question(question)
         self._additional_analysis(self.survey, ltxf)
         return ltxf.document
 
