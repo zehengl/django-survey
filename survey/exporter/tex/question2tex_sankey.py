@@ -64,9 +64,8 @@ class Question2TexSankey(Question2Tex):
         q2 = []
         for answer_to_q1, cardinality_to_q2 in list(self.cardinality.items()):
             for answer_to_q2, number_of_time in list(cardinality_to_q2.items()):
-                for i in range(number_of_time):
-                    q1.append(answer_to_q1)
-                    q2.append(answer_to_q2)
+                q1 += [answer_to_q1] * number_of_time
+                q2 += [answer_to_q2] * number_of_time
         df = DataFrame(data={self.question.text: q1, other_question.text: q2})
         name = "tex/q{}_vs_q{}".format(self.question.pk, other_question.pk)
         sankey(df[self.question.text], df[other_question.text], aspect=20, fontsize=10, figureName=name)
