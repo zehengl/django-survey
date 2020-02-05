@@ -201,6 +201,7 @@ You get this as a result:
 If you want to make your own treatment you can use your own class, for example.
 
 Configuration:
+
 ~~~~yaml
 'Test survëy':
   questions:
@@ -232,6 +233,15 @@ For a full example of a configuration file look at `example_conf.yaml` in doc,
 you can also generate your configuration file with
 `python manage.py generatetexconf -h`, it will create the default skeleton
 for every survey and question.
+
+To guide you during the python development, you can read:
+
+* The default reporter for PieChart in `Question2TexChart` : https://github.com/Pierre-Sassoulas/django-survey/blob/master/survey/exporter/tex/question2tex_chart.py#L13
+* The Sankey reporter in `Question3TexSankey` : https://github.com/Pierre-Sassoulas/django-survey/blob/master/survey/exporter/tex/question2tex_sankey.py#L15
+* The Raw reporter in `Question2TexRax` : https://github.com/Pierre-Sassoulas/django-survey/blob/master/survey/exporter/tex/question2tex_raw.py.
+
+Do not hesitate to make a pull request with your new exporter if it can be of interest
+for others I'll integrate it.
 
 ## Contributing as a developper
 
