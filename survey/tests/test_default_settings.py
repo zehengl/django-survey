@@ -1,7 +1,8 @@
-from survey.tests import BaseTest
-from django.test import override_settings
 from django.conf import settings
+from django.test import override_settings
+
 from survey import set_default_settings
+from survey.tests import BaseTest
 
 
 @override_settings()
