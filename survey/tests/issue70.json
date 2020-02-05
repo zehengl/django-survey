@@ -1,5 +1,23 @@
 [
 {
+ "model": "auth.user",
+ "pk": 1,
+ "fields": {
+  "password": "pbkdf2_sha256$30000$9I20UakFTpfx$y7eJAH51Uet6UY3A56g+JLEiG4qvks9XyGZnXy5B0E4=",
+  "last_login": "2017-03-19T11:21:55.386Z",
+  "is_superuser": true,
+  "username": "adminebd",
+  "first_name": "",
+  "last_name": "",
+  "email": "",
+  "is_staff": true,
+  "is_active": true,
+  "date_joined": "2017-03-19T11:14:45.991Z",
+  "groups": [],
+  "user_permissions": []
+ }
+},
+{
  "model": "survey.survey",
  "pk": 4,
  "fields": {
@@ -113,7 +131,7 @@
   "category": null,
   "survey": 4,
   "type": "select-multiple",
-  "choices": "Calls/Letters, Files, Admin, Talking to about next service, Recoveries, Hiring, Events, Promotion"
+  "choices": "Calls, Letters, Files, Admin, Talking to about next service, Recoveries, Hiring, Events, Promotion"
  }
 },
 {
@@ -222,7 +240,7 @@
   "response": 1,
   "created": "2020-02-04T06:39:22.391Z",
   "updated": "2020-02-04T15:20:34.483Z",
-  "body": "None"
+  "body": null
  }
 },
 {
@@ -266,7 +284,7 @@
   "response": 1,
   "created": "2020-02-04T06:39:22.400Z",
   "updated": "2020-02-04T15:20:34.501Z",
-  "body": "['admin', 'calls', 'events']"
+  "body": "['Admin', 'Calls', 'Events']"
  }
 },
 {
@@ -288,7 +306,7 @@
   "response": 1,
   "created": "2020-02-04T06:39:22.404Z",
   "updated": "2020-02-04T15:20:34.508Z",
-  "body": "None"
+  "body": null
  }
 },
 {
