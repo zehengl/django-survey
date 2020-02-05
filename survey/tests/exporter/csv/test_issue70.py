@@ -15,20 +15,20 @@ class TestIssue70(TestCase):
 
     def setUp(self):
         self.survey = Survey.objects.get(id=4)
-        print(self.survey)
         self.s2csv = Survey2Csv(self.survey)
+
+    @override_settings(USER_DID_NOT_ANSWER="Left blank")
+    def test_get_survey_as_csv(self):
         header = (
             "user,Email Address,Your Name,Date,STARTS Who? What? Where?,Donations,Books Sold,Your Total Volunteer hours"
             " for this week,Your Volunteer Activities this week.,Included in the above hours; how many of those above "
             "hours were on filing,New Hires,Charitable Donations,Events held What? Where? Products gotten?"
         )
-        self.expected_content = """{}
-adminebd,user@example.com,Ed Davison,2020-02-03,Left blank,0,0,8,['Admin'; 'Calls'; 'Events'],0,Left blank,100,""".format(
-            header
+        content = (
+            "adminebd,user@example.com,Ed Davison,2020-02-03,Left blank,0,0,8,['Admin'; 'Calls'; 'Events'],0,"
+            "Left blank,100,"
         )
-
-    @override_settings(USER_DID_NOT_ANSWER="Left blank")
-    def test_get_survey_as_csv(self):
+        self.expected_content = "{}\n{}".format(header, content)
         self.assertEqual(self.s2csv.survey_to_x(), self.expected_content)
 
     @override_settings(USER_DID_NOT_ANSWER=None)
