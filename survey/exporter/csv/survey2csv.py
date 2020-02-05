@@ -2,6 +2,8 @@
 
 import logging
 
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
 
 from survey.exporter.survey2x import Survey2X
@@ -36,7 +38,11 @@ class Survey2Csv(Survey2X):
             answers = answer.values
             cell = ""
             for i, ans in enumerate(answers):
-                if i < len(answers) - 1:
+                if ans is None:
+                    if settings.USER_DID_NOT_ANSWER is None:
+                        raise ImproperlyConfigured("USER_DID_NOT_ANSWER need to be set in your settings file.")
+                    cell += settings.USER_DID_NOT_ANSWER
+                elif i < len(answers) - 1:
                     # Separate by a pipe if its not the last
                     cell += ans + "|"
                 else:

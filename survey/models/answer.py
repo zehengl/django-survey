@@ -38,6 +38,8 @@ class Answer(models.Model):
 
     @property
     def values(self):
+        if self.body is None:
+            return [None]
         if len(self.body) < 3 or self.body[0:3] != "[u'":
             return [self.body]
         #  We do not use eval for security reason but it could work with :

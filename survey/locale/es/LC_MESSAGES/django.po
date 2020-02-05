@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-26 18:37+0000\n"
+"POT-Creation-Date: 2020-02-05 22:05+0000\n"
 "PO-Revision-Date: 2018-10-06 20:42+0000\n"
 "Last-Translator: Javier Ordóñez <>\n"
 "Language-Team: \n"
@@ -37,7 +37,7 @@ msgstr[1] "encuestas %(count)d se marcaron exitosamente como publicadas."
 msgid "Mark selected surveys as published"
 msgstr "Marca las encuestas seleccionadas como publicadas"
 
-#: survey/exporter/csv/survey2csv.py:33
+#: survey/exporter/csv/survey2csv.py:35
 msgid "Anonymous"
 msgstr "Anónimo"
 
