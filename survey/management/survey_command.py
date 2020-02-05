@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
-
 from operator import itemgetter
-
 
 from django.core.management.base import BaseCommand
 
@@ -71,8 +69,12 @@ class SurveyCommand(BaseCommand):
 
     def check_nothing_at_all(self, options):
         at_least_a_question = options.get("question_all") or options.get("question_text") or options.get("question_id")
-        at_least_a_survey = options.get("survey_all") or options.get(
-            "survey_name") or options.get("survey_id") or options.get("survey_latest")
+        at_least_a_survey = (
+            options.get("survey_all")
+            or options.get("survey_name")
+            or options.get("survey_id")
+            or options.get("survey_latest")
+        )
         if not at_least_a_question and not at_least_a_survey:
             sys.exit(
                 "Nothing to do, add at least one of the following options :\n"
@@ -110,9 +112,6 @@ class SurveyCommand(BaseCommand):
                     self.surveys.append(Survey.objects.get(pk=survey_id))
                 except Survey.DoesNotExist:
                     self.raise_value_error("survey-id", survey_id)
-
-
-
 
     def set_questions(self, options):
         if options.get("question_all"):
