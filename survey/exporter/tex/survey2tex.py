@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 from pydoc import locate
+from shutil import copy
 
 import pytz
 from django.utils.text import slugify
@@ -19,11 +20,14 @@ from survey.exporter.tex.question2tex_sankey import Question2TexSankey
 from survey.models.question import Question
 
 LOGGER = logging.getLogger(__name__)
+STATIC = Path(__file__).parent.parent.parent.joinpath("static")
 
 
 class Survey2Tex(Survey2X):
 
     ANALYSIS_FUNCTION = []
+    PGF_PIE_STY = Path(STATIC, "survey", "sty", "pgf-pie.sty")
+    PGF_PLOT_STY = Path(STATIC, "survey", "sty", "pgfplots.sty")
 
     def __init__(self, survey, configuration=None):
         Survey2X.__init__(self, survey)
@@ -105,10 +109,17 @@ class Survey2Tex(Survey2X):
         previous_directory = os.getcwd()
         dir_name, file_name = os.path.split(path)
         os.chdir(dir_name)
+        sty_dependencies = [self.PGF_PIE_STY, self.PGF_PLOT_STY]
+        dependencies_to_delete = []
+        for dep in sty_dependencies:
+            copy(dep, dir_name)
+            dependencies_to_delete.append(Path(dir_name, dep.name))
         os.system("xelatex {}".format(file_name))
         os.system("xelatex {}".format(file_name))
         if output is not None:
             os.system("mv {}.pdf {}".format(file_name[:-3], output))
+        for dep in dependencies_to_delete:
+            dep.unlink()
         os.chdir(previous_directory)
 
     @property
