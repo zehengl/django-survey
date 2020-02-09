@@ -56,8 +56,8 @@ class Command(SurveyCommand):
             if options["tex"] or options["pdf"]:
                 configuration_file = options.get("configuration_file")
                 if configuration_file is None:
-                    msg = "No configuration file given, using default values."
-                    LOGGER.warning(msg)
+                    msg = "No configuration file given, using default values for '{}'.".format(survey)
+                    LOGGER.info(msg)
                 configuration = Configuration(configuration_file)
                 exporters.append(Survey2Tex(survey, configuration))
             for exporter in exporters:
@@ -66,7 +66,7 @@ class Command(SurveyCommand):
                     if options["pdf"] and isinstance(exporter, Survey2Tex):
                         exporter.generate_pdf()
                 else:
-                    LOGGER.info(
+                    LOGGER.warning(
                         "\t- %s's %s were already generated use the --force (-f) option to generate anyway.",
                         survey,
                         exporter._get_x(),
