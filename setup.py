@@ -20,7 +20,7 @@ with open(path.join(THIS_DIRECTORY, "README.md"), encoding="utf-8") as f:
 
 setuptools.setup(
     name="django-survey-and-report",
-    version="1.3.15",
+    version="1.3.16",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
@@ -35,6 +35,10 @@ setuptools.setup(
         "Natural Language :: English",
         "Natural Language :: French",
         "Natural Language :: Japanese",
+        "Natural Language :: Chinese (Traditional)",
+        "Natural Language :: Russian",
+        "Natural Language :: Spanish",
+        "Natural Language :: German",
         "Topic :: Utilities",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",

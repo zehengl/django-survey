@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-09 20:07+0000\n"
+"POT-Creation-Date: 2020-02-09 21:35+0000\n"
 "PO-Revision-Date: 2020-01-24 17:05+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,11 +101,11 @@ msgstr "in Zusammenhang mit der Frage"
 msgid "right"
 msgstr "rechts"
 
-#: survey/exporter/tex/survey2tex.py:72
+#: survey/exporter/tex/survey2tex.py:73
 msgid "We could not render a chart because the type"
 msgstr "Wir konnten eine Grafik nicht erstellen, weil der Typ"
 
-#: survey/exporter/tex/survey2tex.py:75
+#: survey/exporter/tex/survey2tex.py:76
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "kein Standard Typ und auch kein Pfad zu einer importierbaren Question2Tex child class ist. Wähle zwischen  'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' oder 'package.path.MyQuestion2TexCustomClass'"
 
