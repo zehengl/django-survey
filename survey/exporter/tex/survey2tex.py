@@ -99,13 +99,14 @@ class Survey2Tex(Survey2X):
 
     def generate(self, path, output=None):
         """ Compile the pdf from the tex file. """
+        previous_directory = os.getcwd()
         dir_name, file_name = os.path.split(path)
         os.chdir(dir_name)
         os.system("xelatex {}".format(file_name))
         os.system("xelatex {}".format(file_name))
         if output is not None:
             os.system("mv {}.pdf {}".format(file_name[:-3], output))
-        os.chdir(settings.ROOT)
+        os.chdir(previous_directory)
 
     def survey_to_x(self, questions=None):
         if questions is None:
