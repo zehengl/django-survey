@@ -2,9 +2,12 @@
 
 import logging
 import os
+from datetime import datetime
+from pathlib import Path
 from pydoc import locate
 
-from django.conf import settings
+import pytz
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from survey.exporter.survey2x import Survey2X
@@ -107,6 +110,19 @@ class Survey2Tex(Survey2X):
         if output is not None:
             os.system("mv {}.pdf {}".format(file_name[:-3], output))
         os.chdir(previous_directory)
+
+    @property
+    def file_modification_time(self):
+        """ Return the modification time of the pdf. """
+        pdf_path = Path(self._get_x_dir(), "{}.pdf".format(slugify(self.survey.name)))
+        if not pdf_path.exists():
+            earliest_working_timestamp_for_windows = 86400
+            mtime = earliest_working_timestamp_for_windows
+        else:
+            mtime = os.path.getmtime(pdf_path)
+        mtime = datetime.utcfromtimestamp(mtime)
+        mtime = mtime.replace(tzinfo=pytz.timezone("UTC"))
+        return mtime
 
     def survey_to_x(self, questions=None):
         if questions is None:
