@@ -52,6 +52,11 @@ INSTALLED_APPS = [
 	# Your own installed apps here
 ]
 
+from pathlib import Path
+
+CSV_DIRECTORY = Path("csv") # Define the directory where csv are exported
+TEX_DIRECTORY = Path("tex") # Define the directory where tex files and pdf are exported
+
 INSTALLED_APPS += [
 	'bootstrapform',
 	'survey'

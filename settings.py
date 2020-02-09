@@ -22,7 +22,8 @@ print(
 
 DEBUG = True
 ROOT = os.path.dirname(os.path.abspath(__file__))
-CSV_DIR = os.path.join(ROOT, "csv")
+CSV_DIRECTORY = os.path.join(ROOT, "csv")
+TEX_DIRECTORY = os.path.join(ROOT, "tex")
 
 logging.basicConfig(level=logging.DEBUG, format="%(name)s.%(funcName)s() l.%(lineno)s -\033[32m %(message)s \033[39m")
 

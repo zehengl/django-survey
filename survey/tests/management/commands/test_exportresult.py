@@ -15,7 +15,7 @@ class TestExportresult(TestManagement):
 
     def get_csv_path(self, survey_name):
         csv_name = "{}.csv".format(slugify(survey_name))
-        return os.path.join(settings.CSV_DIR, csv_name)
+        return os.path.join(settings.CSV_DIRECTORY, csv_name)
 
     def get_file_content(self, path):
         file_ = open(path, encoding="UTF-8")

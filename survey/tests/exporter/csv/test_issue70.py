@@ -1,7 +1,5 @@
-import os
 from pathlib import Path
 
-from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
 from django.test.utils import override_settings

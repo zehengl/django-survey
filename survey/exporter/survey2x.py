@@ -6,6 +6,7 @@ from datetime import datetime
 
 import pytz
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.text import slugify
 
 from survey.models import Survey
@@ -30,7 +31,11 @@ class Survey2X:
         return self.__class__.__name__.split("Survey2")[1].lower()
 
     def _get_x_dir(self):
-        return os.path.join(settings.ROOT, self._get_x())
+        directory_name = "{}_DIRECTORY".format(self._get_x().upper())
+        try:
+            return getattr(settings, directory_name)
+        except:
+            raise ImproperlyConfigured("Please define a value for {} in your settings".format(directory_name))
 
     def file_name(self):
         """ Return the csv file name for a Survey.

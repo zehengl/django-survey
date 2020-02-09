@@ -6,6 +6,7 @@ from datetime import datetime
 from unittest.mock import patch
 
 from django.conf import settings
+from django.test.utils import override_settings
 
 from survey.exporter.survey2x import Survey2X
 from survey.tests.management.test_management import TestManagement
@@ -23,6 +24,7 @@ SHORT_TIME_AGO = datetime(2000, 1, 1, 0, 0, 0)
 RIGHT_NOW = datetime(2010, 1, 1, 0, 0, 0)
 
 
+@override_settings(SURVEY_DIRECTORY=os.path.join(settings.ROOT, "survey"))
 class TestSurvey2X(TestManagement):
     def setUp(self):
         TestManagement.setUp(self)
@@ -39,6 +41,7 @@ class TestSurvey2X(TestManagement):
     def test_survey_2_x(self):
         self.assertRaises(NotImplementedError, self.virtual_survey2x.survey_to_x)
 
+    @override_settings(X_DIRECTORY=os.path.join(settings.ROOT, "x"))
     def test_file_name(self):
         self.assertEqual(self.actual_survey2x.file_name(), self.expected_actual)
         self.assertEqual(self.virtual_survey2x.file_name(), self.expected_virtual)
