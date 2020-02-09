@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import os
 from datetime import datetime
+from pathlib import Path
 from unittest.mock import patch
 
 from django.conf import settings
@@ -24,14 +24,14 @@ SHORT_TIME_AGO = datetime(2000, 1, 1, 0, 0, 0)
 RIGHT_NOW = datetime(2010, 1, 1, 0, 0, 0)
 
 
-@override_settings(SURVEY_DIRECTORY=os.path.join(settings.ROOT, "survey"))
+@override_settings(SURVEY_DIRECTORY=Path(settings.ROOT, "survey"))
 class TestSurvey2X(TestManagement):
     def setUp(self):
         TestManagement.setUp(self)
         self.virtual_survey2x = Survey2X(self.survey)
         self.actual_survey2x = Survey2Survey(self.survey)
-        self.expected_actual = os.path.join(settings.ROOT, "survey", "test-management-survey.survey")
-        self.expected_virtual = os.path.join(settings.ROOT, "x", "test-management-survey.x")
+        self.expected_actual = str(Path(settings.ROOT, "survey", "test-management-survey.survey"))
+        self.expected_virtual = str(Path(settings.ROOT, "x", "test-management-survey.x"))
 
     def get_fail_info(self, survey2x):
         msg = "\nLatest answer date :     {}".format(survey2x.latest_answer_date)
@@ -41,7 +41,7 @@ class TestSurvey2X(TestManagement):
     def test_survey_2_x(self):
         self.assertRaises(NotImplementedError, self.virtual_survey2x.survey_to_x)
 
-    @override_settings(X_DIRECTORY=os.path.join(settings.ROOT, "x"))
+    @override_settings(X_DIRECTORY=Path(settings.ROOT, "x"))
     def test_file_name(self):
         self.assertEqual(self.actual_survey2x.file_name(), self.expected_actual)
         self.assertEqual(self.virtual_survey2x.file_name(), self.expected_virtual)

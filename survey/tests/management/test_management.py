@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
+from pathlib import Path
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -91,5 +91,5 @@ Anonymous,,,,""".format(
             self.username, self.other_username
         )
         self.expected_header = ["user", "Aèbc?", "Bècd?", "Cède?", "Dèef?"]
-        self.conf_dir = os.path.join(settings.ROOT, "survey", "tests", "exporter", "tex")
-        self.test_conf_path = os.path.join(self.conf_dir, "test_conf.yaml")
+        self.conf_dir = Path(settings.ROOT, "survey", "tests", "exporter", "tex")
+        self.test_conf_path = Path(self.conf_dir, "test_conf.yaml")

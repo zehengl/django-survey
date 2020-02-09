@@ -3,6 +3,7 @@
 import logging
 import os
 from datetime import datetime
+from pathlib import Path
 
 import pytz
 from django.conf import settings
@@ -42,8 +43,8 @@ class Survey2X:
 
         :param Survey survey: The survey we're treating. """
         file_name = "{}.{}".format(slugify(self.survey.name), self._get_x())
-        path = os.path.join(self._get_x_dir(), file_name)
-        return path
+        path = Path(self._get_x_dir(), file_name)
+        return str(path)
 
     @property
     def file_modification_time(self):

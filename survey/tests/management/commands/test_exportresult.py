@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
+from pathlib import Path
 
 from django.conf import settings
 from django.core.management import call_command
@@ -15,7 +15,7 @@ class TestExportresult(TestManagement):
 
     def get_csv_path(self, survey_name):
         csv_name = "{}.csv".format(slugify(survey_name))
-        return os.path.join(settings.CSV_DIRECTORY, csv_name)
+        return Path(settings.CSV_DIRECTORY, csv_name)
 
     def get_file_content(self, path):
         file_ = open(path, encoding="UTF-8")
@@ -32,18 +32,15 @@ class TestExportresult(TestManagement):
     def test_handle(self):
         """ The custom command export result create the right csv file. """
         self.maxDiff = None
-        first_csv = self.get_csv_path(self.test_managament_survey_name)
-        second_csv = self.get_csv_path("Test survëy")
-        # Force to regenerate the csv, we want to test something not optimize
-        # computing time.
-        if os.path.exists(first_csv):
-            os.remove(first_csv)
-        if os.path.exists(second_csv):
-            os.remove(second_csv)
+        csvs = [Path(self.get_csv_path(self.test_managament_survey_name)), self.get_csv_path("Test survëy")]
+        # Force to regenerate the csv, we want to test something not optimize computing time.
+        for csv in csvs:
+            if csv.exists():
+                csv.unlink()
         call_command(
             "exportresult", "--survey-all", "--tex", "--csv", "--force", configuration_file=self.test_conf_path
         )
-        self.assertMultiLineEqual(self.expected_content, self.get_file_content(first_csv))
+        self.assertMultiLineEqual(self.expected_content, self.get_file_content(csvs[0]))
         expected = """\
 user,Lorem ipsum dolor sit amët; <strong> consectetur </strong> adipiscing \
 elit.,Ipsum dolor sit amët; <strong> consectetur </strong> adipiscing elit.,\
@@ -53,4 +50,4 @@ sit amët; consectetur <strong> adipiscing </strong> elit.,Dolor sit amët; \
 consectetur<strong> adipiscing</strong> elit.
 pierre,Yës|Maybe,No,Text for a response,,2,No|Whatever
 ps250112,Yës,Yës,,,1,Yës"""
-        self.assertMultiLineEqual(expected, self.get_file_content(second_csv))
+        self.assertMultiLineEqual(expected, self.get_file_content(csvs[1]))

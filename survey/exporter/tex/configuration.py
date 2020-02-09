@@ -2,7 +2,7 @@
 
 import copy
 import logging
-import os
+from pathlib import Path
 
 import yaml
 from django.conf import settings
@@ -14,7 +14,7 @@ LOGGER = logging.getLogger(__name__)
 
 class Configuration:
 
-    DEFAULT_PATH = os.path.join(settings.ROOT, "survey", "exporter", "tex", "default_conf.yaml")
+    DEFAULT_PATH = Path(settings.ROOT, "survey", "exporter", "tex", "default_conf.yaml")
 
     def __init__(self, configuration_file=None):
         self._default = self._init_from_file(self.DEFAULT_PATH)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
+from pathlib import Path
 
 from survey.exporter.tex.configuration import Configuration
 from survey.exporter.tex.survey2tex import Survey2Tex
@@ -11,7 +11,7 @@ from survey.tests.management.test_management import TestManagement
 class TestSurvey2Tex(TestManagement):
     def setUp(self):
         TestManagement.setUp(self)
-        conf = Configuration(os.path.join(self.conf_dir, "test_conf.yaml"))
+        conf = Configuration(Path(self.conf_dir, "test_conf.yaml"))
         self.generic = Survey2Tex(self.survey, conf)
         self.test_survey = Survey.objects.get(name="Test survëy")
         self.specific = Survey2Tex(self.test_survey, conf)
@@ -45,7 +45,7 @@ class TestSurvey2Tex(TestManagement):
 
     def test_custom_class_fail_import(self):
         """ We have an error message if the type is impossible to import. """
-        conf = Configuration(os.path.join(self.conf_dir, "custom_class_doesnt_exists.yaml"))
+        conf = Configuration(Path(self.conf_dir, "custom_class_doesnt_exists.yaml"))
         self.test_survey = Survey.objects.get(name="Test survëy")
         fail_import = Survey2Tex(self.test_survey, conf).survey_to_x()
         should_contain = [

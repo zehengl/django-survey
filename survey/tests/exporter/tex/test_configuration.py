@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
+from pathlib import Path
 
 from survey.exporter.tex.configuration import Configuration
 from survey.models.survey import Survey
@@ -21,7 +21,7 @@ class TestConfiguration(TestManagement):
     def test_name_doesnt_exists(self):
         """ Value error raised when the name does not exists. """
         name = "This survey does not exists"
-        path = os.path.join(self.conf_dir, "name_doesnt_exists.yaml")
+        path = Path(self.conf_dir, "name_doesnt_exists.yaml")
         conf = Configuration(path)
         self.assertIsNotNone(conf.get(survey_name=name))
         Survey.objects.create(name=name, is_published=True, need_logged_user=True, display_by_question=True)
@@ -38,7 +38,7 @@ class TestConfiguration(TestManagement):
 
     def test_no_value_defined(self):
         """ We raise a value error if there is nothing at all for a Survey."""
-        path = os.path.join(self.conf_dir, "no_value_defined.yaml")
+        path = Path(self.conf_dir, "no_value_defined.yaml")
         self.assertRaises(ValueError, Configuration, path)
 
     def test_use_default(self):

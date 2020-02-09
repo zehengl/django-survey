@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
+from pathlib import Path
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -10,7 +10,7 @@ from django.test.client import Client
 
 class BaseTest(TestCase):
 
-    fixtures = [os.path.join(settings.ROOT, "survey", "tests", "testdump.json")]
+    fixtures = [Path(settings.ROOT, "survey", "tests", "testdump.json")]
 
     def setUp(self):
         user = User(username=settings.DEBUG_ADMIN_NAME, is_superuser=True, is_staff=True)
