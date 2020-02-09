@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -8,9 +9,11 @@ from django.test.utils import override_settings
 from survey.exporter.csv.survey2csv import Survey2Csv
 from survey.models import Survey
 
+HERE = Path(__file__).parent
+
 
 class TestIssue70(TestCase):
-    fixtures = [os.path.join(settings.ROOT, "survey", "tests", "issue70.json")]
+    fixtures = [Path(HERE, "issue70.json")]
     maxDiff = None
 
     def setUp(self):
