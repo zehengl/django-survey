@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from survey.models import Answer, Question, Response, Survey
 from survey.tests import BaseTest
 
+HERE = Path(__file__).parent
+
 
 class TestManagement(BaseTest):
 
@@ -91,5 +93,5 @@ Anonymous,,,,""".format(
             self.username, self.other_username
         )
         self.expected_header = ["user", "Aèbc?", "Bècd?", "Cède?", "Dèef?"]
-        self.conf_dir = Path(settings.ROOT, "survey", "tests", "exporter", "tex")
+        self.conf_dir = Path(HERE, "..", "exporter", "tex")
         self.test_conf_path = Path(self.conf_dir, "test_conf.yaml")

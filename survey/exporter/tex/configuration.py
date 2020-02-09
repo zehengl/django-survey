@@ -5,16 +5,16 @@ import logging
 from pathlib import Path
 
 import yaml
-from django.conf import settings
 
 from survey.models.survey import Survey
 
 LOGGER = logging.getLogger(__name__)
+HERE = Path(__file__).parent
 
 
 class Configuration:
 
-    DEFAULT_PATH = Path(settings.ROOT, "survey", "exporter", "tex", "default_conf.yaml")
+    DEFAULT_PATH = Path(HERE, "default_conf.yaml")
 
     def __init__(self, configuration_file=None):
         self._default = self._init_from_file(self.DEFAULT_PATH)

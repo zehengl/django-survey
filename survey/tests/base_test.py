@@ -7,10 +7,12 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test.client import Client
 
+HERE = Path(__file__).parent
+
 
 class BaseTest(TestCase):
 
-    fixtures = [Path(settings.ROOT, "survey", "tests", "testdump.json")]
+    fixtures = [Path(HERE, "testdump.json")]
 
     def setUp(self):
         user = User(username=settings.DEBUG_ADMIN_NAME, is_superuser=True, is_staff=True)
