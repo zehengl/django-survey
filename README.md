@@ -81,6 +81,23 @@ if 'survey' in settings.INSTALLED_APPS:
 
 Note: you can use whatever you wish as the URL prefix.
 
+You can also change some options:
+
+~~~~python
+# The separator for questions (Default to ",")
+CHOICES_SEPARATOR = "|"
+
+# What is shown in export when the user do not answer (Default to "Left blank")
+USER_DID_NOT_ANSWER = "NAA"
+
+# Path to the Tex configuration file (default to an internal file that should be sufficient)
+from pathlib import Path
+TEX_CONFIGURATION_FILE = Path("tex", "tex.conf")
+
+# Default color for exported pdf pie (default to "red!50")
+SURVEY_DEFAULT_PIE_COLOR = "blue!50"
+~~~~
+
 To uninstall `django-survey-and-report`, simply comment out or remove the
 'survey' line in your `INSTALLED_APPS`.
 
