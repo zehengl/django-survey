@@ -91,8 +91,11 @@ class Survey2X:
         """ Generate a x file corresponding to a Survey. """
 
         LOGGER.debug("Exporting survey '%s' to %s", self.survey, self._get_x())
+        file_path = Path(self.file_name())
+        if not file_path.parent.exists():
+            raise NotADirectoryError(file_path.parent)
         try:
-            with open(self.file_name(), "w", encoding="UTF-8") as f:
+            with open(file_path, "w", encoding="UTF-8") as f:
                 f.write(self.survey_to_x())
             LOGGER.info("Wrote %s in %s", self._get_x(), self.file_name())
         except IOError as exc:
