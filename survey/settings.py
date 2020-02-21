@@ -14,6 +14,7 @@ USER_DID_NOT_ANSWER = getattr(settings, "USER_DID_NOT_ANSWER", "Left blank")
 TEX_CONFIGURATION_FILE = getattr(settings, "TEX_CONFIGURATION_FILE", Path(ROOT, "doc", "example_conf.yaml"))
 SURVEY_DEFAULT_PIE_COLOR = getattr(settings, "SURVEY_DEFAULT_PIE_COLOR", "red!50")
 CHOICES_SEPARATOR = getattr(settings, "CHOICES_SEPARATOR", ",")
+EXCEL_COMPATIBLE_CSV = False
 
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"

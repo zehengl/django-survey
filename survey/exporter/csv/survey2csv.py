@@ -70,6 +70,8 @@ class Survey2Csv(Survey2X):
 
     def survey_to_x(self):
         csv = []
+        if settings.EXCEL_COMPATIBLE_CSV:
+            csv.append('"sep=,"')
         header, question_order = self.get_header_and_order()
         csv.append(Survey2Csv.line_list_to_string(header))
         for response in self.survey.responses.all():
