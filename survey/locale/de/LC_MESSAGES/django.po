@@ -109,11 +109,11 @@ msgstr "in Zusammenhang mit der Frage"
 msgid "right"
 msgstr "rechts"
 
-#: survey/exporter/tex/survey2tex.py:73
+#: survey/exporter/tex/survey2tex.py:76
 msgid "We could not render a chart because the type"
 msgstr "Wir konnten eine Grafik nicht erstellen, weil der Typ"
 
-#: survey/exporter/tex/survey2tex.py:76
+#: survey/exporter/tex/survey2tex.py:79
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "kein Standard Typ und auch kein Pfad zu einer importierbaren Question2Tex child class ist. Wähle zwischen  'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' oder 'package.path.MyQuestion2TexCustomClass'"
 

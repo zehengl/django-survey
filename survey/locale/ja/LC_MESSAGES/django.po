@@ -108,11 +108,11 @@ msgstr "質問に関連して"
 msgid "right"
 msgstr "右"
 
-#: survey/exporter/tex/survey2tex.py:73
+#: survey/exporter/tex/survey2tex.py:76
 msgid "We could not render a chart because the type"
 msgstr "チャートを描画できません。何故ならタイプ"
 
-#: survey/exporter/tex/survey2tex.py:76
+#: survey/exporter/tex/survey2tex.py:79
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "は標準タイプでもインポート可能で有効なQuestion2Tex子クラスへのパスでもありません。 「raw」、「sankey」、「pie」、「cloud」、 「square」、「polar」または「package.path.MyQuestion2TexCustomClass」の中から選択してください。"
 

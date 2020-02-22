@@ -141,6 +141,11 @@ class Survey2Tex(Survey2X):
     def __str__(self):
         return self.create_tex()
 
+    def pdf_path(self) -> str:
+        file_name = "{}.pdf".format(slugify(self.survey.name))
+        path = Path(self._get_x_dir(), file_name)
+        return str(path)
+
     def create_tex(self, questions=None):
         if questions is None:
             questions = self.survey.questions.all()
