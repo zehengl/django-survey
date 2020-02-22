@@ -5,9 +5,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: PACKAGE VERSION/nReport-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-22 12:24+0000\n"
+"POT-Creation-Date: 2020-02-22 18:53+0000\n"
 "PO-Revision-Date: 2018-04-09 00:52+0000\n"
 "Last-Translator: Zhu Sheng Li <digglife@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgid_plural "%(count)d surveys were successfully marked as published"
 msgstr[0] "%(count)d 件问卷成功标记为「已发布」"
 msgstr[1] "%(count)d 件问卷成功标记为「已发布」"
 
-#: survey/actions.py:18
+#: survey/actions.py:20
 msgid "Mark selected surveys as published"
 msgstr "标记选择的问卷为「已发布」"
 
@@ -43,11 +43,11 @@ msgstr "匿名"
 
 #: survey/exporter/csv/survey2csv.py:70
 msgid "user"
-msgstr ""
+msgstr "用户"
 
 #: survey/exporter/csv/survey2csv.py:105
-msgid "export as csv"
-msgstr ""
+msgid "export to csv"
+msgstr "导出为CSV"
 
 #: survey/exporter/tex/question2tex.py:64
 msgid "with"

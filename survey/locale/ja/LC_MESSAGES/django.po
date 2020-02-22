@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-22 12:24+0000\n"
+"POT-Creation-Date: 2020-02-22 18:53+0000\n"
 "PO-Revision-Date: 2018-04-09 00:52+0000\n"
 "Last-Translator: b'  <nsuzue@me.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgid_plural "%(count)d surveys were successfully marked as published"
 msgstr[0] "%(count)d つの調査が「公開」に設定されました"
 msgstr[1] "%(count)d つの調査が「公開」に設定されました"
 
-#: survey/actions.py:18
+#: survey/actions.py:20
 msgid "Mark selected surveys as published"
 msgstr "選択した調査を公開する"
 
@@ -46,7 +46,7 @@ msgid "user"
 msgstr ""
 
 #: survey/exporter/csv/survey2csv.py:105
-msgid "export as csv"
+msgid "export to csv"
 msgstr ""
 
 #: survey/exporter/tex/question2tex.py:64
