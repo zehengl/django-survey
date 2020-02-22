@@ -36,7 +36,7 @@ class Survey2X:
         directory_name = "{}_DIRECTORY".format(self._get_x().upper())
         try:
             return getattr(settings, directory_name)
-        except:
+        except AttributeError:
             raise ImproperlyConfigured("Please define a value for {} in your settings".format(directory_name))
 
     def file_name(self):
