@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+# import logging
+# logging.basicConfig(level=logging.DEBUG, format="%(name)s.%(funcName)s() l.%(lineno)s -\033[32m %(message)s \033[39m")
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # CSV_DIRECTORY = Path(__file__).parent.parent.joinpath("csv")
@@ -27,7 +29,9 @@ SECRET_KEY = "hs!cby8c=^5up3v#j#cl#x$rg35_f!g8^@^dme(6b-0v2b%rsk"
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 # EXCEL_COMPATIBLE_CSV = True
+TEX_DIRECTORY = "tex"
 
 
 # Application definition

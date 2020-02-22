@@ -8,6 +8,8 @@ from pydoc import locate
 from shutil import copy
 
 import pytz
+from django.contrib.messages import ERROR
+from django.http import HttpResponse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
@@ -163,3 +165,21 @@ class Survey2Tex(Survey2X):
         """ Compile the pdf from the tex file. """
         self.generate_file()
         self.generate(self.file_name())
+
+    @staticmethod
+    def export_as_tex(modeladmin, request, queryset):
+        if len(queryset) != 1:
+            modeladmin.message_user(request, "Cannot export multiple PDF, choose only one.", level=ERROR)
+            return
+        survey = queryset.first()
+        survey_name = survey.name.replace(" ", "_").encode("utf-8").decode("ISO-8859-1")
+        response = HttpResponse(content_type="application/pdf")
+        response["Content-Disposition"] = "attachment; filename={}.pdf".format(survey_name)
+        s2tex = Survey2Tex(survey=survey)
+        s2tex.generate_pdf()
+        with open(s2tex.pdf_path(), "rb") as f:
+            response.write(f.read())
+        return response
+
+
+Survey2Tex.export_as_tex.short_description = _("Export to PDF")
