@@ -99,6 +99,4 @@ class Survey2X:
                 f.write(str(self))
             LOGGER.info("Wrote %s in %s", self._get_x(), self.file_name())
         except IOError as exc:
-            msg = "Must fix {} ".format(self._get_x_dir())
-            msg += "in order to generate {} : {}".format(self._get_x(), exc)
-            raise IOError(msg)
+            raise IOError("Unable to create <{}> : {} ".format(self.file_name(), exc))
