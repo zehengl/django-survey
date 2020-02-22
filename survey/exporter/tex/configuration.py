@@ -164,12 +164,15 @@ class Configuration:
         try:
             return conf[key]
         except KeyError:
-            msg = ""
-            if survey_name:
-                msg += "for survey '{}', ".format(survey_name)
-            if question_text:
-                msg += "and question '{}', ".format(question_text)
-            msg += "key '{}' does not exists. ".format(key)
-            msg += "Possible values : {}".format(list(conf.keys()))
-            LOGGER.error(msg)
-            raise ValueError(msg)
+            self.__raise_get_error(conf, key, question_text, survey_name)
+
+    def __raise_get_error(self, conf, key, question_text, survey_name):
+        msg = ""
+        if survey_name:
+            msg += "for survey '{}', ".format(survey_name)
+        if question_text:
+            msg += "and question '{}', ".format(question_text)
+        msg += "key '{}' does not exists. ".format(key)
+        msg += "Possible values : {}".format(list(conf.keys()))
+        LOGGER.error(msg)
+        raise ValueError(msg)
