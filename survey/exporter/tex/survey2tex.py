@@ -12,6 +12,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from survey.exporter.survey2x import Survey2X
+from survey.exporter.tex.configuration import Configuration
 from survey.exporter.tex.latex_file import LatexFile
 from survey.exporter.tex.question2tex import Question2Tex
 from survey.exporter.tex.question2tex_chart import Question2TexChart
@@ -31,6 +32,8 @@ class Survey2Tex(Survey2X):
 
     def __init__(self, survey, configuration=None):
         Survey2X.__init__(self, survey)
+        if configuration is None:
+            configuration = Configuration()
         self.tconf = configuration
 
     def _synthesis(self, survey):
