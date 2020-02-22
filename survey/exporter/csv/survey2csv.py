@@ -84,17 +84,19 @@ class Survey2Csv(Survey2X):
 
     @staticmethod
     def export_as_csv(modeladmin, request, queryset):
-        """
-        action function used in admin site
-        """
-        if len(queryset) == 1:
-            survey = queryset.first()
-            response = HttpResponse(content_type="text/csv")
-            response["Content-Disposition"] = "attachment; filename={}.csv".format(escape_uri_path(survey.name))
-            if settings.EXCEL_COMPATIBLE_CSV:
-                response.write(codecs.BOM_UTF8)
-            response.write(str(Survey2Csv(survey)))
-            return response
-        raise NotImplementedError("Multiple surveys export not implemented.")
+        response = HttpResponse(content_type="text/csv")
+        response.write(codecs.BOM_UTF8)
+        filename = ""
+        for survey in queryset:
+            filename += escape_uri_path(survey.name)
+            survey_as_csv = Survey2Csv(survey)
+            if len(queryset) == 1:
+                response.write(survey_as_csv)
+            else:
+                response.write("{survey_name}\n".format(survey_name=survey.name))
+                response.write(survey_as_csv)
+                response.write("\n\n")
+        response["Content-Disposition"] = "attachment; filename={}.csv".format(filename)
+        return response
 
-    export_as_csv.short_description = _("export to csv")
+    export_as_csv.short_description = _("export as csv")
