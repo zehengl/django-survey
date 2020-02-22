@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import codecs
-import csv
 import logging
 
 from django.conf import settings

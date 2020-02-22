@@ -5,7 +5,6 @@ from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
 
-from django.conf import settings
 from django.test.utils import override_settings
 
 from survey.exporter.survey2x import Survey2X
