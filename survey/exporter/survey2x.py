@@ -80,23 +80,22 @@ class Survey2X:
         )
         return latest_answer_date >= file_modification_time
 
-    def survey_to_x(self):
+    def __str__(self):
         """ Return a string that will be written into a file.
 
         :rtype String:
         """
-        raise NotImplementedError("Please implement survey_to_x()")
+        raise NotImplementedError("Please implement __str__")
 
     def generate_file(self):
         """ Generate a x file corresponding to a Survey. """
-
         LOGGER.debug("Exporting survey '%s' to %s", self.survey, self._get_x())
         file_path = Path(self.file_name())
         if not file_path.parent.exists():
             raise NotADirectoryError(file_path.parent)
         try:
             with open(file_path, "w", encoding="UTF-8") as f:
-                f.write(self.survey_to_x())
+                f.write(str(self))
             LOGGER.info("Wrote %s in %s", self._get_x(), self.file_name())
         except IOError as exc:
             msg = "Must fix {} ".format(self._get_x_dir())
