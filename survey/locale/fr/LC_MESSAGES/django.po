@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-22 19:14+0000\n"
-"PO-Revision-Date: 2018-04-01 11:49+0000\n"
+"POT-Creation-Date: 2020-02-22 19:40+0000\n"
+"PO-Revision-Date: 2020-02-22 19:32+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Translated-Using: django-rosetta 0.7.13\n"
+"X-Translated-Using: django-rosetta 0.9.3\n"
 
 #: dev/templates/base.html:3
 msgid "en"
@@ -43,11 +43,11 @@ msgstr "Anonyme"
 
 #: survey/exporter/csv/survey2csv.py:69
 msgid "user"
-msgstr ""
+msgstr "Utilisateur"
 
 #: survey/exporter/csv/survey2csv.py:109
-msgid "export to csv"
-msgstr ""
+msgid "Export to csv"
+msgstr "Export vers CSV"
 
 #: survey/exporter/tex/question2tex.py:64
 msgid "with"

@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-22 19:14+0000\n"
-"PO-Revision-Date: 2018-10-06 20:42+0000\n"
-"Last-Translator: Javier Ordóñez <>\n"
+"POT-Creation-Date: 2020-02-22 19:40+0000\n"
+"PO-Revision-Date: 2020-02-22 19:36+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"X-Translated-Using: django-rosetta 0.9.0\n"
+"X-Translated-Using: django-rosetta 0.9.3\n"
 
 #: dev/templates/base.html:3
 msgid "en"
@@ -43,11 +43,11 @@ msgstr "Anónimo"
 
 #: survey/exporter/csv/survey2csv.py:69
 msgid "user"
-msgstr ""
+msgstr "usuario"
 
 #: survey/exporter/csv/survey2csv.py:109
-msgid "export to csv"
-msgstr ""
+msgid "Export to csv"
+msgstr "Exportación al formato CSV"
 
 #: survey/exporter/tex/question2tex.py:64
 msgid "with"

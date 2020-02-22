@@ -5,18 +5,18 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION/nReport-Msgid-Bugs-To: \n"
+"Project-Id-Version: PACKAGE VERSION/nReport-Msgid-Bugs-To:\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-22 19:14+0000\n"
-"PO-Revision-Date: 2018-04-09 00:52+0000\n"
-"Last-Translator: Zhu Sheng Li <digglife@gmail.com>\n"
+"POT-Creation-Date: 2020-02-22 19:40+0000\n"
+"PO-Revision-Date: 2020-02-22 19:33+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Translated-Using: django-rosetta 0.7.13\n"
+"X-Translated-Using: django-rosetta 0.9.3\n"
 
 #: dev/templates/base.html:3
 msgid "en"
@@ -46,7 +46,7 @@ msgid "user"
 msgstr "用户"
 
 #: survey/exporter/csv/survey2csv.py:109
-msgid "export to csv"
+msgid "Export to csv"
 msgstr "导出为CSV"
 
 #: survey/exporter/tex/question2tex.py:64
