@@ -37,15 +37,15 @@ msgstr[1] "encuestas %(count)d se marcaron exitosamente como publicadas."
 msgid "Mark selected surveys as published"
 msgstr "Marca las encuestas seleccionadas como publicadas"
 
-#: survey/exporter/csv/survey2csv.py:36
+#: survey/exporter/csv/survey2csv.py:38
 msgid "Anonymous"
 msgstr "Anónimo"
 
-#: survey/exporter/csv/survey2csv.py:69
+#: survey/exporter/csv/survey2csv.py:71
 msgid "user"
 msgstr "usuario"
 
-#: survey/exporter/csv/survey2csv.py:109
+#: survey/exporter/csv/survey2csv.py:116
 msgid "Export to csv"
 msgstr "Exportación al formato CSV"
 

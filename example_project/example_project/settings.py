@@ -27,6 +27,7 @@ SECRET_KEY = "hs!cby8c=^5up3v#j#cl#x$rg35_f!g8^@^dme(6b-0v2b%rsk"
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# EXCEL_COMPATIBLE_CSV = True
 
 
 # Application definition

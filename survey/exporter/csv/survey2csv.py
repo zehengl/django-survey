@@ -13,6 +13,8 @@ LOGGER = logging.getLogger(__name__)
 
 
 class Survey2Csv(Survey2X):
+    EXCEL_HACK = '"sep=,"'
+
     @staticmethod
     def line_list_to_string(line):
         """ Write a line in the CSV. """
@@ -76,7 +78,7 @@ class Survey2Csv(Survey2X):
     def __str__(self):
         csv = []
         if settings.EXCEL_COMPATIBLE_CSV:
-            csv.append('"sep=,"')
+            csv.append(self.EXCEL_HACK)
         header, question_order = self.get_header_and_order()
         csv.append(Survey2Csv.line_list_to_string(header))
         for response in self.survey.responses.all():
@@ -97,8 +99,13 @@ class Survey2Csv(Survey2X):
             if len(queryset) == 1:
                 response.write(survey_as_csv)
             else:
+                if settings.EXCEL_COMPATIBLE_CSV:
+                    survey_as_csv = str(survey_as_csv).replace("{}\n".format(Survey2Csv.EXCEL_HACK), "")
                 if i != 0:
                     filename += "-{}".format(survey_name)
+                elif settings.EXCEL_COMPATIBLE_CSV:
+                    # If we need to be compatible with excel and it's the first survey
+                    response.write("{}\n".format(Survey2Csv.EXCEL_HACK))
                 response.write("{survey_name}\n".format(survey_name=survey.name))
                 response.write(survey_as_csv)
                 response.write("\n\n")

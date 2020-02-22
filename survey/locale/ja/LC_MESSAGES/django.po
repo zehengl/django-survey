@@ -37,15 +37,15 @@ msgstr[1] "%(count)d つの調査が「公開」に設定されました"
 msgid "Mark selected surveys as published"
 msgstr "選択した調査を公開する"
 
-#: survey/exporter/csv/survey2csv.py:36
+#: survey/exporter/csv/survey2csv.py:38
 msgid "Anonymous"
 msgstr "匿名"
 
-#: survey/exporter/csv/survey2csv.py:69
+#: survey/exporter/csv/survey2csv.py:71
 msgid "user"
 msgstr ""
 
-#: survey/exporter/csv/survey2csv.py:109
+#: survey/exporter/csv/survey2csv.py:116
 msgid "Export to csv"
 msgstr ""
 
