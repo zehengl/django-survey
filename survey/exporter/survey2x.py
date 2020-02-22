@@ -23,7 +23,8 @@ class Survey2X:
         self._check_survey(survey)
         self.survey = survey
 
-    def _check_survey(self, survey):
+    @staticmethod
+    def _check_survey(survey):
         if not isinstance(survey, Survey):
             msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
             raise TypeError(msg)
