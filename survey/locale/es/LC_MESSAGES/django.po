@@ -46,7 +46,7 @@ msgid "user"
 msgstr "usuario"
 
 #: survey/exporter/csv/survey2csv.py:116
-msgid "Export to csv"
+msgid "Export to CSV"
 msgstr "Exportación al formato CSV"
 
 #: survey/exporter/tex/question2tex.py:64
