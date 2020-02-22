@@ -102,4 +102,5 @@ class Survey2Csv(Survey2X):
         response["Content-Disposition"] = "attachment; filename={}.csv".format(filename)
         return response
 
+
 Survey2Csv.export_as_csv.short_description = _("export to csv")

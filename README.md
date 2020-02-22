@@ -327,7 +327,7 @@ know a language that is not yet available.
 
 The software is developed in english. Other available languages are :
 
-* [x] Chinese thanks to [朱聖黎 (Zhu Sheng Li)](https://github.com/digglife/)
+* [x] Chinese thanks to [朱聖黎 (Zhu Sheng Li)](https://github.com/digglife/) and [John Lyu](https://github.com/PaleNeutron)
 * [x] French thanks to [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
 * [x] Japanese thanks to [Nobukuni Suzue](https://github.com/nsuzue/)
 * [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/)
