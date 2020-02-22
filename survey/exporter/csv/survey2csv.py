@@ -37,20 +37,7 @@ class Survey2Csv(Survey2X):
             user_answers["user"] = _("Anonymous")
         # user_answers[u"entity"] = response.user.entity
         for answer in response.answers.all():
-            answers = answer.values
-            cell = ""
-            for i, ans in enumerate(answers):
-                if ans is None:
-                    if settings.USER_DID_NOT_ANSWER is None:
-                        raise ImproperlyConfigured("USER_DID_NOT_ANSWER need to be set in your settings file.")
-                    cell += settings.USER_DID_NOT_ANSWER
-                elif i < len(answers) - 1:
-                    # Separate by a pipe if its not the last
-                    cell += ans + "|"
-                else:
-                    cell += ans
-            LOGGER.debug("\t\t%s : %s", answer.question.pk, cell)
-            user_answers[answer.question.pk] = cell
+            Survey2Csv.__get_user_line_from_answers(answer, user_answers)
         user_line = []
         for key_ in question_order:
             try:
@@ -58,6 +45,23 @@ class Survey2Csv(Survey2X):
             except KeyError:
                 user_line.append("")
         return user_line
+
+    @staticmethod
+    def __get_user_line_from_answers(answer, user_answers):
+        answers = answer.values
+        cell = ""
+        for i, ans in enumerate(answers):
+            if ans is None:
+                if settings.USER_DID_NOT_ANSWER is None:
+                    raise ImproperlyConfigured("USER_DID_NOT_ANSWER need to be set in your settings file.")
+                cell += settings.USER_DID_NOT_ANSWER
+            elif i < len(answers) - 1:
+                # Separate by a pipe if its not the last
+                cell += ans + "|"
+            else:
+                cell += ans
+        LOGGER.debug("\t\t%s : %s", answer.question.pk, cell)
+        user_answers[answer.question.pk] = cell
 
     def get_header_and_order(self):
         """ Creating header.
