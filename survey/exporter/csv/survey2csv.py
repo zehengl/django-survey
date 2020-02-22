@@ -5,7 +5,6 @@ import logging
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponse
-from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext_lazy as _
 
 from survey.exporter.survey2x import Survey2X
@@ -90,12 +89,16 @@ class Survey2Csv(Survey2X):
         response = HttpResponse(content_type="text/csv")
         response.write(codecs.BOM_UTF8)
         filename = ""
-        for survey in queryset:
-            filename += escape_uri_path(survey.name)
+        for i, survey in enumerate(queryset):
+            survey_name = survey.name.replace(" ", "_").encode("utf-8").decode("ISO-8859-1")
             survey_as_csv = Survey2Csv(survey)
+            if i == 0:
+                filename = survey_name
             if len(queryset) == 1:
                 response.write(survey_as_csv)
             else:
+                if i != 0:
+                    filename += "-{}".format(survey_name)
                 response.write("{survey_name}\n".format(survey_name=survey.name))
                 response.write(survey_as_csv)
                 response.write("\n\n")

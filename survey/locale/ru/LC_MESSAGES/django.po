@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-22 19:00+0000\n"
+"POT-Creation-Date: 2020-02-22 19:14+0000\n"
 "PO-Revision-Date: 2019-03-10 22:53+0230\n"
 "Last-Translator: b'  <vladm.ru@gmail.com>'\n"
 "Language-Team: \n"
@@ -37,15 +37,15 @@ msgstr[1] "опросы %(count)d помечены как опубликован
 msgid "Mark selected surveys as published"
 msgstr "Помечено как опублиовано"
 
-#: survey/exporter/csv/survey2csv.py:37
+#: survey/exporter/csv/survey2csv.py:36
 msgid "Anonymous"
 msgstr "Анонимно"
 
-#: survey/exporter/csv/survey2csv.py:70
+#: survey/exporter/csv/survey2csv.py:69
 msgid "user"
 msgstr ""
 
-#: survey/exporter/csv/survey2csv.py:105
+#: survey/exporter/csv/survey2csv.py:109
 msgid "export to csv"
 msgstr ""
 

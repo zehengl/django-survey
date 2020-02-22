@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION/nReport-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-22 19:00+0000\n"
+"POT-Creation-Date: 2020-02-22 19:14+0000\n"
 "PO-Revision-Date: 2018-04-09 00:52+0000\n"
 "Last-Translator: Zhu Sheng Li <digglife@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,15 +37,15 @@ msgstr[1] "%(count)d 件问卷成功标记为「已发布」"
 msgid "Mark selected surveys as published"
 msgstr "标记选择的问卷为「已发布」"
 
-#: survey/exporter/csv/survey2csv.py:37
+#: survey/exporter/csv/survey2csv.py:36
 msgid "Anonymous"
 msgstr "匿名"
 
-#: survey/exporter/csv/survey2csv.py:70
+#: survey/exporter/csv/survey2csv.py:69
 msgid "user"
 msgstr "用户"
 
-#: survey/exporter/csv/survey2csv.py:105
+#: survey/exporter/csv/survey2csv.py:109
 msgid "export to csv"
 msgstr "导出为CSV"
 
