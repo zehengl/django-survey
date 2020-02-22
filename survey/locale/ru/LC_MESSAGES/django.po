@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-22 11:07+0000\n"
+"POT-Creation-Date: 2020-02-22 12:24+0000\n"
 "PO-Revision-Date: 2019-03-10 22:53+0230\n"
 "Last-Translator: b'  <vladm.ru@gmail.com>'\n"
 "Language-Team: \n"
@@ -41,11 +41,11 @@ msgstr "Помечено как опублиовано"
 msgid "Anonymous"
 msgstr "Анонимно"
 
-#: survey/exporter/csv/survey2csv.py:66
+#: survey/exporter/csv/survey2csv.py:70
 msgid "user"
 msgstr ""
 
-#: survey/exporter/csv/survey2csv.py:101
+#: survey/exporter/csv/survey2csv.py:105
 msgid "export as csv"
 msgstr ""
 
@@ -85,12 +85,12 @@ msgstr "Перераспределение ответов"
 msgid "Left blank"
 msgstr "Оставить пустым"
 
-#: survey/exporter/tex/question2tex_chart.py:118
+#: survey/exporter/tex/question2tex_chart.py:117
 #: survey/exporter/tex/question2tex_sankey.py:30
 msgid "for the question"
 msgstr "для вопроса"
 
-#: survey/exporter/tex/question2tex_chart.py:128
+#: survey/exporter/tex/question2tex_chart.py:127
 msgid "No answers for this question."
 msgstr "Нет ответов для этого вопроса."
 
