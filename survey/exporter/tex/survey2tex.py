@@ -122,8 +122,10 @@ class Survey2Tex(Survey2X):
             LOGGER.debug("Moving <%s> to <%s> (will delete <%s> later)", dep, dir_name, dependency)
             copy(dep, dir_name)
             dependencies_to_delete.append(dependency)
-        os.system("xelatex {}".format(file_name))
-        os.system("xelatex {}".format(file_name))
+        xelatex_command = "xelatex -interaction=batchmode -halt-on-error {}".format(file_name)
+        os.system(xelatex_command)
+        # Table of content and reference need two compilations for the link to be correct
+        os.system(xelatex_command)
         if output is not None:
             os.system("mv {}.pdf {}".format(file_name[:-3], output))
         for dep in dependencies_to_delete:

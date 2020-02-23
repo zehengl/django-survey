@@ -117,7 +117,7 @@ msgstr "Wir konnten eine Grafik nicht erstellen, weil der Typ"
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "kein Standard Typ und auch kein Pfad zu einer importierbaren Question2Tex child class ist. Wähle zwischen  'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' oder 'package.path.MyQuestion2TexCustomClass'"
 
-#: survey/exporter/tex/survey2tex.py:188
+#: survey/exporter/tex/survey2tex.py:190
 msgid "Export to PDF"
 msgstr ""
 
