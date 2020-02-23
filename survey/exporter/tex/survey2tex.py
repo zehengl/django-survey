@@ -6,7 +6,7 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 from pydoc import locate
-from shutil import copy
+from shutil import copy, which
 
 import pytz
 from django.contrib.messages import ERROR
@@ -25,6 +25,11 @@ from survey.models.question import Question
 
 LOGGER = logging.getLogger(__name__)
 STATIC = Path(__file__).parent.parent.parent.joinpath("static")
+
+
+class XelatexNotInstalled(Exception):
+    def __init__(self):
+        super(XelatexNotInstalled, self).__init__(_("Cannot generate PDF, we need 'xelatex' to be installed."))
 
 
 class Survey2Tex(Survey2X):
@@ -154,6 +159,9 @@ class Survey2Tex(Survey2X):
 
     def compile_pdf(self):
         """ Compile the pdf from the tex file. """
+        xelatex = "xelatex"
+        if which(xelatex) is None:
+            raise XelatexNotInstalled()
         previous_directory = os.getcwd()
         LOGGER.debug("Generating the pdf corresponding to <%s>", self.filename)
         os.chdir(self.filename.parent)
@@ -163,7 +171,7 @@ class Survey2Tex(Survey2X):
             dependencies_to_delete.append(Path(self.filename.parent, sty_dependency.name))
             LOGGER.debug("Copying <%s> temporarily to <%s>", sty_dependency, self.filename.parent)
             copy(sty_dependency, self.filename.parent)
-        xelatex_command = ["xelatex", "-interaction=batchmode", "-halt-on-error", self.filename.name]
+        xelatex_command = [xelatex, "-interaction=batchmode", "-halt-on-error", self.filename.name]
         LOGGER.debug("Launching first compilation with <%s>.", xelatex_command)
         result = subprocess.check_output(xelatex_command)
         LOGGER.debug("First compilation had the following output: %s", result)
