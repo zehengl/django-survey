@@ -45,7 +45,7 @@ msgstr "Anonyme"
 msgid "user"
 msgstr "Utilisateur"
 
-#: survey/exporter/csv/survey2csv.py:116
+#: survey/exporter/csv/survey2csv.py:115
 msgid "Export to CSV"
 msgstr "Export vers CSV"
 
@@ -116,7 +116,7 @@ msgstr "Nous n'avons pas pu générer un graphique car le type"
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "n'est pas un type standard, ni le chemin d'une classe fille de Question2Tex importable. Choisissez entre 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' ou 'package.chemin.MaClasseQuestion2TexPerso'"
 
-#: survey/exporter/tex/survey2tex.py:197
+#: survey/exporter/tex/survey2tex.py:196
 msgid "Export to PDF"
 msgstr "Export vers PDF"
 

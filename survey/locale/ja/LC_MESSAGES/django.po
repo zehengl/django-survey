@@ -45,7 +45,7 @@ msgstr "匿名"
 msgid "user"
 msgstr ""
 
-#: survey/exporter/csv/survey2csv.py:116
+#: survey/exporter/csv/survey2csv.py:115
 msgid "Export to CSV"
 msgstr ""
 
@@ -116,7 +116,7 @@ msgstr "チャートを描画できません。何故ならタイプ"
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "は標準タイプでもインポート可能で有効なQuestion2Tex子クラスへのパスでもありません。 「raw」、「sankey」、「pie」、「cloud」、 「square」、「polar」または「package.path.MyQuestion2TexCustomClass」の中から選択してください。"
 
-#: survey/exporter/tex/survey2tex.py:197
+#: survey/exporter/tex/survey2tex.py:196
 msgid "Export to PDF"
 msgstr ""
 

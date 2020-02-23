@@ -92,17 +92,16 @@ class Survey2Csv(Survey2X):
         response.write(codecs.BOM_UTF8)
         filename = ""
         for i, survey in enumerate(queryset):
-            survey_name = survey.name.replace(" ", "_").encode("utf-8").decode("ISO-8859-1")
             survey_as_csv = Survey2Csv(survey)
             if i == 0:
-                filename = survey_name
+                filename = survey.safe_name
             if len(queryset) == 1:
                 response.write(survey_as_csv)
             else:
                 if settings.EXCEL_COMPATIBLE_CSV:
                     survey_as_csv = str(survey_as_csv).replace("{}\n".format(Survey2Csv.EXCEL_HACK), "")
                 if i != 0:
-                    filename += "-{}".format(survey_name)
+                    filename += "-{}".format(survey.safe_name)
                 elif settings.EXCEL_COMPATIBLE_CSV:
                     # If we need to be compatible with excel and it's the first survey
                     response.write("{}\n".format(Survey2Csv.EXCEL_HACK))

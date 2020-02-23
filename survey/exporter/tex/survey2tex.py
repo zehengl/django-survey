@@ -180,9 +180,8 @@ class Survey2Tex(Survey2X):
             modeladmin.message_user(request, "Cannot export multiple PDF, choose only one.", level=ERROR)
             return
         survey = queryset.first()
-        survey_name = survey.name.replace(" ", "_").encode("utf-8").decode("ISO-8859-1")
         response = HttpResponse(content_type="application/pdf")
-        response["Content-Disposition"] = "attachment; filename={}.pdf".format(survey_name)
+        response["Content-Disposition"] = "attachment; filename={}.pdf".format(survey.safe_name)
         s2tex = Survey2Tex(survey=survey)
         try:
             s2tex.generate_pdf()

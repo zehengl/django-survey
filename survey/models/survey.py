@@ -22,6 +22,10 @@ class Survey(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def safe_name(self):
+        return self.name.replace(" ", "_").encode("utf-8").decode("ISO-8859-1")
+
     def latest_answer_date(self):
         """ Return the latest answer date.
 
