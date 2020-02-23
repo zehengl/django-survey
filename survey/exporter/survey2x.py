@@ -22,6 +22,7 @@ class Survey2X:
     def __init__(self, survey=None):
         self._check_survey(survey)
         self.survey = survey
+        self.__directory = None
 
     @staticmethod
     def _check_survey(survey):
@@ -33,29 +34,28 @@ class Survey2X:
     def mime_type(self):
         return self.__class__.__name__.split("Survey2")[1].lower()
 
-    def _get_x_dir(self):
-        directory_name = "{}_DIRECTORY".format(self.mime_type.upper())
-        try:
-            return str(Path(getattr(settings, directory_name)).absolute())
-        except AttributeError:
-            raise ImproperlyConfigured("Please define a value for {} in your settings".format(directory_name))
+    @property
+    def directory(self):
+        if self.__directory is None:
+            directory_name = "{}_DIRECTORY".format(self.mime_type.upper())
+            try:
+                self.__directory = str(Path(getattr(settings, directory_name)).absolute())
+            except AttributeError:
+                raise ImproperlyConfigured("Please define a value for {} in your settings".format(directory_name))
+        return self.__directory
 
+    @property
     def filename(self):
-        """ Return the csv file name for a Survey.
-
-        :param Survey survey: The survey we're treating. """
-        filename = "{}.{}".format(slugify(self.survey.name), self.mime_type)
-        path = Path(self._get_x_dir(), filename)
-        return str(path)
+        return Path(self.directory, "{}.{}".format(slugify(self.survey.name), self.mime_type))
 
     @property
     def file_modification_time(self):
         """ Return the modification time of the "x" file. """
-        if not os.path.exists(self.filename()):
+        if not os.path.exists(self.filename):
             earliest_working_timestamp_for_windows = 86400
             mtime = earliest_working_timestamp_for_windows
         else:
-            mtime = os.path.getmtime(self.filename())
+            mtime = os.path.getmtime(self.filename)
         mtime = datetime.utcfromtimestamp(mtime)
         mtime = mtime.replace(tzinfo=pytz.timezone("UTC"))
         return mtime
@@ -91,13 +91,12 @@ class Survey2X:
 
     def generate_file(self):
         """ Generate a x file corresponding to a Survey. """
-        LOGGER.debug("Exporting survey '%s' to %s", self.survey, self.mime_type)
-        file_path = Path(self.filename())
-        if not file_path.parent.exists():
-            raise NotADirectoryError(file_path.parent)
+        LOGGER.debug("Exporting survey '%s' to '%s'", self.survey, self.mime_type)
+        if not self.filename.parent.exists():
+            raise NotADirectoryError(self.filename.parent)
         try:
-            with open(file_path, "w", encoding="UTF-8") as f:
+            with open(self.filename, "w", encoding="UTF-8") as f:
                 f.write(str(self))
-            LOGGER.info("Wrote %s in %s", self.mime_type, self.filename())
+            LOGGER.info("Wrote %s in %s", self.mime_type, self.filename)
         except IOError as exc:
-            raise IOError("Unable to create <{}> : {} ".format(self.filename(), exc))
+            raise IOError("Unable to create <{}> : {} ".format(self.filename, exc))

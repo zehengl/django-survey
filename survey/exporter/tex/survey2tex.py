@@ -136,7 +136,7 @@ class Survey2Tex(Survey2X):
     @property
     def file_modification_time(self):
         """ Return the modification time of the pdf. """
-        pdf_path = Path(self._get_x_dir(), "{}.pdf".format(slugify(self.survey.name)))
+        pdf_path = Path(self.directory, "{}.pdf".format(slugify(self.survey.name)))
         if not pdf_path.exists():
             earliest_working_timestamp_for_windows = 86400
             mtime = earliest_working_timestamp_for_windows
@@ -151,7 +151,7 @@ class Survey2Tex(Survey2X):
 
     def pdf_path(self) -> str:
         filename = "{}.pdf".format(slugify(self.survey.name))
-        path = Path(self._get_x_dir(), filename)
+        path = Path(self.directory, filename)
         return str(path)
 
     def create_tex(self, questions=None):
@@ -169,10 +169,10 @@ class Survey2Tex(Survey2X):
 
     def generate_pdf(self):
         """Compile the pdf from the tex file. Can raise subprocess.CalledProcessError """
-        LOGGER.debug("Generating <%s>", self.filename())
+        LOGGER.debug("Generating <%s>", self.filename)
         self.generate_file()
-        LOGGER.debug("Generated <%s>. Now compilating with xelatex to get <%s>.", self.filename(), self.pdf_path())
-        self.generate(self.filename())
+        LOGGER.debug("Generated <%s>. Now compilating with xelatex to get <%s>.", self.filename, self.pdf_path())
+        self.generate(self.filename)
 
     @staticmethod
     def export_as_tex(modeladmin, request, queryset):

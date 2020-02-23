@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
-from unittest.mock import patch
 
 from django.test.utils import override_settings
 
 from survey.exporter.csv.survey2csv import Survey2Csv
 from survey.tests.management.test_management import TestManagement
-
-
-@staticmethod
-def raise_io_exc():
-    raise IOError()
 
 
 class TestSurvey2Csv(TestManagement):
@@ -35,17 +29,12 @@ class TestSurvey2Csv(TestManagement):
     def test_get_survey_excel_compatible(self):
         self.assertEqual(str(self.s2csv), '"sep=,"\n' + self.expected_content)
 
-    @patch.object(Survey2Csv, "filename", raise_io_exc)
-    def test_dir_not_exists(self):
-        """ We raise an IoError if the directory does not exists. """
-        self.assertRaises(IOError, self.s2csv.generate_file)
-
     def test_not_a_survey(self):
         """ TypeError raised when the object is not a survey. """
         self.assertRaises(TypeError, Survey2Csv, "Not a survey")
 
     def test_filename(self):
         """ Filename is not an unicode object or os.path and others fail. """
-        name = self.s2csv.filename()
+        name = str(self.s2csv.filename)
         self.assertIn("csv", name)
         self.assertIn("test-management-survey.csv", name)
