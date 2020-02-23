@@ -39,22 +39,22 @@ class Survey2X:
         except AttributeError:
             raise ImproperlyConfigured("Please define a value for {} in your settings".format(directory_name))
 
-    def file_name(self):
+    def filename(self):
         """ Return the csv file name for a Survey.
 
         :param Survey survey: The survey we're treating. """
-        file_name = "{}.{}".format(slugify(self.survey.name), self._get_x())
-        path = Path(self._get_x_dir(), file_name)
+        filename = "{}.{}".format(slugify(self.survey.name), self._get_x())
+        path = Path(self._get_x_dir(), filename)
         return str(path)
 
     @property
     def file_modification_time(self):
         """ Return the modification time of the "x" file. """
-        if not os.path.exists(self.file_name()):
+        if not os.path.exists(self.filename()):
             earliest_working_timestamp_for_windows = 86400
             mtime = earliest_working_timestamp_for_windows
         else:
-            mtime = os.path.getmtime(self.file_name())
+            mtime = os.path.getmtime(self.filename())
         mtime = datetime.utcfromtimestamp(mtime)
         mtime = mtime.replace(tzinfo=pytz.timezone("UTC"))
         return mtime
@@ -91,12 +91,12 @@ class Survey2X:
     def generate_file(self):
         """ Generate a x file corresponding to a Survey. """
         LOGGER.debug("Exporting survey '%s' to %s", self.survey, self._get_x())
-        file_path = Path(self.file_name())
+        file_path = Path(self.filename())
         if not file_path.parent.exists():
             raise NotADirectoryError(file_path.parent)
         try:
             with open(file_path, "w", encoding="UTF-8") as f:
                 f.write(str(self))
-            LOGGER.info("Wrote %s in %s", self._get_x(), self.file_name())
+            LOGGER.info("Wrote %s in %s", self._get_x(), self.filename())
         except IOError as exc:
-            raise IOError("Unable to create <{}> : {} ".format(self.file_name(), exc))
+            raise IOError("Unable to create <{}> : {} ".format(self.filename(), exc))

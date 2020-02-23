@@ -15,7 +15,7 @@ def serve_unprotected_result_csv(survey):
     survey_to_csv = Survey2Csv(survey)
     if survey_to_csv.need_update():
         survey_to_csv.generate_file()
-    with open(survey_to_csv.file_name(), "r") as csv_file:
+    with open(survey_to_csv.filename(), "r") as csv_file:
         response = HttpResponse(csv_file.read(), content_type="text/csv")
     content_disposition = 'attachment; filename="{}.csv"'.format(survey.name)
     response["Content-Disposition"] = content_disposition

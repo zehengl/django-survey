@@ -35,7 +35,7 @@ class TestSurvey2Csv(TestManagement):
     def test_get_survey_excel_compatible(self):
         self.assertEqual(str(self.s2csv), '"sep=,"\n' + self.expected_content)
 
-    @patch.object(Survey2Csv, "file_name", raise_io_exc)
+    @patch.object(Survey2Csv, "filename", raise_io_exc)
     def test_dir_not_exists(self):
         """ We raise an IoError if the directory does not exists. """
         self.assertRaises(IOError, self.s2csv.generate_file)
@@ -46,6 +46,6 @@ class TestSurvey2Csv(TestManagement):
 
     def test_filename(self):
         """ Filename is not an unicode object or os.path and others fail. """
-        name = self.s2csv.file_name()
+        name = self.s2csv.filename()
         self.assertIn("csv", name)
         self.assertIn("test-management-survey.csv", name)

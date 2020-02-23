@@ -42,9 +42,9 @@ class TestSurvey2X(TestManagement):
         self.assertRaises(NotImplementedError, self.virtual_survey2x.__str__)
 
     @override_settings(X_DIRECTORY=Path(ROOT, "x"))
-    def test_file_name(self):
-        self.assertEqual(self.actual_survey2x.file_name(), self.expected_actual)
-        self.assertEqual(self.virtual_survey2x.file_name(), self.expected_virtual)
+    def test_filename(self):
+        self.assertEqual(self.actual_survey2x.filename(), self.expected_actual)
+        self.assertEqual(self.virtual_survey2x.filename(), self.expected_virtual)
 
     def test_initially_need_update(self):
         self.assertTrue(
