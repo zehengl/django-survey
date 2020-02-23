@@ -148,6 +148,8 @@ class Survey2Tex(Survey2X):
         for question in questions:
             ltxf.text += self.treat_question(question)
         self._additional_analysis(self.survey, ltxf)
+        if not ltxf.text:
+            ltxf.text = _("No questions to display in this survey.")
         return ltxf.document
 
     def compile_pdf(self):
@@ -161,10 +163,12 @@ class Survey2Tex(Survey2X):
             dependencies_to_delete.append(Path(self.filename.parent, sty_dependency.name))
             LOGGER.debug("Copying <%s> temporarily to <%s>", sty_dependency, self.filename.parent)
             copy(sty_dependency, self.filename.parent)
-        xelatex_command = ["xelatex", "-interaction=batchmode", "-halt-on-error", (self.filename.name)]
-        subprocess.call(xelatex_command)
-        # Table of content and reference need two compilations for the link to be correct
-        subprocess.call(xelatex_command)
+        xelatex_command = ["xelatex", "-interaction=batchmode", "-halt-on-error", self.filename.name]
+        LOGGER.debug("Launching first compilation with <%s>.", xelatex_command)
+        result = subprocess.check_output(xelatex_command)
+        LOGGER.debug("First compilation had the following output: %s", result)
+        LOGGER.debug("Launching second compilation for ref/label and proper table of content.")
+        subprocess.check_output(xelatex_command)
         for sty_dependency in dependencies_to_delete:
             sty_dependency.unlink()
         os.chdir(previous_directory)
