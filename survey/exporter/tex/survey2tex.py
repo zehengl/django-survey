@@ -124,9 +124,9 @@ class Survey2Tex(Survey2X):
             copy(dep, dir_name)
             dependencies_to_delete.append(dependency)
         xelatex_command = ["xelatex", "-interaction=batchmode", "-halt-on-error", file_name]
-        subprocess.check_call(xelatex_command)
+        subprocess.call(xelatex_command)
         # Table of content and reference need two compilations for the link to be correct
-        subprocess.check_call(xelatex_command)
+        subprocess.call(xelatex_command)
         if output is not None:
             os.system("mv {}.pdf {}".format(file_name[:-3], output))
         for dep in dependencies_to_delete:
@@ -168,8 +168,10 @@ class Survey2Tex(Survey2X):
         return ltxf.document
 
     def generate_pdf(self):
-        """ Compile the pdf from the tex file. """
+        """Compile the pdf from the tex file. Can raise subprocess.CalledProcessError """
+        LOGGER.debug("Generating <%s>", self.file_name())
         self.generate_file()
+        LOGGER.debug("Generated <%s>. Now compilating with xelatex to get <%s>.", self.file_name(), self.pdf_path())
         self.generate(self.file_name())
 
     @staticmethod
@@ -182,7 +184,11 @@ class Survey2Tex(Survey2X):
         response = HttpResponse(content_type="application/pdf")
         response["Content-Disposition"] = "attachment; filename={}.pdf".format(survey_name)
         s2tex = Survey2Tex(survey=survey)
-        s2tex.generate_pdf()
+        try:
+            s2tex.generate_pdf()
+        except subprocess.CalledProcessError as exc:
+            modeladmin.message_user(request, "Error during PDF generation: %s" % exc, level=ERROR)
+            return
         with open(s2tex.pdf_path(), "rb") as f:
             response.write(f.read())
         return response
