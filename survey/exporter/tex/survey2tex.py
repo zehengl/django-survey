@@ -176,7 +176,7 @@ class Survey2Tex(Survey2X):
     @staticmethod
     def export_as_tex(modeladmin, request, queryset):
         if len(queryset) != 1:
-            modeladmin.message_user(request, "Cannot export multiple PDF, choose only one.", level=ERROR)
+            modeladmin.message_user(request, _("Cannot export multiple PDF, choose only one."), level=ERROR)
             return
         survey = queryset.first()
         response = HttpResponse(content_type="application/pdf")
@@ -185,7 +185,7 @@ class Survey2Tex(Survey2X):
         try:
             s2tex.generate_pdf()
         except subprocess.CalledProcessError as exc:
-            modeladmin.message_user(request, "Error during PDF generation: %s" % exc, level=ERROR)
+            modeladmin.message_user(request, _("Error during PDF generation: %s" % exc), level=ERROR)
             return
         with open(s2tex.pdf_filename, "rb") as f:
             response.write(f.read())
