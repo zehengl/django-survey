@@ -128,9 +128,13 @@ or in a pdf generated with latex.
 
 ## Generating a pdf report from the survey's result
 
+There is a default configuration for PDF generation, but you might want to change
+`TEX_CONFIGURATION_FILE` for better results (in particular for language other
+than english).
+
 You can manage the way the report is created in a yaml file, globally, survey
 by survey, or question by question. In order to render pdf you will need to
-install texlive and python-tk or python3-tk for sankey's diagram.
+install xelatex. You will also need python3-tk for sankey's diagram.
 
 The results are generated for the server only when needed, but you can force
 it as a developper with:
@@ -330,7 +334,7 @@ The software is developed in english. Other available languages are :
 * [x] Chinese thanks to [朱聖黎 (Zhu Sheng Li)](https://github.com/digglife/) and [John Lyu](https://github.com/PaleNeutron)
 * [x] French thanks to [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
 * [x] Japanese thanks to [Nobukuni Suzue](https://github.com/nsuzue/)
-* [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/)
+* [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/) and [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
 * [x] Russian thanks to [Vlad M.](https://github.com/manchos/)
 * [x] German thanks to [Georg Elsas](https://github.com/gjelsas)
 
