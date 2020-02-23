@@ -116,7 +116,7 @@ msgstr "我们无法生成图表，因为类型"
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "既不是标准类型，也不是可导入的有效 Question2Tex 子类的路径。请在'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' 或 'package.path.MyQuestion2TexCustomClass' 中选择。"
 
-#: survey/exporter/tex/survey2tex.py:185
+#: survey/exporter/tex/survey2tex.py:188
 msgid "Export to PDF"
 msgstr "导出为PDF"
 

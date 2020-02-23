@@ -35,7 +35,7 @@ class Survey2X:
     def _get_x_dir(self):
         directory_name = "{}_DIRECTORY".format(self._get_x().upper())
         try:
-            return getattr(settings, directory_name)
+            return str(Path(getattr(settings, directory_name)).absolute())
         except AttributeError:
             raise ImproperlyConfigured("Please define a value for {} in your settings".format(directory_name))
 

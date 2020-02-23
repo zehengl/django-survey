@@ -112,13 +112,16 @@ class Survey2Tex(Survey2X):
     def generate(self, path, output=None):
         """ Compile the pdf from the tex file. """
         previous_directory = os.getcwd()
+        LOGGER.debug("Generating the pdf corresponding to <%s>", path)
         dir_name, file_name = os.path.split(path)
         os.chdir(dir_name)
         sty_dependencies = [self.PGF_PIE_STY, self.PGF_PLOT_STY]
         dependencies_to_delete = []
         for dep in sty_dependencies:
+            dependency = Path(dir_name, dep.name)
+            LOGGER.debug("Moving <%s> to <%s> (will delete <%s> later)", dep, dir_name, dependency)
             copy(dep, dir_name)
-            dependencies_to_delete.append(Path(dir_name, dep.name))
+            dependencies_to_delete.append(dependency)
         os.system("xelatex {}".format(file_name))
         os.system("xelatex {}".format(file_name))
         if output is not None:
