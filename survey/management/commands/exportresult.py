@@ -69,5 +69,5 @@ class Command(SurveyCommand):
                     LOGGER.warning(
                         "\t- %s's %s were already generated use the --force (-f) option to generate anyway.",
                         survey,
-                        exporter._get_x(),
+                        exporter.mime_type,
                     )

@@ -29,11 +29,12 @@ class Survey2X:
             msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
             raise TypeError(msg)
 
-    def _get_x(self):
+    @property
+    def mime_type(self):
         return self.__class__.__name__.split("Survey2")[1].lower()
 
     def _get_x_dir(self):
-        directory_name = "{}_DIRECTORY".format(self._get_x().upper())
+        directory_name = "{}_DIRECTORY".format(self.mime_type.upper())
         try:
             return str(Path(getattr(settings, directory_name)).absolute())
         except AttributeError:
@@ -43,7 +44,7 @@ class Survey2X:
         """ Return the csv file name for a Survey.
 
         :param Survey survey: The survey we're treating. """
-        filename = "{}.{}".format(slugify(self.survey.name), self._get_x())
+        filename = "{}.{}".format(slugify(self.survey.name), self.mime_type)
         path = Path(self._get_x_dir(), filename)
         return str(path)
 
@@ -90,13 +91,13 @@ class Survey2X:
 
     def generate_file(self):
         """ Generate a x file corresponding to a Survey. """
-        LOGGER.debug("Exporting survey '%s' to %s", self.survey, self._get_x())
+        LOGGER.debug("Exporting survey '%s' to %s", self.survey, self.mime_type)
         file_path = Path(self.filename())
         if not file_path.parent.exists():
             raise NotADirectoryError(file_path.parent)
         try:
             with open(file_path, "w", encoding="UTF-8") as f:
                 f.write(str(self))
-            LOGGER.info("Wrote %s in %s", self._get_x(), self.filename())
+            LOGGER.info("Wrote %s in %s", self.mime_type, self.filename())
         except IOError as exc:
             raise IOError("Unable to create <{}> : {} ".format(self.filename(), exc))
