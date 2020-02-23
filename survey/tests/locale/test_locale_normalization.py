@@ -2,11 +2,12 @@ import os
 import platform
 import subprocess
 import unittest
+from pathlib import Path
 
 
 class TestLocaleNormalization(unittest.TestCase):
 
-    LOCALE_PATH = "survey/locale/"
+    LOCALE_PATH = Path("survey", "locale").absolute()
 
     def test_normalization(self):
         """ We test if the messages were properly created with makemessages --no-obsolete --no-wrap. """
