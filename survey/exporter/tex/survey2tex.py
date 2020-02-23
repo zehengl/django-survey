@@ -39,10 +39,6 @@ class Survey2Tex(Survey2X):
             configuration = Configuration()
         self.tconf = configuration
 
-    def _synthesis(self, survey):
-        """ Return a String of a synthesis of the report. """
-        pass
-
     def _additional_analysis(self, survey, latex_file):
         """ Perform additional analysis. """
         for function_ in self.ANALYSIS_FUNCTION:
@@ -161,7 +157,6 @@ class Survey2Tex(Survey2X):
         kwargs = self.tconf.get(survey_name=self.survey.name)
         del kwargs["document_class"]
         ltxf = LatexFile(document_class, **kwargs)
-        self._synthesis(self.survey)
         for question in questions:
             ltxf.text += self.treat_question(question)
         self._additional_analysis(self.survey, ltxf)
