@@ -290,6 +290,9 @@ python manage.py createsuperuser
 python manage.py runserver # Launch server
 ~~~~
 
+Please note that `pre-commit` will permit to fix a lot of linting error
+automatically and is not required but highly recommended.
+
 ### Committing code
 
 #### Launching tests
