@@ -110,7 +110,7 @@ class Survey2Tex(Survey2X):
             question_synthesis,
         )
 
-    def generate(self, path, output=None):
+    def compile_pdf(self, path, output=None):
         """ Compile the pdf from the tex file. """
         previous_directory = os.getcwd()
         LOGGER.debug("Generating the pdf corresponding to <%s>", path)
@@ -167,12 +167,12 @@ class Survey2Tex(Survey2X):
         self._additional_analysis(self.survey, ltxf)
         return ltxf.document
 
-    def generate_pdf(self):
+    def generate_pdf(self, output=None):
         """Compile the pdf from the tex file. Can raise subprocess.CalledProcessError """
         LOGGER.debug("Generating <%s>", self.filename)
         self.generate_file()
         LOGGER.debug("Generated <%s>. Now compilating with xelatex to get <%s>.", self.filename, self.pdf_path())
-        self.generate(self.filename)
+        self.compile_pdf(self.filename, output)
 
     @staticmethod
     def export_as_tex(modeladmin, request, queryset):
