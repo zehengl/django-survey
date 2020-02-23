@@ -106,38 +106,14 @@ class Survey2Tex(Survey2X):
             question_synthesis,
         )
 
-    def compile_pdf(self, path, output=None):
-        """ Compile the pdf from the tex file. """
-        previous_directory = os.getcwd()
-        LOGGER.debug("Generating the pdf corresponding to <%s>", path)
-        dir_name, filename = os.path.split(path)
-        os.chdir(dir_name)
-        sty_dependencies = [self.PGF_PIE_STY, self.PGF_PLOT_STY]
-        dependencies_to_delete = []
-        for dep in sty_dependencies:
-            dependency = Path(dir_name, dep.name)
-            LOGGER.debug("Moving <%s> to <%s> (will delete <%s> later)", dep, dir_name, dependency)
-            copy(dep, dir_name)
-            dependencies_to_delete.append(dependency)
-        xelatex_command = ["xelatex", "-interaction=batchmode", "-halt-on-error", filename]
-        subprocess.call(xelatex_command)
-        # Table of content and reference need two compilations for the link to be correct
-        subprocess.call(xelatex_command)
-        if output is not None:
-            os.system("mv {}.pdf {}".format(filename[:-3], output))
-        for dep in dependencies_to_delete:
-            dep.unlink()
-        os.chdir(previous_directory)
-
     @property
     def file_modification_time(self):
         """ Return the modification time of the pdf. """
-        pdf_path = Path(self.directory, "{}.pdf".format(slugify(self.survey.name)))
-        if not pdf_path.exists():
+        if not self.pdf_filename.exists():
             earliest_working_timestamp_for_windows = 86400
             mtime = earliest_working_timestamp_for_windows
         else:
-            mtime = os.path.getmtime(pdf_path)
+            mtime = os.path.getmtime(self.pdf_filename)
         mtime = datetime.utcfromtimestamp(mtime)
         mtime = mtime.replace(tzinfo=pytz.timezone("UTC"))
         return mtime
@@ -145,10 +121,19 @@ class Survey2Tex(Survey2X):
     def __str__(self):
         return self.create_tex()
 
-    def pdf_path(self) -> str:
-        filename = "{}.pdf".format(slugify(self.survey.name))
-        path = Path(self.directory, filename)
-        return str(path)
+    @property
+    def pdf_filename(self) -> str:
+        return Path(self.directory, "{}.{}".format(slugify(self.survey.name), "pdf"))
+
+    def generate_pdf(self):
+        """Compile the pdf from the tex file. Can raise subprocess.CalledProcessError """
+        if not self.need_update():
+            LOGGER.info("<%s> is already generated and up to date.", self.pdf_filename)
+            return
+        LOGGER.debug("Generating <%s>", self.filename)
+        self.generate_file()
+        LOGGER.debug("Generated <%s>. Now compilating with xelatex to get <%s>.", self.filename, self.pdf_filename)
+        self.compile_pdf()
 
     def create_tex(self, questions=None):
         if questions is None:
@@ -162,12 +147,24 @@ class Survey2Tex(Survey2X):
         self._additional_analysis(self.survey, ltxf)
         return ltxf.document
 
-    def generate_pdf(self, output=None):
-        """Compile the pdf from the tex file. Can raise subprocess.CalledProcessError """
-        LOGGER.debug("Generating <%s>", self.filename)
-        self.generate_file()
-        LOGGER.debug("Generated <%s>. Now compilating with xelatex to get <%s>.", self.filename, self.pdf_path())
-        self.compile_pdf(self.filename, output)
+    def compile_pdf(self):
+        """ Compile the pdf from the tex file. """
+        previous_directory = os.getcwd()
+        LOGGER.debug("Generating the pdf corresponding to <%s>", self.filename)
+        os.chdir(self.filename.parent)
+        sty_dependencies = [self.PGF_PIE_STY, self.PGF_PLOT_STY]
+        dependencies_to_delete = []
+        for sty_dependency in sty_dependencies:
+            dependencies_to_delete.append(Path(self.filename.parent, sty_dependency.name))
+            LOGGER.debug("Copying <%s> temporarily to <%s>", sty_dependency, self.filename.parent)
+            copy(sty_dependency, self.filename.parent)
+        xelatex_command = ["xelatex", "-interaction=batchmode", "-halt-on-error", (self.filename.name)]
+        subprocess.call(xelatex_command)
+        # Table of content and reference need two compilations for the link to be correct
+        subprocess.call(xelatex_command)
+        for sty_dependency in dependencies_to_delete:
+            sty_dependency.unlink()
+        os.chdir(previous_directory)
 
     @staticmethod
     def export_as_tex(modeladmin, request, queryset):
@@ -183,7 +180,7 @@ class Survey2Tex(Survey2X):
         except subprocess.CalledProcessError as exc:
             modeladmin.message_user(request, "Error during PDF generation: %s" % exc, level=ERROR)
             return
-        with open(s2tex.pdf_path(), "rb") as f:
+        with open(s2tex.pdf_filename, "rb") as f:
             response.write(f.read())
         return response
 

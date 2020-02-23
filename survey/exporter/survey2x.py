@@ -74,8 +74,9 @@ class Survey2X:
             return False
         file_modification_time = self.file_modification_time
         LOGGER.debug(
-            "We %sneed an update because latest_answer_date=%s > file_modification_time=%s is %s \n",
+            "We %sneed an update of <%s> because latest_answer_date=%s > file_modification_time=%s is %s \n",
             "" if latest_answer_date > file_modification_time else "do not ",
+            self.survey.name,
             latest_answer_date,
             file_modification_time,
             latest_answer_date > file_modification_time,
