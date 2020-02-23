@@ -71,10 +71,10 @@ class Survey2X:
         latest_answer_date = self.latest_answer_date
         no_response_at_all = latest_answer_date is None
         if no_response_at_all:
-            return False
+            return not self.__generation_done_once()
         file_modification_time = self.file_modification_time
         LOGGER.debug(
-            "We %sneed an update of <%s> because latest_answer_date=%s > file_modification_time=%s is %s \n",
+            "We %sneed an update of <%s> because latest_answer_date=%s >= file_modification_time=%s is %s \n",
             "" if latest_answer_date > file_modification_time else "do not ",
             self.survey.name,
             latest_answer_date,
@@ -82,6 +82,9 @@ class Survey2X:
             latest_answer_date > file_modification_time,
         )
         return latest_answer_date >= file_modification_time
+
+    def __generation_done_once(self):
+        return not os.path.exists(self.filename)
 
     def __str__(self):
         """ Return a string that will be written into a file.

@@ -118,6 +118,9 @@ class Survey2Tex(Survey2X):
         mtime = mtime.replace(tzinfo=pytz.timezone("UTC"))
         return mtime
 
+    def __generation_done_once(self):
+        return os.path.exists(self.pdf_filename)
+
     def __str__(self):
         return self.create_tex()
 
