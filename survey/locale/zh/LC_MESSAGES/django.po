@@ -84,7 +84,7 @@ msgid "Left blank"
 msgstr "留空"
 
 #: survey/exporter/tex/question2tex_chart.py:117
-#: survey/exporter/tex/question2tex_sankey.py:30
+#: survey/exporter/tex/question2tex_sankey.py:40
 msgid "for the question"
 msgstr "为此问题"
 
@@ -96,15 +96,15 @@ msgstr "该问题尚无回答"
 msgid "Participant"
 msgstr "参与者"
 
-#: survey/exporter/tex/question2tex_sankey.py:30
+#: survey/exporter/tex/question2tex_sankey.py:40
 msgid "left"
 msgstr "左"
 
-#: survey/exporter/tex/question2tex_sankey.py:32
+#: survey/exporter/tex/question2tex_sankey.py:42
 msgid "in relation with the question"
 msgstr "和此问题相关"
 
-#: survey/exporter/tex/question2tex_sankey.py:34
+#: survey/exporter/tex/question2tex_sankey.py:44
 msgid "right"
 msgstr "右"
 

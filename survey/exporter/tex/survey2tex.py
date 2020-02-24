@@ -70,8 +70,8 @@ class Survey2Tex(Survey2X):
             elif tex_type == "sankey":
                 other_question_text = opts["question"]
                 other_question = Question.objects.get(text=other_question_text)
-                q2tex = Question2TexSankey(question)
-                question_synthesis += q2tex.tex(other_question)
+                q2tex = Question2TexSankey(question, other_question=other_question)
+                question_synthesis += q2tex.tex()
             elif tex_type in ["pie", "cloud", "square", "polar"]:
                 q2tex = Question2TexChart(question, latex_label=i, **opts)
                 question_synthesis += q2tex.tex()

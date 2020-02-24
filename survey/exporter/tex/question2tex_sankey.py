@@ -26,6 +26,16 @@ class Question2TexSankey(Question2Tex):
 \\end{figure}
 """
 
+    def __init__(self, question, **options):
+        other_question = options.get("other_question")
+        if not isinstance(other_question, Question):
+            msg = "Expected a 'Question' and got '{}'".format(other_question)
+            msg += " (a '{}').".format(other_question.__class__.__name__)
+            raise TypeError(msg)
+        del options["other_question"]
+        super(Question2TexSankey, self).__init__(question, **options)
+        self.other_question = other_question
+
     def get_caption_specifics(self):
         caption = "%s '%s' (%s) " % (_("for the question"), Question2Tex.html2latex(self.question.text), _("left"))
         caption += "%s '%s' (%s) " % (
@@ -35,7 +45,7 @@ class Question2TexSankey(Question2Tex):
         )
         return caption
 
-    def tex(self, other_question):
+    def tex(self):
         """ Return a tikz Sankey Diagram of two questions.
 
         The question used during initialization will be left and down the other
@@ -46,11 +56,6 @@ class Question2TexSankey(Question2Tex):
         in order for it to work with your latex file.
 
         :param Question other_question: the question we compare to. """
-        if not isinstance(other_question, Question):
-            msg = "Expected a 'Question' and got '{}'".format(other_question)
-            msg += " (a '{}').".format(other_question.__class__.__name__)
-            raise TypeError(msg)
-        self.other_question = other_question
         self.cardinality = self.question.sorted_answers_cardinality(
             self.min_cardinality,
             self.group_together,
@@ -58,7 +63,7 @@ class Question2TexSankey(Question2Tex):
             self.group_by_slugify,
             self.filter,
             self.sort_answer,
-            other_question=other_question,
+            other_question=self.other_question,
         )
         q1 = []
         q2 = []
@@ -66,7 +71,12 @@ class Question2TexSankey(Question2Tex):
             for answer_to_q2, number_of_time in list(cardinality_to_q2.items()):
                 q1 += [answer_to_q1] * number_of_time
                 q2 += [answer_to_q2] * number_of_time
-        df = DataFrame(data={self.question.text: q1, other_question.text: q2})
-        name = "tex/q{}_vs_q{}".format(self.question.pk, other_question.pk)
-        sankey(df[self.question.text], df[other_question.text], aspect=20, fontsize=10, figureName=name)
-        return Question2TexSankey.TEX_SKELETON % (name[4:], self.question.pk, other_question.pk, self.get_caption())
+        df = DataFrame(data={self.question.text: q1, self.other_question.text: q2})
+        name = "tex/q{}_vs_q{}".format(self.question.pk, self.other_question.pk)
+        sankey(df[self.question.text], df[self.other_question.text], aspect=20, fontsize=10, figureName=name)
+        return Question2TexSankey.TEX_SKELETON % (
+            name[4:],
+            self.question.pk,
+            self.other_question.pk,
+            self.get_caption(),
+        )

@@ -84,7 +84,7 @@ msgid "Left blank"
 msgstr "空白のまま"
 
 #: survey/exporter/tex/question2tex_chart.py:117
-#: survey/exporter/tex/question2tex_sankey.py:30
+#: survey/exporter/tex/question2tex_sankey.py:40
 msgid "for the question"
 msgstr "質問の為に"
 
@@ -96,15 +96,15 @@ msgstr "この質問に答えない"
 msgid "Participant"
 msgstr "参加者"
 
-#: survey/exporter/tex/question2tex_sankey.py:30
+#: survey/exporter/tex/question2tex_sankey.py:40
 msgid "left"
 msgstr "左"
 
-#: survey/exporter/tex/question2tex_sankey.py:32
+#: survey/exporter/tex/question2tex_sankey.py:42
 msgid "in relation with the question"
 msgstr "質問に関連して"
 
-#: survey/exporter/tex/question2tex_sankey.py:34
+#: survey/exporter/tex/question2tex_sankey.py:44
 msgid "right"
 msgstr "右"
 

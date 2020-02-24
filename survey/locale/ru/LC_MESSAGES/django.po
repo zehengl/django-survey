@@ -86,7 +86,7 @@ msgid "Left blank"
 msgstr "Оставить пустым"
 
 #: survey/exporter/tex/question2tex_chart.py:117
-#: survey/exporter/tex/question2tex_sankey.py:30
+#: survey/exporter/tex/question2tex_sankey.py:40
 msgid "for the question"
 msgstr "для вопроса"
 
@@ -99,16 +99,16 @@ msgid "Participant"
 msgstr "Участник"
 
 #  as in "opposite of right"
-#: survey/exporter/tex/question2tex_sankey.py:30
+#: survey/exporter/tex/question2tex_sankey.py:40
 msgid "left"
 msgstr "не правильно"
 
-#: survey/exporter/tex/question2tex_sankey.py:32
+#: survey/exporter/tex/question2tex_sankey.py:42
 msgid "in relation with the question"
 msgstr "в связи с вопросом"
 
 # as in "opposite of left"
-#: survey/exporter/tex/question2tex_sankey.py:34
+#: survey/exporter/tex/question2tex_sankey.py:44
 msgid "right"
 msgstr "правильно"
 
