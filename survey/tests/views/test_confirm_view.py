@@ -16,10 +16,10 @@ class TestConfirmView(BaseTest):
 
     def test_editable_survey(self):
         response = self.get_first_response("Unicode问卷")
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, "come back and change them")
 
     def test_uneditable_survey(self):
         response = self.get_first_response("Test survëy")
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, "come back and change them")
