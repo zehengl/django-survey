@@ -27,7 +27,8 @@ class SurveyCommand(BaseCommand):
         parser.add_argument("--question-id", nargs="+", type=int, help=help_text.format("primary key", "question"))
         parser.add_argument("--question-text", nargs="+", type=str, help=help_text.format("text", "question"))
 
-    def raise_value_error(self, error_type, value):
+    @staticmethod
+    def raise_value_error(error_type, value):
         """ Raise a ValueError with a clean error message in python 2.7 and 3.
         :param string value: the attempted value. """
         if error_type in ["question-id", "question-text"]:
@@ -39,8 +40,8 @@ class SurveyCommand(BaseCommand):
         msg = "You tried to get --{} '{}' ".format(error_type, value)
         if valids:
             msg += "but is does not exists. Possibles values :\n"
-            for pk, name in valids:
-                msg += base.format(pk, name)
+            for primary_key, name in valids:
+                msg += base.format(primary_key, name)
             msg = msg[:-1]  # Remove last \n
         else:
             msg += "but there is nothing in the database."
@@ -51,10 +52,9 @@ class SurveyCommand(BaseCommand):
         # pragma: no cover
         raise ValueError(msg)
 
-    def check_mutually_exclusive(self, opts):
-        """ We could use the ArgParse option for this, but the case is
-        simple enough to be treated this way. """
-
+    @staticmethod
+    def check_mutually_exclusive(opts):
+        """We could use the ArgParse option for this, but the case is simple enough to be treated this way."""
         all_questions = opts.get("question_all")
         some_questions = opts.get("question_text") or opts.get("question_id")
         all_surveys = opts.get("survey_all")
@@ -67,7 +67,8 @@ class SurveyCommand(BaseCommand):
         if all_surveys and some_surveys:
             sys.exit(error_msg.format("survey with '--survey-id' or '--survey-name' while also using '--survey-all'"))
 
-    def check_nothing_at_all(self, options):
+    @staticmethod
+    def check_nothing_at_all(options):
         at_least_a_question = options.get("question_all") or options.get("question_text") or options.get("question_id")
         at_least_a_survey = (
             options.get("survey_all")
@@ -89,23 +90,23 @@ class SurveyCommand(BaseCommand):
         self.set_surveys(options)
 
     def set_surveys(self, options):
+        #  pylint: disable=attribute-defined-outside-init
+        self.surveys = []
         if options.get("survey_all"):
             self.surveys = Survey.objects.all()
         else:
-            self.surveys = []
-            names = options.get("survey_name")
-            names = names or []
+            names = options.get("survey_name") or []
             for survey_name in names:
                 self.__add_survey_by_name(survey_name)
-            ids = options.get("survey_id")
-            ids = ids or []
+            ids = options.get("survey_id") or []
             for survey_id in ids:
                 self.__add_survey_by_id(survey_id)
             if options.get("survey_latest"):
                 survey_id = self.__get_latest_id()
                 self.__add_survey_by_id(survey_id)
 
-    def __get_latest_id(self):
+    @staticmethod
+    def __get_latest_id():
         valids = [(s.pk, s.name) for s in Survey.objects.all()]
         return max(valids, key=itemgetter(0))[0]
 
@@ -122,10 +123,11 @@ class SurveyCommand(BaseCommand):
             self.raise_value_error("survey-name", survey_name)
 
     def set_questions(self, options):
+        #  pylint: disable=attribute-defined-outside-init
+        self.questions = []
         if options.get("question_all"):
             self.questions = Question.objects.all()
         else:
-            self.questions = []
             if options.get("question_text"):
                 for question_text in options["question_text"]:
                     try:

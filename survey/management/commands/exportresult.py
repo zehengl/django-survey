@@ -19,8 +19,7 @@ class Command(SurveyCommand):
         See the "help" var.
     """
 
-    help = """This command permit to export all survey in the database as csv
-               and tex."""
+    help = """This command permit to export all survey in the database as csv and tex."""
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
@@ -41,7 +40,7 @@ class Command(SurveyCommand):
         )
 
     def check_nothing_at_all(self, options):
-        SurveyCommand.check_nothing_at_all(self, options)
+        SurveyCommand.check_nothing_at_all(options)
         if not options["csv"] and not options["tex"] and not options["pdf"]:
             sys.exit("Nothing to do : add option --tex or --pdf, --csv,  or both.")
 
