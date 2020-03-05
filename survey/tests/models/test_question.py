@@ -18,8 +18,7 @@ except ImportError:
 class TestQuestion(BaseModelTest):
     def setUp(self):
         BaseModelTest.setUp(self)
-        text = "Lorem ipsum dolor sit amët, <strong> consectetur </strong> \
-adipiscing elit."
+        text = "Lorem ipsum dolor sit amët, <strong> consectetur </strong> adipiscing elit."
         self.question = Question.objects.get(text=text)
         choices = "abé cé, Abë-cè, Abé Cé, dé, Dé, dë"
         self.questions[0].choices = choices
@@ -38,8 +37,8 @@ adipiscing elit."
             q2_choice = "dë" if "b" in choice else "Abë-cè"
             Answer.objects.create(question=self.questions[2], body=q2_choice, response=response)
         # Shortcut for the first question's answer cardinality's function
-        self.ac = self.questions[0].answers_cardinality
-        self.sac = self.questions[0].sorted_answers_cardinality
+        self.card = self.questions[0].answers_cardinality
+        self.sorted_card = self.questions[0].sorted_answers_cardinality
 
     def test_unicode(self):
         """ Unicode generation. """
@@ -110,71 +109,54 @@ adipiscing elit."
 
     def test_answer_cardinality_type(self):
         """ We always return an OrderedDict. """
-        self.assertIsInstance(self.ac(), OrderedDict)
-        self.assertIsInstance(self.sac(), OrderedDict)
+        self.assertIsInstance(self.card(), OrderedDict)
+        self.assertIsInstance(self.sorted_card(), OrderedDict)
 
     def test_answers_cardinality(self):
         """ We can get the cardinality of each answers. """
         self.assertEqual(self.question.answers_cardinality(), {"Maybe": 1, "Yës": 2})
         self.assertEqual(self.question.answers_cardinality(min_cardinality=2), {"Other": 1, "Yës": 2})
-        question = Question.objects.get(
-            text="Ipsum dolor sit amët, <strong> \
-consectetur </strong>  adipiscing elit."
-        )
+        question = Question.objects.get(text="Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.")
         self.assertEqual({"No": 1, "Yës": 1}, question.answers_cardinality())
-        question = Question.objects.get(
-            text="Dolor sit amët, <strong> \
-consectetur</strong>  adipiscing elit."
-        )
+        question = Question.objects.get(text="Dolor sit amët, <strong> consectetur</strong>  adipiscing elit.")
         self.assertEqual({"": 1, "Text for a response": 1}, question.answers_cardinality())
-        question = Question.objects.get(
-            text="Ipsum dolor sit amët, consectetur\
- <strong> adipiscing </strong> elit."
-        )
+        question = Question.objects.get(text="Ipsum dolor sit amët, consectetur <strong> adipiscing </strong> elit.")
         self.assertEqual({"1": 1, "2": 1}, question.answers_cardinality())
-        question = Question.objects.get(
-            text="Dolor sit amët, consectetur<stron\
-g>  adipiscing</strong>  elit."
-        )
+        question = Question.objects.get(text="Dolor sit amët, consectetur<strong>  adipiscing</strong>  elit.")
         self.assertEqual({"No": 1, "Whatever": 1, "Yës": 1}, question.answers_cardinality())
         self.assertEqual({"Näh": 2, "Yës": 1}, question.answers_cardinality(group_together={"Näh": ["No", "Whatever"]}))
 
     def test_answers_cardinality_grouped(self):
         """ We can group answers taking letter case or slug into account. """
-        self.assertEqual(self.ac(), {"abé cé": 1, "Abé Cé": 1, "Abë-cè": 1, "dé": 1, "dë": 1, "Dé": 1})
-        rslt = self.ac(group_together={"ABC": ["abé cé", "Abë-cè", "Abé Cé"], "D": ["dé", "Dé", "dë"]})
-        self.assertEqual(rslt, {"ABC": 3, "D": 3})
-        rslt = self.ac(group_by_letter_case=True)
-        self.assertEqual(rslt, {"abé cé": 2, "abë-cè": 1, "dé": 2, "dë": 1})
-        rslt = self.ac(group_by_slugify=True)
-        self.assertEqual(rslt, {"abe-ce": 3, "de": 3})
-        rslt = self.ac(group_by_slugify=True, group_together={"ABCD": ["abe-ce", "de"]})
-        self.assertEqual(rslt, {"ABCD": 6})
-        rslt = self.ac(group_by_letter_case=True, group_together={"ABCD": ["Abë-cè", "Abé Cé", "Dé", "dë"]})
-        self.assertEqual(rslt, {"ABCD": 6})
+        self.assertEqual(self.card(), {"abé cé": 1, "Abé Cé": 1, "Abë-cè": 1, "dé": 1, "dë": 1, "Dé": 1})
+        self.assertEqual(
+            self.card(group_together={"ABC": ["abé cé", "Abë-cè", "Abé Cé"], "D": ["dé", "Dé", "dë"]}),
+            {"ABC": 3, "D": 3},
+        )
+        self.assertEqual(self.card(group_by_letter_case=True), {"abé cé": 2, "abë-cè": 1, "dé": 2, "dë": 1})
+        self.assertEqual(self.card(group_by_slugify=True), {"abe-ce": 3, "de": 3})
+        self.assertEqual(self.card(group_by_slugify=True, group_together={"ABCD": ["abe-ce", "de"]}), {"ABCD": 6})
+        self.assertEqual(
+            self.card(group_by_letter_case=True, group_together={"ABCD": ["Abë-cè", "Abé Cé", "Dé", "dë"]}), {"ABCD": 6}
+        )
 
     def test_answers_cardinality_filtered(self):
         """ We can filter answer with a csv string. """
-        rslt = self.ac(filter=["abé cé", "Abë-cè"], group_by_slugify=True)
-        self.assertEqual(rslt, {"de": 3})
-        rslt = self.ac(filter=["abe-ce"], group_by_slugify=True)
-        self.assertEqual(rslt, {"de": 3})
-        rslt = self.ac(group_together={"ABC": ["abe-ce"]}, filter=["ABC"], group_by_slugify=True)
-        self.assertEqual(rslt, {"de": 3})
-        rslt = self.ac(filter=["abé cé", "Abë-cè"], group_by_letter_case=True)
-        self.assertEqual(rslt, {"dé": 2, "dë": 1})
-        rslt = self.ac(filter=["abé cé", "Abë-cè"])
-        self.assertEqual(rslt, {"Abé Cé": 1, "dé": 1, "dë": 1, "Dé": 1})
+        self.assertEqual(self.card(filter=["abé cé", "Abë-cè"], group_by_slugify=True), {"de": 3})
+        self.assertEqual(self.card(filter=["abe-ce"], group_by_slugify=True), {"de": 3})
+        self.assertEqual(
+            self.card(group_together={"ABC": ["abe-ce"]}, filter=["ABC"], group_by_slugify=True), {"de": 3}
+        )
+        self.assertEqual(self.card(filter=["abé cé", "Abë-cè"], group_by_letter_case=True), {"dé": 2, "dë": 1})
+        self.assertEqual(self.card(filter=["abé cé", "Abë-cè"]), {"Abé Cé": 1, "dé": 1, "dë": 1, "Dé": 1})
 
     def test_answers_cardinality_linked(self):
         """ We can get the answer to another question instead"""
-        q1ac = self.questions[0].answers_cardinality
         abc_together = {"ABC": ["abé cé", "Abë-cè", "Abé Cé"]}
         abcd_together = {"ABC": ["abé cé", "Abë-cè", "Abé Cé"], "D": ["dé", "Dé", "dë"]}
-        self.assertRaises(TypeError, q1ac, other_question="str")
-        q2 = self.questions[2]
+        self.assertRaises(TypeError, self.card, other_question="str")
         self.assertEqual(
-            q1ac(other_question=q2),
+            self.card(other_question=self.questions[2]),
             {
                 "abé cé": {"dë": 1},
                 "Abë-cè": {"dë": 1},
@@ -184,20 +166,27 @@ g>  adipiscing</strong>  elit."
                 "dë": {"Abë-cè": 1},
             },
         )
-        card = q1ac(other_question=q2, group_together=abcd_together)
-        self.assertEqual(card, {"ABC": {"D": 3}, "D": {"ABC": 3}})
-        card = q1ac(other_question=q2, filter=["dé"], group_together=abc_together)
-        self.assertEqual(card, {"ABC": {"dë": 3}, "Dé": {"ABC": 1}, "dë": {"ABC": 1}})
-        card = q1ac(other_question=q2, filter=["dë"], group_together=abc_together)
-        self.assertEqual(card, {"Dé": {"ABC": 1}, "dé": {"ABC": 1}})
+        self.assertEqual(
+            self.card(other_question=self.questions[2], group_together=abcd_together),
+            {"ABC": {"D": 3}, "D": {"ABC": 3}},
+        )
+        self.assertEqual(
+            self.card(other_question=self.questions[2], filter=["dé"], group_together=abc_together),
+            {"ABC": {"dë": 3}, "Dé": {"ABC": 1}, "dë": {"ABC": 1}},
+        )
+        self.assertEqual(
+            self.card(other_question=self.questions[2], filter=["dë"], group_together=abc_together),
+            {"Dé": {"ABC": 1}, "dé": {"ABC": 1}},
+        )
         for i in [0, 2]:
             user = User.objects.get(username="User {}".format(i))
             response = Response.objects.get(survey=self.survey, user=user)
-            answer = Answer.objects.get(question=q2, response=response)
-            # print("Deleting, ", answer)
+            answer = Answer.objects.get(question=self.questions[2], response=response)
             answer.delete()
-        card = q1ac(other_question=q2, group_together=abcd_together)
-        self.assertEqual(card, {"ABC": {"D": 1, _(settings.USER_DID_NOT_ANSWER): 2}, "D": {"ABC": 3}})
+        self.assertEqual(
+            self.card(other_question=self.questions[2], group_together=abcd_together),
+            {"ABC": {"D": 1, _(settings.USER_DID_NOT_ANSWER): 2}, "D": {"ABC": 3}},
+        )
 
     def test_answers_cardinality_linked_without_link(self):
         """ When we want to link to another question and there is no link at
@@ -213,18 +202,14 @@ g>  adipiscing</strong>  elit."
         for j in range(3):
             response = Response.objects.create(survey=survey)
             for i, question in enumerate(questions):
-                answer = j + i
-                Answer.objects.create(response=response, question=question, body=answer)
-        q0 = questions[0]
-        q1 = questions[1]
-        result = q0.sorted_answers_cardinality(other_question=q1)
+                Answer.objects.create(response=response, question=question, body=(j + i))
         expected = [
             ("Left blank", {"1": 1, "2": 1, "3": 1}),
             ("0", {"Left blank": 1}),
             ("1", {"Left blank": 1}),
             ("2", {"Left blank": 1}),
         ]
-        self.assertEqual(result, OrderedDict(expected))
+        self.assertEqual(questions[0].sorted_answers_cardinality(other_question=questions[1]), OrderedDict(expected))
 
     def test_sorted_answers_cardinality(self):
         """ We can sort answer with the sort_answer parameter. """
@@ -232,39 +217,69 @@ g>  adipiscing</strong>  elit."
         cardinal = [("abé cé", 2), ("dé", 2), ("abë-cè", 1), ("dë", 1)]
         user_defined = {"dé": 1, "abë-cè": 2, "dë": 3, "abé cé": 4}
         specific = [("dé", 2), ("abë-cè", 1), ("dë", 1), ("abé cé", 2)]
-        msg = " sorting does not seem to work"
-        rslt = self.sac(group_by_letter_case=True)
-        self.assertEqual(rslt, OrderedDict(cardinal), "default" + msg)
-        rslt = self.sac(group_by_letter_case=True, sort_answer="alphanumeric")
-        self.assertEqual(rslt, OrderedDict(alphanumeric), "alphanumeric" + msg)
-        rslt = self.sac(group_by_letter_case=True, sort_answer="cardinal")
-        self.assertEqual(rslt, OrderedDict(cardinal), "cardinal" + msg)
-        rslt = self.sac(group_by_letter_case=True, sort_answer=user_defined)
-        self.assertEqual(rslt, OrderedDict(specific), "user defined" + msg)
-        oq_alphanumeric = [
-            ("abé cé", {"left blank": 2}),
-            ("abë-cè", {"left blank": 1}),
-            ("dé", {"left blank": 2}),
-            ("dë", {"left blank": 1}),
-        ]
-        oq_cardinal = [
-            ("abé cé", {"left blank": 2}),
-            ("dé", {"left blank": 2}),
-            ("abë-cè", {"left blank": 1}),
-            ("dë", {"left blank": 1}),
-        ]
-        oq_user_defined = [
-            ("dé", {"left blank": 2}),
-            ("abë-cè", {"left blank": 1}),
-            ("dë", {"left blank": 1}),
-            ("abé cé", {"left blank": 2}),
-        ]
-        oqmsg = " when in relation with another question"
-        rslt = self.sac(group_by_letter_case=True, other_question=self.questions[1])
-        self.assertEqual(rslt, OrderedDict(oq_cardinal), "default" + msg + oqmsg)
-        rslt = self.sac(group_by_letter_case=True, sort_answer="alphanumeric", other_question=self.questions[1])
-        self.assertEqual(rslt, OrderedDict(oq_alphanumeric), "alphanumeric" + msg + oqmsg)
-        rslt = self.sac(group_by_letter_case=True, sort_answer="cardinal", other_question=self.questions[1])
-        self.assertEqual(rslt, OrderedDict(oq_cardinal), "cardinal" + msg + oqmsg)
-        rslt = self.sac(group_by_letter_case=True, sort_answer=user_defined, other_question=self.questions[1])
-        self.assertEqual(rslt, OrderedDict(oq_user_defined), "user defined" + msg + oqmsg)
+        assert_message = " sorting does not seem to work"
+        self.assertEqual(self.sorted_card(group_by_letter_case=True), OrderedDict(cardinal), "default" + assert_message)
+        self.assertEqual(
+            self.sorted_card(group_by_letter_case=True, sort_answer="alphanumeric"),
+            OrderedDict(alphanumeric),
+            "alphanumeric" + assert_message,
+        )
+        self.assertEqual(
+            self.sorted_card(group_by_letter_case=True, sort_answer="cardinal"),
+            OrderedDict(cardinal),
+            "cardinal" + assert_message,
+        )
+        self.assertEqual(
+            self.sorted_card(group_by_letter_case=True, sort_answer=user_defined),
+            OrderedDict(specific),
+            "user defined" + assert_message,
+        )
+        other_question_assert_mesage = " when in relation with another question"
+        self.assertEqual(
+            self.sorted_card(group_by_letter_case=True, other_question=self.questions[1]),
+            OrderedDict(
+                [
+                    ("abé cé", {"left blank": 2}),
+                    ("dé", {"left blank": 2}),
+                    ("abë-cè", {"left blank": 1}),
+                    ("dë", {"left blank": 1}),
+                ]
+            ),
+            "default" + assert_message + other_question_assert_mesage,
+        )
+        self.assertEqual(
+            self.sorted_card(group_by_letter_case=True, sort_answer="alphanumeric", other_question=self.questions[1]),
+            OrderedDict(
+                [
+                    ("abé cé", {"left blank": 2}),
+                    ("abë-cè", {"left blank": 1}),
+                    ("dé", {"left blank": 2}),
+                    ("dë", {"left blank": 1}),
+                ]
+            ),
+            "alphanumeric" + assert_message + other_question_assert_mesage,
+        )
+        self.assertEqual(
+            self.sorted_card(group_by_letter_case=True, sort_answer="cardinal", other_question=self.questions[1]),
+            OrderedDict(
+                [
+                    ("abé cé", {"left blank": 2}),
+                    ("dé", {"left blank": 2}),
+                    ("abë-cè", {"left blank": 1}),
+                    ("dë", {"left blank": 1}),
+                ]
+            ),
+            "cardinal" + assert_message + other_question_assert_mesage,
+        )
+        self.assertEqual(
+            self.sorted_card(group_by_letter_case=True, sort_answer=user_defined, other_question=self.questions[1]),
+            OrderedDict(
+                [
+                    ("dé", {"left blank": 2}),
+                    ("abë-cè", {"left blank": 1}),
+                    ("dë", {"left blank": 1}),
+                    ("abé cé", {"left blank": 2}),
+                ]
+            ),
+            "user defined" + assert_message + other_question_assert_mesage,
+        )
