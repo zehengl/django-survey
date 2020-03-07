@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+from warnings import warn
 
 from django.conf import settings
 from django.core.management import call_command
 from django.utils.text import slugify
 
+from survey.exporter.tex import XelatexNotInstalled
 from survey.tests.management.test_management import TestManagement
 
 
@@ -26,8 +28,11 @@ class TestExportresult(TestManagement):
     def test_no_options(self):
         """ If no options are given there are warning and error messages. """
         self.assertRaises(SystemExit, call_command, "exportresult")
-        call_command("exportresult", "--pdf", survey_id="1")
-        call_command("exportresult", "--pdf", "--force", survey_id="1")
+        try:
+            call_command("exportresult", "--pdf", survey_id="1")
+            call_command("exportresult", "--pdf", "--force", survey_id="1")
+        except XelatexNotInstalled:
+            warn("xelatex is not installed, some features regarding report generation in PDF were not tested!")
 
     def test_handle(self):
         """ The custom command export result create the right csv file. """
