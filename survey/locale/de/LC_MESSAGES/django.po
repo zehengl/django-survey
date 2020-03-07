@@ -162,7 +162,7 @@ msgstr "Inhalt"
 msgid "Name"
 msgstr "Name"
 
-#: survey/models/category.py:13 survey/models/question.py:76
+#: survey/models/category.py:13 survey/models/question.py:78
 #: survey/models/response.py:29
 msgid "Survey"
 msgstr "Umfrage"
@@ -191,63 +191,67 @@ msgid ""
 "options for this question ."
 msgstr "Das Auswahlfeld wird nur benutzt, wenn der Fragetyp 'radio', 'select' oder 'select multiple' ist. Geben Sie eine durch Kommas getrennte Liste von Optionen an."
 
-#: survey/models/question.py:61
+#: survey/models/question.py:62
 msgid "text (multiple line)"
 msgstr "Text (mehrere Zeilen)"
 
-#: survey/models/question.py:62
+#: survey/models/question.py:63
 msgid "short text (one line)"
 msgstr "kurzer Text (eine Zeile)"
 
-#: survey/models/question.py:63
+#: survey/models/question.py:64
 msgid "radio"
 msgstr "Optionsschaltfläche"
 
-#: survey/models/question.py:64
+#: survey/models/question.py:65
 msgid "select"
 msgstr "Auswahl"
 
-#: survey/models/question.py:65
+#: survey/models/question.py:66
 msgid "Select Multiple"
 msgstr "Auswahl mehrer"
 
-#: survey/models/question.py:66
+#: survey/models/question.py:67
 msgid "Select Image"
 msgstr "Wähle Bild"
 
-#: survey/models/question.py:67
+#: survey/models/question.py:68
 msgid "integer"
 msgstr "Ganzzahl"
 
-#: survey/models/question.py:70
+#: survey/models/question.py:69
+msgid "float"
+msgstr ""
+
+#: survey/models/question.py:72
 msgid "Text"
 msgstr "Text"
 
-#: survey/models/question.py:71
+#: survey/models/question.py:73
 msgid "Order"
 msgstr "Reihenfolge"
 
-#: survey/models/question.py:72
+#: survey/models/question.py:74
 msgid "Required"
 msgstr "Erfoderlich"
 
-#: survey/models/question.py:74
+#: survey/models/question.py:76
 msgid "Category"
 msgstr "Kategorie"
 
-#: survey/models/question.py:77
+#: survey/models/question.py:79
 msgid "Type"
 msgstr "Typ"
 
-#: survey/models/question.py:78
+#: survey/models/question.py:80
 msgid "Choices"
 msgstr "Auswahl"
 
-#: survey/models/question.py:81
+#: survey/models/question.py:83
 msgid "question"
 msgstr "Frage"
 
-#: survey/models/question.py:82
+#: survey/models/question.py:84
 msgid "questions"
 msgstr "Fragen"
 

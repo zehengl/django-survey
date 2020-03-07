@@ -161,7 +161,7 @@ msgstr "内容"
 msgid "Name"
 msgstr "名字"
 
-#: survey/models/category.py:13 survey/models/question.py:76
+#: survey/models/category.py:13 survey/models/question.py:78
 #: survey/models/response.py:29
 msgid "Survey"
 msgstr "问卷"
@@ -190,63 +190,67 @@ msgid ""
 "options for this question ."
 msgstr "选项栏仅在问题类型为「单选按钮」、「单项选择」和「多项选择」时有效。选项请用逗号隔开。"
 
-#: survey/models/question.py:61
+#: survey/models/question.py:62
 msgid "text (multiple line)"
 msgstr "文本（多行）"
 
-#: survey/models/question.py:62
+#: survey/models/question.py:63
 msgid "short text (one line)"
 msgstr "短文本（单行）"
 
-#: survey/models/question.py:63
+#: survey/models/question.py:64
 msgid "radio"
 msgstr "单选按钮"
 
-#: survey/models/question.py:64
+#: survey/models/question.py:65
 msgid "select"
 msgstr "单选框"
 
-#: survey/models/question.py:65
+#: survey/models/question.py:66
 msgid "Select Multiple"
 msgstr "复选框"
 
-#: survey/models/question.py:66
+#: survey/models/question.py:67
 msgid "Select Image"
 msgstr "选择图片"
 
-#: survey/models/question.py:67
+#: survey/models/question.py:68
 msgid "integer"
 msgstr "整数"
 
-#: survey/models/question.py:70
+#: survey/models/question.py:69
+msgid "float"
+msgstr ""
+
+#: survey/models/question.py:72
 msgid "Text"
 msgstr "文本"
 
-#: survey/models/question.py:71
+#: survey/models/question.py:73
 msgid "Order"
 msgstr "顺序"
 
-#: survey/models/question.py:72
+#: survey/models/question.py:74
 msgid "Required"
 msgstr "必填"
 
-#: survey/models/question.py:74
+#: survey/models/question.py:76
 msgid "Category"
 msgstr "分类"
 
-#: survey/models/question.py:77
+#: survey/models/question.py:79
 msgid "Type"
 msgstr "类型"
 
-#: survey/models/question.py:78
+#: survey/models/question.py:80
 msgid "Choices"
 msgstr "选择"
 
-#: survey/models/question.py:81
+#: survey/models/question.py:83
 msgid "question"
 msgstr "问题"
 
-#: survey/models/question.py:82
+#: survey/models/question.py:84
 msgid "questions"
 msgstr "问题"
 

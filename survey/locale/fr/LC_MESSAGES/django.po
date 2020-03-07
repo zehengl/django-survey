@@ -110,7 +110,7 @@ msgstr "à droite"
 
 #: survey/exporter/tex/survey2tex.py:32
 msgid "Cannot generate PDF, we need 'xelatex' to be installed."
-msgstr ""
+msgstr "Impossible de générer le PDF, 'xelatex' doit être installé."
 
 #: survey/exporter/tex/survey2tex.py:80
 msgid "We could not render a chart because the type"
@@ -161,7 +161,7 @@ msgstr "Contenu"
 msgid "Name"
 msgstr "Nom"
 
-#: survey/models/category.py:13 survey/models/question.py:76
+#: survey/models/category.py:13 survey/models/question.py:78
 #: survey/models/response.py:29
 msgid "Survey"
 msgstr "Sondage"
@@ -190,63 +190,67 @@ msgid ""
 "options for this question ."
 msgstr "Le champ choix est utilisé seulement si la question est de type 'bouton radio', 'liste déroulante', ou 'liste à choix multiple', il faut fournir la liste des options pour cette question sous la forme d'une liste séparée par des virgules."
 
-#: survey/models/question.py:61
+#: survey/models/question.py:62
 msgid "text (multiple line)"
 msgstr "Texte (plusieurs lignes)"
 
-#: survey/models/question.py:62
+#: survey/models/question.py:63
 msgid "short text (one line)"
 msgstr "Texte court (une ligne)"
 
-#: survey/models/question.py:63
+#: survey/models/question.py:64
 msgid "radio"
 msgstr "Bouton radio"
 
-#: survey/models/question.py:64
+#: survey/models/question.py:65
 msgid "select"
 msgstr "Liste déroulante"
 
-#: survey/models/question.py:65
+#: survey/models/question.py:66
 msgid "Select Multiple"
 msgstr "Liste à choix multiple"
 
-#: survey/models/question.py:66
+#: survey/models/question.py:67
 msgid "Select Image"
 msgstr "Séléctionnez l'image"
 
-#: survey/models/question.py:67
+#: survey/models/question.py:68
 msgid "integer"
 msgstr "Chiffre"
 
-#: survey/models/question.py:70
+#: survey/models/question.py:69
+msgid "float"
+msgstr "Décimal"
+
+#: survey/models/question.py:72
 msgid "Text"
 msgstr "Texte"
 
-#: survey/models/question.py:71
+#: survey/models/question.py:73
 msgid "Order"
 msgstr "Ordre"
 
-#: survey/models/question.py:72
+#: survey/models/question.py:74
 msgid "Required"
 msgstr "Requise"
 
-#: survey/models/question.py:74
+#: survey/models/question.py:76
 msgid "Category"
 msgstr "Catégorie"
 
-#: survey/models/question.py:77
+#: survey/models/question.py:79
 msgid "Type"
 msgstr "Type"
 
-#: survey/models/question.py:78
+#: survey/models/question.py:80
 msgid "Choices"
 msgstr "Choix"
 
-#: survey/models/question.py:81
+#: survey/models/question.py:83
 msgid "question"
 msgstr "question"
 
-#: survey/models/question.py:82
+#: survey/models/question.py:84
 msgid "questions"
 msgstr "questions"
 

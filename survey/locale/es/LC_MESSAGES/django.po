@@ -165,7 +165,7 @@ msgstr "Contenido"
 msgid "Name"
 msgstr "Nombre"
 
-#: survey/models/category.py:13 survey/models/question.py:76
+#: survey/models/category.py:13 survey/models/question.py:78
 #: survey/models/response.py:29
 msgid "Survey"
 msgstr "Encuesta"
@@ -198,63 +198,67 @@ msgstr ""
 "es 'radio', 'select', o 'select multiple'. Proporciona una lista de opciones\n"
 "separadas por comas para esta pregunta."
 
-#: survey/models/question.py:61
+#: survey/models/question.py:62
 msgid "text (multiple line)"
 msgstr "texto (multilínea)"
 
-#: survey/models/question.py:62
+#: survey/models/question.py:63
 msgid "short text (one line)"
 msgstr "texto corto (una línea)"
 
-#: survey/models/question.py:63
+#: survey/models/question.py:64
 msgid "radio"
 msgstr "radio"
 
-#: survey/models/question.py:64
+#: survey/models/question.py:65
 msgid "select"
 msgstr "selecciona"
 
-#: survey/models/question.py:65
+#: survey/models/question.py:66
 msgid "Select Multiple"
 msgstr "Selección múltiple"
 
-#: survey/models/question.py:66
+#: survey/models/question.py:67
 msgid "Select Image"
 msgstr "Selecciona imagen"
 
-#: survey/models/question.py:67
+#: survey/models/question.py:68
 msgid "integer"
 msgstr "entero"
 
-#: survey/models/question.py:70
+#: survey/models/question.py:69
+msgid "float"
+msgstr ""
+
+#: survey/models/question.py:72
 msgid "Text"
 msgstr "Texto"
 
-#: survey/models/question.py:71
+#: survey/models/question.py:73
 msgid "Order"
 msgstr "Orden"
 
-#: survey/models/question.py:72
+#: survey/models/question.py:74
 msgid "Required"
 msgstr "Obligatorio"
 
-#: survey/models/question.py:74
+#: survey/models/question.py:76
 msgid "Category"
 msgstr "Categoría"
 
-#: survey/models/question.py:77
+#: survey/models/question.py:79
 msgid "Type"
 msgstr "Tipo"
 
-#: survey/models/question.py:78
+#: survey/models/question.py:80
 msgid "Choices"
 msgstr "Opciones"
 
-#: survey/models/question.py:81
+#: survey/models/question.py:83
 msgid "question"
 msgstr "pregunta"
 
-#: survey/models/question.py:82
+#: survey/models/question.py:84
 msgid "questions"
 msgstr "preguntas"
 
