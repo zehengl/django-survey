@@ -29,7 +29,7 @@ version < 1.3.0.
     * [Launching tests](#launching-tests)
     * [Adding test data](#adding-test-data)
     * [Launching coverage](#launching-coverage)
-    * [Applying Lint](#applying-Lint)
+    * [Applying Lint](#applying-lint)
 * [Translating the project](#translating-the-project)
   * [Language available](#language-available)
   * [As a developper](#as-a-developper)
