@@ -50,7 +50,7 @@ setuptools.setup(
         "Framework :: Django",
     ],
     install_requires=[
-        "django>=2.1.6",
+        "django>=3.0.0",
         "django-bootstrap-form>=3.4",
         "django-tastypie>=0.14.2",  # API
         "django-registration>=3.0",  # account logic, views and workflows
