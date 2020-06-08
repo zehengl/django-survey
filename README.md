@@ -24,7 +24,7 @@ version < 1.3.0.
   * [Sankey's diagram](#sankey-diagram)
   * [Advanced example](#advanced-example)
   * [Implementing a custom treatment](#implementing-a-custom-treatment)
-* [Contributing as a developper](#contributing-as-a-developper)
+* [Contributing as a developer](#contributing-as-a-developer)
   * [Development environment](#development-environment)
   * [Committing code](#committing-code)
     * [Launching tests](#launching-tests)
@@ -32,7 +32,7 @@ version < 1.3.0.
     * [Launching coverage](#launching-coverage)
     * [Applying Lint](#applying-lint)
 * [Translating the project](#translating-the-project)
-  * [As a developper](#as-a-developper)
+  * [As a developer](#as-a-developer)
   * [As a translator](#as-a-translator)
 * [Credit](#credits)
 
@@ -145,10 +145,10 @@ than english).
 
 You can manage the way the report is created in a yaml file, globally, survey
 by survey, or question by question. In order to render pdf you will need to
-install xelatex. You will also need python3-tk for sankey's diagram.
+install `xelatex`. You will also need python3-tk for sankey's diagram.
 
 The results are generated for the server only when needed, but you can force
-it as a developper with:
+it as a developer with:
 
 ~~~~bash
 python manage.py exportresult -h
@@ -284,7 +284,7 @@ To guide you during the python development, you can read:
 Do not hesitate to make a pull request with your new exporter if it can be of interest
 for others I'll integrate it.
 
-## Contributing as a developper
+## Contributing as a developer
 
 ### Development environment
 
@@ -341,7 +341,7 @@ Django survey's is available in multiple language.
 Your contribution would be very appreciated if you
 know a language that is not yet available.
 
-### As a developper
+### As a developer
 
 If your language do not exists add it in the `LANGUAGE` variable in the
 settings, like [here](https://github.com/Pierre-Sassoulas/django-survey/commit/ee3bdba26c303ad12fc4584938e724b39223faa9#diff-bdf3ecebd8379ca98cc89e545fc90899).
@@ -367,7 +367,7 @@ should work even for language not handled by django.
 
 ### As a translator
 
-If you're not a developper, open an issue on github and ask for a .po
+If you're not a developer, open an issue on github and ask for a .po
 file in your language. I will generate it for you, so you can edit it with an
 online editor. I will then create the .po and commit them, so you can edit them
 with your github account or integrate it myself if you do not have one.
