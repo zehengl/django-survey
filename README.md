@@ -16,6 +16,7 @@ version < 1.3.0.
 
 ## Table of contents
 
+* [Language available](#language-available)
 * [Getting started](#getting-started)
 * [Making a survey](#making-a-survey)
 * [Generating a pdf report from the survey's result](#generating-a-pdf-report-from-the-surveys-result)
@@ -31,10 +32,20 @@ version < 1.3.0.
     * [Launching coverage](#launching-coverage)
     * [Applying Lint](#applying-lint)
 * [Translating the project](#translating-the-project)
-  * [Language available](#language-available)
   * [As a developper](#as-a-developper)
   * [As a translator](#as-a-translator)
 * [Credit](#credits)
+
+## Language available
+
+The software is developed in english. Other available languages are :
+
+* [x] Chinese thanks to [朱聖黎 (Zhu Sheng Li)](https://github.com/digglife/) and [John Lyu](https://github.com/PaleNeutron)
+* [x] French thanks to [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
+* [x] Japanese thanks to [Nobukuni Suzue](https://github.com/nsuzue/)
+* [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/) and [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
+* [x] Russian thanks to [Vlad M.](https://github.com/manchos/)
+* [x] German thanks to [Georg Elsas](https://github.com/gjelsas)
 
 ## Getting started
 
@@ -329,17 +340,6 @@ We're using `pre-commit`, it should take care of linting during commit.
 Django survey's is available in multiple language.
 Your contribution would be very appreciated if you
 know a language that is not yet available.
-
-### Language available
-
-The software is developed in english. Other available languages are :
-
-* [x] Chinese thanks to [朱聖黎 (Zhu Sheng Li)](https://github.com/digglife/) and [John Lyu](https://github.com/PaleNeutron)
-* [x] French thanks to [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
-* [x] Japanese thanks to [Nobukuni Suzue](https://github.com/nsuzue/)
-* [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/) and [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
-* [x] Russian thanks to [Vlad M.](https://github.com/manchos/)
-* [x] German thanks to [Georg Elsas](https://github.com/gjelsas)
 
 ### As a developper
 
