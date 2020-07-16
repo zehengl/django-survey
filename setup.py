@@ -20,7 +20,7 @@ with open(path.join(THIS_DIRECTORY, "README.md"), encoding="utf-8") as f:
 
 setuptools.setup(
     name="django-survey-and-report",
-    version="1.3.22",
+    version="1.3.23",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
@@ -50,7 +50,7 @@ setuptools.setup(
         "Framework :: Django",
     ],
     install_requires=[
-        "django>=3.0.0",
+        "django>=2.2",
         "django-bootstrap-form>=3.4",
         "django-tastypie>=0.14.2",  # API
         "django-registration>=3.0",  # account logic, views and workflows
