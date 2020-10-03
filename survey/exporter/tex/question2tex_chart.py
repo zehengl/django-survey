@@ -13,8 +13,8 @@ LOGGER = logging.getLogger(__name__)
 class Question2TexChart(Question2Tex):
 
     """
-        This class permit to generate latex code directly from the Question
-        object.
+    This class permit to generate latex code directly from the Question
+    object.
     """
 
     TEX_SKELETON = """
@@ -113,11 +113,11 @@ class Question2TexChart(Question2Tex):
         return "%s '%s' " % (_("for the question"), Question2Tex.html2latex(self.question.text))
 
     def tex(self):
-        """ Return a pfg-pie pie chart of a question.
+        """Return a pfg-pie pie chart of a question.
 
         You must use pgf-pie in your latex file for this to works ::
             \\usepackage{pgf-pie}
-        See http://pgf-pie.googlecode.com/ for detail and arguments doc. """
+        See http://pgf-pie.googlecode.com/ for detail and arguments doc."""
         results = self.get_results()
         if not results:
             return str(_("No answers for this question."))

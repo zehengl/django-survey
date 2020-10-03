@@ -29,8 +29,8 @@ class SurveyCommand(BaseCommand):
 
     @staticmethod
     def raise_value_error(error_type, value):
-        """ Raise a ValueError with a clean error message in python 2.7 and 3.
-        :param string value: the attempted value. """
+        """Raise a ValueError with a clean error message in python 2.7 and 3.
+        :param string value: the attempted value."""
         if error_type in ["question-id", "question-text"]:
             base = "--question-id {} / --question-text '{}'\n"
             valids = [(q.pk, q.text) for q in Question.objects.all()]

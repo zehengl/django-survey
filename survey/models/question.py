@@ -28,7 +28,7 @@ options for this question ."""
 
 
 def validate_choices(choices):
-    """  Verifies that there is at least two choices in choices
+    """Verifies that there is at least two choices in choices
     :param String choices: The string representing the user choices.
     """
     values = choices.split(settings.CHOICES_SEPARATOR)
@@ -104,9 +104,9 @@ class Question(models.Model):
 
     @property
     def answers_as_text(self):
-        """ Return answers as a list of text.
+        """Return answers as a list of text.
 
-        :rtype: List """
+        :rtype: List"""
         answers_as_text = []
         for answer in self.answers.all():
             for value in answer.values:
@@ -136,7 +136,7 @@ class Question(models.Model):
         filter=None,
         other_question=None,
     ):
-        """ Return a dictionary with answers as key and cardinality (int or
+        """Return a dictionary with answers as key and cardinality (int or
             dict) as value
 
         :param int min_cardinality: The minimum of answer we need to take it
@@ -155,7 +155,7 @@ class Question(models.Model):
             person that answered the key as value, we will give the cardinality
             for another answer taking only the user that answered the key into
             account.
-        :rtype: Dict """
+        :rtype: Dict"""
         if min_cardinality is None:
             min_cardinality = 0
         if group_together is None:
@@ -191,11 +191,11 @@ class Question(models.Model):
         standardized_filter,
         other_question,
     ):
-        """ Return an ordered dict but the insertion order is the order of
+        """Return an ordered dict but the insertion order is the order of
         the related manager (ie question.answers).
 
         If you want something sorted use sorted_answers_cardinality with a set
-        sort_answer parameter. """
+        sort_answer parameter."""
         cardinality = OrderedDict()
         for answer in self.answers.all():
             for value in answer.values:
@@ -267,10 +267,10 @@ class Question(models.Model):
         sort_answer=None,
         other_question=None,
     ):
-        """ Mostly to have reliable tests, but marginally nicer too...
+        """Mostly to have reliable tests, but marginally nicer too...
 
         The ordering is reversed for same cardinality value so we have aa
-        before zz. """
+        before zz."""
         cardinality = self.answers_cardinality(
             min_cardinality, group_together, group_by_letter_case, group_by_slugify, filter, other_question
         )
@@ -305,8 +305,8 @@ class Question(models.Model):
         return OrderedDict(sorted_cardinality)
 
     def _cardinality_plus_answer(self, cardinality, value, other_question_value):
-        """ The user answered 'value' to our question and
-        'other_question_value' to the other question. """
+        """The user answered 'value' to our question and
+        'other_question_value' to the other question."""
         if cardinality.get(value) is None:
             cardinality[value] = {other_question_value: 1}
         elif isinstance(cardinality[value], int):
@@ -319,8 +319,8 @@ class Question(models.Model):
                 cardinality[value][other_question_value] += 1
 
     def _cardinality_plus_n(self, cardinality, value, n):
-        """ We don't know what is the answer to other question but the
-        user answered 'value'. """
+        """We don't know what is the answer to other question but the
+        user answered 'value'."""
         if cardinality.get(value) is None:
             cardinality[value] = n
         else:

@@ -48,9 +48,9 @@ class Survey(models.Model):
         return self.name.replace(" ", "_").encode("utf-8").decode("ISO-8859-1")
 
     def latest_answer_date(self):
-        """ Return the latest answer date.
+        """Return the latest answer date.
 
-        Return None is there is no response. """
+        Return None is there is no response."""
         min_ = None
         for response in self.responses.all():
             if min_ is None or min_ < response.updated:
