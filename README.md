@@ -66,7 +66,7 @@ INSTALLED_APPS = [
 from pathlib import Path
 
 CSV_DIRECTORY = Path("csv") # Define the directory where csv are exported
-TEX_DIRECTORY = Path("tex") # Define the directory where tex files and pdf are exported
+TEX_DIRECTORY = Path("tex") # Define the directory where tex files and pdf are exported
 
 INSTALLED_APPS += [
 	'bootstrapform',
@@ -99,17 +99,17 @@ You can also change some options:
 # Using this trick : https://superuser.com/a/686415/567417
 EXCEL_COMPATIBLE_CSV = True
 
-# The separator for questions (Default to ",")
+# The separator for questions (Default to ",")
 CHOICES_SEPARATOR = "|"
 
-# What is shown in export when the user do not answer (Default to "Left blank")
+# What is shown in export when the user do not answer (Default to "Left blank")
 USER_DID_NOT_ANSWER = "NAA"
 
-# Path to the Tex configuration file (default to an internal file that should be sufficient)
+# Path to the Tex configuration file (default to an internal file that should be sufficient)
 from pathlib import Path
 TEX_CONFIGURATION_FILE = Path("tex", "tex.conf")
 
-# Default color for exported pdf pie (default to "red!50")
+# Default color for exported pdf pie (default to "red!50")
 SURVEY_DEFAULT_PIE_COLOR = "blue!50"
 ~~~~
 
@@ -291,14 +291,14 @@ for others I'll integrate it.
 This is the typical command you should do to get started:
 
 ~~~~bash
-python -m venv venv/ # Create virtualenv
-source venv/bin/activate # Activate virtualenv
-pip install -e ".[dev]" # Install dev requirements
-pre-commit install # Install pre-commit hook framework
-python manage.py migrate # Create database
-python manage.py loaddata survey/tests/testdump.json # Load test data
+python -m venv venv/ # Create virtualenv
+source venv/bin/activate # Activate virtualenv
+pip install -e ".[dev]" # Install dev requirements
+pre-commit install # Install pre-commit hook framework
+python manage.py migrate # Create database
+python manage.py loaddata survey/tests/testdump.json # Load test data
 python manage.py createsuperuser
-python manage.py runserver # Launch server
+python manage.py runserver # Launch server
 ~~~~
 
 Please note that `pre-commit` will permit to fix a lot of linting error

@@ -90,7 +90,7 @@ class SurveyCommand(BaseCommand):
         self.set_surveys(options)
 
     def set_surveys(self, options):
-        #  pylint: disable=attribute-defined-outside-init
+        #  pylint: disable=attribute-defined-outside-init
         self.surveys = []
         if options.get("survey_all"):
             self.surveys = Survey.objects.all()
@@ -123,7 +123,7 @@ class SurveyCommand(BaseCommand):
             self.raise_value_error("survey-name", survey_name)
 
     def set_questions(self, options):
-        #  pylint: disable=attribute-defined-outside-init
+        #  pylint: disable=attribute-defined-outside-init
         self.questions = []
         if options.get("question_all"):
             self.questions = Question.objects.all()
