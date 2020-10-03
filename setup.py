@@ -18,7 +18,7 @@ with open(path.join(THIS_DIRECTORY, "README.md"), encoding="utf-8") as f:
     LONG_DESCRIPTION = f.read()
 
 DEPENDENCIES = [
-    "django>=2.2,<3",
+    "django>=2.2",
     "django-bootstrap-form>=3.4",
     "django-tastypie>=0.14.2",
     "django-registration>=3.0",
@@ -40,7 +40,7 @@ DEV_DEPENDENCIES = [
 
 setuptools.setup(
     name="django-survey-and-report",
-    version="1.3.24",
+    version="1.3.25",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
