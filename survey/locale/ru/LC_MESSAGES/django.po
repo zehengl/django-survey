@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-09 04:01+0000\n"
+"POT-Creation-Date: 2020-10-03 18:22+0000\n"
 "PO-Revision-Date: 2019-03-10 22:53+0230\n"
 "Last-Translator: b'  <vladm.ru@gmail.com>'\n"
 "Language-Team: \n"
@@ -42,11 +42,11 @@ msgstr "Помечено как опублиовано"
 msgid "Anonymous"
 msgstr "Анонимно"
 
-#: survey/exporter/csv/survey2csv.py:71
+#: survey/exporter/csv/survey2csv.py:68
 msgid "user"
 msgstr ""
 
-#: survey/exporter/csv/survey2csv.py:115
+#: survey/exporter/csv/survey2csv.py:112
 msgid "Export to CSV"
 msgstr ""
 
@@ -82,16 +82,16 @@ msgstr "или"
 msgid "Repartition of answers"
 msgstr "Перераспределение ответов"
 
-#: survey/exporter/tex/question2tex_chart.py:72
+#: survey/exporter/tex/question2tex_chart.py:68
 msgid "Left blank"
 msgstr "Оставить пустым"
 
-#: survey/exporter/tex/question2tex_chart.py:117
+#: survey/exporter/tex/question2tex_chart.py:113
 #: survey/exporter/tex/question2tex_sankey.py:40
 msgid "for the question"
 msgstr "для вопроса"
 
-#: survey/exporter/tex/question2tex_chart.py:127
+#: survey/exporter/tex/question2tex_chart.py:123
 msgid "No answers for this question."
 msgstr "Нет ответов для этого вопроса."
 
@@ -113,32 +113,36 @@ msgstr "в связи с вопросом"
 msgid "right"
 msgstr "правильно"
 
-#: survey/exporter/tex/survey2tex.py:32
+#: survey/exporter/tex/survey2tex.py:39
 msgid "Cannot generate PDF, we need 'xelatex' to be installed."
 msgstr ""
 
-#: survey/exporter/tex/survey2tex.py:80
+#: survey/exporter/tex/survey2tex.py:44
+msgid "Cannot generate PDF, we need 'pySankeyBeta' to be installed."
+msgstr ""
+
+#: survey/exporter/tex/survey2tex.py:94
 msgid "We could not render a chart because the type"
 msgstr "Мы не смогли отобразить диаграмму, потому что тип"
 
-#: survey/exporter/tex/survey2tex.py:83
+#: survey/exporter/tex/survey2tex.py:97
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "не является стандартным типом или путем к импортируемому допустимому текстовому дочернему классу Question2Tex. Выбрать между 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' o 'package.path.MyQuestion2TexCustomClass'"
 
-#: survey/exporter/tex/survey2tex.py:157
+#: survey/exporter/tex/survey2tex.py:171
 msgid "No questions to display in this survey."
 msgstr ""
 
-#: survey/exporter/tex/survey2tex.py:187
+#: survey/exporter/tex/survey2tex.py:201
 msgid "Cannot export multiple PDF, choose only one."
 msgstr ""
 
-#: survey/exporter/tex/survey2tex.py:196
+#: survey/exporter/tex/survey2tex.py:210
 #, python-format
 msgid "Error during PDF generation: %s"
 msgstr ""
 
-#: survey/exporter/tex/survey2tex.py:203
+#: survey/exporter/tex/survey2tex.py:217
 msgid "Export to PDF"
 msgstr ""
 
