@@ -24,6 +24,7 @@ from survey.models.question import Question
 
 try:
     from survey.exporter.tex.question2tex_sankey import Question2TexSankey
+
     SANKEY = True
 except ImportError:
     SANKEY = False
