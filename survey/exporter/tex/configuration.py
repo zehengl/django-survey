@@ -132,8 +132,7 @@ class Configuration:
 
         :param String key: The key we want to get.
         :param String survey_name: The name of a specific survey.
-        :param String question_text: The text of a specific question.
-        :param String category_name """
+        :param String question_text: The text of a specific question."""
         # We create a new dictionary from a deepcopy of the default conf
         conf = copy.deepcopy(self._default["generic"])
         # We update it with the generic configuration of the user if it exists

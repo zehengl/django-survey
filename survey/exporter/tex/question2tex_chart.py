@@ -47,11 +47,7 @@ class Question2TexChart(Question2Tex):
         self.latex_label = options.get("latex_label", 1)
 
     def get_colors(self):
-        """ Return a formated string for a tikz pgf-pie chart.
-
-        :param Question question: The question..
-        :param Dict colors_dict: Color to use (String answer: String color)
-        """
+        """ Return a formatted string for a tikz pgf-pie chart."""
         colors = []
         for answer in self.cardinality:
             answer = Question2Tex.get_clean_answer(answer)
@@ -65,7 +61,7 @@ class Question2TexChart(Question2Tex):
         return "{%s}" % ", ".join(colors)
 
     def get_results(self):
-        """ Return a formated string for a tikz pgf-pie chart. """
+        """ Return a formatted string for a tikz pgf-pie chart."""
         pie = ""
         for answer, cardinality in list(self.cardinality.items()):
             if not answer:
