@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-03 20:21+0000\n"
+"POT-Creation-Date: 2020-10-03 20:28+0000\n"
 "PO-Revision-Date: 2018-04-09 00:52+0000\n"
 "Last-Translator: Zhu Sheng Li <digglife@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,8 +56,8 @@ msgstr "和"
 
 #: survey/exporter/tex/question2tex.py:66
 #, python-format
-msgid "%(min_cardinality)d respondants or more"
-msgid_plural "%(min_cardinality)d respondant or more"
+msgid "%(min_cardinality)d respondents or more"
+msgid_plural "%(min_cardinality)d respondent or more"
 msgstr[0] "%(min_cardinality)d 位参与者或更多"
 msgstr[1] "%(min_cardinality)d 位参与者或更多"
 

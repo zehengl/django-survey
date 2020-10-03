@@ -99,7 +99,7 @@ class TestQuestion2TexChart(TestManagement):
             return q2c.get_caption()
 
         options = get_options(min_cardinality=2)
-        self.assertIn("2 respondant or more", get_result(**options))
+        self.assertIn("2 respondent or more", get_result(**options))
         options = get_options(filter=["Toto"])
         self.assertIn("excluding 'Toto' ", get_result(**options))
         options = get_options(filter=["Toto", "Titi"])

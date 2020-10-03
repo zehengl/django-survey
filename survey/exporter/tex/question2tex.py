@@ -63,8 +63,8 @@ class Question2Tex:
             caption += "{} {} ".format(
                 _("with"),
                 ungettext(
-                    "%(min_cardinality)d respondants or more",
-                    "%(min_cardinality)d respondant or more",
+                    "%(min_cardinality)d respondents or more",
+                    "%(min_cardinality)d respondent or more",
                     self.min_cardinality,
                 )
                 % {"min_cardinality": self.min_cardinality},
