@@ -7,7 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ungettext
 
 from survey.models import Question
-from survey.models.question import Question
 
 LOGGER = logging.getLogger(__name__)
 
