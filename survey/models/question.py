@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from typing import List
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
