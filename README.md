@@ -46,6 +46,7 @@ The software is developed in english. Other available languages are :
 * [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/), [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/) and [Anton Melser](https://github.com/AntonOfTheWoods/)
 * [x] Russian thanks to [Vlad M.](https://github.com/manchos/) and [Anton Melser](https://github.com/AntonOfTheWoods/)
 * [x] German thanks to [Georg Elsas](https://github.com/gjelsas)
+* [x] Indonesian thanks to [Dhana Dhira](https://github.com/ddhira123)
 
 ## Getting started
 
