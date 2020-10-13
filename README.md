@@ -40,13 +40,14 @@ version < 1.3.0.
 
 The software is developed in english. Other available languages are :
 
-* [x] Chinese thanks to [朱聖黎 (Zhu Sheng Li)](https://github.com/digglife/), [John Lyu](https://github.com/PaleNeutron) and [Anton Melser](https://github.com/AntonOfTheWoods/) \(with help from 宋璐\)
-* [x] French thanks to [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/) and [Anton Melser](https://github.com/AntonOfTheWoods/)
-* [x] Japanese thanks to [Nobukuni Suzue](https://github.com/nsuzue/)
-* [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/), [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/) and [Anton Melser](https://github.com/AntonOfTheWoods/)
-* [x] Russian thanks to [Vlad M.](https://github.com/manchos/) and [Anton Melser](https://github.com/AntonOfTheWoods/)
+* [x] Brazilian-Portuguese thanks to [Rafael Capaci](https://github.com/capaci)
+* [x] Chinese thanks to [朱聖黎 (Zhu Sheng Li)](https://github.com/digglife/)
+* [x] French thanks to [Pierre Sassoulas](https://github.com/Pierre-Sassoulas/)
 * [x] German thanks to [Georg Elsas](https://github.com/gjelsas)
 * [x] Indonesian thanks to [Dhana Dhira](https://github.com/ddhira123)
+* [x] Japanese thanks to [Nobukuni Suzue](https://github.com/nsuzue/)
+* [x] Spanish thanks to [Javier Ordóñez](https://github.com/ordonja/)
+* [x] Russian thanks to [Vlad M.](https://github.com/manchos/)
 
 ## Getting started
 
