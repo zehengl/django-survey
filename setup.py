@@ -40,7 +40,7 @@ DEV_DEPENDENCIES = [
 
 setuptools.setup(
     name="django-survey-and-report",
-    version="1.3.27",
+    version="1.3.28",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",

@@ -118,22 +118,15 @@ msgstr "Não foi possível gerar o PDF, o 'xelatex' precisa estar instalado"
 
 #: survey/exporter/tex/survey2tex.py:44
 msgid "Cannot generate PDF, we need 'pySankeyBeta' to be installed."
-msgstr ""
-"Não foi possível gerar o PDF, o 'pySankeyBeta' precisa estar instalado"
+msgstr "Não foi possível gerar o PDF, o 'pySankeyBeta' precisa estar instalado"
 
 #: survey/exporter/tex/survey2tex.py:94
 msgid "We could not render a chart because the type"
 msgstr "Não foi possível gerar o gráfico por conta do tipo"
 
 #: survey/exporter/tex/survey2tex.py:97
-msgid ""
-"is not a standard type nor the path to an importable valid Question2Tex "
-"child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', "
-"'polar' or 'package.path.MyQuestion2TexCustomClass'"
-msgstr ""
-"não é um tipo padrão nem o caminho para uma classe filho Question2Tex válida"
-" e importável. Escolha entre 'raw', 'sankey', 'pie', 'cloud', 'square', "
-"'polar' ou 'package.path.MyQuestion2TexCustomClass'"
+msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
+msgstr "não é um tipo padrão nem o caminho para uma classe filho Question2Tex válida e importável. Escolha entre 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' ou 'package.path.MyQuestion2TexCustomClass'"
 
 #: survey/exporter/tex/survey2tex.py:171
 msgid "No questions to display in this survey."
