@@ -361,7 +361,7 @@ python manage.py runserver
 # Then go to http://localhost:8000/rosetta to translate
 python manage.py makemessages --no-obsolete --no-wrap --ignore venv
 # Add "--locale ru --locale es --locale fr --locale ja --locale zh --locale de
-# --locale id --locale pt-br" for version of django above 3
+# --locale id --locale pt-br --locale pl" for version of django above 3
 git add survey/locale/
 ...
 ~~~~

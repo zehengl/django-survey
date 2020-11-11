@@ -16,9 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #: dev/templates/base.html:3
 msgid "en"
@@ -123,15 +121,8 @@ msgid "We could not render a chart because the type"
 msgstr "Nie można wyrenderować wykresu ze względu na typ"
 
 #: survey/exporter/tex/survey2tex.py:97
-msgid ""
-"is not a standard type nor the path to an importable valid Question2Tex "
-"child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', "
-"'polar' or 'package.path.MyQuestion2TexCustomClass'"
-msgstr ""
-"to nie jest standardowy typ ani ścieżka aby importować prawidłowo Question2Tex"
-"do klasy podrzędnej. Wybierz pomiędzy 'surowy', 'wykres sankeya', 'kawałek', 'chmura', 'kwadrat', "
-"polarny lub 'package.path.MyQuestion2TexCustomClass'"
-
+msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
+msgstr "to nie jest standardowy typ ani ścieżka aby importować prawidłowo Question2Texdo klasy podrzędnej. Wybierz pomiędzy 'surowy', 'wykres sankeya', 'kawałek', 'chmura', 'kwadrat', polarny lub 'package.path.MyQuestion2TexCustomClass'"
 
 #: survey/exporter/tex/survey2tex.py:171
 msgid "No questions to display in this survey."
