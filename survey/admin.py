@@ -13,6 +13,12 @@ class QuestionInline(admin.StackedInline):
     ordering = ("order", "category")
     extra = 1
 
+    def get_formset(self, request, survey_obj, *args, **kwargs):
+        formset = super(QuestionInline, self).get_formset(request, survey_obj, *args, **kwargs)
+        if survey_obj:
+            formset.form.base_fields["category"].queryset = survey_obj.categories.all()
+        return formset
+
 
 class CategoryInline(admin.TabularInline):
     model = Category
