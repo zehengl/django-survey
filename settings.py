@@ -46,7 +46,7 @@ SURVEY_DEFAULT_PIE_COLOR = "red!50"
 
 CHOICES_SEPARATOR = ","
 
-LANGUAGE_CODE = "en-us"
+
 SITE_ID = 1
 TIME_ZONE = "UTC"
 USE_I18N = True
@@ -124,7 +124,7 @@ INSTALLED_APPS = (
 )
 
 LOCALE_PATHS = (os.path.join(ROOT, "survey", "locale"),)
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = "en-us"
 LANGUAGES = (
     ("en", "english"),
     ("ru", "russian"),
