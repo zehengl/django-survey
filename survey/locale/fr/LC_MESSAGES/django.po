@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-13 07:04+0000\n"
+"POT-Creation-Date: 2021-01-24 14:21+0000\n"
 "PO-Revision-Date: 2020-02-23 14:44+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,7 +85,7 @@ msgid "Left blank"
 msgstr "Laissé vide"
 
 #: survey/exporter/tex/question2tex_chart.py:113
-#: survey/exporter/tex/question2tex_sankey.py:51
+#: survey/exporter/tex/question2tex_sankey.py:57
 msgid "for the question"
 msgstr "pour la question"
 
@@ -97,15 +97,21 @@ msgstr "Aucune réponse pour cette question."
 msgid "Participant"
 msgstr "Participant"
 
-#: survey/exporter/tex/question2tex_sankey.py:51
+#: survey/exporter/tex/question2tex_sankey.py:29
+#, fuzzy
+#| msgid "Cannot generate PDF, we need 'xelatex' to be installed."
+msgid "Cannot generate PDF, we need 'pySankeyBeta' to be installed."
+msgstr "Impossible de générer le PDF, 'xelatex' doit être installé."
+
+#: survey/exporter/tex/question2tex_sankey.py:57
 msgid "left"
 msgstr "à gauche"
 
-#: survey/exporter/tex/question2tex_sankey.py:53
+#: survey/exporter/tex/question2tex_sankey.py:59
 msgid "in relation with the question"
 msgstr "mise en relation avec la question"
 
-#: survey/exporter/tex/question2tex_sankey.py:55
+#: survey/exporter/tex/question2tex_sankey.py:61
 msgid "right"
 msgstr "à droite"
 
@@ -113,34 +119,28 @@ msgstr "à droite"
 msgid "Cannot generate PDF, we need 'xelatex' to be installed."
 msgstr "Impossible de générer le PDF, 'xelatex' doit être installé."
 
-#: survey/exporter/tex/survey2tex.py:37
-#, fuzzy
-#| msgid "Cannot generate PDF, we need 'xelatex' to be installed."
-msgid "Cannot generate PDF, we need 'pySankeyBeta' to be installed."
-msgstr "Impossible de générer le PDF, 'xelatex' doit être installé."
-
-#: survey/exporter/tex/survey2tex.py:87
+#: survey/exporter/tex/survey2tex.py:82
 msgid "We could not render a chart because the type"
 msgstr "Nous n'avons pas pu générer un graphique car le type"
 
-#: survey/exporter/tex/survey2tex.py:90
+#: survey/exporter/tex/survey2tex.py:85
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "n'est pas un type standard, ni le chemin d'une classe fille de Question2Tex importable. Choisissez entre 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' ou 'package.chemin.MaClasseQuestion2TexPerso'"
 
-#: survey/exporter/tex/survey2tex.py:164
+#: survey/exporter/tex/survey2tex.py:159
 msgid "No questions to display in this survey."
 msgstr "Aucune questions à montrer dans ce sondage."
 
-#: survey/exporter/tex/survey2tex.py:194
+#: survey/exporter/tex/survey2tex.py:189
 msgid "Cannot export multiple PDF, choose only one."
 msgstr "Impossible d'exporter plusieurs PDF,  choisissez en un seul."
 
-#: survey/exporter/tex/survey2tex.py:203
+#: survey/exporter/tex/survey2tex.py:198
 #, python-format
 msgid "Error during PDF generation: %s"
 msgstr "Erreur durant la génération du PDF: %s"
 
-#: survey/exporter/tex/survey2tex.py:210
+#: survey/exporter/tex/survey2tex.py:205
 msgid "Export to PDF"
 msgstr "Export vers PDF"
 

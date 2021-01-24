@@ -20,7 +20,7 @@ from survey.exporter.tex.latex_file import LatexFile
 from survey.exporter.tex.question2tex import Question2Tex
 from survey.exporter.tex.question2tex_chart import Question2TexChart
 from survey.exporter.tex.question2tex_raw import Question2TexRaw
-from survey.exporter.tex.question2tex_sankey import SANKEY, Question2TexSankey
+from survey.exporter.tex.question2tex_sankey import SANKEY, Question2TexSankey, SankeyNotInstalled
 from survey.models.question import Question
 
 LOGGER = logging.getLogger(__name__)
@@ -30,11 +30,6 @@ STATIC = Path(__file__).parent.parent.parent.joinpath("static")
 class XelatexNotInstalled(Exception):
     def __init__(self):
         super(XelatexNotInstalled, self).__init__(_("Cannot generate PDF, we need 'xelatex' to be installed."))
-
-
-class SankeyNotInstalled(Exception):
-    def __init__(self):
-        super(SankeyNotInstalled, self).__init__(_("Cannot generate PDF, we need 'pySankeyBeta' to be installed."))
 
 
 class Survey2Tex(Survey2X):

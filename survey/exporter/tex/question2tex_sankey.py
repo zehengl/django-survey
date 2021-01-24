@@ -4,9 +4,9 @@ import logging
 import warnings
 
 from django.utils.translation import gettext_lazy as _
-from pandas.core.frame import DataFrame
 
 try:
+    from pandas.core.frame import DataFrame
     from pysankey import sankey
 
     SANKEY = True
@@ -22,6 +22,11 @@ from survey.exporter.tex.question2tex import Question2Tex
 from survey.models.question import Question
 
 LOGGER = logging.getLogger(__name__)
+
+
+class SankeyNotInstalled(Exception):
+    def __init__(self):
+        super(SankeyNotInstalled, self).__init__(_("Cannot generate PDF, we need 'pySankeyBeta' to be installed."))
 
 
 class Question2TexSankey(Question2Tex):
@@ -68,6 +73,8 @@ class Question2TexSankey(Question2Tex):
         in order for it to work with your latex file.
 
         :param Question other_question: the question we compare to."""
+        if not SANKEY:
+            raise SankeyNotInstalled()
         self.cardinality = self.question.sorted_answers_cardinality(
             self.min_cardinality,
             self.group_together,
