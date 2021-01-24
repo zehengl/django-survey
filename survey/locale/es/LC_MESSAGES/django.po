@@ -87,7 +87,7 @@ msgid "Left blank"
 msgstr "Dejada en blanco"
 
 #: survey/exporter/tex/question2tex_chart.py:113
-#: survey/exporter/tex/question2tex_sankey.py:40
+#: survey/exporter/tex/question2tex_sankey.py:48
 msgid "for the question"
 msgstr "para la pregunta"
 
@@ -100,16 +100,16 @@ msgid "Participant"
 msgstr "Participante"
 
 #  as in "opposite of right"
-#: survey/exporter/tex/question2tex_sankey.py:40
+#: survey/exporter/tex/question2tex_sankey.py:48
 msgid "left"
 msgstr "izquierda"
 
-#: survey/exporter/tex/question2tex_sankey.py:42
+#: survey/exporter/tex/question2tex_sankey.py:50
 msgid "in relation with the question"
 msgstr "en relación con la pregunta"
 
 # as in "opposite of left"
-#: survey/exporter/tex/question2tex_sankey.py:44
+#: survey/exporter/tex/question2tex_sankey.py:52
 msgid "right"
 msgstr "derecha"
 
@@ -377,6 +377,10 @@ msgstr "Reponde esta sección"
 msgid "Questions"
 msgstr "Preguntas"
 
-#: survey/templates/survey/survey.html:66
+#: survey/templates/survey/survey.html:67
+msgid "Next!"
+msgstr ""
+
+#: survey/templates/survey/survey.html:73
 msgid "I'm done!"
 msgstr "¡Terminé!"

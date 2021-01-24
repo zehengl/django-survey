@@ -85,7 +85,7 @@ msgid "Left blank"
 msgstr "Frei gelassen"
 
 #: survey/exporter/tex/question2tex_chart.py:113
-#: survey/exporter/tex/question2tex_sankey.py:43
+#: survey/exporter/tex/question2tex_sankey.py:48
 msgid "for the question"
 msgstr "für die Frage"
 
@@ -97,15 +97,15 @@ msgstr "Keine Antwort auf diese Frage."
 msgid "Participant"
 msgstr "Teilnehmer"
 
-#: survey/exporter/tex/question2tex_sankey.py:43
+#: survey/exporter/tex/question2tex_sankey.py:48
 msgid "left"
 msgstr "links"
 
-#: survey/exporter/tex/question2tex_sankey.py:45
+#: survey/exporter/tex/question2tex_sankey.py:50
 msgid "in relation with the question"
 msgstr "in Zusammenhang mit der Frage"
 
-#: survey/exporter/tex/question2tex_sankey.py:47
+#: survey/exporter/tex/question2tex_sankey.py:52
 msgid "right"
 msgstr "rechts"
 

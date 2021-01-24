@@ -84,7 +84,7 @@ msgid "Left blank"
 msgstr "Dikosongkan saja"
 
 #: survey/exporter/tex/question2tex_chart.py:113
-#: survey/exporter/tex/question2tex_sankey.py:40
+#: survey/exporter/tex/question2tex_sankey.py:48
 msgid "for the question"
 msgstr "untuk pertanyaan"
 
@@ -96,15 +96,15 @@ msgstr "Tidak ada jawaban untuk pertanyaan ini."
 msgid "Participant"
 msgstr "Partisipan"
 
-#: survey/exporter/tex/question2tex_sankey.py:40
+#: survey/exporter/tex/question2tex_sankey.py:48
 msgid "left"
 msgstr "kiri"
 
-#: survey/exporter/tex/question2tex_sankey.py:42
+#: survey/exporter/tex/question2tex_sankey.py:50
 msgid "in relation with the question"
 msgstr "hubungannya dengan pertanyaan"
 
-#: survey/exporter/tex/question2tex_sankey.py:44
+#: survey/exporter/tex/question2tex_sankey.py:52
 msgid "right"
 msgstr "kanan"
 
@@ -372,6 +372,10 @@ msgstr "Jawab bagian ini"
 msgid "Questions"
 msgstr "Pertanyaan"
 
-#: survey/templates/survey/survey.html:66
+#: survey/templates/survey/survey.html:67
+msgid "Next!"
+msgstr ""
+
+#: survey/templates/survey/survey.html:73
 msgid "I'm done!"
 msgstr "Saya sudah selesai!"
