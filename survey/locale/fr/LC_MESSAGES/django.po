@@ -377,7 +377,7 @@ msgstr "Questions"
 
 #: survey/templates/survey/survey.html:67
 msgid "Next!"
-msgstr ""
+msgstr "Suite"
 
 #: survey/templates/survey/survey.html:73
 msgid "I'm done!"
