@@ -84,7 +84,7 @@ msgid "Left blank"
 msgstr "Dikosongkan saja"
 
 #: survey/exporter/tex/question2tex_chart.py:113
-#: survey/exporter/tex/question2tex_sankey.py:48
+#: survey/exporter/tex/question2tex_sankey.py:51
 msgid "for the question"
 msgstr "untuk pertanyaan"
 
@@ -96,48 +96,48 @@ msgstr "Tidak ada jawaban untuk pertanyaan ini."
 msgid "Participant"
 msgstr "Partisipan"
 
-#: survey/exporter/tex/question2tex_sankey.py:48
+#: survey/exporter/tex/question2tex_sankey.py:51
 msgid "left"
 msgstr "kiri"
 
-#: survey/exporter/tex/question2tex_sankey.py:50
+#: survey/exporter/tex/question2tex_sankey.py:53
 msgid "in relation with the question"
 msgstr "hubungannya dengan pertanyaan"
 
-#: survey/exporter/tex/question2tex_sankey.py:52
+#: survey/exporter/tex/question2tex_sankey.py:55
 msgid "right"
 msgstr "kanan"
 
-#: survey/exporter/tex/survey2tex.py:39
+#: survey/exporter/tex/survey2tex.py:32
 msgid "Cannot generate PDF, we need 'xelatex' to be installed."
 msgstr "Tidak dapat menghasilkan PDF, 'xelatex' perlu dipasang terlebih dahulu"
 
-#: survey/exporter/tex/survey2tex.py:44
+#: survey/exporter/tex/survey2tex.py:37
 msgid "Cannot generate PDF, we need 'pySankeyBeta' to be installed."
 msgstr "Tidak dapat menghasilkan PDF, 'pySankeyBeta' perlu dipasang terlebih dahulu"
 
-#: survey/exporter/tex/survey2tex.py:94
+#: survey/exporter/tex/survey2tex.py:87
 msgid "We could not render a chart because the type"
 msgstr "Tidak dapat memuat sebuah diagram karena tipe"
 
-#: survey/exporter/tex/survey2tex.py:97
+#: survey/exporter/tex/survey2tex.py:90
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "bukan tipe standar ataupun path menuju kelas turunan Question2Tex yang dapat diimpor tidak valid. Plih antara 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' atau 'package.path.MyQuestion2TexCustomClass'"
 
-#: survey/exporter/tex/survey2tex.py:171
+#: survey/exporter/tex/survey2tex.py:164
 msgid "No questions to display in this survey."
 msgstr "Tidak ada pertanyaan untuk ditampilkan pada survei ini."
 
-#: survey/exporter/tex/survey2tex.py:201
+#: survey/exporter/tex/survey2tex.py:194
 msgid "Cannot export multiple PDF, choose only one."
 msgstr "Tidak dapat ekspor beberapa PDF sekaligus, pilih satu saja."
 
-#: survey/exporter/tex/survey2tex.py:210
+#: survey/exporter/tex/survey2tex.py:203
 #, python-format
 msgid "Error during PDF generation: %s"
 msgstr "Terjadi kesalahan dalam membuat berkas PDF: %s"
 
-#: survey/exporter/tex/survey2tex.py:217
+#: survey/exporter/tex/survey2tex.py:210
 msgid "Export to PDF"
 msgstr "Ekspor sebagai PDF"
 

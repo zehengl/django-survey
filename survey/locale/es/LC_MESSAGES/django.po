@@ -87,7 +87,7 @@ msgid "Left blank"
 msgstr "Dejada en blanco"
 
 #: survey/exporter/tex/question2tex_chart.py:113
-#: survey/exporter/tex/question2tex_sankey.py:48
+#: survey/exporter/tex/question2tex_sankey.py:51
 msgid "for the question"
 msgstr "para la pregunta"
 
@@ -100,49 +100,49 @@ msgid "Participant"
 msgstr "Participante"
 
 #  as in "opposite of right"
-#: survey/exporter/tex/question2tex_sankey.py:48
+#: survey/exporter/tex/question2tex_sankey.py:51
 msgid "left"
 msgstr "izquierda"
 
-#: survey/exporter/tex/question2tex_sankey.py:50
+#: survey/exporter/tex/question2tex_sankey.py:53
 msgid "in relation with the question"
 msgstr "en relación con la pregunta"
 
 # as in "opposite of left"
-#: survey/exporter/tex/question2tex_sankey.py:52
+#: survey/exporter/tex/question2tex_sankey.py:55
 msgid "right"
 msgstr "derecha"
 
-#: survey/exporter/tex/survey2tex.py:39
+#: survey/exporter/tex/survey2tex.py:32
 msgid "Cannot generate PDF, we need 'xelatex' to be installed."
 msgstr ""
 
-#: survey/exporter/tex/survey2tex.py:44
+#: survey/exporter/tex/survey2tex.py:37
 msgid "Cannot generate PDF, we need 'pySankeyBeta' to be installed."
 msgstr ""
 
-#: survey/exporter/tex/survey2tex.py:94
+#: survey/exporter/tex/survey2tex.py:87
 msgid "We could not render a chart because the type"
 msgstr "no pudimos generar un gráfico porque el tipo"
 
-#: survey/exporter/tex/survey2tex.py:97
+#: survey/exporter/tex/survey2tex.py:90
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "no es un tipo estándar ni ruta a una subclase importable válida de Question2Tex. Escoje entre 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' o 'package.path.MyQuestion2TexCustomClass'"
 
-#: survey/exporter/tex/survey2tex.py:171
+#: survey/exporter/tex/survey2tex.py:164
 msgid "No questions to display in this survey."
 msgstr "No hay preguntas para mostrar en esta encuesta."
 
-#: survey/exporter/tex/survey2tex.py:201
+#: survey/exporter/tex/survey2tex.py:194
 msgid "Cannot export multiple PDF, choose only one."
 msgstr "No se pueden exportar varios PDF, elija solo uno."
 
-#: survey/exporter/tex/survey2tex.py:210
+#: survey/exporter/tex/survey2tex.py:203
 #, python-format
 msgid "Error during PDF generation: %s"
 msgstr "Error durante la generación del PDF: %s"
 
-#: survey/exporter/tex/survey2tex.py:217
+#: survey/exporter/tex/survey2tex.py:210
 msgid "Export to PDF"
 msgstr "Exportación al formato PDF"
 

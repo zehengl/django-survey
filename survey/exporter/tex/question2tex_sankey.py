@@ -8,11 +8,14 @@ from pandas.core.frame import DataFrame
 
 try:
     from pysankey import sankey
+
+    SANKEY = True
 except ModuleNotFoundError:
     warnings.warn(
         "Cannot import 'sankey', please install the package using"
         "the sankey extra. (pip install django-survey-and-report[sankey])"
     )
+    SANKEY = False
 
 from survey.exporter.tex.question2tex import Question2Tex
 from survey.models.question import Question

@@ -20,15 +20,8 @@ from survey.exporter.tex.latex_file import LatexFile
 from survey.exporter.tex.question2tex import Question2Tex
 from survey.exporter.tex.question2tex_chart import Question2TexChart
 from survey.exporter.tex.question2tex_raw import Question2TexRaw
+from survey.exporter.tex.question2tex_sankey import SANKEY, Question2TexSankey
 from survey.models.question import Question
-
-try:
-    from survey.exporter.tex.question2tex_sankey import Question2TexSankey
-
-    SANKEY = True
-except ImportError:
-    SANKEY = False
-
 
 LOGGER = logging.getLogger(__name__)
 STATIC = Path(__file__).parent.parent.parent.joinpath("static")
