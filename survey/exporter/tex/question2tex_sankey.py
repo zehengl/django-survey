@@ -5,6 +5,7 @@ import warnings
 
 from django.utils.translation import gettext_lazy as _
 from pandas.core.frame import DataFrame
+
 try:
     from pysankey import sankey
 except ModuleNotFoundError:
