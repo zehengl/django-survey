@@ -26,7 +26,7 @@ DEPENDENCIES = [
     "ordereddict>=1.1",
     "pyyaml>=4.2b1",
 ]
-SANKEY_DEPENDENCIES = ["pySankeyBeta~=1.2.2", "pandas"]
+SANKEY_DEPENDENCIES = ["pySankeyBeta~=1.3.0"]
 DEV_DEPENDENCIES = [
     "django-rosetta",
     "coverage",
@@ -40,7 +40,7 @@ DEV_DEPENDENCIES = [
 
 setuptools.setup(
     name="django-survey-and-report",
-    version="1.3.34",
+    version="1.3.35",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",

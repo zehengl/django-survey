@@ -1,8 +1,8 @@
+import logging
 from datetime import date
 from functools import wraps
 
 from django.shortcuts import Http404, get_object_or_404
-import logging
 
 from survey.models import Survey
 
