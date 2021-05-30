@@ -110,7 +110,7 @@ Test survëy:
                 color: {"Text for a response": "yellow!70", "": "white!100"}
 
         # 4
-        Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.:
+        Lorem ipsum dolor sit amët, consectetur<strong>  adipiscing </strong> elit.:
             chart:
                 type: survey.tests.exporter.tex.CustomQuestion2TexChild
 
