@@ -46,7 +46,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     author="Pierre SASSOULAS",
     author_email="pierre.sassoulas@gmail.com",
-    license="AGPL",
+    license="AGPL-3.0",
     url="https://github.com/Pierre-Sassoulas/django-survey",
     packages=setuptools.find_packages(),
     include_package_data=True,
