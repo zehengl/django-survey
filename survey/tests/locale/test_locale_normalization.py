@@ -29,7 +29,7 @@ class TestLocaleNormalization(unittest.TestCase):
         ]
         if django_version > "3.0":
             for x in settings.LANGUAGES:
-                if x[0] != "en":
+                if x[0] not in ["en"]:
                     makemessages_command += ["--locale", x[0]]
             logging.warning("Command to launch for makemessages is : %s", " ".join(makemessages_command))
         number_of_language = len(os.listdir(self.LOCALE_PATH))

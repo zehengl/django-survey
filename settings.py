@@ -134,7 +134,7 @@ LANGUAGES = (
     ("zh", "Chinese"),
     ("de", "German"),
     ("id", "Indonesian"),
-    ("pt-br", "Brazilian Portuguese"),
+    ("pt", "Portuguese"),
     ("pl", "Polish"),
 )
 
