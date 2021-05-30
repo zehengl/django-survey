@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -35,6 +33,6 @@ class Response(models.Model):
         verbose_name_plural = _("Sets of answers to surveys")
 
     def __str__(self):
-        msg = "Response to {} by {}".format(self.survey, self.user)
-        msg += " on {}".format(self.created)
+        msg = f"Response to {self.survey} by {self.user}"
+        msg += f" on {self.created}"
         return msg

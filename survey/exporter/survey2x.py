@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 import os
 from datetime import datetime
@@ -27,7 +25,7 @@ class Survey2X:
     @staticmethod
     def _check_survey(survey):
         if not isinstance(survey, Survey):
-            msg = "Expected Survey not '{}'".format(survey.__class__.__name__)
+            msg = f"Expected Survey not '{survey.__class__.__name__}'"
             raise TypeError(msg)
 
     @property
@@ -37,16 +35,16 @@ class Survey2X:
     @property
     def directory(self):
         if self.__directory is None:
-            directory_name = "{}_DIRECTORY".format(self.mime_type.upper())
+            directory_name = f"{self.mime_type.upper()}_DIRECTORY"
             try:
                 self.__directory = str(Path(getattr(settings, directory_name)).absolute())
             except AttributeError:
-                raise ImproperlyConfigured("Please define a value for {} in your settings".format(directory_name))
+                raise ImproperlyConfigured(f"Please define a value for {directory_name} in your settings")
         return self.__directory
 
     @property
     def filename(self):
-        return Path(self.directory, "{}.{}".format(slugify(self.survey.name), self.mime_type))
+        return Path(self.directory, f"{slugify(self.survey.name)}.{self.mime_type}")
 
     @property
     def file_modification_time(self):
@@ -102,5 +100,5 @@ class Survey2X:
             with open(self.filename, "w", encoding="UTF-8") as f:
                 f.write(str(self))
             LOGGER.info("Wrote %s in %s", self.mime_type, self.filename)
-        except IOError as exc:
-            raise IOError("Unable to create <{}> : {} ".format(self.filename, exc))
+        except OSError as exc:
+            raise OSError(f"Unable to create <{self.filename}> : {exc} ")

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 import uuid
 
@@ -48,7 +46,7 @@ class ResponseForm(models.ModelForm):
             self.step = int(kwargs.pop("step"))
         except KeyError:
             self.step = None
-        super(ResponseForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.uuid = uuid.uuid4().hex
 
         self.categories = self.survey.non_empty_categories()
@@ -270,7 +268,7 @@ class ResponseForm(models.ModelForm):
         if not self.survey.editable_answers and response is not None:
             return None
         if response is None:
-            response = super(ResponseForm, self).save(commit=False)
+            response = super().save(commit=False)
         response.survey = self.survey
         response.interview_uuid = self.uuid
         if self.user.is_authenticated:

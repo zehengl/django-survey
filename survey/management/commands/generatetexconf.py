@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import sys
 
 from survey.exporter.tex import ConfigurationBuilder
@@ -16,7 +14,7 @@ class Command(SurveyCommand):
     to manage the survey report generation. """
 
     def add_arguments(self, parser):
-        super(Command, self).add_arguments(parser)
+        super().add_arguments(parser)
         parser.add_argument("output", nargs="+", type=str, help="Output prefix.")
 
     def write_conf(self, name, conf):
@@ -25,7 +23,7 @@ class Command(SurveyCommand):
         file_.close()
 
     def handle(self, *args, **options):
-        super(Command, self).handle(*args, **options)
+        super().handle(*args, **options)
         output = options["output"]
         if len(output) != len(self.surveys):
             exit_msg = "You want to generate {} surveys but you only gave {} output names."

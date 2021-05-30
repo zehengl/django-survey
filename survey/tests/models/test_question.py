@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -28,10 +26,10 @@ class TestQuestion(BaseModelTest):
         )
         user_number = len(self.questions[0].choices.split(", "))
         for i in range(user_number):
-            user = User.objects.create(username="User {}".format(i))
+            user = User.objects.create(username=f"User {i}")
             Response.objects.create(survey=self.survey, user=user)
         for i, choice in enumerate(self.questions[0].choices.split(", ")):
-            user = User.objects.get(username="User {}".format(i))
+            user = User.objects.get(username=f"User {i}")
             response = Response.objects.get(user=user, survey=self.survey)
             Answer.objects.create(question=self.questions[0], body=choice, response=response)
             q2_choice = "dë" if "b" in choice else "Abë-cè"
@@ -179,7 +177,7 @@ class TestQuestion(BaseModelTest):
             {"Dé": {"ABC": 1}, "dé": {"ABC": 1}},
         )
         for i in [0, 2]:
-            user = User.objects.get(username="User {}".format(i))
+            user = User.objects.get(username=f"User {i}")
             response = Response.objects.get(survey=self.survey, user=user)
             answer = Answer.objects.get(question=self.questions[2], response=response)
             answer.delete()

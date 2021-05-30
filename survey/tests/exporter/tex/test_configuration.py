@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from pathlib import Path
 
 from survey.exporter.tex.configuration import Configuration
@@ -90,7 +88,7 @@ class TestConfiguration(TestManagement):
                 self.assertEqual(
                     value,
                     expected_value,
-                    "Expected '{}' for '{}' in '{}' and got '{}'".format(expected_value, key, chart, value),
+                    f"Expected '{expected_value}' for '{key}' in '{chart}' and got '{value}'",
                 )
 
     def test_value_doesnt_exists(self):

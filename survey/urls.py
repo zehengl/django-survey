@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.conf.urls import url
 
 from survey.views import ConfirmView, IndexView, SurveyCompleted, SurveyDetail

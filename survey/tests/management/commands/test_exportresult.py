@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from pathlib import Path
 from warnings import warn
 
@@ -16,7 +14,7 @@ class TestExportresult(TestManagement):
     """Permit to check if export result is working as intended."""
 
     def get_csv_path(self, survey_name):
-        csv_name = "{}.csv".format(slugify(survey_name))
+        csv_name = f"{slugify(survey_name)}.csv"
         return Path(settings.CSV_DIRECTORY, csv_name)
 
     def get_file_content(self, path):

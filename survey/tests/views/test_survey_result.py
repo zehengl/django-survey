@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.urls.base import reverse
 
 from survey.tests.management.test_management import TestManagement

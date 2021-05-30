@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 
 from django.conf import settings
@@ -89,7 +87,7 @@ class Question(models.Model):
     def save(self, *args, **kwargs):
         if self.type in [Question.RADIO, Question.SELECT, Question.SELECT_MULTIPLE]:
             validate_choices(self.choices)
-        super(Question, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_clean_choices(self):
         """Return split and stripped list of choices with no null values."""
@@ -169,7 +167,7 @@ class Question(models.Model):
             if not isinstance(other_question, Question):
                 msg = "Question.answer_cardinality expect a 'Question' for "
                 msg += "the 'other_question' parameter and got"
-                msg += " '{}' (a '{}')".format(other_question, other_question.__class__.__name__)
+                msg += f" '{other_question}' (a '{other_question.__class__.__name__}')"
                 raise TypeError(msg)
         return self.__answers_cardinality(
             min_cardinality,
@@ -285,7 +283,7 @@ class Question(models.Model):
             msg = "Unrecognized option '%s' for 'sort_answer': " % sort_answer
             msg += "use nothing, a dict (answer: rank),"
             for option in possibles_values:
-                msg += " '{}', or".format(option)
+                msg += f" '{option}', or"
             msg = msg[:-4]
             msg += ". We used the default cardinal sorting."
             LOGGER.warning(msg)
@@ -380,8 +378,8 @@ class Question(models.Model):
         return choices_tuple
 
     def __str__(self):
-        msg = "Question '{}' ".format(self.text)
+        msg = f"Question '{self.text}' "
         if self.required:
             msg += "(*) "
-        msg += "{}".format(self.get_clean_choices())
+        msg += f"{self.get_clean_choices()}"
         return msg

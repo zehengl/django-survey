@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 from datetime import datetime
 from pathlib import Path
@@ -34,8 +32,8 @@ class TestSurvey2X(TestManagement):
         self.expected_virtual = Path(ROOT, "x", "test-management-survey.x")
 
     def get_fail_info(self, survey2x):
-        msg = "\nLatest answer date :     {}".format(survey2x.latest_answer_date)
-        msg += "\nFile modification time : {}".format(survey2x.file_modification_time)
+        msg = f"\nLatest answer date :     {survey2x.latest_answer_date}"
+        msg += f"\nFile modification time : {survey2x.file_modification_time}"
         return msg
 
     def test_str(self):

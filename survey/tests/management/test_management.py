@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from pathlib import Path
 
 from django.contrib.auth.models import User
@@ -66,7 +64,7 @@ class TestManagement(BaseTest):
                 User.objects.get_or_create(username=j)
         for i in range(number_of_question):
             question = Question.objects.create(
-                text="How much do you like question {} ?".format(i + 1),
+                text=f"How much do you like question {i + 1} ?",
                 order=i,
                 required=True,
                 survey=ranking_survey,

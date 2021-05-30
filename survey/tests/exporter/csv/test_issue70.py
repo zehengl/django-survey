@@ -29,7 +29,7 @@ class TestIssue70(TestCase):
             "adminebd,user@example.com,Ed Davison,2020-02-03,Left blank,0,0,8,['Admin'; 'Calls'; 'Events'],0,"
             "Left blank,100,"
         )
-        self.expected_content = "{}\n{}".format(header, content)
+        self.expected_content = f"{header}\n{content}"
         self.assertEqual(str(self.s2csv), self.expected_content)
 
     @override_settings(USER_DID_NOT_ANSWER=None)

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from pathlib import Path
 
 from survey.exporter.tex.configuration import Configuration

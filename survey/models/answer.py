@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
     These type-specific answer models use a text field to allow for flexible
     field sizes depending on the actual question this answer corresponds to any
@@ -34,7 +32,7 @@ class Answer(models.Model):
         body = kwargs.get("body")
         if question and body:
             self.check_answer_body(question, body)
-        super(Answer, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     @property
     def values(self):
@@ -69,9 +67,9 @@ class Answer(models.Model):
                     answers = [body]
             for answer in answers:
                 if answer not in choices:
-                    msg = "Impossible answer '{}'".format(body)
-                    msg += " should be in {} ".format(choices)
+                    msg = f"Impossible answer '{body}'"
+                    msg += f" should be in {choices} "
                     raise ValidationError(msg)
 
     def __str__(self):
-        return "{} to '{}' : '{}'".format(self.__class__.__name__, self.question, self.body)
+        return f"{self.__class__.__name__} to '{self.question}' : '{self.body}'"

@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
 import logging
-from builtins import open
 from datetime import datetime
 
 LOGGER = logging.getLogger(__name__)
@@ -38,7 +35,7 @@ class LatexFile:
         :rtype: String"""
         header = "\\documentclass"
         if self.document_option:
-            header += "[{}]".format(self.document_option)
+            header += f"[{self.document_option}]"
         header += "{%s}\n" % self.document_class
         header += "\\date{%s}\n" % self.date
         header += "%s\n" % self._header
@@ -68,4 +65,4 @@ class LatexFile:
         """Return the full text of the LatexFile.
 
         :rtype: String"""
-        return "{}{}{}".format(self.header, self.text, self.footer)
+        return f"{self.header}{self.text}{self.footer}"

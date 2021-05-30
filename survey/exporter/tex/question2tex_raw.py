@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.utils.translation import gettext_lazy as _
 
 from survey.exporter.tex.question2tex import Question2Tex

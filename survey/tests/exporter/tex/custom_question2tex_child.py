@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from survey.exporter.tex.question2tex_chart import Question2TexChart
 
 

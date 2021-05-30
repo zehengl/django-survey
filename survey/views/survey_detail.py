@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import logging
 
 from django.conf import settings
@@ -24,7 +23,7 @@ class SurveyDetail(View):
             else:
                 template_name = "survey/survey.html"
         if survey.need_logged_user and not request.user.is_authenticated:
-            return redirect("%s?next=%s" % (settings.LOGIN_URL, request.path))
+            return redirect(f"{settings.LOGIN_URL}?next={request.path}")
 
         form = ResponseForm(survey=survey, user=request.user, step=step)
         categories = form.current_categories()
@@ -47,7 +46,7 @@ class SurveyDetail(View):
     def post(self, request, *args, **kwargs):
         survey = kwargs.get("survey")
         if survey.need_logged_user and not request.user.is_authenticated:
-            return redirect("%s?next=%s" % (settings.LOGIN_URL, request.path))
+            return redirect(f"{settings.LOGIN_URL}?next={request.path}")
 
         form = ResponseForm(request.POST, survey=survey, user=request.user, step=kwargs.get("step", 0))
         categories = form.current_categories()
@@ -73,7 +72,7 @@ class SurveyDetail(View):
         return render(request, template_name, context)
 
     def treat_valid_form(self, form, kwargs, request, survey):
-        session_key = "survey_%s" % (kwargs["id"],)
+        session_key = "survey_{}".format(kwargs["id"])
         if session_key not in request.session:
             request.session[session_key] = {}
         for key, value in list(form.cleaned_data.items()):

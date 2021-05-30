@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 import warnings
 
@@ -26,7 +24,7 @@ LOGGER = logging.getLogger(__name__)
 
 class SankeyNotInstalled(Exception):
     def __init__(self):
-        super(SankeyNotInstalled, self).__init__(_("Cannot generate PDF, we need 'pySankeyBeta' to be installed."))
+        super().__init__(_("Cannot generate PDF, we need 'pySankeyBeta' to be installed."))
 
 
 class Question2TexSankey(Question2Tex):
@@ -46,16 +44,16 @@ class Question2TexSankey(Question2Tex):
     def __init__(self, question, **options):
         other_question = options.get("other_question")
         if not isinstance(other_question, Question):
-            msg = "Expected a 'Question' and got '{}'".format(other_question)
-            msg += " (a '{}').".format(other_question.__class__.__name__)
+            msg = f"Expected a 'Question' and got '{other_question}'"
+            msg += f" (a '{other_question.__class__.__name__}')."
             raise TypeError(msg)
         del options["other_question"]
-        super(Question2TexSankey, self).__init__(question, **options)
+        super().__init__(question, **options)
         self.other_question = other_question
 
     def get_caption_specifics(self):
-        caption = "%s '%s' (%s) " % (_("for the question"), Question2Tex.html2latex(self.question.text), _("left"))
-        caption += "%s '%s' (%s) " % (
+        caption = "{} '{}' ({}) ".format(_("for the question"), Question2Tex.html2latex(self.question.text), _("left"))
+        caption += "{} '{}' ({}) ".format(
             _("in relation with the question"),
             Question2Tex.html2latex(self.other_question.text),
             _("right"),
@@ -91,7 +89,7 @@ class Question2TexSankey(Question2Tex):
                 q1 += [answer_to_q1] * number_of_time
                 q2 += [answer_to_q2] * number_of_time
         df = DataFrame(data={self.question.text: q1, self.other_question.text: q2})
-        name = "tex/q{}_vs_q{}".format(self.question.pk, self.other_question.pk)
+        name = f"tex/q{self.question.pk}_vs_q{self.other_question.pk}"
         sankey(df[self.question.text], df[self.other_question.text], aspect=20, fontsize=10, figureName=name)
         return Question2TexSankey.TEX_SKELETON % (
             name[4:],

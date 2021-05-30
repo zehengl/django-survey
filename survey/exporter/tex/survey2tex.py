@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 import os
 import subprocess
@@ -29,7 +27,7 @@ STATIC = Path(__file__).parent.parent.parent.joinpath("static")
 
 class XelatexNotInstalled(Exception):
     def __init__(self):
-        super(XelatexNotInstalled, self).__init__(_("Cannot generate PDF, we need 'xelatex' to be installed."))
+        super().__init__(_("Cannot generate PDF, we need 'xelatex' to be installed."))
 
 
 class Survey2Tex(Survey2X):
@@ -63,7 +61,7 @@ class Survey2Tex(Survey2X):
             if chart_title:
                 # "" is False, by default we do not add section or anything
                 mct = options["multiple_chart_type"]
-                question_synthesis += "\\%s{%s}" % (mct, chart_title)
+                question_synthesis += f"\\{mct}{{{chart_title}}}"
             tex_type = opts.get("type")
             if tex_type == "raw":
                 question_synthesis += Question2TexRaw(question, **opts).tex()
@@ -100,14 +98,14 @@ class Survey2Tex(Survey2X):
                 question_synthesis += q2tex.tex()
         section_title = Question2Tex.html2latex(question.text)
         return """
-\\clearpage{}
-\\section{%s}
+\\clearpage{{}}
+\\section{{{}}}
 
-\\label{sec:%s}
+\\label{{sec:{}}}
 
-%s
+{}
 
-""" % (
+""".format(
             section_title,
             question.pk,
             question_synthesis,
@@ -190,7 +188,7 @@ class Survey2Tex(Survey2X):
             return
         survey = queryset.first()
         response = HttpResponse(content_type="application/pdf")
-        response["Content-Disposition"] = "attachment; filename={}.pdf".format(survey.safe_name)
+        response["Content-Disposition"] = f"attachment; filename={survey.safe_name}.pdf"
         s2tex = Survey2Tex(survey=survey)
         try:
             s2tex.generate_pdf()

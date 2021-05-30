@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 
 from django.conf import settings
@@ -29,7 +27,7 @@ class Question2TexChart(Question2Tex):
 """
 
     def __init__(self, question, **options):
-        super(Question2TexChart, self).__init__(question, **options)
+        super().__init__(question, **options)
         self.pos = options.get("pos")
         self.rotate = options.get("rotate")
         self.radius = options.get("radius")
@@ -67,7 +65,7 @@ class Question2TexChart(Question2Tex):
             if not answer:
                 ans = _("Left blank")
             ans = Question2Tex.get_clean_answer(answer)
-            pie += "{}/{},".format(cardinality, ans)
+            pie += f"{cardinality}/{ans},"
         if not pie:
             return ""
         final_answers = []
@@ -84,33 +82,33 @@ class Question2TexChart(Question2Tex):
         if self.explode:
             options += "explode={%s}," % self.explode
         if self.rotate:
-            options += "rotate={},".format(self.rotate)
+            options += f"rotate={self.rotate},"
         if self.radius:
-            options += "radius={},".format(self.radius)
+            options += f"radius={self.radius},"
         if self.color:
-            options += "color={},".format(self.get_colors())
+            options += f"color={self.get_colors()},"
         if self.sum:
-            options += "sum={},".format(self.sum)
+            options += f"sum={self.sum},"
         if self.after_number:
-            options += "after number={},".format(self.after_number)
+            options += f"after number={self.after_number},"
         if self.before_number:
-            options += "before number={},".format(self.before_number)
+            options += f"before number={self.before_number},"
         if self.scale_font:
             options += "scale font, "
         if self.text:
-            options += "text={},".format(self.text)
+            options += f"text={self.text},"
         if self.style:
-            options += "style={},".format(self.style)
+            options += f"style={self.style},"
         if self.type and self.type != "pie":
-            options += "{},".format(self.type)
+            options += f"{self.type},"
         # Removing last ','
         options = options[:-1]
         if options:
-            return "[{}]".format(options)
+            return f"[{options}]"
         return ""
 
     def get_caption_specifics(self):
-        return "%s '%s' " % (_("for the question"), Question2Tex.html2latex(self.question.text))
+        return "{} '{}' ".format(_("for the question"), Question2Tex.html2latex(self.question.text))
 
     def tex(self):
         """Return a pfg-pie pie chart of a question.

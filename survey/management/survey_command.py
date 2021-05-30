@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import sys
 from operator import itemgetter
 
@@ -37,7 +35,7 @@ class SurveyCommand(BaseCommand):
         elif error_type in ["survey-name", "survey-id"]:
             base = "--survey-id {} / --survey-name '{}'\n"
             valids = [(s.pk, s.name) for s in Survey.objects.all()]
-        msg = "You tried to get --{} '{}' ".format(error_type, value)
+        msg = f"You tried to get --{error_type} '{value}' "
         if valids:
             msg += "but is does not exists. Possibles values :\n"
             for primary_key, name in valids:

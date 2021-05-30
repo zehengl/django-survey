@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib import admin
 
 from survey.actions import make_published
@@ -14,7 +12,7 @@ class QuestionInline(admin.StackedInline):
     extra = 1
 
     def get_formset(self, request, survey_obj, *args, **kwargs):
-        formset = super(QuestionInline, self).get_formset(request, survey_obj, *args, **kwargs)
+        formset = super().get_formset(request, survey_obj, *args, **kwargs)
         if survey_obj:
             formset.form.base_fields["category"].queryset = survey_obj.categories.all()
         return formset

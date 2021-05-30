@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from survey.models import Survey
 
 from .configuration import Configuration
@@ -21,7 +19,7 @@ class ConfigurationBuilder(Configuration):
 
         :param Survey survey: If survey is defined we generate configuration
         only for this survey."""
-        super(ConfigurationBuilder, self).__init__(self.DEFAULT_PATH)
+        super().__init__(self.DEFAULT_PATH)
         self._init_default()
         if survey:
             for other_survey in Survey.objects.all():

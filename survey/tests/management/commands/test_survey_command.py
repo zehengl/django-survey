@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.core.management import call_command
 
 from survey.management.survey_command import SurveyCommand

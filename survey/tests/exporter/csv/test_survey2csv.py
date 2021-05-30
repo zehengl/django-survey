@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.test.utils import override_settings
 
 from survey.exporter.csv.survey2csv import Survey2Csv

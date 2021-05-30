@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.core.exceptions import ValidationError
 
 from survey.models import Answer

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import codecs
 import logging
 
@@ -96,16 +95,16 @@ class Survey2Csv(Survey2X):
                 response.write(survey_as_csv)
             else:
                 if settings.EXCEL_COMPATIBLE_CSV:
-                    survey_as_csv = str(survey_as_csv).replace("{}\n".format(Survey2Csv.EXCEL_HACK), "")
+                    survey_as_csv = str(survey_as_csv).replace(f"{Survey2Csv.EXCEL_HACK}\n", "")
                 if i != 0:
-                    filename += "-{}".format(survey.safe_name)
+                    filename += f"-{survey.safe_name}"
                 elif settings.EXCEL_COMPATIBLE_CSV:
                     # If we need to be compatible with excel and it's the first survey
-                    response.write("{}\n".format(Survey2Csv.EXCEL_HACK))
-                response.write("{survey_name}\n".format(survey_name=survey.name))
+                    response.write(f"{Survey2Csv.EXCEL_HACK}\n")
+                response.write(f"{survey.name}\n")
                 response.write(survey_as_csv)
                 response.write("\n\n")
-        response["Content-Disposition"] = "attachment; filename={}.csv".format(filename)
+        response["Content-Disposition"] = f"attachment; filename={filename}.csv"
         return response
 
 

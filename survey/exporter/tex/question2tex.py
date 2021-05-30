@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 
 from django.conf import settings
@@ -78,10 +76,10 @@ class Question2Tex:
             caption += "{} ".format(_("excluding"))
             for i, excluded in enumerate(self.filter):
                 excluded = Question2Tex.get_clean_answer(excluded)
-                caption += "'{}', ".format(excluded)
+                caption += f"'{excluded}', "
                 if len(self.filter) >= 2 and i == len(self.filter) - 2:
                     caption += "{} ".format(_("and"))
-            caption = "{} ".format(caption[:-2])
+            caption = f"{caption[:-2]} "
         return caption
 
     def get_caption_group_together(self):
@@ -109,7 +107,7 @@ class Question2Tex:
                     # a placeholder ex Yes for [yes Yës yEs]
                     continue
                 # We duplicate the translations so makemessage find it
-                caption += "with '{}' standing for ".format(key)
+                caption += f"with '{key}' standing for "
                 for value in values:
                     caption += "'{}' {} ".format(value, _("or"))
                 caption = caption[: -len("{} ".format(_("or")))]
@@ -132,7 +130,7 @@ class Question2Tex:
         caption += self.get_caption_specifics()
         caption += self.get_caption_group_together()
         # We remove the last trailing space
-        return "{}.".format(caption[:-1])
+        return f"{caption[:-1]}."
 
     @staticmethod
     def get_clean_answer(answer):

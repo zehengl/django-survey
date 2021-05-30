@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from survey.models import Answer, Question, Response, Survey
 from survey.tests import BaseTest
 
@@ -29,7 +27,7 @@ class BaseModelTest(BaseTest):
         for i, data in enumerate(self.data):
             qtype, answer_body, answer_choices = data
             question = Question.objects.create(
-                text="{} question ?".format(qtype),
+                text=f"{qtype} question ?",
                 choices=answer_choices,
                 order=i + 1,
                 required=True,

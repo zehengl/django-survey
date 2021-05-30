@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 import sys
 
@@ -22,7 +20,7 @@ class Command(SurveyCommand):
     help = """This command permit to export all survey in the database as csv and tex."""
 
     def add_arguments(self, parser):
-        super(Command, self).add_arguments(parser)
+        super().add_arguments(parser)
         parser.add_argument("--configuration-file", "-c", type=str, help="Path to the tex configuration file.")
         parser.add_argument(
             "--force",
@@ -45,7 +43,7 @@ class Command(SurveyCommand):
             sys.exit("Nothing to do : add option --tex or --pdf, --csv,  or both.")
 
     def handle(self, *args, **options):
-        super(Command, self).handle(*args, **options)
+        super().handle(*args, **options)
         translation.activate(options.get("language"))
         for survey in self.surveys:
             LOGGER.info("Generating results for '%s'", survey)
@@ -55,7 +53,7 @@ class Command(SurveyCommand):
             if options["tex"] or options["pdf"]:
                 configuration_file = options.get("configuration_file")
                 if configuration_file is None:
-                    msg = "No configuration file given, using default values for '{}'.".format(survey)
+                    msg = f"No configuration file given, using default values for '{survey}'."
                     LOGGER.info(msg)
                 configuration = Configuration(configuration_file)
                 exporters.append(Survey2Tex(survey, configuration))

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from survey.exporter.tex import ConfigurationBuilder
 from survey.models import Survey
 from survey.tests.management.test_management import TestManagement

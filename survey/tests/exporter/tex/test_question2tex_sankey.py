@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from survey.exporter.tex.question2tex_sankey import Question2TexSankey
 from survey.tests.management.test_management import TestManagement
 

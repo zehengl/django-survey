@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.conf import settings
 
 from survey.exporter.tex.question2tex_chart import Question2TexChart
@@ -40,19 +38,19 @@ class TestQuestion2TexChart(TestManagement):
         self.assertIn(
             "4/1\xe9,\n            1/Left blank,\n            1/1,\n            1/1a,\n            1/1b",
             chart,
-            "Cardinal sort does not seem to works. {}".format(chart),
+            f"Cardinal sort does not seem to works. {chart}",
         )
         chart = Question2TexChart(question, color=color, group_together=groups, sort_answer="alphanumeric").tex()
         self.assertIn(
             "1/1,\n            1/1a,\n            1/1b,\n            4/1é",
             chart,
-            "Alphanumeric sort does not seem to works.. {}".format(chart),
+            f"Alphanumeric sort does not seem to works.. {chart}",
         )
         chart = Question2TexChart(question, group_together=groups, sort_answer="unknown_option").tex()
         self.assertIn(
             "4/1\xe9,\n            1/Left blank,\n            1/1,\n            1/1a,\n            1/1b",
             chart,
-            "Default behavior does not sort by cardinality. {}".format(chart),
+            f"Default behavior does not sort by cardinality. {chart}",
         )
 
     def test_cloud_tex(self):

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from survey.models.category import Category
 from survey.tests import BaseTest
 

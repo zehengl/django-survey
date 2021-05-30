@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import collections
 import copy
 import logging
@@ -46,14 +44,14 @@ class Configuration:
         :param String survey_name: The name of a survey."""
         LOGGER.info("Checking that '%s' is an existing survey.", survey_name)
         if not isinstance(survey_name, str):
-            msg = "Expecting a string for 'survey_name' and got a {} ".format(type(survey_name))
-            msg += " ('{}').".format(survey_name)
+            msg = f"Expecting a string for 'survey_name' and got a {type(survey_name)} "
+            msg += f" ('{survey_name}')."
             raise TypeError(msg)
         if survey_name not in self.valid_survey_names:
-            msg = "'{}' is not an existing survey in the ".format(survey_name)
+            msg = f"'{survey_name}' is not an existing survey in the "
             msg += "database.\nPossible values are :\n"
             for name in self.valid_survey_names:
-                msg += "- '{}'\n".format(name)
+                msg += f"- '{name}'\n"
             # Remove the last "\n"
             msg = msg[:-1]
             LOGGER.warning(msg)
@@ -66,7 +64,7 @@ class Configuration:
 
         :param String filepath: The path of the yaml configuration file.
         :rtype: Dict"""
-        with open(filepath, "r", encoding="UTF-8") as f:
+        with open(filepath, encoding="UTF-8") as f:
             configuration = yaml.load(f, Loader=yaml.FullLoader)
         for survey_name in list(configuration.keys()):
             self.check_survey_exists(survey_name)
@@ -167,10 +165,10 @@ class Configuration:
     def __raise_get_error(conf, key, question_text, survey_name):
         msg = ""
         if survey_name:
-            msg += "for survey '{}', ".format(survey_name)
+            msg += f"for survey '{survey_name}', "
         if question_text:
-            msg += "and question '{}', ".format(question_text)
-        msg += "key '{}' does not exists. ".format(key)
-        msg += "Possible values : {}".format(list(conf.keys()))
+            msg += f"and question '{question_text}', "
+        msg += f"key '{key}' does not exists. "
+        msg += f"Possible values : {list(conf.keys())}"
         LOGGER.error(msg)
         raise ValueError(msg)
