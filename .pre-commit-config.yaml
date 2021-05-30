@@ -1,5 +1,5 @@
-ci:
-  skip: [pylint]
+#ci:
+#  skip: [pylint]
 
 repos:
   - repo: https://github.com/myint/autoflake
