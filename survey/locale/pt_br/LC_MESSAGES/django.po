@@ -1,197 +1,191 @@
-# django-survey-and-report's i18n file
-# This file is distributed under the MIT license.
-# Javier Ordóñez <ordonja@gmail.com>, 2018.
-# Anton Melser <melser.anton@gmail.com>, 2020.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 14:21+0000\n"
-"PO-Revision-Date: 2018-10-06 20:42+0000\n"
-"Last-Translator: Javier Ordóñez <>\n"
-"Language-Team: \n"
-"Language: es\n"
+"POT-Creation-Date: 2021-05-30 21:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"X-Translated-Using: django-rosetta 0.9.0\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: dev/templates/base.html:3
 msgid "en"
-msgstr "es"
+msgstr ""
 
 #: dev/templates/base.html:5
 msgid "DEVELOPMENT django-Survey"
-msgstr "DESARROLLO django-Survey"
+msgstr ""
 
 #: survey/actions.py:14
 #, python-format
 msgid "%(count)d survey was successfully marked as published."
 msgid_plural "%(count)d surveys were successfully marked as published"
-msgstr[0] "encuesta %(count)d se marcó exitosamente como publicada."
-msgstr[1] "encuestas %(count)d se marcaron exitosamente como publicadas."
+msgstr[0] ""
+msgstr[1] ""
 
 #: survey/actions.py:23
 msgid "Mark selected surveys as published"
-msgstr "Marca las encuestas seleccionadas como publicadas"
+msgstr ""
 
 #: survey/exporter/csv/survey2csv.py:38
 msgid "Anonymous"
-msgstr "Anónimo"
+msgstr ""
 
 #: survey/exporter/csv/survey2csv.py:68
 msgid "user"
-msgstr "usuario"
+msgstr ""
 
 #: survey/exporter/csv/survey2csv.py:112
 msgid "Export to CSV"
-msgstr "Exporta como CSV"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:64
 msgid "with"
-msgstr "con"
+msgstr ""
 
-# there is a mistake in the EN singular and plural cases.
-# Entrevistado refers to all surveyed.
 #: survey/exporter/tex/question2tex.py:66
 #, python-format
 msgid "%(min_cardinality)d respondents or more"
 msgid_plural "%(min_cardinality)d respondent or more"
-msgstr[0] "%(min_cardinality)d entrevistado o más"
-msgstr[1] "%(min_cardinality)d entrevistados o más."
+msgstr[0] ""
+msgstr[1] ""
 
 #: survey/exporter/tex/question2tex.py:78
 msgid "excluding"
-msgstr "excluyendo"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:83
 #: survey/exporter/tex/question2tex.py:117
 #: survey/exporter/tex/question2tex.py:120
 msgid "and"
-msgstr "y"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:114
 #: survey/exporter/tex/question2tex.py:115
 msgid "or"
-msgstr "o"
+msgstr ""
 
 #: survey/exporter/tex/question2tex.py:129
 msgid "Repartition of answers"
-msgstr "Distribución de respuestas"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_chart.py:68
 msgid "Left blank"
-msgstr "Dejada en blanco"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_chart.py:113
 #: survey/exporter/tex/question2tex_sankey.py:57
 msgid "for the question"
-msgstr "para la pregunta"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_chart.py:123
 msgid "No answers for this question."
-msgstr "No hay respuestas para esta pregunta."
+msgstr ""
 
 #: survey/exporter/tex/question2tex_raw.py:26
 msgid "Participant"
-msgstr "Participante"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_sankey.py:29
 msgid "Cannot generate PDF, we need 'pySankeyBeta' to be installed."
-msgstr "No podemos generar el PDF, necesitamos instalar 'pySankeyBeta'"
+msgstr ""
 
-#  as in "opposite of right"
 #: survey/exporter/tex/question2tex_sankey.py:57
 msgid "left"
-msgstr "izquierda"
+msgstr ""
 
 #: survey/exporter/tex/question2tex_sankey.py:59
 msgid "in relation with the question"
-msgstr "en relación con la pregunta"
+msgstr ""
 
-# as in "opposite of left"
 #: survey/exporter/tex/question2tex_sankey.py:61
 msgid "right"
-msgstr "derecha"
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:32
 msgid "Cannot generate PDF, we need 'xelatex' to be installed."
-msgstr "No podemos generar el PDF, necesitamos instalar 'xelatex'"
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:82
 msgid "We could not render a chart because the type"
-msgstr "No pudimos generar un gráfico porque el tipo"
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:85
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
-msgstr "no es un tipo estándar ni ruta a una subclase importable válida de Question2Tex. Escoje entre 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' o 'package.path.MyQuestion2TexCustomClass'"
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:159
 msgid "No questions to display in this survey."
-msgstr "No hay preguntas para mostrar en esta encuesta."
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:189
 msgid "Cannot export multiple PDF, choose only one."
-msgstr "No se pueden exportar varios PDF, elije solo uno."
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:198
 #, python-format
 msgid "Error during PDF generation: %s"
-msgstr "Error durante la generación del PDF: %s"
+msgstr ""
 
 #: survey/exporter/tex/survey2tex.py:205
 msgid "Export to PDF"
-msgstr "Exportación al formato PDF"
+msgstr ""
 
 #: survey/models/answer.py:23
 msgid "Question"
-msgstr "Pregunta"
+msgstr ""
 
 #: survey/models/answer.py:24
 msgid "Response"
-msgstr "Respuesta"
+msgstr ""
 
 #: survey/models/answer.py:25 survey/models/response.py:27
 msgid "Creation date"
-msgstr "Fecha de creación"
+msgstr ""
 
 #: survey/models/answer.py:26 survey/models/response.py:28
 msgid "Update date"
-msgstr "Fecha de actualización"
+msgstr ""
 
 #: survey/models/answer.py:27
 msgid "Content"
-msgstr "Contenido"
+msgstr ""
 
 #: survey/models/category.py:12 survey/models/survey.py:27
 msgid "Name"
-msgstr "Nombre"
+msgstr ""
 
 #: survey/models/category.py:13 survey/models/question.py:80
 #: survey/models/response.py:29
 msgid "Survey"
-msgstr "Encuesta"
+msgstr ""
 
 #: survey/models/category.py:14
 msgid "Display order"
-msgstr "Orden de presentación"
+msgstr ""
 
 #: survey/models/category.py:15 survey/models/survey.py:28
 msgid "Description"
-msgstr "Descripción"
+msgstr ""
 
 #: survey/models/category.py:19
 msgid "category"
-msgstr "categoría"
+msgstr ""
 
 #: survey/models/category.py:20
 msgid "categories"
-msgstr "categorías"
+msgstr ""
 
-# "if the question type" repeated in english original
 #: survey/models/question.py:23
 msgid ""
 "The choices field is only used if the question type\n"
@@ -199,188 +193,185 @@ msgid ""
 "'select multiple' provide a comma-separated list of\n"
 "options for this question ."
 msgstr ""
-"El campo de opciones solo se usa si el tipo de pregunta\n"
-"es 'radio', 'selección simple', o 'selección múltiple'. Proporciona una lista de opciones\n"
-"separadas por comas para esta pregunta."
 
 #: survey/models/question.py:63
 msgid "text (multiple line)"
-msgstr "Texto (multilínea)"
+msgstr ""
 
 #: survey/models/question.py:64
 msgid "short text (one line)"
-msgstr "Texto corto (una línea)"
+msgstr ""
 
 #: survey/models/question.py:65
 msgid "radio"
-msgstr "Radio"
+msgstr ""
 
 #: survey/models/question.py:66
 msgid "select"
-msgstr "Selección simple"
+msgstr ""
 
 #: survey/models/question.py:67
 msgid "Select Multiple"
-msgstr "Selección múltiple"
+msgstr ""
 
 #: survey/models/question.py:68
 msgid "Select Image"
-msgstr "Selecciona imagen"
+msgstr ""
 
 #: survey/models/question.py:69
 msgid "integer"
-msgstr "Entero"
+msgstr ""
 
 #: survey/models/question.py:70
 msgid "float"
-msgstr "Coma flotante"
+msgstr ""
 
 #: survey/models/question.py:71
 msgid "date"
-msgstr "Fecha"
+msgstr ""
 
 #: survey/models/question.py:74
 msgid "Text"
-msgstr "Texto"
+msgstr ""
 
 #: survey/models/question.py:75
 msgid "Order"
-msgstr "Orden"
+msgstr ""
 
 #: survey/models/question.py:76
 msgid "Required"
-msgstr "Obligatorio"
+msgstr ""
 
 #: survey/models/question.py:78
 msgid "Category"
-msgstr "Categoría"
+msgstr ""
 
 #: survey/models/question.py:81
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #: survey/models/question.py:82
 msgid "Choices"
-msgstr "Opciones"
+msgstr ""
 
 #: survey/models/question.py:85
 msgid "question"
-msgstr "pregunta"
+msgstr ""
 
 #: survey/models/question.py:86
 msgid "questions"
-msgstr "preguntas"
+msgstr ""
 
 #: survey/models/response.py:30
 msgid "User"
-msgstr "Usuario"
+msgstr ""
 
 #: survey/models/response.py:31
 msgid "Interview unique identifier"
-msgstr "Identificador único de entrevista"
+msgstr ""
 
 #: survey/models/response.py:34
 msgid "Set of answers to surveys"
-msgstr "Conjunto de respuestas a encuestas"
+msgstr ""
 
 #: survey/models/response.py:35
 msgid "Sets of answers to surveys"
-msgstr "Conjuntos de respuestas a encuestas"
+msgstr ""
 
 #: survey/models/survey.py:22
 msgid "By question"
-msgstr "Por pregunta"
+msgstr ""
 
 #: survey/models/survey.py:23
 msgid "By category"
-msgstr "Por categoría"
+msgstr ""
 
 #: survey/models/survey.py:24
 msgid "All in one page"
-msgstr "Todo en una sola página"
+msgstr ""
 
 #: survey/models/survey.py:29
 msgid "Users can see it and answer it"
-msgstr "Los usuarios pueden ver y responder"
+msgstr ""
 
 #: survey/models/survey.py:30
 msgid "Only authenticated users can see it and answer it"
-msgstr "Solo usuarios autenticados pueden ver y responder"
+msgstr ""
 
 #: survey/models/survey.py:31
 msgid "Users can edit their answers afterwards"
-msgstr "Los usuarios pueden editar sus respuestas"
+msgstr ""
 
 #: survey/models/survey.py:33
 msgid "Display method"
-msgstr "Método de visualización"
+msgstr ""
 
 #: survey/models/survey.py:35
 msgid "Template"
-msgstr "Plantilla"
+msgstr ""
 
 #: survey/models/survey.py:36
 msgid "Publication date"
-msgstr "Fecha de publication"
+msgstr ""
 
 #: survey/models/survey.py:37
 msgid "Expiration date"
-msgstr "Fecha de caducidad"
+msgstr ""
 
 #: survey/models/survey.py:40
 msgid "survey"
-msgstr "encuesta"
+msgstr ""
 
 #: survey/models/survey.py:41
 msgid "surveys"
-msgstr "encuestas"
+msgstr ""
 
 #: survey/templates/survey/completed.html:4
 #: survey/templates/survey/completed.html:7
 msgid "Survey completed"
-msgstr "Encuesta completada"
+msgstr ""
 
 #: survey/templates/survey/completed.html:8
 msgid "Sorry! Your already replied to our survey"
-msgstr "Lo sentimos, pero ya has respondido a nuestra encuesta"
+msgstr ""
 
 #: survey/templates/survey/completed.html:9
 msgid "Back to survey list"
-msgstr "Regresa a la lista de encuestas"
+msgstr ""
 
 #: survey/templates/survey/confirm.html:4
 #: survey/templates/survey/confirm.html:7
 msgid "Survey submitted"
-msgstr "Encuesta enviada"
+msgstr ""
 
 #: survey/templates/survey/confirm.html:10
 msgid "Thanks! Your answers have been saved"
-msgstr "¡Gracias¡ Hemos guardado tus respuestas"
+msgstr ""
 
 #: survey/templates/survey/confirm.html:14
 msgid "You can always come back and change them."
-msgstr "Siempre puedes regresar y hacer cambios."
+msgstr ""
 
 #: survey/templates/survey/list.html:6
 msgid "Welcome to the Django Survey app"
-msgstr "Bienvenido a Django Survey"
+msgstr ""
 
 #: survey/templates/survey/list.html:10
 msgid "Take the Survey"
-msgstr "Toma la encuesta"
+msgstr ""
 
 #: survey/templates/survey/survey.html:44
 msgid "Answer this part"
-msgstr "Reponde esta sección"
+msgstr ""
 
 #: survey/templates/survey/survey.html:57
 msgid "Questions"
-msgstr "Preguntas"
+msgstr ""
 
 #: survey/templates/survey/survey.html:67
 msgid "Next!"
-msgstr "Siguiente!"
+msgstr ""
 
 #: survey/templates/survey/survey.html:73
 msgid "I'm done!"
-msgstr "¡Terminé!"
+msgstr ""
