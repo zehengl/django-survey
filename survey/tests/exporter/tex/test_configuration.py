@@ -19,7 +19,7 @@ class TestConfiguration(TestManagement):
         self.qts_expected_conf = {"min_cardinality": 0, "type": "cloud", "radius": 1, "text": "inside"}
 
     def test_name_doesnt_exists(self):
-        """ Value error raised when the name does not exists. """
+        """Value error raised when the name does not exists."""
         name = "This survey does not exists"
         path = Path(self.conf_dir, "name_doesnt_exists.yaml")
         conf = Configuration(path)
@@ -29,25 +29,25 @@ class TestConfiguration(TestManagement):
         self.assertIsNotNone(conf.get(survey_name=name))
 
     def test_str(self):
-        """ No error for str """
+        """No error for str"""
         self.assertIsNotNone(str(self.conf))
 
     def test_wrong_type(self):
-        """ If we give the wrong type for survey_name we get a TypeError. """
+        """If we give the wrong type for survey_name we get a TypeError."""
         self.assertRaises(TypeError, self.conf.get, survey_name=self.survey)
 
     def test_no_value_defined(self):
-        """ We raise a value error if there is nothing at all for a Survey."""
+        """We raise a value error if there is nothing at all for a Survey."""
         path = Path(self.conf_dir, "no_value_defined.yaml")
         self.assertRaises(ValueError, Configuration, path)
 
     def test_use_default(self):
-        """ If the value is undefined for a survey we use default. """
+        """If the value is undefined for a survey we use default."""
         short_survey_conf = self.conf.get(survey_name="Short Survëy")
         self.assertEqual(short_survey_conf.get("document_class"), "article")
 
     def test_change_default(self):
-        """ If a value is set in a survey, the default is changed. """
+        """If a value is set in a survey, the default is changed."""
         ss_conf = self.conf["Short Survëy"]
         self.assertEqual(ss_conf.get("footer"), "Short survey footer.")
         self.assertEqual(ss_conf.get("document_class"), "article")
@@ -62,7 +62,7 @@ class TestConfiguration(TestManagement):
         self.assertEqual(self.conf.get("document_class"), "article")
 
     def test_get_questions(self):
-        """ We have something coherent when we get by question_text. """
+        """We have something coherent when we get by question_text."""
         self.assertEqual(self.ts_conf["chart"]["min_cardinality"], 0)
         self.assertEqual(self.ts_conf["chart"]["type"], "pie")
         self.assertEqual(self.ts_conf["chart"]["radius"], 3)
@@ -71,7 +71,7 @@ class TestConfiguration(TestManagement):
             self.assertEqual(self.qts_conf["chart"][key], value)
 
     def test_get_question_multiple_charts(self):
-        """ We have set multiple charts when we get by question text. """
+        """We have set multiple charts when we get by question text."""
         self.assertEqual(self.ts_conf["multiple_charts"], None)
         self.assertEqual(self.ts_conf["multiple_chart_type"], "subsubsection")
         self.assertEqual(self.qts_conf["multiple_chart_type"], "subsubsection")
@@ -94,7 +94,7 @@ class TestConfiguration(TestManagement):
                 )
 
     def test_value_doesnt_exists(self):
-        """ Get when a value does not exists. """
+        """Get when a value does not exists."""
         self.assertRaises(ValueError, self.conf.get, key="noexists")
         self.assertRaises(ValueError, self.conf.get, survey_name="Test survëy", key="noexists")
         self.assertRaises(

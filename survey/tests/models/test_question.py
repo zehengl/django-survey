@@ -41,11 +41,11 @@ class TestQuestion(BaseModelTest):
         self.sorted_card = self.questions[0].sorted_answers_cardinality
 
     def test_unicode(self):
-        """ Unicode generation. """
+        """Unicode generation."""
         self.assertIsNotNone(str(self.questions[0]))
 
     def test_get_choices(self):
-        """ We can get a list of choices for a widget from choices text. """
+        """We can get a list of choices for a widget from choices text."""
         self.questions[0].choices = "A éa,B éb"
         self.assertEqual(self.questions[0].get_choices(), (("a-éa", "A éa"), ("b-éb", "B éb")))
         self.questions[0].choices = "A()a,  ,C()c"
@@ -57,7 +57,7 @@ class TestQuestion(BaseModelTest):
 
     @override_settings(CHOICES_SEPARATOR="|")
     def test_get_choices_with_pipe(self):
-        """ We can get a list of choices for a widget from choices text with_pipe. """
+        """We can get a list of choices for a widget from choices text with_pipe."""
         self.questions[0].choices = "A éa|B éb"
         self.assertEqual(self.questions[0].get_choices(), (("a-éa", "A éa"), ("b-éb", "B éb")))
         self.questions[0].choices = "A()a|  |C()c"
@@ -70,7 +70,7 @@ class TestQuestion(BaseModelTest):
         self.assertEqual(self.questions[0].get_choices(), (("聖黎", "聖黎"), ("はじむ", "はじむ")))
 
     def test_validate_choices(self):
-        """  List are validated for comma. """
+        """List are validated for comma."""
         question = Question.objects.create(
             text="Q?", choices="a,b,c", order=1, required=True, survey=self.survey, type=Question.SELECT_MULTIPLE
         )
@@ -85,7 +85,7 @@ class TestQuestion(BaseModelTest):
 
     @override_settings(CHOICES_SEPARATOR="|")
     def test_validate_choices_with_pipe(self):
-        """  List are validated for pipe. """
+        """List are validated for pipe."""
         question = Question.objects.create(
             text="Q?", choices="a|b|c", order=1, required=True, survey=self.survey, type=Question.SELECT_MULTIPLE
         )
@@ -99,7 +99,7 @@ class TestQuestion(BaseModelTest):
         self.assertRaises(ValidationError, question.save)
 
     def test_answers_as_text(self):
-        """ We can get a list of answers to this question. """
+        """We can get a list of answers to this question."""
         qat = self.question.answers_as_text
         self.assertEqual(3, len(qat))
         expected = ["Yës", "Maybe", "Yës"]
@@ -108,12 +108,12 @@ class TestQuestion(BaseModelTest):
         self.assertEqual(qat, expected)
 
     def test_answer_cardinality_type(self):
-        """ We always return an OrderedDict. """
+        """We always return an OrderedDict."""
         self.assertIsInstance(self.card(), OrderedDict)
         self.assertIsInstance(self.sorted_card(), OrderedDict)
 
     def test_answers_cardinality(self):
-        """ We can get the cardinality of each answers. """
+        """We can get the cardinality of each answers."""
         self.assertEqual(self.question.answers_cardinality(), {"Maybe": 1, "Yës": 2})
         self.assertEqual(self.question.answers_cardinality(min_cardinality=2), {"Other": 1, "Yës": 2})
         question = Question.objects.get(text="Ipsum dolor sit amët, <strong> consectetur </strong>  adipiscing elit.")
@@ -127,7 +127,7 @@ class TestQuestion(BaseModelTest):
         self.assertEqual({"Näh": 2, "Yës": 1}, question.answers_cardinality(group_together={"Näh": ["No", "Whatever"]}))
 
     def test_answers_cardinality_grouped(self):
-        """ We can group answers taking letter case or slug into account. """
+        """We can group answers taking letter case or slug into account."""
         self.assertEqual(self.card(), {"abé cé": 1, "Abé Cé": 1, "Abë-cè": 1, "dé": 1, "dë": 1, "Dé": 1})
         self.assertEqual(
             self.card(group_together={"ABC": ["abé cé", "Abë-cè", "Abé Cé"], "D": ["dé", "Dé", "dë"]}),
@@ -141,7 +141,7 @@ class TestQuestion(BaseModelTest):
         )
 
     def test_answers_cardinality_filtered(self):
-        """ We can filter answer with a csv string. """
+        """We can filter answer with a csv string."""
         self.assertEqual(self.card(filter=["abé cé", "Abë-cè"], group_by_slugify=True), {"de": 3})
         self.assertEqual(self.card(filter=["abe-ce"], group_by_slugify=True), {"de": 3})
         self.assertEqual(
@@ -151,7 +151,7 @@ class TestQuestion(BaseModelTest):
         self.assertEqual(self.card(filter=["abé cé", "Abë-cè"]), {"Abé Cé": 1, "dé": 1, "dë": 1, "Dé": 1})
 
     def test_answers_cardinality_linked(self):
-        """ We can get the answer to another question instead"""
+        """We can get the answer to another question instead"""
         abc_together = {"ABC": ["abé cé", "Abë-cè", "Abé Cé"]}
         abcd_together = {"ABC": ["abé cé", "Abë-cè", "Abé Cé"], "D": ["dé", "Dé", "dë"]}
         self.assertRaises(TypeError, self.card, other_question="str")
@@ -214,7 +214,7 @@ class TestQuestion(BaseModelTest):
         self.assertEqual(questions[0].sorted_answers_cardinality(other_question=questions[1]), OrderedDict(expected))
 
     def test_sorted_answers_cardinality(self):
-        """ We can sort answer with the sort_answer parameter. """
+        """We can sort answer with the sort_answer parameter."""
         alphanumeric = [("abé cé", 2), ("abë-cè", 1), ("dé", 2), ("dë", 1)]
         cardinal = [("abé cé", 2), ("dé", 2), ("abë-cè", 1), ("dë", 1)]
         user_defined = {"dé": 1, "abë-cè": 2, "dë": 3, "abé cé": 4}

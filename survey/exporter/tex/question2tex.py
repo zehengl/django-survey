@@ -57,7 +57,7 @@ class Question2Tex:
         return html_text
 
     def get_caption_min_cardinality(self):
-        """ A descriptive text for the min_cardinality option. """
+        """A descriptive text for the min_cardinality option."""
         caption = ""
         if self.min_cardinality > 0:
             caption += "{} {} ".format(
@@ -72,7 +72,7 @@ class Question2Tex:
         return caption
 
     def get_caption_filter(self):
-        """ A descriptive text for the filter option. """
+        """A descriptive text for the filter option."""
         caption = ""
         if self.filter:
             caption += "{} ".format(_("excluding"))
@@ -85,7 +85,7 @@ class Question2Tex:
         return caption
 
     def get_caption_group_together(self):
-        """ A descriptive text for the group_together option. """
+        """A descriptive text for the group_together option."""
         caption = ""
         if self.group_together:
             if self.cardinality is None:
@@ -125,7 +125,7 @@ class Question2Tex:
         raise NotImplementedError(msg)
 
     def get_caption(self):
-        """ Return a caption with an appropriate description of the figure. """
+        """Return a caption with an appropriate description of the figure."""
         caption = "{} ".format(_("Repartition of answers"))
         caption += self.get_caption_min_cardinality()
         caption += self.get_caption_filter()

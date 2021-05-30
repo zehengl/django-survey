@@ -10,7 +10,7 @@ class TestConfigurationBuilder(TestManagement):
         TestManagement.setUp(self)
 
     def test_init_surveys(self):
-        """ Only one survey if we init with a survey, all surveys otherwise"""
+        """Only one survey if we init with a survey, all surveys otherwise"""
         all_survey_names = [survey.name for survey in Survey.objects.all()]
         one_survey_conf = ConfigurationBuilder(self.survey)
         self.assertIsInstance(one_survey_conf[self.survey.name], dict)

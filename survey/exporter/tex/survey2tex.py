@@ -45,7 +45,7 @@ class Survey2Tex(Survey2X):
         self.tconf = configuration
 
     def _additional_analysis(self, survey, latex_file):
-        """ Perform additional analysis. """
+        """Perform additional analysis."""
         for function_ in self.ANALYSIS_FUNCTION:
             LOGGER.info("Performing additional analysis with %s", function_)
             latex_file.text += function_(survey)
@@ -115,7 +115,7 @@ class Survey2Tex(Survey2X):
 
     @property
     def file_modification_time(self):
-        """ Return the modification time of the pdf. """
+        """Return the modification time of the pdf."""
         if not self.pdf_filename.exists():
             earliest_working_timestamp_for_windows = 86400
             mtime = earliest_working_timestamp_for_windows
@@ -136,7 +136,7 @@ class Survey2Tex(Survey2X):
         return Path(self.directory, "{}.{}".format(slugify(self.survey.name), "pdf"))
 
     def generate_pdf(self):
-        """Compile the pdf from the tex file. Can raise subprocess.CalledProcessError """
+        """Compile the pdf from the tex file. Can raise subprocess.CalledProcessError"""
         if not self.need_update():
             LOGGER.info("<%s> is already generated and up to date.", self.pdf_filename)
             return
@@ -160,7 +160,7 @@ class Survey2Tex(Survey2X):
         return ltxf.document
 
     def compile_pdf(self):
-        """ Compile the pdf from the tex file. """
+        """Compile the pdf from the tex file."""
         xelatex = "xelatex"
         if which(xelatex) is None:
             raise XelatexNotInstalled()

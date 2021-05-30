@@ -30,7 +30,7 @@ class ConfigurationBuilder(Configuration):
                     del self._conf[other_survey.name]
 
     def _init_default(self):
-        """ Return the default configuration. """
+        """Return the default configuration."""
         default_value_generic = self._conf["generic"]
         default_value_chart = self._conf["generic"]["chart"]
         default_values = {"chart": default_value_chart}

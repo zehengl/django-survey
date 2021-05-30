@@ -17,7 +17,7 @@ LOGGER = logging.getLogger(__name__)
 
 class Survey2X:
 
-    """ Abstract class for Survey exporter. """
+    """Abstract class for Survey exporter."""
 
     def __init__(self, survey=None):
         self._check_survey(survey)
@@ -50,7 +50,7 @@ class Survey2X:
 
     @property
     def file_modification_time(self):
-        """ Return the modification time of the "x" file. """
+        """Return the modification time of the "x" file."""
         if not os.path.exists(self.filename):
             earliest_working_timestamp_for_windows = 86400
             mtime = earliest_working_timestamp_for_windows
@@ -62,7 +62,7 @@ class Survey2X:
 
     @property
     def latest_answer_date(self):
-        """ The date at which the last answer was given"""
+        """The date at which the last answer was given"""
         return self.survey.latest_answer_date()
 
     def need_update(self):
@@ -94,7 +94,7 @@ class Survey2X:
         raise NotImplementedError("Please implement __str__")
 
     def generate_file(self):
-        """ Generate a x file corresponding to a Survey. """
+        """Generate a x file corresponding to a Survey."""
         LOGGER.debug("Exporting survey '%s' to '%s'", self.survey, self.mime_type)
         if not self.filename.parent.exists():
             raise NotADirectoryError(self.filename.parent)

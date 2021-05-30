@@ -35,7 +35,7 @@ class Configuration:
 
     @property
     def valid_survey_names(self):
-        """ Return a list of the valid name for a survey. """
+        """Return a list of the valid name for a survey."""
         valid_survey_names = [survey.name for survey in Survey.objects.all()]
         valid_survey_names.append("generic")
         return valid_survey_names
@@ -75,7 +75,7 @@ class Configuration:
         return configuration
 
     def optional_update(self, dict_, update_dict, key):
-        """ Update a dict with another one if optional key exists. """
+        """Update a dict with another one if optional key exists."""
         try:
             self.recursive_update(dict_, update_dict[key])
         except KeyError:
@@ -98,12 +98,12 @@ class Configuration:
 
     @staticmethod
     def get_multiple_charts(dict_):
-        """ Permit to get a dict while the default value is None. """
+        """Permit to get a dict while the default value is None."""
         multiple_charts = dict_.get("multiple_charts")
         return {} if multiple_charts is None else multiple_charts
 
     def update(self, dict_, update):
-        """ Update a dictionary and handle the multiple charts values. """
+        """Update a dictionary and handle the multiple charts values."""
         self.recursive_update(dict_, update)
         multiple_charts = self.get_multiple_charts(dict_)
         for chart, chart_conf in list(multiple_charts.items()):

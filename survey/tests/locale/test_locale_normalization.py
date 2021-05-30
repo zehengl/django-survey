@@ -14,7 +14,7 @@ class TestLocaleNormalization(unittest.TestCase):
     LOCALE_PATH = Path("survey", "locale").absolute()
 
     def test_normalization(self):
-        """ We test if the messages were properly created with makemessages --no-obsolete --no-wrap. """
+        """We test if the messages were properly created with makemessages --no-obsolete --no-wrap."""
         if platform.system() == "Windows":
             python_3 = ["py", "-3"]
         else:

@@ -12,7 +12,7 @@ HERE = Path(__file__).parent
 
 class TestManagement(BaseTest):
 
-    """ Permit to check if export result is working as intended. """
+    """Permit to check if export result is working as intended."""
 
     def create_answers(self, username, a1, a2, a3):
         if username:

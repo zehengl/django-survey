@@ -9,7 +9,7 @@ LOGGER = logging.getLogger(__name__)
 
 class LatexFile:
 
-    """ Permit to handle the content of a LatexFile """
+    """Permit to handle the content of a LatexFile"""
 
     def __init__(self, document_class, document_option=None, header=None, intro=None, footer=None, date=None, **kwargs):
         LOGGER.debug(
@@ -26,7 +26,7 @@ class LatexFile:
         self.date = date
 
     def set_value(self, value):
-        """ Return the value we need for null text. """
+        """Return the value we need for null text."""
         if value is None:
             return ""
         return value
@@ -59,7 +59,7 @@ class LatexFile:
         return end
 
     def save(self, path):
-        """ Save the document on disk. """
+        """Save the document on disk."""
         with open(path, "wb") as tex_file:
             tex_file.write(self.document.encode("UTF-8"))
 

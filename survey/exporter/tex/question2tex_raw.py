@@ -19,7 +19,7 @@ class Question2TexRaw(Question2Tex):
 """
 
     def tex(self):
-        """ Return all the answer as quote in latex. """
+        """Return all the answer as quote in latex."""
         raw_answers = ""
         for i, answer in enumerate(self.cardinality):
             if answer:

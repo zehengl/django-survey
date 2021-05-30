@@ -13,7 +13,7 @@ except ImportError:
 
 class TestQuestion2TexChart(TestManagement):
     def test_get_tex(self):
-        """ The header and order of the question is correct. """
+        """The header and order of the question is correct."""
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIsNotNone(Question2TexChart(question).tex())
         color = OrderedDict()
@@ -56,12 +56,12 @@ class TestQuestion2TexChart(TestManagement):
         )
 
     def test_cloud_tex(self):
-        """ We can create a cloud chart. """
+        """We can create a cloud chart."""
         question = self.survey.questions.get(text="Aèbc?")
         self.assertIsNotNone(Question2TexChart(question, type="cloud").tex())
 
     def test_get_caption(self):
-        """ We can create a filtered chart with a proper caption. """
+        """We can create a filtered chart with a proper caption."""
         question = self.survey.questions.get(text="Cède?")
 
         def get_options(
@@ -126,6 +126,6 @@ class TestQuestion2TexChart(TestManagement):
         self.assertIn("Repartition of answers for the question 'Cède?'.", get_result(**options))
 
     def test_no_results(self):
-        """ We manage having no result at all. """
+        """We manage having no result at all."""
         question = self.survey.questions.get(text="Dèef?")
         self.assertIn("No answers for this question.", Question2TexChart(question).tex())

@@ -92,7 +92,7 @@ class Question(models.Model):
         super(Question, self).save(*args, **kwargs)
 
     def get_clean_choices(self):
-        """ Return split and stripped list of choices with no null values. """
+        """Return split and stripped list of choices with no null values."""
         if self.choices is None:
             return []
         choices_list = []
@@ -115,7 +115,7 @@ class Question(models.Model):
 
     @staticmethod
     def standardize(value, group_by_letter_case=None, group_by_slugify=None):
-        """ Standardize a value in order to group by slugify or letter case """
+        """Standardize a value in order to group by slugify or letter case"""
         if group_by_slugify:
             value = slugify(value)
         if group_by_letter_case:
@@ -124,7 +124,7 @@ class Question(models.Model):
 
     @staticmethod
     def standardize_list(string_list, group_by_letter_case=None, group_by_slugify=None):
-        """ Return a list of standardized string from a csv string.."""
+        """Return a list of standardized string from a csv string.."""
         return [Question.standardize(strng, group_by_letter_case, group_by_slugify) for strng in string_list]
 
     def answers_cardinality(
@@ -327,7 +327,7 @@ class Question(models.Model):
             cardinality[value] += n
 
     def __get_cardinality_value(self, value, group_by_letter_case, group_by_slugify, group_together):
-        """ Return the value we should use for cardinality. """
+        """Return the value we should use for cardinality."""
         value = Question.standardize(value, group_by_letter_case, group_by_slugify)
         for key, values in list(group_together.items()):
             grouped_values = Question.standardize_list(values, group_by_letter_case, group_by_slugify)

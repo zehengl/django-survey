@@ -41,7 +41,7 @@ class ResponseForm(models.ModelForm):
         fields = ()
 
     def __init__(self, *args, **kwargs):
-        """ Expects a survey object to be passed in initially """
+        """Expects a survey object to be passed in initially"""
         self.survey = kwargs.pop("survey")
         self.user = kwargs.pop("user")
         try:
@@ -263,7 +263,7 @@ class ResponseForm(models.ModelForm):
         return reverse("survey-detail-step", kwargs={"id": self.survey.id, "step": self.step})
 
     def save(self, commit=True):
-        """ Save the response object """
+        """Save the response object"""
         # Recover an existing response from the database if any
         #  There is only one response by logged user.
         response = self._get_preexisting_response()

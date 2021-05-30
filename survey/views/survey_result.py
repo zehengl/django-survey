@@ -11,7 +11,7 @@ from survey.models import Survey
 
 
 def serve_unprotected_result_csv(survey):
-    """ Return the csv corresponding to a survey. """
+    """Return the csv corresponding to a survey."""
     survey_to_csv = Survey2Csv(survey)
     if survey_to_csv.need_update():
         survey_to_csv.generate_file()
@@ -24,7 +24,7 @@ def serve_unprotected_result_csv(survey):
 
 @login_required
 def serve_protected_result(request, survey):
-    """ Return the csv only if the user is logged. """
+    """Return the csv only if the user is logged."""
     return serve_unprotected_result_csv(survey)
 
 

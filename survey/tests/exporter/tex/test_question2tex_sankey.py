@@ -6,7 +6,7 @@ from survey.tests.management.test_management import TestManagement
 
 class TestQuestion2TexSankey(TestManagement):
     def test_other_question_type(self):
-        """ We get a type error if we do not give a Question. """
+        """We get a type error if we do not give a Question."""
         question = self.survey.questions.get(text="Aèbc?")
         self.assertRaises(TypeError, Question2TexSankey.__init__, question, {"other_question": "other_question"})
         other_question = self.survey.questions.get(text="Aèbc?")

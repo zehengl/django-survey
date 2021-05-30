@@ -17,7 +17,7 @@ class TestSurvey2Tex(TestManagement):
         self.specific = Survey2Tex(self.test_survey, conf)
 
     def test_get_survey_as_tex(self):
-        """ The content of the tex is correct. """
+        """The content of the tex is correct."""
         generic = str(self.generic)
         should_contain = [
             "documentclass[11pt]{article}",
@@ -44,7 +44,7 @@ class TestSurvey2Tex(TestManagement):
             self.assertIn(text, specific)
 
     def test_custom_class_fail_import(self):
-        """ We have an error message if the type is impossible to import. """
+        """We have an error message if the type is impossible to import."""
         conf = Configuration(Path(self.conf_dir, "custom_class_doesnt_exists.yaml"))
         self.test_survey = Survey.objects.get(name="Test survëy")
         fail_import = str(Survey2Tex(self.test_survey, conf))

@@ -17,7 +17,7 @@ class Survey2Csv(Survey2X):
 
     @staticmethod
     def line_list_to_string(line):
-        """ Write a line in the CSV. """
+        """Write a line in the CSV."""
         new_line = ""
         for i, cell in enumerate(line):
             cell = " ".join(str(cell).split())
@@ -28,7 +28,7 @@ class Survey2Csv(Survey2X):
 
     @staticmethod
     def get_user_line(question_order, response):
-        """ Creating a line for a user """
+        """Creating a line for a user"""
         LOGGER.debug("\tTreating answer from %s", response.user)
         user_answers = {}
         try:

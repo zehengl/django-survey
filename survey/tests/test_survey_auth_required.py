@@ -9,10 +9,10 @@ from survey.tests import BaseTest
 
 class TestSurveyAuthRequired(BaseTest):
 
-    """ Permit to check if need_logged_user is working as intended. """
+    """Permit to check if need_logged_user is working as intended."""
 
     def assert_accessible(self, url):
-        """ Assert that everything is accessible. """
+        """Assert that everything is accessible."""
         try:
             response = self.client.get(url, follow=True)
             self.assertEqual(response.status_code, 200)
@@ -25,7 +25,7 @@ class TestSurveyAuthRequired(BaseTest):
             raise
 
     def test_need_login(self):
-        """ If a survey has need_logged_user=True user need to authenticate."""
+        """If a survey has need_logged_user=True user need to authenticate."""
         urls = [
             reverse("survey-detail", kwargs={"id": 1}),
             reverse("survey-completed", kwargs={"id": 1}),
@@ -41,7 +41,7 @@ class TestSurveyAuthRequired(BaseTest):
             self.logout()
 
     def test_accessible(self):
-        """ If need_logged_user=False user do not need to authenticate. """
+        """If need_logged_user=False user do not need to authenticate."""
         survey = Survey.objects.get(id=2)
         responses = Response.objects.filter(survey=survey)
         response = responses.all()[0]

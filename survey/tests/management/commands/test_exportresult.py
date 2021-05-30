@@ -13,7 +13,7 @@ from survey.tests.management.test_management import TestManagement
 
 class TestExportresult(TestManagement):
 
-    """ Permit to check if export result is working as intended. """
+    """Permit to check if export result is working as intended."""
 
     def get_csv_path(self, survey_name):
         csv_name = "{}.csv".format(slugify(survey_name))
@@ -26,7 +26,7 @@ class TestExportresult(TestManagement):
         return content
 
     def test_no_options(self):
-        """ If no options are given there are warning and error messages. """
+        """If no options are given there are warning and error messages."""
         self.assertRaises(SystemExit, call_command, "exportresult")
         try:
             call_command("exportresult", "--pdf", survey_id="1")
@@ -35,7 +35,7 @@ class TestExportresult(TestManagement):
             warn("xelatex is not installed, some features regarding report generation in PDF were not tested!")
 
     def test_handle(self):
-        """ The custom command export result create the right csv file. """
+        """The custom command export result create the right csv file."""
         self.maxDiff = None
         csvs = [Path(self.get_csv_path(self.test_managament_survey_name)), self.get_csv_path("Test survëy")]
         # Force to regenerate the csv, we want to test something not optimize computing time.
