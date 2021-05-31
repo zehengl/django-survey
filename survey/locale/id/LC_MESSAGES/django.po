@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-30 21:28+0000\n"
+"POT-Creation-Date: 2021-05-31 06:42+0000\n"
 "PO-Revision-Date: 2020-10-04 15:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,166 +27,166 @@ msgstr "id"
 msgid "DEVELOPMENT django-Survey"
 msgstr "Pengembangan django-survey"
 
-#: survey/actions.py:14
+#: survey/actions.py:12
 #, python-format
 msgid "%(count)d survey was successfully marked as published."
 msgid_plural "%(count)d surveys were successfully marked as published"
 msgstr[0] "%(count)d survei berhasil ditandai sebagai diterbitkan"
 msgstr[1] "%(count)d survei berhasil ditandai sebagai diterbitkan"
 
-#: survey/actions.py:23
+#: survey/actions.py:21
 msgid "Mark selected surveys as published"
 msgstr "Tandai survei yang dipilih sebagai diterbitkan"
 
-#: survey/exporter/csv/survey2csv.py:38
+#: survey/exporter/csv/survey2csv.py:37
 msgid "Anonymous"
 msgstr "Anonim"
 
-#: survey/exporter/csv/survey2csv.py:68
+#: survey/exporter/csv/survey2csv.py:67
 msgid "user"
 msgstr "pengguna"
 
-#: survey/exporter/csv/survey2csv.py:112
+#: survey/exporter/csv/survey2csv.py:111
 msgid "Export to CSV"
 msgstr "Ekspor sebagai CSV"
 
-#: survey/exporter/tex/question2tex.py:64
+#: survey/exporter/tex/question2tex.py:62
 msgid "with"
 msgstr "dengan"
 
-#: survey/exporter/tex/question2tex.py:66
+#: survey/exporter/tex/question2tex.py:64
 #, python-format
 msgid "%(min_cardinality)d respondents or more"
 msgid_plural "%(min_cardinality)d respondent or more"
 msgstr[0] "%(min_cardinality)d responden atau lebih"
 
-#: survey/exporter/tex/question2tex.py:78
+#: survey/exporter/tex/question2tex.py:76
 msgid "excluding"
 msgstr "selain"
 
-#: survey/exporter/tex/question2tex.py:83
-#: survey/exporter/tex/question2tex.py:117
-#: survey/exporter/tex/question2tex.py:120
+#: survey/exporter/tex/question2tex.py:81
+#: survey/exporter/tex/question2tex.py:115
+#: survey/exporter/tex/question2tex.py:118
 msgid "and"
 msgstr "dan"
 
-#: survey/exporter/tex/question2tex.py:114
-#: survey/exporter/tex/question2tex.py:115
+#: survey/exporter/tex/question2tex.py:112
+#: survey/exporter/tex/question2tex.py:113
 msgid "or"
 msgstr "atau"
 
-#: survey/exporter/tex/question2tex.py:129
+#: survey/exporter/tex/question2tex.py:127
 msgid "Repartition of answers"
 msgstr "Partisi ulang respon-respon"
 
-#: survey/exporter/tex/question2tex_chart.py:68
+#: survey/exporter/tex/question2tex_chart.py:66
 msgid "Left blank"
 msgstr "Dikosongkan saja"
 
-#: survey/exporter/tex/question2tex_chart.py:113
-#: survey/exporter/tex/question2tex_sankey.py:57
+#: survey/exporter/tex/question2tex_chart.py:111
+#: survey/exporter/tex/question2tex_sankey.py:55
 msgid "for the question"
 msgstr "untuk pertanyaan"
 
-#: survey/exporter/tex/question2tex_chart.py:123
+#: survey/exporter/tex/question2tex_chart.py:121
 msgid "No answers for this question."
 msgstr "Tidak ada jawaban untuk pertanyaan ini."
 
-#: survey/exporter/tex/question2tex_raw.py:26
+#: survey/exporter/tex/question2tex_raw.py:24
 msgid "Participant"
 msgstr "Partisipan"
 
-#: survey/exporter/tex/question2tex_sankey.py:29
+#: survey/exporter/tex/question2tex_sankey.py:27
 msgid "Cannot generate PDF, we need 'pySankeyBeta' to be installed."
 msgstr "Tidak dapat menghasilkan PDF, 'pySankeyBeta' perlu dipasang terlebih dahulu"
 
-#: survey/exporter/tex/question2tex_sankey.py:57
+#: survey/exporter/tex/question2tex_sankey.py:55
 msgid "left"
 msgstr "kiri"
 
-#: survey/exporter/tex/question2tex_sankey.py:59
+#: survey/exporter/tex/question2tex_sankey.py:57
 msgid "in relation with the question"
 msgstr "hubungannya dengan pertanyaan"
 
-#: survey/exporter/tex/question2tex_sankey.py:61
+#: survey/exporter/tex/question2tex_sankey.py:59
 msgid "right"
 msgstr "kanan"
 
-#: survey/exporter/tex/survey2tex.py:32
+#: survey/exporter/tex/survey2tex.py:30
 msgid "Cannot generate PDF, we need 'xelatex' to be installed."
 msgstr "Tidak dapat menghasilkan PDF, 'xelatex' perlu dipasang terlebih dahulu"
 
-#: survey/exporter/tex/survey2tex.py:82
+#: survey/exporter/tex/survey2tex.py:80
 msgid "We could not render a chart because the type"
 msgstr "Tidak dapat memuat sebuah diagram karena tipe"
 
-#: survey/exporter/tex/survey2tex.py:85
+#: survey/exporter/tex/survey2tex.py:83
 msgid "is not a standard type nor the path to an importable valid Question2Tex child class. Choose between 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' or 'package.path.MyQuestion2TexCustomClass'"
 msgstr "bukan tipe standar ataupun path menuju kelas turunan Question2Tex yang dapat diimpor tidak valid. Plih antara 'raw', 'sankey', 'pie', 'cloud', 'square', 'polar' atau 'package.path.MyQuestion2TexCustomClass'"
 
-#: survey/exporter/tex/survey2tex.py:159
+#: survey/exporter/tex/survey2tex.py:157
 msgid "No questions to display in this survey."
 msgstr "Tidak ada pertanyaan untuk ditampilkan pada survei ini."
 
-#: survey/exporter/tex/survey2tex.py:189
+#: survey/exporter/tex/survey2tex.py:187
 msgid "Cannot export multiple PDF, choose only one."
 msgstr "Tidak dapat ekspor beberapa PDF sekaligus, pilih satu saja."
 
-#: survey/exporter/tex/survey2tex.py:198
+#: survey/exporter/tex/survey2tex.py:196
 #, python-format
 msgid "Error during PDF generation: %s"
 msgstr "Terjadi kesalahan dalam membuat berkas PDF: %s"
 
-#: survey/exporter/tex/survey2tex.py:205
+#: survey/exporter/tex/survey2tex.py:203
 msgid "Export to PDF"
 msgstr "Ekspor sebagai PDF"
 
-#: survey/models/answer.py:23
+#: survey/models/answer.py:21
 msgid "Question"
 msgstr "Pertanyaan"
 
-#: survey/models/answer.py:24
+#: survey/models/answer.py:22
 msgid "Response"
 msgstr "Respon"
 
-#: survey/models/answer.py:25 survey/models/response.py:27
+#: survey/models/answer.py:23 survey/models/response.py:25
 msgid "Creation date"
 msgstr "Tanggal pembuatan"
 
-#: survey/models/answer.py:26 survey/models/response.py:28
+#: survey/models/answer.py:24 survey/models/response.py:26
 msgid "Update date"
 msgstr "Tanggal pembaruan"
 
-#: survey/models/answer.py:27
+#: survey/models/answer.py:25
 msgid "Content"
 msgstr "Konten"
 
-#: survey/models/category.py:12 survey/models/survey.py:27
+#: survey/models/category.py:10 survey/models/survey.py:26
 msgid "Name"
 msgstr "Nama"
 
-#: survey/models/category.py:13 survey/models/question.py:80
-#: survey/models/response.py:29
+#: survey/models/category.py:11 survey/models/question.py:78
+#: survey/models/response.py:27
 msgid "Survey"
 msgstr "Survei"
 
-#: survey/models/category.py:14
+#: survey/models/category.py:12
 msgid "Display order"
 msgstr "Urutan tampilan"
 
-#: survey/models/category.py:15 survey/models/survey.py:28
+#: survey/models/category.py:13 survey/models/survey.py:27
 msgid "Description"
 msgstr "Deskripsi"
 
-#: survey/models/category.py:19
+#: survey/models/category.py:17
 msgid "category"
 msgstr "Kategori"
 
-#: survey/models/category.py:20
+#: survey/models/category.py:18
 msgid "categories"
 msgstr "Kategori"
 
-#: survey/models/question.py:23
+#: survey/models/question.py:21
 msgid ""
 "The choices field is only used if the question type\n"
 "if the question type is 'radio', 'select', or\n"
@@ -198,135 +198,135 @@ msgstr ""
 "'pilih beberapa' menyediakan sebuah daftar opsi\n"
 "yang dipisahkan tanda koma untuk pertanyaan ini"
 
-#: survey/models/question.py:63
+#: survey/models/question.py:61
 msgid "text (multiple line)"
 msgstr "teks (beberapa baris)"
 
-#: survey/models/question.py:64
+#: survey/models/question.py:62
 msgid "short text (one line)"
 msgstr "teks pendek (satu baris)"
 
-#: survey/models/question.py:65
+#: survey/models/question.py:63
 msgid "radio"
 msgstr "radio"
 
-#: survey/models/question.py:66
+#: survey/models/question.py:64
 msgid "select"
 msgstr "pilih"
 
-#: survey/models/question.py:67
+#: survey/models/question.py:65
 msgid "Select Multiple"
 msgstr "Pilih beberapa"
 
-#: survey/models/question.py:68
+#: survey/models/question.py:66
 msgid "Select Image"
 msgstr "Pilih Gambar"
 
-#: survey/models/question.py:69
+#: survey/models/question.py:67
 msgid "integer"
 msgstr "bilangan bulat"
 
-#: survey/models/question.py:70
+#: survey/models/question.py:68
 msgid "float"
 msgstr "bilangan desimal"
 
-#: survey/models/question.py:71
+#: survey/models/question.py:69
 msgid "date"
 msgstr "tanggal"
 
-#: survey/models/question.py:74
+#: survey/models/question.py:72
 msgid "Text"
 msgstr "Teks"
 
-#: survey/models/question.py:75
+#: survey/models/question.py:73
 msgid "Order"
 msgstr "Urutan"
 
-#: survey/models/question.py:76
+#: survey/models/question.py:74
 msgid "Required"
 msgstr "Diperlukan"
 
-#: survey/models/question.py:78
+#: survey/models/question.py:76
 msgid "Category"
 msgstr "Kategori"
 
-#: survey/models/question.py:81
+#: survey/models/question.py:79
 msgid "Type"
 msgstr "Tipe"
 
-#: survey/models/question.py:82
+#: survey/models/question.py:80
 msgid "Choices"
 msgstr "Pilihan"
 
-#: survey/models/question.py:85
+#: survey/models/question.py:83
 msgid "question"
 msgstr "pertanyaan"
 
-#: survey/models/question.py:86
+#: survey/models/question.py:84
 msgid "questions"
 msgstr "pertanyaan-pertanyaan"
 
-#: survey/models/response.py:30
+#: survey/models/response.py:28
 msgid "User"
 msgstr "Pengguna"
 
-#: survey/models/response.py:31
+#: survey/models/response.py:29
 msgid "Interview unique identifier"
 msgstr "ID wawancara (unik)"
 
-#: survey/models/response.py:34
+#: survey/models/response.py:32
 msgid "Set of answers to surveys"
 msgstr "Kumpulan jawaban dari survei"
 
-#: survey/models/response.py:35
+#: survey/models/response.py:33
 msgid "Sets of answers to surveys"
 msgstr "Kumpulan jawaban dari survei"
 
-#: survey/models/survey.py:22
+#: survey/models/survey.py:21
 msgid "By question"
 msgstr "Berdasarkan pertanyaan"
 
-#: survey/models/survey.py:23
+#: survey/models/survey.py:22
 msgid "By category"
 msgstr "Berdasarkan kategori"
 
-#: survey/models/survey.py:24
+#: survey/models/survey.py:23
 msgid "All in one page"
 msgstr "Semua dalam satu halaman"
 
-#: survey/models/survey.py:29
+#: survey/models/survey.py:28
 msgid "Users can see it and answer it"
 msgstr "Pengguna dapat melihat dan menjawabnya"
 
-#: survey/models/survey.py:30
+#: survey/models/survey.py:29
 msgid "Only authenticated users can see it and answer it"
 msgstr "Hanya pengguna yang telah diotentikasi dapat melihat dan menjawabnya"
 
-#: survey/models/survey.py:31
+#: survey/models/survey.py:30
 msgid "Users can edit their answers afterwards"
 msgstr "Pengguna dapat mengubah jawabannya setelahnya"
 
-#: survey/models/survey.py:33
+#: survey/models/survey.py:32
 msgid "Display method"
 msgstr "Metode tampilan"
 
-#: survey/models/survey.py:35
+#: survey/models/survey.py:34
 msgid "Template"
 msgstr "Templat"
 
-#: survey/models/survey.py:36
+#: survey/models/survey.py:35
 msgid "Publication date"
 msgstr "Tanggal penayangan"
 
-#: survey/models/survey.py:37
+#: survey/models/survey.py:36
 msgid "Expiration date"
 msgstr "Tanggal kedaluwarsa"
 
-#: survey/models/survey.py:40
+#: survey/models/survey.py:39
 msgid "survey"
 msgstr "survei"
 
-#: survey/models/survey.py:41
+#: survey/models/survey.py:40
 msgid "surveys"
 msgstr "survei"
 
