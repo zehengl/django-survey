@@ -129,6 +129,7 @@ LANGUAGES = (
     ("es", "spanish"),
     ("fr", "french"),
     ("ja", "Japanese"),
+    ("nl", "Dutch"),
     ("zh", "Chinese"),
     ("de", "German"),
     ("id", "Indonesian"),
