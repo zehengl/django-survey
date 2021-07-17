@@ -55,10 +55,14 @@ LOCALE_PATHS = (Path(ROOT, "survey", "locale"),)
 LANGUAGE_CODE = "en"
 LANGUAGES = (
     ("en", "english"),
-    ("ru-RU", "русский"),
+    ("ru", "russian"),
     ("es", "spanish"),
     ("fr", "french"),
     ("ja", "Japanese"),
+    ("nl", "Dutch"),
     ("zh", "Chinese"),
     ("de", "German"),
+    ("id", "Indonesian"),
+    ("pt", "Portuguese"),
+    ("pl", "Polish"),
 )
