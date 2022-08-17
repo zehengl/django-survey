@@ -9,7 +9,7 @@ from survey.models.question import Question
 
 class SurveyCommand(BaseCommand):
 
-    requires_system_checks = False
+    requires_system_checks = []
 
     def add_arguments(self, parser):
         help_text = "The {}s of the {}s we want to generate. Default is None."
