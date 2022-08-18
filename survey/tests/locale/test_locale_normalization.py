@@ -44,6 +44,6 @@ class TestLocaleNormalization(unittest.TestCase):
             "You did not update the translation following your changes. Maybe you did not use the "
             "normalized 'python3 manage.py makemessages --no-obsolete --no-wrap' ? If you're "
             f"working locally, just use 'git add {self.LOCALE_PATH}', we launched "
-            f"'{command_as_str}' during tests.",
+            f"'{command_as_str}' during tests.\ngit diff\n{git_diff}",
         )
         self.assertEqual(number_of_change, number_of_language, msg)
