@@ -38,10 +38,12 @@ class TestLocaleNormalization(unittest.TestCase):
         git_diff = subprocess.check_output(git_diff_command).decode("utf8")
         # In the diff we should have a change only for the date of the generation
         # So 2 * @@ * number of language
+        command_as_str = " ".join(makemessages_command)
         number_of_change = git_diff.count("@@") / 2
         msg = (
             "You did not update the translation following your changes. Maybe you did not use the "
             "normalized 'python3 manage.py makemessages --no-obsolete --no-wrap' ? If you're "
-            "working locally, just use 'git add {}', we launched it during tests.".format(self.LOCALE_PATH),
+            f"working locally, just use 'git add {self.LOCALE_PATH}', we launched "
+            f"'{command_as_str}' during tests.",
         )
         self.assertEqual(number_of_change, number_of_language, msg)
